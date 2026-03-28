@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════╗ -->
-<!-- ║  TWO-CLASS LINKED LIST — THE MANAGER & THE WORKER    ║ -->
-<!-- ╚══════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------+ -->
+<!-- |  TWO-CLASS LINKED LIST — THE MANAGER & THE WORKER    | -->
+<!-- +------------------------------------------------------+ -->
 # Two-Class Linked List — The Manager & The Worker
 
 ## What's Different from the Basic Linked List?
@@ -24,20 +24,17 @@ In this version, we split the work into **two clear roles**:
 
 ```
                         THE MANAGER (TrainManager)
-                    ┌─────────────────────────────┐
-                    │  head ──────────────────┐    │
-                    │  add_carriage_to_end()  │    │
-                    │  remove_carriage()      │    │
-                    │  show_all_carriages()   │    │
-                    └────────────────────────┼────┘
-                                             │
-                                             ▼
+                    +-----------------------------+
+                    |  head ------------------+    |
+                    |  add_carriage_to_end()  |    |
+                    |  remove_carriage()      |    |
+                    |  show_all_carriages()   |    |
+                    +------------------------+----+
+                                             |
+                                             v
           THE WORKERS (CarriageNodes)
-  ┌──────────┬───┐   ┌──────────┬───┐   ┌──────────┬──────┐
-  │ data: 30 │ ──┼─▶ │ data: 40 │ ──┼─▶ │ data: 50 │ None │
-  │ next:  ──┤   │   │ next:  ──┤   │   │ next:None│      │
-  └──────────┴───┘   └──────────┴───┘   └──────────┴──────┘
-     [Car 1]            [Car 2]             [Car 3]
+  [data: 30 | next] -> [data: 40 | next] -> [data: 50 | NULL]
+     (Car 1)              (Car 2)              (Car 3)
 ```
 
 **The Manager only remembers the Head.** To find anything else, it walks through the chain starting from the Head.
@@ -50,9 +47,9 @@ In this version, we split the work into **two clear roles**:
 
 ```
   MANAGER
-  ┌──────────────┐
-  │  head: None  │   ← "No train exists yet!"
-  └──────────────┘
+  +--------------+
+  |  head: None  |   < "No train exists yet!"
+  +--------------+
 ```
 
 ### Step 2: Add carriage with value 30
@@ -61,11 +58,8 @@ Since the train is empty, this NEW carriage becomes the **Engine** (Head):
 
 ```
   MANAGER
-  ┌──────────┐
-  │  head: ──┼──▶  ┌──────────┬──────┐
-  └──────────┘     │ data: 30 │ None │   ← Only one carriage!
-                   └──────────┴──────┘
-                     [Engine]
+  [ head | - ] ---> [ data: 30 | None ]
+                       (The Engine)
 ```
 
 ### Step 3: Add carriage with value 40
@@ -74,22 +68,16 @@ The Manager walks to the last carriage (30) and hooks the new one:
 
 ```
   MANAGER
-  ┌──────────┐
-  │  head: ──┼──▶  ┌──────────┬───┐    ┌──────────┬──────┐
-  └──────────┘     │ data: 30 │ ──┼──▶ │ data: 40 │ None │
-                   └──────────┴───┘    └──────────┴──────┘
-                     [Engine]              [Car 1]
+  [ head | - ] ---> [ 30 | next ] ---> [ 40 | None ]
+                      (Engine)          (Car 1)
 ```
 
 ### Step 4: Add carriage with value 50
 
 ```
   MANAGER
-  ┌──────────┐
-  │  head: ──┼──▶ ┌────┬───┐   ┌────┬───┐   ┌────┬──────┐
-  └──────────┘    │ 30 │ ──┼─▶ │ 40 │ ──┼─▶ │ 50 │ None │
-                  └────┴───┘   └────┴───┘   └────┴──────┘
-                 [Engine]      [Car 1]       [Car 2]
+  [ head | - ] ---> [ 30 | next ] ---> [ 40 | next ] ---> [ 50 | None ]
+                      (Engine)         (Car 1)          (Car 2)
 ```
 
 ---
@@ -101,12 +89,10 @@ The Manager walks to the last carriage (30) and hooks the new one:
 We need **two walkers** — one stays one step behind the other.
 
 ```
-      previous    current
-         │           │
-         ▼           ▼
-       ┌────┬───┐  ┌────┬───┐  ┌────┬──────┐
-       │ 30 │ ──┼─▶│ 40 │ ──┼─▶│ 50 │ None │
-       └────┴───┘  └────┴───┘  └────┴──────┘
+        previous            current
+           |                   |
+           v                   v
+      [ 30 | next ] ---> [ 40 | next ] ---> [ 50 | None ]
 ```
 
 **Case: Target is the Head (30)**
@@ -115,30 +101,24 @@ Since 30 is at the very front, we simply move the Head pointer to the next carri
 
 ```
   BEFORE:                           AFTER:
-  head ──▶ [30] ──▶ [40] ──▶ [50]  head ──▶ [40] ──▶ [50]
+  head --> [30] --> [40] --> [50]   head --> [40] --> [50]
 ```
 
 **Case: Target is in the middle (say 40)**
 
 ```
-  previous    current
-      │          │
-      ▼          ▼
-   ┌────┬───┐  ┌────┬───┐  ┌────┬──────┐
-   │ 30 │ ──┼─▶│ 40 │ ──┼─▶│ 50 │ None │
-   └────┴───┘  └────┴───┘  └────┴──────┘
+        previous            current
+           |                   |
+           v                   v
+      [ 30 | next ] ---> [ 40 | next ] ---> [ 50 | None ]
 ```
 
 The previous node (30) **bypasses** current node (40) by pointing directly to 50:
 
 ```
-   ┌────┬───┐               ┌────┬──────┐
-   │ 30 │ ──┼──────────────▶│ 50 │ None │
-   └────┴───┘               └────┴──────┘
+      [ 30 | skip ] ----------------------> [ 50 | None ]
 
-                ┌────┬───┐
-                │ 40 │   │  ← Disconnected! Removed!
-                └────┴───┘
+                               [ 40 | X ]  <-- Gone!
 ```
 
 ---

@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════════════════╗ -->
-<!-- ║  BALANCED BST (AVL TREE) — THE SELF-BALANCING LIBRARY            ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------------------+ -->
+<!-- |  BALANCED BST (AVL TREE) — THE SELF-BALANCING LIBRARY            | -->
+<!-- +------------------------------------------------------------------+ -->
 # Balanced Binary Search Tree (AVL Tree) — The Self-Balancing Library
 
 ## What is a Binary Search Tree (BST)?
@@ -50,7 +50,7 @@ For every node:
 
 ```
   ALLOWED balance factors: -1, 0, +1  [OK]
-  NOT ALLOWED: -2, +2 or worse        [X] --> Triggers a ROTATION!
+  NOT ALLOWED: -2, +2 or worse        ❌ --> Triggers a ROTATION!
 ```
 
 ---
@@ -63,7 +63,7 @@ For every node:
 ```
      1
   
-  (Balance Factor = 0) [done] All good!
+  (Balance Factor = 0) ✅ All good!
 ```
 
 **Insert 2:**
@@ -72,12 +72,12 @@ For every node:
       \
        2
   
-  (BF of node 1 = 0 - 1 = -1) [done] Still fine!
+  (BF of node 1 = 0 - 1 = -1) ✅ Still fine!
 ```
 
 **Insert 3: [!] UNBALANCED!**
 ```
-     1          Balance Factor of 1 = 0 - 2 = -2  [X]
+     1          Balance Factor of 1 = 0 - 2 = -2  ❌
       \
        2        PROBLEM: Right-Right heavy!
         \       
@@ -95,7 +95,7 @@ Think of it like a see-saw that's tilting too much to the right. We need to **li
         \                               / \
          2                             1   3
           \
-           3                    [done] BALANCED!
+           3                    ✅ BALANCED!
 ```
 
 **What happened:**
@@ -107,18 +107,18 @@ Think of it like a see-saw that's tilting too much to the right. We need to **li
 ```
        2                        2
       / \                      / \
-     1   3          →         1   3
+     1   3          >         1   3
           \                        \
            4                        4
            
-  (BF of 3 = -1) [done] Fine!
+  (BF of 3 = -1) ✅ Fine!
 ```
 
 **Insert 5: [!] UNBALANCED at node 3!**
 ```
        2                        2
       / \                      / \
-     1   3          →         1   4      ← LEFT ROTATION on 3
+     1   3          >         1   4      < LEFT ROTATION on 3
           \                      / \
            4                    3   5
             \
@@ -129,7 +129,7 @@ Think of it like a see-saw that's tilting too much to the right. We need to **li
 ```
        2                            4
       / \                          / \
-     1   4          →             2   5      ← LEFT ROTATION on 2
+     1   4          >             2   5      < LEFT ROTATION on 2
         / \                      / \   \
        3   5                    1   3   6
             \
@@ -140,13 +140,13 @@ Think of it like a see-saw that's tilting too much to the right. We need to **li
 ```
          4                          4
         / \                        / \
-       2   5          →           2   6      ← LEFT ROTATION on 5
+       2   5          >           2   6      < LEFT ROTATION on 5
       / \   \                    / \ / \
      1   3   6                  1  3 5  7
               \
                7
 
-  FINAL BALANCED TREE! [done]
+  FINAL BALANCED TREE! ✅
 ```
 
 ---
@@ -162,7 +162,7 @@ Opposite of left rotation — used when the tree is **leaning too much to the LE
           /                            / \
          3                            2   5
         /
-       2                       [done] BALANCED!
+       2                       ✅ BALANCED!
 ```
 
 ---
@@ -177,9 +177,9 @@ Sometimes the tree has a **zigzag** shape (Left-Right or Right-Left). A single r
                          the left child           the root
        5                      5                        4
       /                      /                        / \
-     3          →           4            →           3   5
+     3          >           4            >           3   5
       \                    /
-       4                  3              [done] BALANCED!
+       4                  3              ✅ BALANCED!
 ```
 
 ### Right-Left Case:
@@ -188,9 +188,9 @@ Sometimes the tree has a **zigzag** shape (Left-Right or Right-Left). A single r
                          the right child          the root
      3                        3                        4
       \                        \                      / \
-       5          →             4           →        3   5
+       5          >             4           >        3   5
       /                          \
-     4                            5          [done] BALANCED!
+     4                            5          ✅ BALANCED!
 ```
 
 ---
@@ -210,9 +210,9 @@ There are 3 ways to "read" all numbers from a tree:
 
 | Order | Rule | Result |
 |---|---|---|
-| **Inorder** | Left → Root → Right | `[1, 2, 3, 4, 5, 6, 7]` ← Always sorted! |
-| **Preorder** | Root → Left → Right | `[4, 2, 1, 3, 6, 5, 7]` |
-| **Postorder** | Left → Right → Root | `[1, 3, 2, 5, 7, 6, 4]` |
+| **Inorder** | Left > Root > Right | `[1, 2, 3, 4, 5, 6, 7]` < Always sorted! |
+| **Preorder** | Root > Left > Right | `[4, 2, 1, 3, 6, 5, 7]` |
+| **Postorder** | Left > Right > Root | `[1, 3, 2, 5, 7, 6, 4]` |
 
 ### Inorder Traversal Walkthrough:
 ```
@@ -223,21 +223,21 @@ There are 3 ways to "read" all numbers from a tree:
      1  3 5  7
 
   Start at root (4):
-    → Go LEFT to 2
-      → Go LEFT to 1
-        → No left child → Visit 1 [done]  → No right child
-      → Visit 2 [done]
-      → Go RIGHT to 3
-        → No left child → Visit 3 [done]  → No right child
-    → Visit 4 [done]
-    → Go RIGHT to 6
-      → Go LEFT to 5
-        → No left child → Visit 5 [done]  → No right child
-      → Visit 6 [done]
-      → Go RIGHT to 7
-        → No left child → Visit 7 [done]  → No right child
+    > Go LEFT to 2
+      > Go LEFT to 1
+        > No left child > Visit 1 ✅  > No right child
+      > Visit 2 ✅
+      > Go RIGHT to 3
+        > No left child > Visit 3 ✅  > No right child
+    > Visit 4 ✅
+    > Go RIGHT to 6
+      > Go LEFT to 5
+        > No left child > Visit 5 ✅  > No right child
+      > Visit 6 ✅
+      > Go RIGHT to 7
+        > No left child > Visit 7 ✅  > No right child
   
-  Result: [1, 2, 3, 4, 5, 6, 7] ← Perfectly sorted!
+  Result: [1, 2, 3, 4, 5, 6, 7] < Perfectly sorted!
 ```
 
 ---
@@ -249,7 +249,7 @@ There are 3 ways to "read" all numbers from a tree:
 | **Worst-case height** | O(n) — becomes a line | O(log n) — always balanced |
 | **Search time** | O(n) worst case | O(log n) guaranteed |
 | **Insert time** | O(n) worst case | O(log n) guaranteed |
-| **Self-balancing?** | [X] No | [done] Yes, automatically! |
+| **Self-balancing?** | ❌ No | ✅ Yes, automatically! |
 
 > With **1 million** numbers, an AVL tree needs only about **20 steps** to find any number. A normal BST in the worst case could need **1 million steps**!
 

@@ -1,6 +1,6 @@
-<!-- ╔═════════════════════════════════════════════╗ -->
-<!-- ║  TOPOLOGICAL SORT — THE TASK SCHEDULER       ║ -->
-<!-- ╚═════════════════════════════════════════════╝ -->
+<!-- +---------------------------------------------+ -->
+<!-- |  TOPOLOGICAL SORT — THE TASK SCHEDULER       | -->
+<!-- +---------------------------------------------+ -->
 # Topological Sort — The Task Scheduler
 
 ## What is Topological Sort?
@@ -21,25 +21,25 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   Tasks: 0, 1, 2, 3, 4, 5, 6, 7
 
   Dependencies (arrows mean "must come before"):
-  0 → 2, 3, 4
-  1 → 2, 7
-  2 → 5
-  3 → 5, 7
-  4 → 7
-  5 → 6
-  6 → 7
+  0 > 2, 3, 4
+  1 > 2, 7
+  2 > 5
+  3 > 5, 7
+  4 > 7
+  5 > 6
+  6 > 7
 
   Visual Graph:
   
-  0─────▶2─────▶5─────▶6─────▶7
-  │       ↑              ↑     ↑
-  ├──▶3──┘──────────────┘     │
-  │   │                        │
-  └──▶4────────────────────────┘
-       ↑
-  1───▶2
-  │
-  └───────────────────────────▶7
+  0----->2----->5----->6----->7
+  |       ^              ^     ^
+  +-->3--+--------------+     |
+  |   |                        |
+  +-->4------------------------+
+       ^
+  1--->2
+  |
+  +--------------------------->7
 ```
 
 ---
@@ -49,18 +49,18 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 **In-Degree** = How many arrows point **INTO** a node = How many prerequisites it has.
 
 ```
-  ┌──────┬───────────┬──────────────────────┐
-  │ Node │ In-Degree │ Meaning               │
-  ├──────┼───────────┼──────────────────────┤
-  │  0   │     0     │ No prerequisites! [*]  │
-  │  1   │     0     │ No prerequisites! [*]  │
-  │  2   │     2     │ Needs 0 and 1 first   │
-  │  3   │     1     │ Needs 0 first          │
-  │  4   │     1     │ Needs 0 first          │
-  │  5   │     2     │ Needs 2 and 3 first   │
-  │  6   │     1     │ Needs 5 first          │
-  │  7   │     4     │ Needs 1,3,4,6 first   │
-  └──────┴───────────┴──────────────────────┘
+  +------+-----------+----------------------+
+  | Node | In-Degree | Meaning               |
+  +------+-----------+----------------------+
+  |  0   |     0     | No prerequisites! [*]  |
+  |  1   |     0     | No prerequisites! [*]  |
+  |  2   |     2     | Needs 0 and 1 first   |
+  |  3   |     1     | Needs 0 first          |
+  |  4   |     1     | Needs 0 first          |
+  |  5   |     2     | Needs 2 and 3 first   |
+  |  6   |     1     | Needs 5 first          |
+  |  7   |     4     | Needs 1,3,4,6 first   |
+  +------+-----------+----------------------+
 
   Rule: A task is READY when its In-Degree becomes 0!
 ```
@@ -72,7 +72,7 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 ### Step 1: Find all tasks with In-Degree 0 (no prerequisites)
 
 ```
-  Ready Queue: [0, 1]   ← These can start immediately!
+  Ready Queue: [0, 1]   < These can start immediately!
   
   Tasks 0 and 1 have NO prerequisites.
 ```
@@ -80,19 +80,19 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 ### Step 2: Process task 0
 
 ```
-  Remove task 0 from queue → Add to result.
+  Remove task 0 from queue > Add to result.
   Result: [0]
   
   Task 0 was a prerequisite for: 2, 3, 4
   Reduce their in-degrees by 1:
 
-  ┌──────┬───────────┐
-  │ Node │ In-Degree │
-  ├──────┼───────────┤
-  │  2   │ 2→1       │
-  │  3   │ 1→0 [*]    │  ← NOW READY!
-  │  4   │ 1→0 [*]    │  ← NOW READY!
-  └──────┴───────────┘
+  +------+-----------+
+  | Node | In-Degree |
+  +------+-----------+
+  |  2   | 2>1       |
+  |  3   | 1>0 [*]    |  < NOW READY!
+  |  4   | 1>0 [*]    |  < NOW READY!
+  +------+-----------+
   
   Ready Queue: [1, 3, 4]
 ```
@@ -104,12 +104,12 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   
   Task 1 was a prerequisite for: 2, 7
   
-  ┌──────┬───────────┐
-  │ Node │ In-Degree │
-  ├──────┼───────────┤
-  │  2   │ 1→0 [*]    │  ← NOW READY!
-  │  7   │ 4→3       │
-  └──────┴───────────┘
+  +------+-----------+
+  | Node | In-Degree |
+  +------+-----------+
+  |  2   | 1>0 [*]    |  < NOW READY!
+  |  7   | 4>3       |
+  +------+-----------+
   
   Ready Queue: [3, 4, 2]
 ```
@@ -121,10 +121,10 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   
   Task 3 was a prerequisite for: 5, 7
   
-  ┌──────┬───────────┐
-  │  5   │ 2→1       │
-  │  7   │ 3→2       │
-  └──────┴───────────┘
+  +------+-----------+
+  |  5   | 2>1       |
+  |  7   | 3>2       |
+  +------+-----------+
   
   Ready Queue: [4, 2]
 ```
@@ -136,9 +136,9 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   
   Task 4 was a prerequisite for: 7
   
-  ┌──────┬───────────┐
-  │  7   │ 2→1       │
-  └──────┴───────────┘
+  +------+-----------+
+  |  7   | 2>1       |
+  +------+-----------+
   
   Ready Queue: [2]
 ```
@@ -150,9 +150,9 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   
   Task 2 was a prerequisite for: 5
   
-  ┌──────┬───────────┐
-  │  5   │ 1→0 ⭐    │  ← NOW READY!
-  └──────┴───────────┘
+  +------+-----------+
+  |  5   | 1>0 ⭐    |  < NOW READY!
+  +------+-----------+
   
   Ready Queue: [5]
 ```
@@ -164,9 +164,9 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   
   Task 5 was a prerequisite for: 6
   
-  ┌──────┬───────────┐
-  │  6   │ 1→0 ⭐    │  ← NOW READY!
-  └──────┴───────────┘
+  +------+-----------+
+  |  6   | 1>0 ⭐    |  < NOW READY!
+  +------+-----------+
   
   Ready Queue: [6]
 ```
@@ -178,9 +178,9 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
   
   Task 6 was a prerequisite for: 7
   
-  ┌──────┬───────────┐
-  │  7   │ 1→0 ⭐    │  ← NOW READY!
-  └──────┴───────────┘
+  +------+-----------+
+  |  7   | 1>0 ⭐    |  < NOW READY!
+  +------+-----------+
   
   Ready Queue: [7]
 ```
@@ -188,9 +188,9 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 ### Step 9: Process task 7
 
 ```
-  Result: [0, 1, 3, 4, 2, 5, 6, 7]   ← FINAL ORDER! [done]
+  Result: [0, 1, 3, 4, 2, 5, 6, 7]   < FINAL ORDER! ✅
   
-  Ready Queue: [] ← Empty! ALL DONE!
+  Ready Queue: [] < Empty! ALL DONE!
 ```
 
 ---
@@ -198,18 +198,18 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 ## 📐 The Final Valid Order
 
 ```
-  0 → 1 → 3 → 4 → 2 → 5 → 6 → 7
+  0 > 1 > 3 > 4 > 2 > 5 > 6 > 7
 
   Verification:
-  [done] 0 before 2, 3, 4     (0's dependencies)
-  [done] 1 before 2, 7         (1's dependencies)
-  [done] 2 before 5             (2's dependency)
-  [done] 3 before 5, 7          (3's dependencies)
-  [done] 4 before 7             (4's dependency)
-  [done] 5 before 6             (5's dependency)
-  [done] 6 before 7             (6's dependency)
+  ✅ 0 before 2, 3, 4     (0's dependencies)
+  ✅ 1 before 2, 7         (1's dependencies)
+  ✅ 2 before 5             (2's dependency)
+  ✅ 3 before 5, 7          (3's dependencies)
+  ✅ 4 before 7             (4's dependency)
+  ✅ 5 before 6             (5's dependency)
+  ✅ 6 before 7             (6's dependency)
   
-  ALL DEPENDENCIES SATISFIED! [done]
+  ALL DEPENDENCIES SATISFIED! ✅
 ```
 
 ---
@@ -218,21 +218,21 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 
 ### Getting Dressed:
 ```
-  Socks → Shoes
-  Underwear → Pants → Shoes
-  Shirt → Jacket
+  Socks > Shoes
+  Underwear > Pants > Shoes
+  Shirt > Jacket
 
-  Valid order: Underwear, Socks, Shirt, Pants, Jacket, Shoes [done]
-  Invalid:    Shoes, Socks [X] (Can't put shoes before socks!)
+  Valid order: Underwear, Socks, Shirt, Pants, Jacket, Shoes ✅
+  Invalid:    Shoes, Socks ❌ (Can't put shoes before socks!)
 ```
 
 ### University Course Planning:
 ```
-  Math 101 → Math 201 → Math 301
-  CS 101 → CS 201
-  Math 101 → CS 201
+  Math 101 > Math 201 > Math 301
+  CS 101 > CS 201
+  Math 101 > CS 201
 
-  Valid: Math 101, CS 101, Math 201, CS 201, Math 301 [done]
+  Valid: Math 101, CS 101, Math 201, CS 201, Math 301 ✅
 ```
 
 ---

@@ -1,14 +1,14 @@
-<!-- ╔══════════════════════════════════════════╗ -->
-<!-- ║  UNION-FIND — THE TEAM MANAGER           ║ -->
-<!-- ╚══════════════════════════════════════════╝ -->
+<!-- +------------------------------------------+ -->
+<!-- |  UNION-FIND — THE TEAM MANAGER           | -->
+<!-- +------------------------------------------+ -->
 # Union-Find — The Team Manager
 
 ## What is Union-Find?
 
 Imagine a room full of **strangers** at a party. As people talk, they start forming **friend groups**. Union-Find is a tool that answers two questions:
 
-1. **"Are these two people already friends?"** → This is called **FIND**
-2. **"Can we merge these two friend groups into one?"** → This is called **UNION**
+1. **"Are these two people already friends?"** > This is called **FIND**
+2. **"Can we merge these two friend groups into one?"** > This is called **UNION**
 
 > **Simple Definition:** Union-Find (also called Disjoint Set Union) is a data structure that keeps track of which elements belong to which group, and can merge groups together.
 
@@ -32,7 +32,7 @@ At the beginning, **everyone is their own leader**. Each person is a team of ONE
 ```
   Person:  0   1   2   3   4   5   6   7   8   9  10  11  12  13
   Leader:  0   1   2   3   4   5   6   7   8   9  10  11  12  13
-           ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑   ↑
+           ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^
          (each person is their own boss)
 ```
 
@@ -44,26 +44,22 @@ At the beginning, **everyone is their own leader**. Each person is a team of ONE
 ### Friendship Link: UNION(0, 1) — Person 0 and 1 become friends
 
 ```
-  BEFORE:                          AFTER:
-  (o)0    (o)1                       ┌─────────┐
-                                   │ Team 0  │
-                        ──────▶    │  (o)0    │
-                                   │  (o)1    │
-                                   └─────────┘
+  BEFORE:                       AFTER:
+  (o)0  (o)1                     [ Team 0 ]
+                                 |  (o)0  |
+                       ------>   |  (o)1  |
   Leader of 0: 0                   Leader of 0: 0
-  Leader of 1: 1                   Leader of 1: 0  ← Changed!
+  Leader of 1: 1                   Leader of 1: 0  < Changed!
 ```
 
 ### More Friendships: UNION(0, 2) and UNION(1, 3)
 
 ```
-  ┌──────────────┐
-  │   Team 0     │
-  │  (o)0 (Leader)│
-  │  (o)1         │
-  │  (o)2         │
-  │  (o)3         │
-  └──────────────┘
+     [ Team 0 ]
+     | (o)0 (Boss)|
+     | (o)1       |
+     | (o)2       |
+     | (o)3       |
 ```
 
 Now, person 0, 1, 2, and 3 all have the **same leader: 0**.
@@ -76,11 +72,9 @@ Now, person 0, 1, 2, and 3 all have the **same leader: 0**.
   (5,6) (6,7) (7,8) (8,9) (9,10)
   (10,11) (11,12) (12,13) (1,13)
 
-  ┌──────────────────────────────────────────────────────┐
-  │                     Team 0 (Leader: 0)               │
-  │  (o)0  (o)1  (o)2  (o)3  (o)4  (o)5  (o)6  (o)7            │
-  │  (o)8  (o)9  (o)10 (o)11 (o)12 (o)13                     │
-  └──────────────────────────────────────────────────────┘
+    [ Team 0 (Leader: 0) ]
+    | (o)0  (o)1  (o)2  (o)3  (o)4  (o)5  (o)6  (o)7  |
+    | (o)8  (o)9  (o)10 (o)11 (o)12 (o)13             |
 
   Everyone ends up in ONE big group!
 ```
@@ -95,20 +89,20 @@ When merging two groups, we always make the **smaller group** join the **larger 
 ```
   Small group   joins   Big group         Result: Tall tree (slow!)
        (o)                 (o)
-       │           +      │
+       |           +      |
        (o)                 (o)
-                          │
+                          |
                           (o)
-                          │
-                          (o)       ← Very tall! Slow to find leader!
+                          |
+                          (o)       < Very tall! Slow to find leader!
 ```
 
 ### With Smart Merging (Good — Union by Rank):
 ```
   Small group   joins   Big group         Result: Flat tree (fast!)
        (o)                 (o)
-                          ├──┬──┐
-                          (o) (o) (o)    ← Flat! Quick to find leader!
+                          +--+--+
+                          (o) (o) (o)    < Flat! Quick to find leader!
 ```
 
 > The flatter the tree, the faster we can find any person's leader!
@@ -122,10 +116,10 @@ To find someone's leader, we just follow the chain of "who is your boss?" until 
 ```
   "Who is Person 5's leader?"
 
-  Person 5 → "My boss is Person 3"
-  Person 3 → "My boss is Person 1"
-  Person 1 → "My boss is Person 0"
-  Person 0 → "I AM my own boss!"  ← This is the LEADER!
+  Person 5 > "My boss is Person 3"
+  Person 3 > "My boss is Person 1"
+  Person 1 > "My boss is Person 0"
+  Person 0 > "I AM my own boss!"  < This is the LEADER!
 
   Answer: Person 0 is the leader of Person 5's group!
 ```

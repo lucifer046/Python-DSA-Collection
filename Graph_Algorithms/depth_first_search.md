@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════════════╗ -->
-<!-- ║  DEPTH-FIRST SEARCH (DFS) — THE MAZE EXPLORER               ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════╝ -->
+<!-- +--------------------------------------------------------------+ -->
+<!-- |  DEPTH-FIRST SEARCH (DFS) — THE MAZE EXPLORER               | -->
+<!-- +--------------------------------------------------------------+ -->
 # Depth-First Search (DFS) — The Maze Explorer
 
 ## What is DFS?
@@ -19,7 +19,7 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
   
        0                                   0
       / \                                  |
-     1   2    ← Layer by Layer             1
+     1   2    < Layer by Layer             1
     / \ / \                                |
    3   4        Visit: 0,1,2,3,4           3
                                            |
@@ -34,12 +34,12 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 
 ### The Graph:
 ```
-       0 ─────── 1
-       │        ╱ │
-       │      ╱   │
-       2          │
-       │          │
-       3 ─────── 4
+       0 ------- 1
+       |        ╱ |
+       |      ╱   |
+       2          |
+       |          |
+       3 ------- 4
 
   Adjacency List:
   0: [1, 2]
@@ -58,14 +58,14 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 ### Step 1: Start at node 0, push it on the stack
 
 ```
-  Stack:   [0]    ← Push 0
+  Stack:   [0]    < Push 0
   Visited: {}
 
-       ★0 ─────── 1
-       │        ╱ │
-       2          │
-       │          │
-       3 ─────── 4
+       ★0 ------- 1
+       |        ╱ |
+       2          |
+       |          |
+       3 ------- 4
 
   ★ = Next to process
 ```
@@ -73,40 +73,40 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 ### Step 2: Pop 0, visit it. Push its neighbors (1, 2)
 
 ```
-  Stack:   [2, 1]    ← Pushed 1 and 2 (1 is on top!)
+  Stack:   [2, 1]    < Pushed 1 and 2 (1 is on top!)
   Visited: {0}
 
-       [done]0 ─────── ★1
-       │        ╱   │
-       ★2          │
-       │            │
-       3 ─────── 4
+       ✅0 ------- ★1
+       |        ╱   |
+       ★2          |
+       |            |
+       3 ------- 4
 ```
 
 ### Step 3: Pop 1 (top of stack), visit it. Push its unvisited neighbors (3, 4)
 
 ```
-  Stack:   [2, 4, 3]    ← Pushed 3 and 4 (3 is on top!)
+  Stack:   [2, 4, 3]    < Pushed 3 and 4 (3 is on top!)
   Visited: {0, 1}
 
-       [done]0 ─────── [done]1
-       │        ╱    │
-       ★2           │
-       │             │
-       ★3 ─────── ★4
+       ✅0 ------- ✅1
+       |        ╱    |
+       ★2           |
+       |             |
+       ★3 ------- ★4
 ```
 
 ### Step 4: Pop 3 (top), visit it. Push its unvisited neighbor (4)
 
 ```
-  Stack:   [2, 4, 4]    ← Pushed 4 (already in stack, but that's ok)
+  Stack:   [2, 4, 4]    < Pushed 4 (already in stack, but that's ok)
   Visited: {0, 1, 3}
 
-       [done]0 ─────── [done]1
-       │                │
-       ★2               │
-       │                │
-       [done]3 ─────── ★4
+       ✅0 ------- ✅1
+       |                |
+       ★2               |
+       |                |
+       ✅3 ------- ★4
 ```
 
 ### Step 5: Pop 4 (top), visit it. No unvisited neighbors.
@@ -115,26 +115,26 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
   Stack:   [2, 4]
   Visited: {0, 1, 3, 4}
 
-       [done]0 ─────── [done]1
-       │                │
-       ★2               │
-       │                │
-       [done]3 ─────── [done]4
+       ✅0 ------- ✅1
+       |                |
+       ★2               |
+       |                |
+       ✅3 ------- ✅4
 ```
 
 ### Step 6: Pop 4 again — already visited! Skip. Pop 2, visit it.
 
 ```
-  Stack:   []    ← EMPTY!
+  Stack:   []    < EMPTY!
   Visited: {0, 1, 3, 4, 2}
 
-       [done]0 ─────── [done]1
-       │                │
-       [done]2              │
-       │                │
-       [done]3 ─────── [done]4
+       ✅0 ------- ✅1
+       |                |
+       ✅2              |
+       |                |
+       ✅3 ------- ✅4
 
-  DFS Order: 0 → 1 → 3 → 4 → 2
+  DFS Order: 0 > 1 > 3 > 4 > 2
 ```
 
 ---
@@ -145,29 +145,29 @@ The recursive version uses the computer's built-in "call stack" — it's more el
 
 ```
   Start: 0
-    │
-    ├──▶ Visit 0, then go deeper into neighbor 1
-    │      │
-    │      ├──▶ Visit 1, then go deeper into neighbor 3
-    │      │      │
-    │      │      ├──▶ Visit 3, then go deeper into neighbor 4
-    │      │      │      │
-    │      │      │      └──▶ Visit 4 (no unvisited neighbors)
-    │      │      │           BACKTRACK! <--
-    │      │      │
-    │      │      └──▶ Neighbor 4? Already visited. BACKTRACK! <--
-    │      │
-    │      └──▶ Neighbor 4? Already visited. BACKTRACK! <--
-    │
-    └──▶ Go deeper into neighbor 2
-           │
-           ├──▶ Visit 2, neighbor 4? Already visited.
-           │      neighbor 3? Already visited.
-           └──▶ BACKTRACK! <--
+    |
+    +--> Visit 0, then go deeper into neighbor 1
+    |      |
+    |      +--> Visit 1, then go deeper into neighbor 3
+    |      |      |
+    |      |      +--> Visit 3, then go deeper into neighbor 4
+    |      |      |      |
+    |      |      |      +--> Visit 4 (no unvisited neighbors)
+    |      |      |           BACKTRACK! <--
+    |      |      |
+    |      |      +--> Neighbor 4? Already visited. BACKTRACK! <--
+    |      |
+    |      +--> Neighbor 4? Already visited. BACKTRACK! <--
+    |
+    +--> Go deeper into neighbor 2
+           |
+           +--> Visit 2, neighbor 4? Already visited.
+           |      neighbor 3? Already visited.
+           +--> BACKTRACK! <--
 
-  ALL DONE! [done]
+  ALL DONE! ✅
   
-  DFS Order: 0 → 1 → 3 → 4 → 2
+  DFS Order: 0 > 1 > 3 > 4 > 2
   Parent tree: {1: 0, 3: 1, 4: 3, 2: 0}
 ```
 
@@ -175,13 +175,13 @@ The recursive version uses the computer's built-in "call stack" — it's more el
 ```
   "Who discovered whom?"
 
-       0           ← Root (discovered itself)
+       0           < Root (discovered itself)
       / \
-     1   2         ← 0 discovered both 1 and 2
+     1   2         < 0 discovered both 1 and 2
      |
-     3             ← 1 discovered 3
+     3             < 1 discovered 3
      |
-     4             ← 3 discovered 4
+     4             < 3 discovered 4
 ```
 
 ---

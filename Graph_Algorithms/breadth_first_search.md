@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════════════╗ -->
-<!-- ║  BREADTH-FIRST SEARCH (BFS) — LAYER-BY-LAYER EXPLORATION    ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════╝ -->
+<!-- +--------------------------------------------------------------+ -->
+<!-- |  BREADTH-FIRST SEARCH (BFS) — LAYER-BY-LAYER EXPLORATION    | -->
+<!-- +--------------------------------------------------------------+ -->
 # Breadth-First Search (BFS) — Layer-by-Layer Exploration
 
 ## What is BFS?
@@ -20,15 +20,15 @@ A **graph** is just a collection of **dots** (called Nodes) connected by **lines
 ```
   Example Graph:
 
-       0 ─────── 1
-       │        ╱ │
-       │      ╱   │
-       │    ╱     │
-       2 ─╱      │
-       │  ╲      │
-       │    ╲    │
-       │      ╲  │
-       3 ─────── 4
+       0 ------- 1
+       |        ╱ |
+       |      ╱   |
+       |    ╱     |
+       2 -╱      |
+       |  ╲      |
+       |    ╲    |
+       |      ╲  |
+       3 ------- 4
 
   Node 0 connects to: 1, 2
   Node 1 connects to: 3, 4
@@ -53,87 +53,87 @@ A **graph** is just a collection of **dots** (called Nodes) connected by **lines
   Queue:   [0]
   Visited: {0}
 
-       ●0 ─────── 1
-       │        ╱ │
-       │      ╱   │
-       2          │
-       │          │
-       3 ─────── 4
+       ●0 ------- 1
+       |        ╱ |
+       |      ╱   |
+       2          |
+       |          |
+       3 ------- 4
 
   ● = Currently processing (Layer 0)
 ```
 
-### Step 2: Process node 0 → Add its neighbors (1, 2) to the queue
+### Step 2: Process node 0 > Add its neighbors (1, 2) to the queue
 
 ```
-  Queue:   [1, 2]     ← Added neighbors of 0
+  Queue:   [1, 2]     < Added neighbors of 0
   Visited: {0, 1, 2}
 
-       [done]0 ─────── ○1
-       │        ╱  │
-       │      ╱    │
-       ○2         │
-       │           │
-       3 ─────── 4
+       ✅0 ------- ○1
+       |        ╱  |
+       |      ╱    |
+       ○2         |
+       |           |
+       3 ------- 4
 
-  [done] = Done    ○ = In queue (Layer 1)
+  ✅ = Done    ○ = In queue (Layer 1)
 ```
 
-### Step 3: Process node 1 → Add its unvisited neighbors (3, 4)
+### Step 3: Process node 1 > Add its unvisited neighbors (3, 4)
 
 ```
-  Queue:   [2, 3, 4]  ← 1 is done, added 3 and 4
+  Queue:   [2, 3, 4]  < 1 is done, added 3 and 4
   Visited: {0, 1, 2, 3, 4}
 
-       [done]0 ─────── [done]1
-       │        ╱   │
-       │      ╱     │
-       ○2          │
-       │            │
-       ○3 ─────── ○4
+       ✅0 ------- ✅1
+       |        ╱   |
+       |      ╱     |
+       ○2          |
+       |            |
+       ○3 ------- ○4
 
   ○ = In queue (Layer 2)
 ```
 
-### Step 4: Process node 2 → Neighbors 4 and 3 already visited!
+### Step 4: Process node 2 > Neighbors 4 and 3 already visited!
 
 ```
-  Queue:   [3, 4]     ← Nothing new to add
+  Queue:   [3, 4]     < Nothing new to add
   Visited: {0, 1, 2, 3, 4}
 
-       [done]0 ─────── [done]1
-       │        ╱   │
-       [done]2          │
-       │            │
-       ○3 ─────── ○4
+       ✅0 ------- ✅1
+       |        ╱   |
+       ✅2          |
+       |            |
+       ○3 ------- ○4
 ```
 
-### Step 5: Process node 3 → Neighbor 4 already visited
+### Step 5: Process node 3 > Neighbor 4 already visited
 
 ```
   Queue:   [4]
   Visited: {0, 1, 2, 3, 4}
 
-       [done]0 ─────── [done]1
-       │        ╱   │
-       [done]2          │
-       │            │
-       [done]3 ─────── ○4
+       ✅0 ------- ✅1
+       |        ╱   |
+       ✅2          |
+       |            |
+       ✅3 ------- ○4
 ```
 
-### Step 6: Process node 4 → No new neighbors. We're done!
+### Step 6: Process node 4 > No new neighbors. We're done!
 
 ```
-  Queue:   []   ← EMPTY! All done!
+  Queue:   []   < EMPTY! All done!
   Visited: {0, 1, 2, 3, 4}
 
-       [done]0 ─────── [done]1
-       │        ╱   │
-       [done]2          │
-       │            │
-       [done]3 ─────── [done]4
+       ✅0 ------- ✅1
+       |        ╱   |
+       ✅2          |
+       |            |
+       ✅3 ------- ✅4
 
-  BFS Order: 0 → 1 → 2 → 3 → 4
+  BFS Order: 0 > 1 > 2 > 3 > 4
 ```
 
 ---
@@ -158,8 +158,8 @@ A **graph** is just a collection of **dots** (called Nodes) connected by **lines
 ### 1. Adjacency List (Dictionary)
 ```
   {
-    0: [1, 2],      ← "Node 0 is friends with 1 and 2"
-    1: [3, 4],      ← "Node 1 is friends with 3 and 4"
+    0: [1, 2],      < "Node 0 is friends with 1 and 2"
+    1: [3, 4],      < "Node 1 is friends with 3 and 4"
     2: [4, 3],
     3: [4],
     4: []
@@ -169,8 +169,8 @@ A **graph** is just a collection of **dots** (called Nodes) connected by **lines
 ### 2. Adjacency Matrix (Grid)
 ```
        0  1  2  3  4
-    0 [0, 1, 1, 0, 0]    ← Node 0 connects to 1 and 2
-    1 [0, 0, 0, 1, 1]    ← Node 1 connects to 3 and 4
+    0 [0, 1, 1, 0, 0]    < Node 0 connects to 1 and 2
+    1 [0, 0, 0, 1, 1]    < Node 1 connects to 3 and 4
     2 [0, 0, 0, 1, 1]
     3 [0, 0, 0, 0, 1]
     4 [0, 0, 0, 0, 0]

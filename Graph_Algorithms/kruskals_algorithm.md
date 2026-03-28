@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════╗ -->
-<!-- ║  KRUSKAL'S ALGORITHM — THE ISLAND BRIDGE BUILDER    ║ -->
-<!-- ╚══════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------+ -->
+<!-- |  KRUSKAL'S ALGORITHM — THE ISLAND BRIDGE BUILDER    | -->
+<!-- +------------------------------------------------------+ -->
 # Kruskal's Algorithm — The Island Bridge Builder
 
 ## What is Kruskal's Algorithm?
@@ -37,17 +37,17 @@ Both find the same MST, just using different approaches!
 ```
   All possible bridges sorted by cost:
   
-  ┌──────────┬────────┬──────────────┐
-  │ From     │ To     │ Cost         │
-  ├──────────┼────────┼──────────────┤
-  │ Island 3 │ Is. 4  │ $1  ← Cheapest│
-  │ Island 0 │ Is. 1  │ $2           │
-  │ Island 1 │ Is. 2  │ $3           │
-  │ Island 1 │ Is. 4  │ $5           │
-  │ Island 0 │ Is. 3  │ $6           │
-  │ Island 2 │ Is. 3  │ $7           │
-  │ Island 1 │ Is. 3  │ $8  ← Most   │
-  └──────────┴────────┴──────────────┘
+  +----------+--------+--------------+
+  | From     | To     | Cost         |
+  +----------+--------+--------------+
+  | Island 3 | Is. 4  | $1  < Cheapest|
+  | Island 0 | Is. 1  | $2           |
+  | Island 1 | Is. 2  | $3           |
+  | Island 1 | Is. 4  | $5           |
+  | Island 0 | Is. 3  | $6           |
+  | Island 2 | Is. 3  | $7           |
+  | Island 1 | Is. 3  | $8  < Most   |
+  +----------+--------+--------------+
 ```
 
 ### Initial State: 5 Separate Islands
@@ -60,67 +60,67 @@ Both find the same MST, just using different approaches!
 
 ---
 
-### Edge 1: Island 3 → Island 4, cost $1 [done] ADD!
+### Edge 1: Island 3 > Island 4, cost $1 ✅ ADD!
 
 ```
-  Are 3 and 4 on the same island? NO → BUILD!
+  Are 3 and 4 on the same island? NO > BUILD!
 
-  (o)0    (o)1    (o)2    (o)3═══(o)4
+  (o)0    (o)1    (o)2    (o)3---(o)4
                               $1
   Components: {0}, {1}, {2}, {3,4}
   MST cost: $1
 ```
 
-### Edge 2: Island 0 → Island 1, cost $2 [done] ADD!
+### Edge 2: Island 0 > Island 1, cost $2 ✅ ADD!
 
 ```
-  Are 0 and 1 on the same island? NO → BUILD!
+  Are 0 and 1 on the same island? NO > BUILD!
 
-  (o)0═══(o)1    (o)2    (o)3═══(o)4
+  (o)0---(o)1    (o)2    (o)3---(o)4
      $2
   Components: {0,1}, {2}, {3,4}
   MST cost: $1 + $2 = $3
 ```
 
-### Edge 3: Island 1 → Island 2, cost $3 [done] ADD!
+### Edge 3: Island 1 > Island 2, cost $3 ✅ ADD!
 
 ```
-  Are 1 and 2 on the same island? NO → BUILD!
+  Are 1 and 2 on the same island? NO > BUILD!
 
-  (o)0═══(o)1═══(o)2    (o)3═══(o)4
+  (o)0---(o)1---(o)2    (o)3---(o)4
      $2    $3
   Components: {0,1,2}, {3,4}
   MST cost: $1 + $2 + $3 = $6
 ```
 
-### Edge 4: Island 1 → Island 4, cost $5 [done] ADD!
+### Edge 4: Island 1 > Island 4, cost $5 ✅ ADD!
 
 ```
-  Are 1 and 4 on the same island? NO → BUILD!
+  Are 1 and 4 on the same island? NO > BUILD!
 
-  (o)0═══(o)1═══(o)2
-     $2  │ $3
-          │$5
-  (o)3═══(o)4
+  (o)0---(o)1---(o)2
+     $2  | $3
+          |$5
+  (o)3---(o)4
      $1
 
-  Components: {0,1,2,3,4}  ← ALL CONNECTED! [done]
+  Components: {0,1,2,3,4}  < ALL CONNECTED! ✅
   MST cost: $1 + $2 + $3 + $5 = $11
 ```
 
-### Edge 5: Island 0 → Island 3, cost $6 [X] SKIP!
+### Edge 5: Island 0 > Island 3, cost $6 ❌ SKIP!
 
 ```
-  Are 0 and 3 on the same island? YES → SKIP! (Would create a loop)
+  Are 0 and 3 on the same island? YES > SKIP! (Would create a loop)
 ```
 
-### Edge 6: Island 2 → Island 3, cost $7 [X] SKIP!
+### Edge 6: Island 2 > Island 3, cost $7 ❌ SKIP!
 
 ```
-  Are 2 and 3 on the same island? YES → SKIP!
+  Are 2 and 3 on the same island? YES > SKIP!
 ```
 
-### DONE! We have n-1 = 4 edges. All islands connected! [done]
+### DONE! We have n-1 = 4 edges. All islands connected! ✅
 
 ---
 
@@ -129,15 +129,15 @@ Both find the same MST, just using different approaches!
 ```
   Sorted Edges:        Decision:              Running MST:
   ━━━━━━━━━━━━━━       ━━━━━━━━━              ━━━━━━━━━━━━
-  3→4, cost $1    ──▶  [done] Different teams    ──▶  {3═4}
-  0→1, cost $2    ──▶  [done] Different teams    ──▶  {0═1}, {3═4}
-  1→2, cost $3    ──▶  [done] Different teams    ──▶  {0═1═2}, {3═4}
-  1→4, cost $5    ──▶  [done] Different teams    ──▶  {0═1═2═4═3} ALL DONE!
-  0→3, cost $6    ──▶  [X] Same team, skip!
-  2→3, cost $7    ──▶  [X] Same team, skip!
-  1→3, cost $8    ──▶  [X] Same team, skip!
+  3>4, cost $1    -->  ✅ Different teams    -->  {3-4}
+  0>1, cost $2    -->  ✅ Different teams    -->  {0-1}, {3-4}
+  1>2, cost $3    -->  ✅ Different teams    -->  {0-1-2}, {3-4}
+  1>4, cost $5    -->  ✅ Different teams    -->  {0-1-2-4-3} ALL DONE!
+  0>3, cost $6    -->  ❌ Same team, skip!
+  2>3, cost $7    -->  ❌ Same team, skip!
+  1>3, cost $8    -->  ❌ Same team, skip!
   
-  FINAL MST COST: $1 + $2 + $3 + $5 = $11 [done]
+  FINAL MST COST: $1 + $2 + $3 + $5 = $11 ✅
 ```
 
 ---
@@ -149,14 +149,14 @@ Kruskal's needs to answer one question repeatedly: **"Are these two nodes alread
 This is exactly what **Union-Find** does!
 
 ```
-  Before adding edge (1→4):
+  Before adding edge (1>4):
   
-  FIND(1) → Leader is 0      (Island 1 is in group {0,1,2})
-  FIND(4) → Leader is 3      (Island 4 is in group {3,4})
+  FIND(1) > Leader is 0      (Island 1 is in group {0,1,2})
+  FIND(4) > Leader is 3      (Island 4 is in group {3,4})
   
-  Leaders are DIFFERENT → They're on different islands → SAFE TO BUILD! ✅
+  Leaders are DIFFERENT > They're on different islands > SAFE TO BUILD! ✅
   
-  UNION(0, 3) → Merge the two groups into {0,1,2,3,4}
+  UNION(0, 3) > Merge the two groups into {0,1,2,3,4}
 ```
 
 ---

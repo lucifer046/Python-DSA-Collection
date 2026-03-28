@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════╗ -->
-<!-- ║  HUFFMAN ENCODING — DATA COMPRESSION MADE SIMPLE    ║ -->
-<!-- ╚══════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------+ -->
+<!-- |  HUFFMAN ENCODING — DATA COMPRESSION MADE SIMPLE    | -->
+<!-- +------------------------------------------------------+ -->
 # Huffman Encoding — Data Compression Made Simple
 
 ## What is Huffman Encoding?
@@ -22,17 +22,17 @@ This way, your message becomes **much shorter** overall!
 ```
   Regular (Fixed Length):               Huffman (Variable Length):
   
-  A = 000  (3 bits)                     A = 0    (1 bit!)    ← Used most!
+  A = 000  (3 bits)                     A = 0    (1 bit!)    < Used most!
   B = 001  (3 bits)                     B = 10   (2 bits)
   C = 010  (3 bits)                     C = 110  (3 bits)
-  D = 011  (3 bits)                     D = 1110 (4 bits)    ← Used least!
+  D = 011  (3 bits)                     D = 1110 (4 bits)    < Used least!
   E = 100  (3 bits)                     E = 1111 (4 bits)
   
   Message "AAABBC":                     Message "AAABBC":
   000 000 000 001 001 010              0 0 0 10 10 110
   = 18 bits                             = 10 bits
   
-  Savings: 44%! [done]
+  Savings: 44%! ✅
 ```
 
 ---
@@ -44,15 +44,15 @@ This way, your message becomes **much shorter** overall!
 ### Step 1: Count the frequency of each character
 
 ```
-  ┌──────────┬───────────┐
-  │ Character│ Frequency │
-  ├──────────┼───────────┤
-  │    a     │     6     │  ← Most common!
-  │    b     │     3     │
-  │    c     │     2     │
-  │    d     │     3     │
-  │    e     │     3     │  
-  └──────────┴───────────┘
+  +----------+-----------+
+  | Character| Frequency |
+  +----------+-----------+
+  |    a     |     6     |  < Most common!
+  |    b     |     3     |
+  |    c     |     2     |
+  |    d     |     3     |
+  |    e     |     3     |  
+  +----------+-----------+
   
   Total characters: 17
 ```
@@ -119,25 +119,25 @@ Start with every character as a **leaf node** sorted by frequency:
                 [c]    [b]
   
   Tracing paths from ROOT:
-  d: LEFT, LEFT         → Code: 00
-  e: LEFT, RIGHT        → Code: 01
-  c: RIGHT, LEFT, LEFT  → Code: 100
-  b: RIGHT, LEFT, RIGHT → Code: 101
-  a: RIGHT, RIGHT       → Code: 11
+  d: LEFT, LEFT         > Code: 00
+  e: LEFT, RIGHT        > Code: 01
+  c: RIGHT, LEFT, LEFT  > Code: 100
+  b: RIGHT, LEFT, RIGHT > Code: 101
+  a: RIGHT, RIGHT       > Code: 11
 ```
 
 ### Step 4: Final Code Table
 
 ```
-  ┌──────────┬───────────┬──────────┬───────────────────┐
-  │ Character│ Frequency │   Code   │ Bits Used         │
-  ├──────────┼───────────┼──────────┼───────────────────┤
-  │    a     │     6     │    11    │ 6 × 2 = 12 bits   │
-  │    b     │     3     │   101    │ 3 × 3 = 9 bits    │
-  │    c     │     2     │   100    │ 2 × 3 = 6 bits    │
-  │    d     │     3     │    00    │ 3 × 2 = 6 bits    │
-  │    e     │     3     │    01    │ 3 × 2 = 6 bits    │
-  └──────────┴───────────┴──────────┴───────────────────┘
+  +----------+-----------+----------+-------------------+
+  | Character| Frequency |   Code   | Bits Used         |
+  +----------+-----------+----------+-------------------+
+  |    a     |     6     |    11    | 6 × 2 = 12 bits   |
+  |    b     |     3     |   101    | 3 × 3 = 9 bits    |
+  |    c     |     2     |   100    | 2 × 3 = 6 bits    |
+  |    d     |     3     |    00    | 3 × 2 = 6 bits    |
+  |    e     |     3     |    01    | 3 × 2 = 6 bits    |
+  +----------+-----------+----------+-------------------+
   
   Total with Huffman: 12+9+6+6+6 = 39 bits
   Total with Fixed (3 bits each): 17 × 3 = 51 bits
@@ -154,7 +154,7 @@ A critical rule: **No code can be the START of another code!**
 ```
   ✅ VALID codes:       ❌ INVALID codes:
   a = 0                  a = 0
-  b = 10                 b = 01    ← Starts with 'a's code (0)!
+  b = 10                 b = 01    < Starts with 'a's code (0)!
   c = 11                 c = 011
   
   Why? If a=0 and b=01, how would the computer read "001"?
@@ -182,7 +182,7 @@ The code provides TWO implementations:
 ```
   A pyramid where the LIGHTEST (smallest) item is always on TOP!
   
-        [2]         ← Smallest always on top!
+        [2]         < Smallest always on top!
        ╱   ╲
      [5]   [3]
     ╱   ╲

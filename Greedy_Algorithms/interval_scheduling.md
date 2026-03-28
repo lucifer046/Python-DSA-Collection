@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════╗ -->
-<!-- ║  INTERVAL SCHEDULING — THE MEETING ROOM PROBLEM      ║ -->
-<!-- ╚══════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------+ -->
+<!-- |  INTERVAL SCHEDULING — THE MEETING ROOM PROBLEM      | -->
+<!-- +------------------------------------------------------+ -->
 # Interval Scheduling — The Meeting Room Problem
 
 ## What is Interval Scheduling?
@@ -19,9 +19,9 @@ A **Greedy Algorithm** means: At each step, make the **best looking choice** rig
 
 | Strategy | Does it Work? |
 |---|---|
-| Pick the **shortest** meeting? | [X] Fails! A short meeting might overlap with two longer ones |
-| Pick the one that **starts earliest**? | [X] Fails! It might be very long and block everything |
-| Pick the one that **ends earliest**? | [done] YES! Finishing earliest leaves the most room for others |
+| Pick the **shortest** meeting? | ❌ Fails! A short meeting might overlap with two longer ones |
+| Pick the one that **starts earliest**? | ❌ Fails! It might be very long and block everything |
+| Pick the one that **ends earliest**? | ✅ YES! Finishing earliest leaves the most room for others |
 
 > **The Optimal Rule: Always pick the meeting that ENDS EARLIEST!**
 
@@ -33,7 +33,7 @@ A **Greedy Algorithm** means: At each step, make the **best looking choice** rig
 
 ```
   Time:  0  1  2  3  4  5  6  7  8  9 10 11
-         │  │  │  │  │  │  │  │  │  │  │  │
+         |  |  |  |  |  |  |  |  |  |  |  |
   A:        ████████░░░░░░░░░░░░░░░░░░░░░░    [1, 4]
   B:           ░░████████░░░░░░░░░░░░░░░░░    [3, 5]
   C:     ██████████████████░░░░░░░░░░░░░░░    [0, 6]
@@ -48,18 +48,18 @@ A **Greedy Algorithm** means: At each step, make the **best looking choice** rig
 
 ```
   Sorted by end time:
-  ┌─────────┬───────┬─────────┐
-  │ Meeting │ Start │  End    │
-  ├─────────┼───────┼─────────┤
-  │    A    │   1   │   4 ←   │
-  │    B    │   3   │   5     │
-  │    C    │   0   │   6     │
-  │    D    │   5   │   7     │
-  │    E    │   3   │   8     │
-  │    F    │   5   │   9     │
-  │    G    │   6   │  10     │
-  │    H    │   8   │  11     │
-  └─────────┴───────┴─────────┘
+  +---------+-------+---------+
+  | Meeting | Start |  End    |
+  +---------+-------+---------+
+  |    A    |   1   |   4 <   |
+  |    B    |   3   |   5     |
+  |    C    |   0   |   6     |
+  |    D    |   5   |   7     |
+  |    E    |   3   |   8     |
+  |    F    |   5   |   9     |
+  |    G    |   6   |  10     |
+  |    H    |   8   |  11     |
+  +---------+-------+---------+
 ```
 
 ### Step 2: Greedily pick meetings
@@ -67,23 +67,23 @@ A **Greedy Algorithm** means: At each step, make the **best looking choice** rig
 ```
   Room is free at time: 0
 
-  Check A [1, 4]:  Start (1) ≥ Free time (0)?  YES → PICK A! [done]
+  Check A [1, 4]:  Start (1) ≥ Free time (0)?  YES > PICK A! ✅
   Room is now free at: 4
 
-  Check B [3, 5]:  Start (3) ≥ Free time (4)?  NO → SKIP! [X] (Overlaps!)
+  Check B [3, 5]:  Start (3) ≥ Free time (4)?  NO > SKIP! ❌ (Overlaps!)
 
-  Check C [0, 6]:  Start (0) ≥ Free time (4)?  NO → SKIP! [X]
+  Check C [0, 6]:  Start (0) ≥ Free time (4)?  NO > SKIP! ❌
 
-  Check D [5, 7]:  Start (5) ≥ Free time (4)?  YES → PICK D! [done]
+  Check D [5, 7]:  Start (5) ≥ Free time (4)?  YES > PICK D! ✅
   Room is now free at: 7
 
-  Check E [3, 8]:  Start (3) ≥ Free time (7)?  NO → SKIP! ❌
+  Check E [3, 8]:  Start (3) ≥ Free time (7)?  NO > SKIP! ❌
 
-  Check F [5, 9]:  Start (5) ≥ Free time (7)?  NO → SKIP! ❌
+  Check F [5, 9]:  Start (5) ≥ Free time (7)?  NO > SKIP! ❌
 
-  Check G [6, 10]: Start (6) ≥ Free time (7)?  NO → SKIP! ❌
+  Check G [6, 10]: Start (6) ≥ Free time (7)?  NO > SKIP! ❌
 
-  Check H [8, 11]: Start (8) ≥ Free time (7)?  YES → PICK H! [done]
+  Check H [8, 11]: Start (8) ≥ Free time (7)?  YES > PICK H! ✅
   Room is now free at: 11
 ```
 
@@ -91,10 +91,10 @@ A **Greedy Algorithm** means: At each step, make the **best looking choice** rig
 
 ```
   Time:  0  1  2  3  4  5  6  7  8  9 10 11
-         │  │  │  │  │  │  │  │  │  │  │  │
-  A:        ████████                            [1, 4]  [done] PICKED
-  D:                    ████████                [5, 7]  [done] PICKED
-  H:                             ████████████   [8, 11] [done] PICKED
+         |  |  |  |  |  |  |  |  |  |  |  |
+  A:        ████████                            [1, 4]  ✅ PICKED
+  D:                    ████████                [5, 7]  ✅ PICKED
+  H:                             ████████████   [8, 11] ✅ PICKED
   
   No overlaps! Maximum meetings = 3! 🎉
 ```
@@ -106,7 +106,7 @@ A **Greedy Algorithm** means: At each step, make the **best looking choice** rig
 ```
   Strategy: Earliest END time
 
-  ████  ████  ████████    3 meetings fit! [done]
+  ████  ████  ████████    3 meetings fit! ✅
   
   Strategy: Earliest START time
 
@@ -123,13 +123,15 @@ By finishing early, we leave the **maximum room** for future meetings.
 ```
   For each meeting (sorted by end time):
   
-  ┌─────────────────────────┐
-  │ Does this meeting start │
-  │ AFTER the last one      │     YES ──▶ PICK IT! [done]
-  │ ended?                  │──────────▶ Update free time
-  │                         │
-  │                         │     NO ──▶ SKIP IT! ❌
-  └─────────────────────────┘──────────▶ Check next meeting
+  +-------------------------+
+  | Does this meeting start |
+  | AFTER the last one      |     YES --> PICK IT! ✅
+  | ended?                  |----------> Update free time
+  |                         |
+  |                         |     NO  --> SKIP IT! ❌
+  +-------------------------+
+               |
+               +-------------------------> Check next meeting
 ```
 
 ---

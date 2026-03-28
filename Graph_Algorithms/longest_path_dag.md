@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════╗ -->
-<!-- ║  LONGEST PATH IN DAG — THE CRITICAL PATH METHOD      ║ -->
-<!-- ╚══════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------+ -->
+<!-- |  LONGEST PATH IN DAG — THE CRITICAL PATH METHOD      | -->
+<!-- +------------------------------------------------------+ -->
 # Longest Path in DAG — The Critical Path Method
 
 ## What is the Longest Path?
@@ -18,9 +18,9 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
 ```
   Building a House:
   
-  Foundation (2 days) ──▶ Walls (5 days) ──▶ Roof (3 days)    = 10 days
-  Foundation (2 days) ──▶ Plumbing (1 day)                     = 3 days
-  Foundation (2 days) ──▶ Electrical (2 days)                  = 4 days
+  Foundation (2 days) --> Walls (5 days) --> Roof (3 days)    = 10 days
+  Foundation (2 days) --> Plumbing (1 day)                     = 3 days
+  Foundation (2 days) --> Electrical (2 days)                  = 4 days
   
   ALL three branches must finish before the house is done.
   The house takes 10 days (the LONGEST path), not 3!
@@ -35,26 +35,26 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
 ### The DAG:
 
 ```
-  0 → 2, 3, 4
-  1 → 2, 7
-  2 → 5
-  3 → 5, 7
-  4 → 7
-  5 → 6
-  6 → 7
-  7 → (end)
+  0 > 2, 3, 4
+  1 > 2, 7
+  2 > 5
+  3 > 5, 7
+  4 > 7
+  5 > 6
+  6 > 7
+  7 > (end)
 
   Visual:
   
-  0───▶2───▶5───▶6───▶7
-  │         ↑         ↑
-  ├───▶3───┘──────────┤
-  │                    │
-  └───▶4───────────────┘
+  0--->2--->5--->6--->7
+  |         ^         ^
+  +--->3---+----------+
+  |                    |
+  +--->4---------------+
   
-  1───▶2
-  │
-  └───────────────────▶7
+  1--->2
+  |
+  +------------------->7
 ```
 
 ---
@@ -62,18 +62,18 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
 ### Step 1: Calculate In-Degrees and find starting nodes
 
 ```
-  ┌──────┬───────────┬────────────┐
-  │ Node │ In-Degree │Path Length  │
-  ├──────┼───────────┼────────────┤
-  │  0   │     0 [*]  │     0      │
-  │  1   │     0 [*]  │     0      │
-  │  2   │     2     │     0      │
-  │  3   │     1     │     0      │
-  │  4   │     1     │     0      │
-  │  5   │     2     │     0      │
-  │  6   │     1     │     0      │
-  │  7   │     4     │     0      │
-  └──────┴───────────┴────────────┘
+  +------+-----------+------------+
+  | Node | In-Degree |Path Length  |
+  +------+-----------+------------+
+  |  0   |     0 [*]  |     0      |
+  |  1   |     0 [*]  |     0      |
+  |  2   |     2     |     0      |
+  |  3   |     1     |     0      |
+  |  4   |     1     |     0      |
+  |  5   |     2     |     0      |
+  |  6   |     1     |     0      |
+  |  7   |     4     |     0      |
+  +------+-----------+------------+
   
   Nodes 0 and 1 are STARTING POINTS (In-Degree = 0)
 ```
@@ -87,18 +87,18 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
   For node 3: path = MAX(current 0, path_of_0 + 1) = MAX(0, 1) = 1
   For node 4: path = MAX(current 0, path_of_0 + 1) = MAX(0, 1) = 1
 
-  ┌──────┬────────────┐
-  │ Node │Path Length  │
-  ├──────┼────────────┤
-  │  0   │ 0 ✅       │
-  │  1   │ 0          │
-  │  2   │ 1          │
-  │  3   │ 1          │
-  │  4   │ 1          │
-  │  5   │ 0          │
-  │  6   │ 0          │
-  │  7   │ 0          │
-  └──────┴────────────┘
+  +------+------------+
+  | Node |Path Length  |
+  +------+------------+
+  |  0   | 0 ✅       |
+  |  1   | 0          |
+  |  2   | 1          |
+  |  3   | 1          |
+  |  4   | 1          |
+  |  5   | 0          |
+  |  6   | 0          |
+  |  7   | 0          |
+  +------+------------+
 ```
 
 ### Step 3: Process node 1 (path length = 0)
@@ -109,7 +109,7 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
   For node 2: path = MAX(current 1, path_of_1 + 1) = MAX(1, 1) = 1  (no change)
   For node 7: path = MAX(current 0, path_of_1 + 1) = MAX(0, 1) = 1
 
-  Node 2's in-degree is now 0 → READY!
+  Node 2's in-degree is now 0 > READY!
 ```
 
 ### Step 4: Process node 3 (path length = 1)
@@ -136,7 +136,7 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
   
   For node 5: path = MAX(current 2, 1 + 1) = MAX(2, 2) = 2  (no change)
   
-  Node 5's in-degree is now 0 → READY!
+  Node 5's in-degree is now 0 > READY!
 ```
 
 ### Step 7: Process node 5 (path length = 2)
@@ -152,7 +152,7 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
 ```
   Node 6 points to: 7
   
-  For node 7: path = MAX(current 2, 3 + 1) = MAX(2, 4) = 4 [done]
+  For node 7: path = MAX(current 2, 3 + 1) = MAX(2, 4) = 4 ✅
 ```
 
 ### Step 9: Process node 7 (path length = 4)
@@ -166,33 +166,33 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
 ## Final Results
 
 ```
-  ┌──────┬────────────┬──────────────────────────────────┐
-  │ Node │ Depth      │ Longest Path To This Node        │
-  ├──────┼────────────┼──────────────────────────────────┤
-  │  0   │ 0          │ Starting point                   │
-  │  1   │ 0          │ Starting point                   │
-  │  2   │ 1          │ 0 → 2   (or 1 → 2)              │
-  │  3   │ 1          │ 0 → 3                            │
-  │  4   │ 1          │ 0 → 4                            │
-  │  5   │ 2          │ 0 → 3 → 5                       │
-  │  6   │ 3          │ 0 → 3 → 5 → 6                   │
-  │  7   │ 4          │ 0 → 3 → 5 → 6 → 7 ← CRITICAL!  │
-  └──────┴────────────┴──────────────────────────────────┘
+  +------+------------+----------------------------------+
+  | Node | Depth      | Longest Path To This Node        |
+  +------+------------+----------------------------------+
+  |  0   | 0          | Starting point                   |
+  |  1   | 0          | Starting point                   |
+  |  2   | 1          | 0 > 2   (or 1 > 2)              |
+  |  3   | 1          | 0 > 3                            |
+  |  4   | 1          | 0 > 4                            |
+  |  5   | 2          | 0 > 3 > 5                       |
+  |  6   | 3          | 0 > 3 > 5 > 6                   |
+  |  7   | 4          | 0 > 3 > 5 > 6 > 7 < CRITICAL!  |
+  +------+------------+----------------------------------+
 
-  The CRITICAL PATH (longest): 0 → 3 → 5 → 6 → 7 (depth = 4)
+  The CRITICAL PATH (longest): 0 > 3 > 5 > 6 > 7 (depth = 4)
 ```
 
 ### Visual of Depths:
 ```
   Depth 0:    0    1
-              │    │
+              |    |
   Depth 1:    2    3    4
-                   │
+                   |
   Depth 2:         5
-                   │
+                   |
   Depth 3:         6
-                   │
-  Depth 4:         7     ← The project's total "length"!
+                   |
+  Depth 4:         7     < The project's total "length"!
 ```
 
 ---

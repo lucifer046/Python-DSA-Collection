@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════════════╗ -->
-<!-- ║  PYTHON DATA STRUCTURES AND ALGORITHMS (DSA) COLLECTION      ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════╝ -->
+<!-- +--------------------------------------------------------------+ -->
+<!-- |  PYTHON DATA STRUCTURES AND ALGORITHMS (DSA) COLLECTION      | -->
+<!-- +--------------------------------------------------------------+ -->
 
 > [!IMPORTANT]
 > **For Better Readability:** It is highly recommended to **clone or download** this repository and open it in **VS Code**. This will provide the best visibility for comments, code structure, and diagrams.
@@ -87,6 +87,6 @@ This collection was documented and polished to provide a professional, clean, an
 
 ---
 
-<!-- ╔══════════════════════════════════════════════════════════════╗ -->
-<!-- ║                HAPPY CODING & PROBLEM SOLVING!               ║ -->
-<!-- ╚══════════════════════════════════════════════════════════════╝ -->
+<!-- +--------------------------------------------------------------+ -->
+<!-- |                HAPPY CODING & PROBLEM SOLVING!               | -->
+<!-- +--------------------------------------------------------------+ -->

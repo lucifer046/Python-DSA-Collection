@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════════╗ -->
-<!-- ║  PRIM'S ALGORITHM — THE GREEDY TREE BUILDER          ║ -->
-<!-- ╚══════════════════════════════════════════════════════╝ -->
+<!-- +------------------------------------------------------+ -->
+<!-- |  PRIM'S ALGORITHM — THE GREEDY TREE BUILDER          | -->
+<!-- +------------------------------------------------------+ -->
 # Prim's Algorithm — The Greedy Tree Builder
 
 ## What is Prim's Algorithm?
@@ -22,11 +22,11 @@ A tree that:
   ORIGINAL GRAPH:                    MST (Cheapest connections):
   
        2        8                         2
-  0───────1───────3                  0───────1        3
-  │       │      ╱│                          │       │
-  │ 6     │3   7  │1                         │3      │1
-  │       │ ╱     │                          │       │
-  3───────2───────4                  3       2       4
+  0-------1-------3                  0-------1        3
+  |       |      ╱|                          |       |
+  | 6     |3   7  |1                         |3      |1
+  |       | ╱     |                          |       |
+  3-------2-------4                  3       2       4
        5
 
   Total edges: 7                     Total edges: 4 (n-1)
@@ -40,11 +40,11 @@ A tree that:
 ### The Graph:
 
 ```
-  Node 0: → 1(cost 2), → 3(cost 6)
-  Node 1: → 0(cost 2), → 2(cost 3), → 3(cost 8), → 4(cost 5)
-  Node 2: → 1(cost 3), → 3(cost 7)
-  Node 3: → 0(cost 6), → 1(cost 8), → 2(cost 7), → 4(cost 1)
-  Node 4: → 1(cost 5), → 3(cost 1)
+  Node 0: > 1(cost 2), > 3(cost 6)
+  Node 1: > 0(cost 2), > 2(cost 3), > 3(cost 8), > 4(cost 5)
+  Node 2: > 1(cost 3), > 3(cost 7)
+  Node 3: > 0(cost 6), > 1(cost 8), > 2(cost 7), > 4(cost 1)
+  Node 4: > 1(cost 5), > 3(cost 1)
 ```
 
 ---
@@ -56,15 +56,15 @@ A tree that:
   Not yet: {1, 2, 3, 4}
   
   Available edges from MST to outside:
-  • 0 → 1, cost 2  ← CHEAPEST! ⭐
-  • 0 → 3, cost 6
+  • 0 > 1, cost 2  < CHEAPEST! ⭐
+  • 0 > 3, cost 6
 
-  Pick: Edge 0→1 (cost 2)
+  Pick: Edge 0>1 (cost 2)
   
-       ●0═══════●1        3
-       │                  │
-       │ 6                │1
-       │                  │
+       ●0-------●1        3
+       |                  |
+       | 6                |1
+       |                  |
        3        2        4
 
   MST cost so far: 2
@@ -77,17 +77,17 @@ A tree that:
   Not yet: {2, 3, 4}
   
   Available edges from MST to outside:
-  • 0 → 3, cost 6
-  • 1 → 2, cost 3  ← CHEAPEST! [*]
-  • 1 → 3, cost 8
-  • 1 → 4, cost 5
+  • 0 > 3, cost 6
+  • 1 > 2, cost 3  < CHEAPEST! [*]
+  • 1 > 3, cost 8
+  • 1 > 4, cost 5
 
-  Pick: Edge 1→2 (cost 3)
+  Pick: Edge 1>2 (cost 3)
   
-       ●0═══════●1        3
-                 ║        │
-                 ║ 3      │1
-                 ║        │
+       ●0-------●1        3
+                 |        |
+                 | 3      |1
+                 |        |
        3        ●2        4
 
   MST cost so far: 2 + 3 = 5
@@ -100,18 +100,18 @@ A tree that:
   Not yet: {3, 4}
   
   Available edges from MST to outside:
-  • 0 → 3, cost 6
-  • 1 → 3, cost 8
-  • 1 → 4, cost 5
-  • 2 → 3, cost 7
+  • 0 > 3, cost 6
+  • 1 > 3, cost 8
+  • 1 > 4, cost 5
+  • 2 > 3, cost 7
 
-  Pick: Edge 1→4 (cost 5)... Wait, let me check ALL options:
-  Cheapest = 1 → 4, cost 5 [*]
+  Pick: Edge 1>4 (cost 5)... Wait, let me check ALL options:
+  Cheapest = 1 > 4, cost 5 [*]
   
-       ●0═══════●1        3
-                 ║╲       │
-                 ║  ╲5    │1
-                 ║   ╲    │
+       ●0-------●1        3
+                 |╲       |
+                 |  ╲5    |1
+                 |   ╲    |
        3        ●2   ●4
 
   MST cost so far: 2 + 3 + 5 = 10
@@ -124,34 +124,34 @@ A tree that:
   Not yet: {3}
   
   Available edges from MST to outside:
-  • 0 → 3, cost 6
-  • 1 → 3, cost 8
-  • 2 → 3, cost 7
-  • 4 → 3, cost 1  ← CHEAPEST! [*]
+  • 0 > 3, cost 6
+  • 1 > 3, cost 8
+  • 2 > 3, cost 7
+  • 4 > 3, cost 1  < CHEAPEST! [*]
 
-  Pick: Edge 4→3 (cost 1)
+  Pick: Edge 4>3 (cost 1)
   
-       ●0═══════●1        ●3
-                 ║╲       ║
-                 ║  ╲5    ║1
-                 ║   ╲    ║
-                ●2   ●4══╝
+       ●0-------●1        ●3
+                 |╲       |
+                 |  ╲5    |1
+                 |   ╲    |
+                ●2   ●4--+
 
   MST cost so far: 2 + 3 + 5 + 1 = 11
 ```
 
-### DONE! All nodes connected! [done]
+### DONE! All nodes connected! ✅
 
 ```
-  FINAL MST:                        ┌──────────────┐
-                                    │ SELECTED EDGES│
-       0═══════1                    │ 0─1 (cost 2)  │
-               ║╲                   │ 1─2 (cost 3)  │
-               ║  ╲                 │ 1─4 (cost 5)  │
-               ║   ╲                │ 4─3 (cost 1)  │
-              2    4═══3            │               │
-                                    │ TOTAL: $11    │
-                                    └──────────────┘
+  FINAL MST:                        +--------------+
+                                    | SELECTED EDGES|
+       0-------1                    | 0-1 (cost 2)  |
+               |╲                   | 1-2 (cost 3)  |
+               |  ╲                 | 1-4 (cost 5)  |
+               |   ╲                | 4-3 (cost 1)  |
+              2    4---3            |               |
+                                    | TOTAL: $11    |
+                                    +--------------+
 ```
 
 ---
@@ -159,11 +159,11 @@ A tree that:
 ## Prim's Growth Animation
 
 ```
-  Step 1:    {0}                ──▶  Connect cheapest neighbor
-  Step 2:    {0, 1}             ──▶  Connect cheapest neighbor
-  Step 3:    {0, 1, 2}          ──▶  Connect cheapest neighbor
-  Step 4:    {0, 1, 2, 4}       ──▶  Connect cheapest neighbor
-  Step 5:    {0, 1, 2, 4, 3}    ──▶  ALL CONNECTED! [done]
+  Step 1:    {0}                -->  Connect cheapest neighbor
+  Step 2:    {0, 1}             -->  Connect cheapest neighbor
+  Step 3:    {0, 1, 2}          -->  Connect cheapest neighbor
+  Step 4:    {0, 1, 2, 4}       -->  Connect cheapest neighbor
+  Step 5:    {0, 1, 2, 4, 3}    -->  ALL CONNECTED! ✅
 
   MST grows like a plant — starting from a seed and reaching outward!
 ```

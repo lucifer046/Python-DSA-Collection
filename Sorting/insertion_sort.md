@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════════════╗ -->
-<!-- ║  INSERTION SORT — THE CARD-SORTING METHOD        ║ -->
-<!-- ╚══════════════════════════════════════════════════╝ -->
+<!-- +--------------------------------------------------+ -->
+<!-- |  INSERTION SORT — THE CARD-SORTING METHOD        | -->
+<!-- +--------------------------------------------------+ -->
 # Insertion Sort — The Card-Sorting Method
 
 ## What is Insertion Sort?
@@ -22,11 +22,11 @@ You pick up cards one at a time. Each time you pick a new card, you **slide it l
 ### Step 1: Start with the first number (12)
 
 ```
-  SORTED   │ UNSORTED
-  ┌────┐   ┌────┬────┬────┬────┐
-  │ 12 │   │ 11 │ 13 │  5 │  6 │
-  └────┘   └────┴────┴────┴────┘
-    [done]       Pick next: 11
+  SORTED   | UNSORTED
+  +----+   +----+----+----+----+
+  | 12 |   | 11 | 13 |  5 |  6 |
+  +----+   +----+----+----+----+
+    ✅       Pick next: 11
 ```
 
 A single number is already "sorted" by itself!
@@ -35,15 +35,15 @@ A single number is already "sorted" by itself!
 
 ```
   Pick up 11. Compare with 12.
-  11 < 12? YES → Slide 12 to the right, insert 11 before it.
+  11 < 12? YES > Slide 12 to the right, insert 11 before it.
 
-  ┌────┬────┐   ┌────┬────┬────┐
-  │ 11 │ 12 │   │ 13 │  5 │  6 │
-  └────┴────┘   └────┴────┴────┘
-    [done]   [done]       Pick next: 13
+  +----+----+   +----+----+----+
+  | 11 | 12 |   | 13 |  5 |  6 |
+  +----+----+   +----+----+----+
+    ✅   ✅       Pick next: 13
 
   Visualization of the slide:
-  [12, 11, ...]  →  11 picks up  →  12 slides right  →  11 drops in  →  [11, 12, ...]
+  [12, 11, ...]  >  11 picks up  >  12 slides right  >  11 drops in  >  [11, 12, ...]
        ^ pick         [card]              -->               [v]
 ```
 
@@ -51,56 +51,56 @@ A single number is already "sorted" by itself!
 
 ```
   Pick up 13. Compare with 12.
-  13 < 12? NO → 13 stays where it is!
+  13 < 12? NO > 13 stays where it is!
 
-  ┌────┬────┬────┐   ┌────┬────┐
-  │ 11 │ 12 │ 13 │   │  5 │  6 │
-  └────┴────┴────┘   └────┴────┘
-    [done]   [done]   [done]       Pick next: 5
+  +----+----+----+   +----+----+
+  | 11 | 12 | 13 |   |  5 |  6 |
+  +----+----+----+   +----+----+
+    ✅   ✅   ✅       Pick next: 5
 ```
 
 ### Step 4: Pick 5 and INSERT
 
 ```
   Pick up 5. Compare backwards:
-  5 < 13? YES → Slide 13 right
-  5 < 12? YES → Slide 12 right
-  5 < 11? YES → Slide 11 right
-  No more to check → Insert 5 at position 0!
+  5 < 13? YES > Slide 13 right
+  5 < 12? YES > Slide 12 right
+  5 < 11? YES > Slide 11 right
+  No more to check > Insert 5 at position 0!
 
   Sliding animation:
   [11, 12, 13,  5, ...]
                 ^ pick up 5 [card]
   
-  [11, 12, __, 13, ...]  ← 13 slides right
-  [11, __, 12, 13, ...]  ← 12 slides right
-  [__, 11, 12, 13, ...]  ← 11 slides right
-  [ 5, 11, 12, 13, ...]  ← Insert 5! [done]
+  [11, 12, __, 13, ...]  < 13 slides right
+  [11, __, 12, 13, ...]  < 12 slides right
+  [__, 11, 12, 13, ...]  < 11 slides right
+  [ 5, 11, 12, 13, ...]  < Insert 5! ✅
 
   Result:
-  ┌────┬────┬────┬────┐   ┌────┐
-  │  5 │ 11 │ 12 │ 13 │   │  6 │
-  └────┴────┴────┴────┘   └────┘
-    [done]   [done]   [done]   [done]       Pick next: 6
+  +----+----+----+----+   +----+
+  |  5 | 11 | 12 | 13 |   |  6 |
+  +----+----+----+----+   +----+
+    ✅   ✅   ✅   ✅       Pick next: 6
 ```
 
 ### Step 5: Pick 6 and INSERT
 
 ```
   Pick up 6. Compare backwards:
-  6 < 13? YES → Slide 13 right
-  6 < 12? YES → Slide 12 right
-  6 < 11? YES → Slide 11 right
-  6 < 5?  NO  → Insert 6 RIGHT HERE!
+  6 < 13? YES > Slide 13 right
+  6 < 12? YES > Slide 12 right
+  6 < 11? YES > Slide 11 right
+  6 < 5?  NO  > Insert 6 RIGHT HERE!
 
   [ 5, __, 11, 12, 13]  
-  [ 5,  6, 11, 12, 13]  ← Insert 6! [done]
+  [ 5,  6, 11, 12, 13]  < Insert 6! ✅
 
   FINAL RESULT:
-  ┌────┬────┬────┬────┬────┐
-  │  5 │  6 │ 11 │ 12 │ 13 │
-  └────┴────┴────┴────┴────┘
-    [done]   [done]   [done]   [done]   [done]   ALL SORTED!
+  +----+----+----+----+----+
+  |  5 |  6 | 11 | 12 | 13 |
+  +----+----+----+----+----+
+    ✅   ✅   ✅   ✅   ✅   ALL SORTED!
 ```
 
 ---
@@ -110,13 +110,13 @@ A single number is already "sorted" by itself!
 ```
   Start:    [12, 11, 13,  5,  6]
   
-  Step 1:   [12] 11, 13,  5,  6     ← 12 is sorted by itself
-  Step 2:   [11, 12] 13,  5,  6     ← 11 inserted before 12
-  Step 3:   [11, 12, 13]  5,  6     ← 13 already in place
-  Step 4:   [ 5, 11, 12, 13]  6     ← 5 inserted at the start
-  Step 5:   [ 5,  6, 11, 12, 13]    ← 6 inserted after 5
+  Step 1:   [12] 11, 13,  5,  6     < 12 is sorted by itself
+  Step 2:   [11, 12] 13,  5,  6     < 11 inserted before 12
+  Step 3:   [11, 12, 13]  5,  6     < 13 already in place
+  Step 4:   [ 5, 11, 12, 13]  6     < 5 inserted at the start
+  Step 5:   [ 5,  6, 11, 12, 13]    < 6 inserted after 5
   
-  DONE! [done]
+  DONE! ✅
 ```
 
 ---

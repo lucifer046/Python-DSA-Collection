@@ -1,6 +1,6 @@
-<!-- ╔══════════════════════════════════════════╗ -->
-<!-- ║  BINARY SEARCH — THE PHONEBOOK METHOD    ║ -->
-<!-- ╚══════════════════════════════════════════╝ -->
+<!-- +------------------------------------------+ -->
+<!-- |  BINARY SEARCH — THE PHONEBOOK METHOD    | -->
+<!-- +------------------------------------------+ -->
 # Binary Search — The Phonebook Method
 
 ## What is Binary Search?
@@ -20,9 +20,9 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 ### The Sorted List:
 ```
   Index:   0    1    2    3    4    5    6    7    8    9
-        ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
-  List: │  2 │  5 │  8 │ 12 │ 16 │ 23 │ 38 │ 56 │ 72 │ 91 │
-        └────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
+        +----+----+----+----+----+----+----+----+----+----+
+  List: |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
+        +----+----+----+----+----+----+----+----+----+----+
 ```
 
 ### Goal: Find the number **23**
@@ -33,17 +33,17 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ```
   start = 0                                          end = 9
-    │                                                  │
-    ▼                                                  ▼
-  ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
-  │  2 │  5 │  8 │ 12 │ 16 │ 23 │ 38 │ 56 │ 72 │ 91 │
-  └────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
-                            ↑
-                        middle = 4
-                       value = 16
+    |                                                  |
+    v                                                  v
+  +----+----+----+----+----+----+----+----+----+----+
+  |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
+  +----+----+----+----+----+----+----+----+----+----+
+                        ^
+                   middle = 4
+                   value = 16
 
   Question: Is 16 == 23?  NO.
-  Question: Is 16 < 23?   YES → Target is in the RIGHT half!
+  Question: Is 16 < 23?   YES > Target is in the RIGHT half!
   Action:   Move start to middle + 1 = 5
 ```
 
@@ -51,17 +51,17 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ```
                               start = 5                end = 9
-                                │                        │
-                                ▼                        ▼
-  ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
-  │  2 │  5 │  8 │ 12 │ 16 │ 23 │ 38 │ 56 │ 72 │ 91 │
-  └────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░         ↑
+                                |                        |
+                                v                        v
+  +----+----+----+----+----+----+----+----+----+----+
+  |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
+  +----+----+----+----+----+----+----+----+----+----+
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░         ^
     (ignored — thrown away!)      middle = 7
                                  value = 56
 
   Question: Is 56 == 23?  NO.
-  Question: Is 56 > 23?   YES → Target is in the LEFT half!
+  Question: Is 56 > 23?   YES > Target is in the LEFT half!
   Action:   Move end to middle - 1 = 6
 ```
 
@@ -69,12 +69,12 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ```
                               start = 5   end = 6
-                                │           │
-                                ▼           ▼
-  ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
-  │  2 │  5 │  8 │ 12 │ 16 │ 23 │ 38 │ 56 │ 72 │ 91 │
-  └────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░    ↑    ░░░░░░░░░░░░░░░░
+                                |           |
+                                v           v
+  +----+----+----+----+----+----+----+----+----+----+
+  |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
+  +----+----+----+----+----+----+----+----+----+----+
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░    ^
                              middle = 5
                             value = 23
 
@@ -87,9 +87,9 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 ## The "Halving" Effect — Why It's So Fast
 
 ```
-  Step 1:  Search 10 items     ──────────────────────────────
-  Step 2:  Search 5 items      ───────────────
-  Step 3:  Search 2 items      ──────
+  Step 1:  Search 10 items     ------------------------------
+  Step 2:  Search 5 items      ---------------
+  Step 3:  Search 2 items      ------
   FOUND!
 
   Total steps: Just 3! (instead of checking all 10 one by one)
@@ -111,9 +111,9 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 ### Iterative (Using a While Loop)
 
 ```
-  Start ──▶ Calculate Middle ──▶ Compare ──▶ Adjust boundaries ──▶ Repeat
-                 ↑                                                    │
-                 └────────────────────────────────────────────────────┘
+  Start --> Calculate Middle --> Compare --> Adjust boundaries --> Repeat
+                 ^                                                    |
+                 +----------------------------------------------------+
                                (Loop until found or empty)
 ```
 
@@ -121,16 +121,16 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ```
   search([2,5,8,12,16,23,38,56,72,91], target=23, start=0, end=9)
-         │
-         ├──▶ middle=4, value=16, 16 < 23 → search RIGHT
-         │
-         └──▶ search([...], target=23, start=5, end=9)
-                   │
-                   ├──▶ middle=7, value=56, 56 > 23 → search LEFT
-                   │
-                   └──▶ search([...], target=23, start=5, end=6)
-                             │
-                             └──▶ middle=5, value=23 == 23 → FOUND! [done]
+         |
+         +--> middle=4, value=16, 16 < 23 > search RIGHT
+         |
+         +--> search([...], target=23, start=5, end=9)
+                   |
+                   +--> middle=7, value=56, 56 > 23 > search LEFT
+                   |
+                   +--> search([...], target=23, start=5, end=6)
+                             |
+                             +--> middle=5, value=23 == 23 > FOUND! ✅
 ```
 
 Both methods give the **same result**. The recursive version calls itself with a smaller range each time.
@@ -142,7 +142,7 @@ Both methods give the **same result**. The recursive version calls itself with a
 ```
   LINEAR SEARCH (One by one):
   Check 2? No. Check 5? No. Check 8? No. Check 12? No. Check 16? No. Check 23? YES!
-  ──▶──▶──▶──▶──▶──▶
+  -->-->-->-->-->-->
   (6 checks!)
 
   BINARY SEARCH (Halving):

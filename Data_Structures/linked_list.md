@@ -1,27 +1,31 @@
-<!-- ╔══════════════════════════════════════════╗ -->
-<!-- ║  LINKED LIST — THE CHAIN OF CLUES        ║ -->
-<!-- ╚══════════════════════════════════════════╝ -->
+<!-- +------------------------------------------+ -->
+
+<!-- |  LINKED LIST — THE CHAIN OF CLUES        | -->
+
+<!-- +------------------------------------------+ -->
+
 # Linked List — The Chain of Clues
 
 ## What is a Linked List?
 
-Imagine a **treasure hunt**! You find the first clue at the park. That clue gives you a **piece of treasure** (some data) and tells you **where the next clue is hidden**. You go to that location, find more treasure and another clue... and so on, until the last clue says: *"The hunt ends here!"*
+Imagine a **treasure hunt**! You find the first clue at the park. That clue gives you a **piece of treasure** (some data) and tells you **where the next clue is hidden**. You go to that location, find more treasure and another clue... and so on, until the last clue says: _"The hunt ends here!"_
 
 That's exactly how a **Linked List** works in a computer!
 
 > **Simple Definition:** A Linked List is a chain of small boxes called **Nodes**. Each box holds two things:
+>
 > 1. **A value** (your actual data — like a number)
-> 2. **A pointer** (the address/location of the *next* box)
+> 2. **A pointer** (the address/location of the _next_ box)
 
 ---
 
 ## How Does a Node Look?
 
 ```
-┌──────────┬──────────┐
-│  Value   │   Next   │ ──────▶ (points to the next node)
-│  (Data)  │ (Pointer)│
-└──────────┴──────────┘
++----------+----------+
+|  Value   |   Next   | ------> (points to the next node)
+|  (Data)  | (Pointer)|
++----------+----------+
 ```
 
 Each node only knows **two things**: what it's holding, and who comes after it. That's it!
@@ -36,11 +40,11 @@ Let's say we want to store the numbers **10, 20, 30, 40, 50** in a linked list.
 
 ```
     HEAD
-     │
-     ▼
-  ┌──────┬──────┐
-  │  10  │ None │
-  └──────┴──────┘
+     |
+     v
+  +------+------+
+  |  10  | None |
+  +------+------+
 ```
 
 We start with just **one node** holding the value `10`. Since there's no one after it, the "Next" pointer says `None` (which means "end of the line").
@@ -49,11 +53,11 @@ We start with just **one node** holding the value `10`. Since there's no one aft
 
 ```
     HEAD
-     │
-     ▼
-  ┌──────┬───┐    ┌──────┬──────┐
-  │  10  │ ──┼──▶ │  20  │ None │
-  └──────┴───┘    └──────┴──────┘
+     |
+     v
+  +------+---+    +------+------+
+  |  10  | --|-> |  20  | None |
+  +------+---+    +------+------+
 ```
 
 We walk to the end of the chain (node 10), and attach a new node with value `20`.
@@ -62,11 +66,9 @@ We walk to the end of the chain (node 10), and attach a new node with value `20`
 
 ```
     HEAD
-     │
-     ▼
-  ┌──────┬───┐   ┌──────┬───┐   ┌──────┬───┐   ┌──────┬───┐   ┌──────┬──────┐
-  │  10  │ ──┼─▶ │  20  │ ──┼─▶ │  30  │ ──┼─▶ │  40  │ ──┼─▶ │  50  │ None │
-  └──────┴───┘   └──────┴───┘   └──────┴───┘   └──────┴───┘   └──────┴──────┘
+     |
+     v
+  [ 10 | next ] -> [ 20 | next ] -> [ 30 | next ] -> [ 40 | next ] -> [ 50 | NULL ]
 ```
 
 Now we have a **complete chain** of 5 nodes. The last node (50) has `None` — meaning there's nobody after it.
@@ -79,14 +81,14 @@ There are two styles used in the code:
 
 ### Method 1: Recursive Append ("Pass the Parcel")
 
-Imagine you're at a birthday party and you want to put a gift at the end of a line of gifts. You ask the first person: *"Are you the last one?"*. If they say no, they **pass the question** to the next person. This continues until someone says *"Yes, I'm last!"*, and they place the gift.
+Imagine you're at a birthday party and you want to put a gift at the end of a line of gifts. You ask the first person: _"Are you the last one?"_. If they say no, they **pass the question** to the next person. This continues until someone says _"Yes, I'm last!"_, and they place the gift.
 
 ```
- "Am I last?" ──▶ "Am I last?" ──▶ "Am I last?" ──▶ "YES! I'll take it!"
+ "Am I last?" --> "Am I last?" --> "Am I last?" --> "YES! I'll take it!"
 
-  ┌──────┬───┐    ┌──────┬───┐    ┌──────┬──────┐    ┌──────┬──────┐
-  │  10  │ ──┼──▶ │  20  │ ──┼──▶ │  30  │ None │──▶ │  40  │ None │ ← NEW!
-  └──────┴───┘    └──────┴───┘    └──────┴──────┘    └──────┴──────┘
+  +------+---+    +------+---+    +------+------+    +------+------+
+  |  10  | --|-> |  20  | --|-> |  30  | None |--> |  40  | None | < NEW!
+  +------+---+    +------+---+    +------+------+    +------+------+
 ```
 
 ### Method 2: Iterative Append ("Walking")
@@ -94,12 +96,12 @@ Imagine you're at a birthday party and you want to put a gift at the end of a li
 Instead of passing messages, you personally **walk** from the first node all the way to the last one, and then attach the new node yourself.
 
 ```
-  Walker starts here ──▶ walks ──▶ walks ──▶ reached the end! Attach new node!
+  Walker starts here --> walks --> walks --> reached the end! Attach new node!
 
-  ┌──────┬───┐    ┌──────┬───┐    ┌──────┬──────┐
-  │  10  │ ──┼──▶ │  20  │ ──┼──▶ │  30  │ None │
-  └──────┴───┘    └──────┴───┘    └──────┴──────┘
-       [walk] ────────▶ [walk] ────────▶ [walk] arrived! → Attach [40]
+  +------+---+    +------+---+    +------+------+
+  |  10  | --|-> |  20  | --|-> |  30  | None |
+  +------+---+    +------+---+    +------+------+
+       [walk] --------> [walk] --------> [walk] arrived! > Attach [40]
 ```
 
 ---
@@ -109,28 +111,28 @@ Instead of passing messages, you personally **walk** from the first node all the
 What if we want to add a new number **at the very start** instead of the end?
 
 ### Before:
+
 ```
     HEAD
-     │
-     ▼
-  ┌──────┬───┐    ┌──────┬───┐    ┌──────┬──────┐
-  │  10  │ ──┼──▶ │  20  │ ──┼──▶ │  30  │ None │
-  └──────┴───┘    └──────┴───┘    └──────┴──────┘
+     |
+     v
+  +------+---+    +------+---+    +------+------+
+  |  10  | --|-> |  20  | --|-> |  30  | None |
+  +------+---+    +------+---+    +------+------+
 ```
 
 ### Insert value 5 at front:
 
 ```
     HEAD
-     │
-     ▼
-  ┌──────┬───┐    ┌──────┬───┐    ┌──────┬───┐    ┌──────┬──────┐
-  │   5  │ ──┼──▶ │  10  │ ──┼──▶ │  20  │ ──┼──▶ │  30  │ None │
-  └──────┴───┘    └──────┴───┘    └──────┴───┘    └──────┴──────┘
-    ↑ NEW HEAD!
+     |
+     v
+  [ 5 | next ] -> [ 10 | next ] -> [ 20 | next ] -> [ 30 | NULL ]
+    ^ NEW HEAD!
 ```
 
 The trick used in the code is a **swap method**:
+
 1. Create a new node with the new value
 2. **Swap** the value of the head with the new node
 3. **Re-link** the pointers so the new node comes first
@@ -142,39 +144,43 @@ The trick used in the code is a **swap method**:
 Let's say we want to **remove the value 30** from our chain.
 
 ### Before:
+
 ```
-  ┌──────┬───┐    ┌──────┬───┐    ┌──────┬───┐    ┌──────┬──────┐
-  │  10  │ ──┼──▶ │  20  │ ──┼──▶ │  30  │ ──┼──▶ │  40  │ None │
-  └──────┴───┘    └──────┴───┘    └──────┴───┘    └──────┴──────┘
+  +------+---+    +------+---+    +------+---+    +------+------+
+  |  10  | --|-> |  20  | --|-> |  30  | --|-> |  40  | None |
+  +------+---+    +------+---+    +------+---+    +------+------+
 ```
 
 ### Step 1: Find 30
-We walk through the chain: 10 → 20 → **30 found!**
+
+We walk through the chain: 10 > 20 > **30 found!**
 
 ### Step 2: Bypass it!
+
 We make node 20 point **directly** to node 40, skipping 30 entirely.
 
 ### After:
-```
-  ┌──────┬───┐    ┌──────┬───┐    ┌──────┬──────┐
-  │  10  │ ──┼──▶ │  20  │ ──┼──▶ │  40  │ None │
-  └──────┴───┘    └──────┴───┘    └──────┴──────┘
 
-                           ┌──────┬───┐
-                           │  30  │   │  ← Disconnected! Gone!
-                           └──────┴───┘
+```
+  +------+---+    +------+---+    +------+------+
+  |  10  | --|-> |  20  | --|-> |  40  | None |
+  +------+---+    +------+---+    +------+------+
+
+                     +------+---+
+                        |  30  |   |  < Disconnected! Gone!
+                     +------+---+
 ```
 
 ---
 
 ## Linked List vs Normal List (Array)
 
-| Feature | Normal List (Array) | Linked List |
-|---|---|---|
-| **Accessing item #5** | [FAST] Instant (jump to index 5) | [SLOW] Walk through 5 nodes |
-| **Adding at the end** | [FAST] | [SLOW] Needs to walk to end first |
-| **Adding in the middle** | [SLOW] Shift everything | [FAST] Just change pointers |
-| **Memory** | All items sit together | Items scattered everywhere |
+| Feature                  | Normal List (Array)              | Linked List                       |
+| ------------------------ | -------------------------------- | --------------------------------- |
+| **Accessing item #5**    | [FAST] Instant (jump to index 5) | [SLOW] Walk through 5 nodes       |
+| **Adding at the end**    | [FAST]                           | [SLOW] Needs to walk to end first |
+| **Adding in the middle** | [SLOW] Shift everything          | [FAST] Just change pointers       |
+| **Memory**               | All items sit together           | Items scattered everywhere        |
 
 ---
 
