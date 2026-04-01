@@ -2,88 +2,85 @@
 <!-- |  PYTHON DATA STRUCTURES AND ALGORITHMS (DSA) COLLECTION      | -->
 <!-- +--------------------------------------------------------------+ -->
 
+# 🚀 Python DSA Collection: Standardized & Educational
+
 > [!IMPORTANT]
-> **For Better Readability:** It is highly recommended to **clone or download** this repository and open it in **VS Code**. This will provide the best visibility for comments, code structure, and diagrams.
-> 
-> **For Markdown (.md) Files:** To get the best experience while reading the documentation and viewing diagrams, please install the **Office Viewer** extension (by **cweijan**) from the VS Code Extension Store. This extension provides a superior WYSIWYG preview for markdown files, matching the layout intended for these explanations.
+> **For Better Readability:** This repository is designed for **VS Code**. For the best experience with diagrams and documentation, install the **Office Viewer** extension (by **cweijan**) to view `.md` files as intended.
 
 ---
 
-## What is this project?
+## 📖 What is this project?
 
-This repository is a comprehensive collection of **22 essential Data Structures and Algorithms** implemented in Python. It is designed specifically for students and beginners (targeted at a 10th-grade level) to understand complex coding concepts through:
-1.  **Pure Python Code:** Clean, well-commented implementations.
-2.  **Visual Documentation:** Each algorithm comes with a dedicated `.md` file containing theory, real-life analogies, and step-by-step ASCII diagrams.
+This repository is a professionally standardized collection of **essential Data Structures and Algorithms** implemented in Python. It is specifically crafted for students and beginners, focusing on clarity, intuition, and academic rigor. 
 
----
-
-## Why was this created?
-
-DSA can often feel intimidating. Most resources are either too technical or lack visual intuition. This project was built to:
-- **Simplify Complexity:** Using analogies like "treasure hunts" and "piling plates" to make concepts relatable.
-- **Provide Visual Aid:** Every algorithm is explained with "before and after" diagrams.
-- **Bridge the Gap:** Help beginners transition from "how to code" to "how to solve problems efficiently."
+Every algorithm follows a uniform structure:
+1.  **Theory & Concept:** Detailed high-level explanations and real-life analogies.
+2.  **Complexity Analysis:** Best, Worst, and Average case time complexity.
+3.  **Standardized Implementation:** Concise variable naming combined with exhaustive line-by-line educational comments.
+4.  **Compact Version:** A "production-ready" short-form version of the algorithm.
 
 ---
 
-## How to use this?
+## 🛠️ Repository Organization
 
-1.  **Explore by Category:** Files are organized into folders like `Sorting`, `Searching`, and `Graph_Algorithms`.
-2.  **Read the Theory First:** Open the `.md` file corresponding to an algorithm to understand the "why" and "how" before looking at the code.
-3.  **Run the Code:** Execute the `.py` files to see the algorithms in action.
-4.  **Visualize:** Use the recommended **Office Viewer** extension in VS Code to see the documentation render as intended.
+The collection is organized into logical modules, making it easy to navigate through different algorithmic families:
 
----
+### 📁 [Data Structures](./Data_Structures/)
+Fundamental building blocks for managing data.
+- **Stack & Queue:** LIFO and FIFO implementations.
+- **Linked Lists:** Both basic and multi-class (Head/Node) structures.
+- **Union-Find:** Disjoint set management with path compression.
 
-## Available Algorithms
+### 📁 [Sorting Algorithms](./Sorting/)
+Techniques for organizing data efficiently.
+- **Simple Sorts:** Insertion and Selection sort.
+- **Advanced Sorts:** Merge Sort and Quick Sort (standard & median-of-medians).
 
-### Data Structures
-- **Linked List:** A chain of nodes connected via pointers.
-- **Linked List (Multi-class):** Advanced implementation with separate Node and List classes.
-- **Queue Implementation:** First-In-First-Out (FIFO) data structure.
-- **Stack Implementation:** Last-In-First-Out (LIFO) data structure.
-- **Union-Find:** Disjoint set union for tracking connected components.
+### 📁 [Searching Algorithms](./Searching/)
+Finding needles in haystacks.
+- **Binary Search:** Iterative and Recursive halving.
+- **AVL Tree:** Self-balancing Binary Search Tree for guaranteed efficiency.
 
-### Graph Algorithms
-- **Breadth-First Search (BFS):** Layer-by-layer graph exploration.
-- **Depth-First Search (DFS):** Exploration by going as deep as possible.
-- **Dijkstra's Algorithm:** Finding the shortest path in weighted graphs.
-- **Bellman-Ford Algorithm:** Shortest paths with negative weight support.
-- **Prim's Algorithm:** Building a Minimum Spanning Tree (Greedy).
-- **Kruskal's Algorithm:** Connecting components with minimum cost.
-- **Topological Sort:** Task scheduling based on dependencies.
-- **Longest Path in DAG:** Critical path method for task durations.
+### 📁 [Graph Algorithms](./Graph_Algorithms/)
+Navigating complex networks and dependencies.
+- **Traversals:** BFS and DFS (Iterative/Recursive).
+- **Shortest Paths:** Dijkstra, Bellman-Ford, and Floyd-Warshall.
+- **MST:** Kruskal’s and Prim’s algorithms.
+- **Flow & Order:** Topological Sort and Longest Path in DAGs.
 
-### Greedy Algorithms
-- **Huffman Encoding:** Data compression using character frequencies.
-- **Interval Scheduling:** Maximizing non-overlapping tasks.
-- **Minimize Lateness:** Scheduling to minimize the worst-case delay.
+### 📁 [Greedy Algorithms](./Greedy_Algorithms/)
+Making optimal local choices for global solutions.
+- **Huffman Encoding:** Data compression and frequency trees.
+- **Scheduling:** Interval Scheduling and Maximum Lateness minimization.
 
-### Searching Algorithms
-- **Binary Search:** Efficiently finding items in sorted lists.
-- **Balanced Binary Search (AVL Tree):** Self-balancing tree for O(log n) operations.
-
-### Sorting Algorithms
-- **Insertion Sort:** Building a sorted list one item at a time.
-- **Merge Sort:** Divide-and-conquer sorting (consistent O(n log n)).
-- **Quick Sort:** High-performance partitioning-based sort.
-- **Selection Sort:** Repeatedly finding the minimum element.
+### 📁 [Divide & Conquer](./Divide_and_Conquer/)
+Breaking problems down into manageable pieces.
+- **Fast Multiply:** Karatsuba-inspired multiplication.
+- **Fast Select:** Median of medians selection algorithm.
 
 ---
 
-## Recommended VS Code Environment
+## ✨ Standardized Coding Style
 
-To get the most out of this repository, we recommend the following setup:
+All Python files in this repository adhere to the following educational standards:
 
-1.  **Theme:** Any modern dark theme (e.g., One Dark Pro) for high-contrast code reading.
-2.  **Extension:** **Office Viewer (Markdown Editor)** by `cweijan`.
-    - *Features: WYSIWYG editing, professional rendering, and excellent support for tables/diagrams.*
+- **Concise Variables:** Using industry-standard short-form names (e.g., `l` for left, `r` for right, `q` for queue) to mirror academic pseudo-code.
+- **Line-by-Line Documentation:** Every single line of code is explained with a comment, bridging the gap between syntax and logic.
+- **Theoretical Headers:** Every file includes a complete conceptual overview including "What is it?", "Why is it useful?", and "Real-life examples."
 
 ---
 
-## Credits
+## 🎓 Recommended Learning Path
 
-This collection was documented and polished to provide a professional, clean, and emoji-free educational resource for students worldwide.
+1.  **Start with the Concepts:** Open the `.md` file for an algorithm first to understand the mental model.
+2.  **Study the Code:** Open the `.py` file. Read the comments as you trace the execution flow.
+3.  **Run and Experiment:** Execute the file to see the output. Try changing the input variables `L`, `G`, or `E` to see how the logic adapts.
+
+---
+
+## 🌟 Credits
+
+This collection is curated and standardized to provide a premium, visually-rich, and emoji-free educational resource. It is designed to turn "how to code" into "how to think."
 
 ---
 

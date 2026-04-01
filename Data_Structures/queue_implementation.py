@@ -3,6 +3,17 @@
 CONCEPTS AND THEORY: QUEUE (FIRST-IN, FIRST-OUT)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- ENQUEUE (Join): O(1) (Adding to the very back is instant)
+- DEQUEUE (Serve):O(n) (In this list implementation, shifting everyone forward takes time)
+- PEEK (Look):    O(1) (Instantly seeing who is at the front)
+- SEARCH:         O(n) (Must scan every single person in line)
+--------------------------------
+- SPACE COMPLEXITY: O(n) (Memory scales with every person in the line)
+
+STATUS: INDEPENDENT (Self-contained 'Queue' class)
+================================================================================
+
 1. WHAT IS A QUEUE?
    A Queue is a very 'fair' data structure that follows the 
    **FIRST-IN, FIRST-OUT (FIFO)** rule. 
@@ -32,77 +43,63 @@ CONCEPTS AND THEORY: QUEUE (FIRST-IN, FIRST-OUT)
 ================================================================================
 """
 
-class TicketQueue:
+class Queue:
     """
-    A class that represents a physical line (queue) of items.
+    Simulates a First-In, First-Out (FIFO) queue.
     """
     def __init__(self):
-        # We use a standard Python list as our internal 'waiting line'
-        self.waiting_line = []
+        # q: internal list to store queue elements
+        self.q = [] # q = queue storage
         
-    def is_queue_empty(self):
-        """
-        Simply checks if anyone is currently in line.
-        """
-        # If the list equals an empty list [], it returns True
-        return self.waiting_line == []
+    def is_empty(self):
+        """ Checks if the queue is empty. """
+        # Returns True if list q has no elements
+        return len(self.q) == 0
         
-    def join_back_of_line(self, new_customer_value):
-        """
-        Adds a new person to the very back of the line.
-        """
-        # Python's 'append' adds an item to the end (the Back)
-        self.waiting_line.append(new_customer_value)
-        print(f"Joined: {new_customer_value} (Back of Line)")
+    def enqueue(self, x):
+        """ Adds item x to the back of the queue. """
+        # x: data item to join the line
+        self.q.append(x) # add x to end of list (back of queue)
+        print(f"Enqueued: {x} 📥")
         
-    def serve_front_person(self):
-        """
-        Serves (removes) the person who is currently at the front.
-        """
-        # 1. Create a variable to hold our served customer
-        served_customer = None
-        
-        # 2. Safety Check: We can't serve anyone if the line is empty!
-        if not self.is_queue_empty():
-            # In a Queue, the 'Front' person is at Index 0
-            served_customer = self.waiting_line[0]
+    def dequeue(self):
+        """ Removes and returns the front item of the queue. """
+        # 1. Safety check for empty queue dequeueing
+        if self.is_empty():
+            print("Notice: Queue is empty! 🚫")
+            return None
             
-            # --- THE SHIFT STEP ---
-            # Now we remove the person we served and SHIFT everyone forward.
-            # Python's [1:] slice creates a new list from the 2nd person onwards.
-            self.waiting_line = self.waiting_line[1:]
-            
-            print(f"Served: {served_customer} (Front of Line)")
-        else:
-            print("Notice: The line is already empty!")
-            
-        # Give back the person we served
-        return served_customer    
+        # 2. In a simple list queue, the front is at index 0
+        v = self.q[0] # v: value at the front of the line
         
-    # This special function tells Python how to print our queue
+        # 3. Shift everyone forward by slicing the list from index 1
+        self.q = self.q[1:] # ignore the first item (O(n) shift)
+        print(f"Dequeued: {v} 📤")
+        
+        # 4. Return the removed item
+        return v    
+        
     def __str__(self):
-        return f"Current Line (Front to Back): {self.waiting_line}"
+        """ Displays the queue's current state. """
+        # Shows list starting from Front [0] to Back [-1]
+        return f"Current Queue: {self.q}"
 
 # --- START OF PROGRAM ---
 
-# Create our Queue manager
-my_queue = TicketQueue()
+# Q: instance of our Queue class
+Q = Queue()
 
-print("Welcome to the Ticket Counter!")
+print("Welcome to the Queue Simulator!\n")
 
-# 1. Customers join the line
-my_queue.join_back_of_line(10)
-my_queue.join_back_of_line(20)
-my_queue.join_back_of_line(30)
-my_queue.join_back_of_line(40)
+# 1. Join the line using enqueue
+Q.enqueue(10); Q.enqueue(20); Q.enqueue(30)
 
-# Show the queue after they joined
-print(f"\n{my_queue}")
+# Show queue status
+print(f"\n{Q}")
 
-# 2. Serve the customers from the front (Notice they come off in the SAME order!)
-print("\n--- Serving 2 Customers ---")
-first_served = my_queue.serve_front_person()
-second_served = my_queue.serve_front_person()
+# 2. Serve from the front using dequeue
+v1 = Q.dequeue() # v1: first served person
+v2 = Q.dequeue() # v2: second served person
 
-# 3. Final Result
-print(f"Final {my_queue}")
+# Final status
+print(f"\nFinal State: {Q} ✅")

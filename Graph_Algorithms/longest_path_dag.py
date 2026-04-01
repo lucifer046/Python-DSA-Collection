@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: LONGEST PATH ON DAG (THE 'CRITICAL PATH' METHOD)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(V + E) (Requires one full pass of the graph)
+- AVERAGE CASE: O(V + E) 
+- WORST CASE:   O(V + E) 
+--------------------------------
+- SPACE COMPLEXITY: O(V) (Requires space for in-degrees and the path length tracker)
+
+STATUS: INDEPENDENT (Contains both a full and a compact implementation)
+================================================================================
+
 1. WHAT IS THE LONGEST PATH ON A DAG?
    A Directed Acyclic Graph (DAG) is like a "One-Way Street" system with 
    no loops. Finding the **Longest Path** tells us the furthest distance 
@@ -38,114 +48,87 @@ CONCEPTS AND THEORY: LONGEST PATH ON DAG (THE 'CRITICAL PATH' METHOD)
 ================================================================================
 """
 
-import queue # Standard Python Queue module
+import queue # q: standard python queue module
 
-def calculate_longest_path_in_dag(task_adjacency_list):
+def longest_path(G):
     """
-    Computes the depth (longest path) of every node in a directed acyclic graph.
+    Kahn's Algorithm + Dynamic Programming for longest path in DAG G.
+    G: adjacency list {task: [deps]}
     """
-    # 1. INITIALIZATION: Track dependencies (In-degree) and path lengths
-    dependency_tracker = {}
-    path_length_tracker = {} # Stores how many steps it takes to reach each node
+    # 1. d: dependency tracker (in-degree) for all vertices
+    d = {node: 0 for node in G} # d = dictionary
     
-    # Ready Queue for nodes that have no prerequisites
-    ready_to_process_queue = queue.Queue()
+    # 2. L: longest path tracker stores length to reach each node
+    L = {node: 0 for node in G} # L = longest path map
     
-    # At the start, set every task to 0 dependencies and 0 path length
-    for node in task_adjacency_list.keys():
-        dependency_tracker[node] = 0
-        path_length_tracker[node] = 0
-    
-    # 2. COUNT THE INCOMING ARROWS:
-    for parent_node in task_adjacency_list.keys():
-        for neighbor_node in task_adjacency_list[parent_node]:
-            # Each time an arrow points to a task, increase its prerequisite count
-            dependency_tracker[neighbor_node] += 1
-
-    # 3. FIND THE STARTING POINTS: Nodes with 0 prerequisites
-    for node_name in task_adjacency_list.keys():
-        if dependency_tracker[node_name] == 0:
-            ready_to_process_queue.put(node_name)
+    # 3. Calculate in-degrees for each node n in G
+    for u in G: # u: source parent task
+        for v in G[u]: # v: target dependent task
+            d[v] += 1 # increment v's prerequisite count
             
-    # 4. THE COMPUTING PROCESS: 
-    while not ready_to_process_queue.empty():
-        # Remove a 'ready' task from the queue
-        current_node = ready_to_process_queue.get()
-        # Mark it as 'completed' by subtracting its prerequisites
-        dependency_tracker[current_node] -= 1
+    # 4. q: Queue for nodes that are "Ready to Process" (In-degree = 0)
+    q1 = queue.Queue() # q1 = ready queue
+    for task in G:
+        if d[task] == 0:
+            q1.put(task) # add starting tasks to queue
+            
+    # 5. The Computing Loop
+    while not q1.empty():
+        # curr: current task being processed
+        curr = q1.get()
+        # logically skip prerequisite counts for children of curr
+        d[curr] -= 1 
         
-        # 5. EXPLORE NEIGHBORS: Check every task waiting on this current one
-        for neighbor_node in task_adjacency_list[current_node]:
-            # REDUCE PREREQUISITE:
-            dependency_tracker[neighbor_node] -= 1
+        # 6. Relax neighbors using Dynamic Programming (max search)
+        for child in G[curr]: # child: node depending on curr
+            # 7. Decrease child's dependency count
+            d[child] -= 1
             
-            # CALCULATE PATH: 
-            # The neighbor node's distance is now AT LEAST (our distance + 1)
-            # We use 'max' to make sure we only keep the LONGEST path found so far.
-            path_length_tracker[neighbor_node] = max(
-                path_length_tracker[neighbor_node], 
-                path_length_tracker[current_node] + 1
-            )
+            # 8. Path calculation: compare current path to new path via 'curr'
+            # path to child is at least (path to curr + 1) index jump
+            L[child] = max(L[child], L[curr] + 1) # keep the longest distance
             
-            # 6. UNLOCK: If the neighbor now has 0 prerequisites left, it's ready!
-            if dependency_tracker[neighbor_node] == 0:
-                ready_to_process_queue.put(neighbor_node)
+            # 9. If child has no pending prerequisites, add to ready queue
+            if d[child] == 0:
+                q1.put(child) # child is now ready for path calculation
                 
-    # Return the map of every node and its longest path length
-    return path_length_tracker
+    # 10. Return the final length of the longest path to each node
+    return L
 
 # ================================================================================
-# VERSION 2: THE MOST COMPACT & SHORTEST WAY
+# COMPACT LONGEST PATH (TOPOLOGICAL BASED)
 # ================================================================================
 
-def longest_path_shortest_code(graph):
-    """
-    Very short Longest Path on DAG.
-    1. First, get the topological order.
-    2. Then, calculate path lengths node-by-node in that order.
-    """
-    # Helper to get the dependency order using DFS
-    def get_order(node, visited, stack):
-        visited.add(node)
-        for neighbor in graph.get(node, []):
-            if neighbor not in visited:
-                get_order(neighbor, visited, stack)
-        stack.append(node)
-
-    visited, order = set(), []
-    for node in graph.keys():
-        if node not in visited:
-            get_order(node, visited, order)
-    
-    # Process in reverse order (topological)
-    ordered_nodes = order[::-1]
-    
-    # Map every node to distance 0 initially
-    dist = {node: 0 for node in graph}
-    
-    # Update distances in order
-    for node in ordered_nodes:
-        for neighbor in graph.get(node, []):
-            dist[neighbor] = max(dist[neighbor], dist[node] + 1)
-            
-    return dist
+def compact_lp(G):
+    """ G: DAG. Returns longest path lengths to every node. """
+    v, s = set(), [] # v: visited, s: stack
+    def visit(n):
+        if n not in v:
+            v.add(n)
+            for m in G.get(n, []): visit(m)
+            s.append(n) # topological sort order
+    for node in G: visit(node) # get traversal order
+    order = s[::-1] # reverse stack
+    dist = {n: 0 for n in G} # dist: distance mapping
+    for n in order: # n: current node in sorted order
+        for m in G.get(n, []): # m: direct neighbor
+            dist[m] = max(dist[m], dist[n] + 1) # relax path
+    return dist # return final distances
 
 # --- START OF PROGRAM ---
 
-# 1. Sample Graph (DAG) representing the 'Critical Path' of a project
-sample_tasks = {0: [2, 3, 4], 1: [2, 7], 2: [5], 3: [5, 7], 4: [7], 5: [6], 6: [7], 7: []}
+# G1: sample Directed Acyclic Graph (DAG) for tasks
+G1 = {0: [2, 3, 4], 1: [2, 7], 2: [5], 3: [5, 7], 4: [7], 5: [6], 6: [7], 7: []}
 
-print("Welcome to the Critical Path (Longest Path) Calculator!")
-print("Finding the 'Depth' of every node in the system...\n")
+print("Longest Path (Critical Path) Calculator for DAGs!\n")
 
-# Run the calculation
-results_map = calculate_longest_path_in_dag(sample_tasks)
+# Run calculation
+len_res = longest_path(G1)
 
-# Print out the results clearly
-print("--- Results (Node: Depth) ---")
-for task_id, depth in results_map.items():
-    print(f"Task {task_id}: {depth}")
+print("--- Results (Task Index: Max Depth) ---")
+for tid, depth in len_res.items():
+    print(f"Task {tid}: {depth} steps from start")
 
-print("\n--- Testing THE SHORTEST LONGEST-PATH CODE ---")
-final_dist = longest_path_shortest_code(sample_tasks)
-print(f"Final Distances: {final_dist}")
+# Run compact version
+c_dist = compact_lp(G1)
+print(f"\nCompact code result: {c_dist} ✅")

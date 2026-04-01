@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: BINARY SEARCH (DIVIDE AND CONQUER)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(1) (Target is found exactly at the first middle point)
+- AVERAGE CASE: O(log n) 
+- WORST CASE:   O(log n) (Searching until only one item remains)
+--------------------------------
+- SPACE COMPLEXITY: O(1) (Iterative) or O(log n) (Recursive call stack)
+
+STATUS: INDEPENDENT (Contains both Iterative and Recursive versions)
+================================================================================
+
 1. WHAT IS IT?
    Binary Search is a super-fast way to find one specific item in a 
    list that is already **SORTED**. 
@@ -46,90 +56,81 @@ CONCEPTS AND THEORY: BINARY SEARCH (DIVIDE AND CONQUER)
 # VERSION 1: ITERATIVE IMPLEMENTATION (Using a While Loop)
 # ================================================================================
 
-def binary_search_iterative(sorted_list, target_value):
+def search_iterative(L, t):
     """
-    Finds the target_value by repeatedly moving the search boundaries.
+    Finds target 't' in sorted list 'L' using a loop.
+    L: sorted list, t: target value
     """
-    # 1. Start our search area at the very edges of the list
-    start_point = 0
-    end_point = len(sorted_list) - 1
+    # 1. l/r: search boundaries (left index and right index)
+    l, r = 0, len(L) - 1 # l: start, r: end
     
-    # 2. Keep searching as long as there is at least one item left to check
-    while start_point <= end_point: 
+    # 2. Logic: repeatedly narrow down the range until the pointers meet
+    while l <= r: # l: left pointer, r: right pointer
         
-        # 3. Find the middle spot between our start and end points
-        middle_index = (start_point + end_point) // 2
+        # 3. m: find the exact midpoint index to divide the search territory
+        m = (l + r) // 2 # m: midpoint index
         
-        # 4. If the item in the middle is LESS than what we want:
-        if sorted_list[middle_index] < target_value:
-            # We move the 'start_point' past the middle (ignore the left half)
-            start_point = middle_index + 1
+        # 4. Check target against midpoint value L[m]
+        # if target is smaller, ignore everything on the right
+        if L[m] > t:
+            r = m - 1 # move right boundary inwards
             
-        # 5. If the item in the middle is MORE than what we want:
-        elif sorted_list[middle_index] > target_value:
-            # We move the 'end_point' before the middle (ignore the right half)
-            end_point = middle_index - 1
+        # 5. If target is larger, ignore everything on the left
+        elif L[m] < t:
+            l = m + 1 # move left boundary inwards
             
-        # 6. If it's not smaller and not larger, it must be the ONE!
+        # 6. Target found exactly at the middle!
         else:
-            # We found it! Return the position (index) where it lives
-            return middle_index
+            return m # return the index m where t was found
             
-    # If the loop finishes without finding the item:
+    # 7. Return False if target is never located
     return False
 
 # ================================================================================
 # VERSION 2: RECURSIVE IMPLEMENTATION (Function calling itself)
 # ================================================================================
 
-def binary_search_recursive(sorted_list, target_value, start_point, end_point):
+def search_recursive(L, t, l, r):
     """
-    Finds the target_value by asking the function to search a smaller half.
+    Finds target 't' in sorted list 'L' using recursion.
+    L: sorted list, t: target, l/r: current search boundaries
     """
-    # 1. BASE CASE: If the search area is gone (empty), we failed to find it
-    if end_point - start_point < 0:
-        return False
+    # 1. Base case: Check if the search territory has disappeared
+    if r < l: 
+        return False # target t is not in list L
         
-    # 2. Find the middle index
-    middle_index = (end_point + start_point) // 2
+    # 2. m: calculate midpoint index for this recursive step
+    m = (l + r) // 2 # m: middle index
     
-    # 3. CHECK: Did we find it exactly at the middle?
-    if target_value == sorted_list[middle_index]:
-        return middle_index
+    # 3. Success condition: target located in the middle
+    if t == L[m]:
+        return m # return resulting index
         
-    # 4. RECURSIVE MOVE (Left): If target is smaller, search the left half
-    if target_value < sorted_list[middle_index]:
-        # Return the result of the SAME function, but with a smaller 'end_point'
-        return binary_search_recursive(sorted_list, target_value, start_point, middle_index - 1)
+    # 4. Binary split: decide which half to recursively explore
+    # If target is smaller than middle, search the left half territory
+    if t < L[m]:
+        return search_recursive(L, t, l, m - 1) # dive left
         
-    # 5. RECURSIVE MOVE (Right): Otherwise, search the right half
+    # 5. Otherwise, search the right half territory
     else:
-        # Return the result of the SAME function, but with a smaller 'start_point'
-        return binary_search_recursive(sorted_list, target_value, middle_index + 1, end_point)
+        return search_recursive(L, t, m + 1, r) # dive right
 
 # --- START OF PROGRAM ---
 
-# 1. Our sorted list of mystery numbers
-my_numbers = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
-my_target = 23
+# L1: sorted sample list, t1: target number to find
+L1 = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+t1 = 23
 
-print("Welcome to the Binary Search Demo!")
-print(f"List: {my_numbers}")
-print(f"Goal: Find the location of number '{my_target}'\n")
+print("Binary Search Algorithm Simulator (Search by Halving)!\n")
+print(f"Sorted List: {L1}")
+print(f"Target Selection: {t1}\n")
 
-# --- TESTING ITERATIVE VERSION ---
-result_idx = binary_search_iterative(my_numbers, my_target)
-print("--- Result from Iterative Version ---")
-if result_idx is not False:
-    print(f"Found it at index position: {result_idx}")
-else:
-    print("Sorry, that number is not in the list.")
+# Run iterative version
+res1 = search_iterative(L1, t1)
+print(f"Iterative Search: Found at Index {res1} ✅")
 
-# --- TESTING RECURSIVE VERSION ---
-# For recursion, we have to tell it the initial start and end points [0, len-1]
-result_idx = binary_search_recursive(my_numbers, my_target, 0, len(my_numbers) - 1)
-print("\n--- Result from Recursive Version ---")
-if result_idx is not False:
-    print(f"Found it at index position: {result_idx}")
-else:
-    print("Sorry, that number is not in the list.")
+# Run recursive version
+res2 = search_recursive(L1, t1, 0, len(L1) - 1)
+print(f"Recursive Search: Found at Index {res2} ✅")
+
+print("\nSearch operation successful! 🎯")

@@ -3,6 +3,17 @@
 CONCEPTS AND THEORY: STACK (LAST-IN, FIRST-OUT)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- PUSH (Add):   O(1) (Instantly adding to the very top)
+- POP (Remove): O(1) (Instantly taking off the very top)
+- PEEK (Look):  O(1) (Instantly seeing what is on top)
+- SEARCH:       O(n) (Must remove or scan everything to find an item)
+--------------------------------
+- SPACE COMPLEXITY: O(n) (We need space for every item in the pile)
+
+STATUS: INDEPENDENT (Self-contained 'Stack' class)
+================================================================================
+
 1. WHAT IS A STACK?
    A Stack is simplest data structure in computing. It follows a 
    very strict rule: **LAST-IN, FIRST-OUT (LIFO)**.
@@ -32,71 +43,59 @@ CONCEPTS AND THEORY: STACK (LAST-IN, FIRST-OUT)
 ================================================================================
 """
 
-class PlateStack:
+class Stack:
     """
-    A class that represents a physical stack of items.
+    Simulates a Last-In, First-Out (LIFO) stack.
     """
     def __init__(self):
-        # We use a standard Python list as our internal 'storage pile'
-        self.storage_pile = []
+        # s: internal storage list for the stack items
+        self.s = [] # s = stack storage
         
-    def is_stack_empty(self):
-        """
-        Simply checks if we have any items in our pile.
-        """
-        # If the list is empty, return True
-        return self.storage_pile == []
+    def is_empty(self):
+        """ Checks if the stack is currently empty. """
+        # Returns True if list s is empty, else False
+        return len(self.s) == 0
         
-    def push_item(self, new_item):
-        """
-        Adds an item to the very top (the end of our list).
-        """
-        # Python's 'append' adds an item to the end, which is our 'Top'
-        self.storage_pile.append(new_item)
-        print(f"Pushed: {new_item}")
+    def push(self, x):
+        """ Adds item x to the top of the stack. """
+        # x: data item to push
+        self.s.append(x) # add x to end of list (top of stack)
+        print(f"Pushed: {x} 📥")
         
-    def pop_item(self):
-        """
-        Removes and gives back the item on the very top.
-        """
-        # 1. Create a variable to hold our removed item
-        item_to_remove = None
-        
-        # 2. Safety Check: We can't pop from an empty stack!
-        if not self.is_stack_empty():
-            # 'pop()' in Python removes the last item and returns it
-            item_to_remove = self.storage_pile.pop()
-            print(f"Popped: {item_to_remove}")
-        else:
-            print("Notice: Stack is already empty!")
+    def pop(self):
+        """ Removes and returns the top item from the stack. """
+        # 1. Safety check for empty stack popping
+        if self.is_empty():
+            print("Notice: Stack is empty! 🚫")
+            return None # cannot pop from empty stack
             
-        # Give back the item we took off the top
-        return item_to_remove    
+        # 2. Use list.pop() to remove and return last element
+        v = self.s.pop() # v: value taken from top
+        print(f"Popped: {v} 📤")
         
-    # This special function tells Python how to print our stack
+        # 3. Return the popped item
+        return v    
+        
     def __str__(self):
-        return f"Current Stack (Bottom to Top): {self.storage_pile}"
+        """ Displays the stack's current state. """
+        return f"Current Stack: {self.s} (Top at end)"
 
 # --- START OF PROGRAM ---
 
-# Create our Stack object
-my_piles = PlateStack()
+# S: instance of our Stack class
+S = Stack()
 
-print("Welcome to the Stack Simulator!")
+print("Welcome to the Stack Simulator!\n")
 
-# 1. Push items onto the stack
-my_piles.push_item(10)
-my_piles.push_item(20)
-my_piles.push_item(30)
-my_piles.push_item(40)
+# 1. Add items using push
+S.push(10); S.push(20); S.push(30)
 
-# Show the stack after pushing
-print(f"\n{my_piles}")
+# Show current stack
+print(f"\n{S}")
 
-# 2. Pop the items off the top (Notice they come off in reverse order!)
-print("\n--- Popping 2 items ---")
-first_out = my_piles.pop_item()
-second_out = my_piles.pop_item()
+# 2. Remove items using pop
+v1 = S.pop() # v1: first popped item
+v2 = S.pop() # v2: second popped item
 
-# 3. Final Result
-print(f"Final {my_piles}")
+# Final status
+print(f"\nFinal State: {S} ✅")

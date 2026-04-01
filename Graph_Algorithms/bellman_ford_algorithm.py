@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: BELLMAN-FORD (THE 'NEGATIVE WEIGHT' SPECIALIST)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(E) (If no paths change during the first pass)
+- AVERAGE CASE: O(V * E) 
+- WORST CASE:   O(V * E) (Must relax all edges exactly V-1 times)
+--------------------------------
+- SPACE COMPLEXITY: O(V) (To store a distance table for every vertex)
+
+STATUS: INDEPENDENT (Contains both a full and a compact version)
+================================================================================
+
 1. WHAT IS BELLMAN-FORD?
    Dijkstra's algorithm is fast, but it gets very confused if an edge 
    has a NEGATIVE weight (like a road that pays you to drive on it!). 
@@ -40,90 +50,71 @@ CONCEPTS AND THEORY: BELLMAN-FORD (THE 'NEGATIVE WEIGHT' SPECIALIST)
 ================================================================================
 """
 
-def find_shortest_paths_bellman_ford(edge_list, total_vertices, starting_node):
+def bellman_ford(E, n, s):
     """
-    Finds the cheapest path to ALL nodes, even with negative edge weights.
+    Finds shortest paths from source s in graph with n nodes.
+    E: list of edges (u, v, w) where u -> v with weight w
     """
-    # 1. INITIALIZATION: Everyone starts at Infinity distance
-    # 'dist_tracker' stores the best cost to reach each node (Index 0 to total_vertices-1)
-    dist_tracker = [float('inf')] * total_vertices
-    # Distance to our start is 0
-    dist_tracker[starting_node] = 0
+    # 1. d: distance tracker for all n node indices
+    # set to Infinity initially as we don't know the shortest paths yet
+    d = [float('inf')] * n # d = distance result list
+    d[s] = 0 # distance to starting node is always 0
     
-    # 2. THE REPETITION LOOP: We relax all edges (total_vertices - 1) times
-    # Each pass 'unlocks' the shortest route to more distant nodes
-    for iteration_count in range(total_vertices - 1):
-        # 3. SCAN EVERY EDGE:
-        for source_node, neighbor_node, edge_weight in edge_list:
-            # CHECK: "Is reaching the neighbor through this source shorter 
-            # than their current best path?"
-            if dist_tracker[source_node] != float('inf') and \
-               dist_tracker[neighbor_node] > dist_tracker[source_node] + edge_weight:
-                
-                # YES! Update the new shorter distance
-                dist_tracker[neighbor_node] = dist_tracker[source_node] + edge_weight
+    # 2. Outer loop: relax all edges for (n-1) iterations
+    # the longest possible gap-free path has n-1 edges
+    for i in range(n - 1): # i: iteration counter
+        # 3. Inner loop: evaluate every single road (edge) in the graph
+        for u, v, w in E: # u: source, v: destination, w: edge weight
+            # 4. Check if reaching v via u is a better shortcut
+            if d[u] != float('inf') and d[v] > d[u] + w:
+                d[v] = d[u] + w # update v's best known distance
     
-    # 3. THE CYCLE CHECK (Final Pass): 
-    # If we can STILL find a shorter path, it means we have a Negative Cycle!
-    for source_node, neighbor_node, edge_weight in edge_list:
-        if dist_tracker[source_node] != float('inf') and \
-           dist_tracker[neighbor_node] > dist_tracker[source_node] + edge_weight:
-            return ["ERROR: Found a Negative Cycle! Path is undefined."]
+    # 5. Safety check: one final pass to detect negative cycles (infinite loops)
+    for u, v, w in E:
+        # if a path can STILL be shortened, we have a negative cycle
+        if d[u] != float('inf') and d[v] > d[u] + w:
+            print("ERROR: Negative cycle detected! 🚩")
+            return None # no stable shortest path exists
     
-    # 4. Return the finally calculated BEST distances from our starting point
-    return dist_tracker
+    # 6. Return the final distances to all nodes
+    return d
 
 # ================================================================================
-# VERSION 2: THE MOST COMPACT & SHORTEST WAY
+# COMPACT BELLMAN-FORD (MINIMAL CODE)
 # ================================================================================
 
-def bellman_ford_shortest_code(edges, n, start):
-    """
-    Very short implementation focusing on the logic core.
-    """
-    dist = [float('inf')] * n
-    dist[start] = 0
-    
-    # Relax (n-1) times
+def compact_bf(E, n, s):
+    """ E: edges, n: node count, s: start. Minimal implementation. """
+    # d: result distances
+    d = [float('inf')] * n; d[s] = 0
+    # relax n-1 times
     for _ in range(n - 1):
-        for u, v, w in edges:
-            dist[v] = min(dist[v], dist[u] + w)
-            
-    # One more check for cycles
-    if any(dist[v] > dist[u] + w for u, v, w in edges):
+        for u, v, w in E: d[v] = min(d[v], d[u] + w)
+    # verify stability (no cycles)
+    if any(d[u] + w < d[v] for u, v, w in E if d[u] != float('inf')):
         return "Cycle Found!"
-        
-    return dist
+    return d # returning mapping of all distances
 
 # --- START OF PROGRAM ---
 
-# 1. Our graph represented as a LIST of EDGES (u -> v with weight w)
-# Node labels: 0, 1, 2, 3, 4
-sample_edges = [
-    (0, 1, 4),      # Edge from 0 to 1, costs 4
-    (0, 2, 2),      # Edge from 0 to 2, costs 2
-    (1, 2, 1),      # Edge from 1 to 2, costs 1
-    (1, 3, 5),      # Edge from 1 to 3, costs 5
-    (2, 3, 8),      # Edge from 2 to 3, costs 8
-    (2, 4, 10),     # Edge from 2 to 4, costs 10
-    (3, 4, 2),      # Edge from 3 to 4, costs 2
+# E: sample graph as a list of directed edges (u, v, weight)
+E = [
+    (0, 1, 4), (0, 2, 2), (1, 2, 1), 
+    (1, 3, 5), (2, 3, 8), (2, 4, 10), (3, 4, 2)
 ]
 
-print("Welcome to the Bellman-Ford Shortest Path Solver!")
+print("Bellman-Ford Shortest Path Search (Negative Weight Proof)!\n")
 
-# 2. Run the search
-num_nodes = 5
-start_point = 0
-results = find_shortest_paths_bellman_ford(sample_edges, num_nodes, start_point)
+# Run calculation
+start_node = 0
+v_count = 5
+distances = bellman_ford(E, v_count, start_node)
 
-# 3. Print the results
-print(f"\nShortest distances from Node {start_point}:")
-if isinstance(results, list):
-    for node_id, final_dist in enumerate(results):
-        print(f"  -> Path to Node {node_id}: Distance {final_dist}")
-else:
-    print(results)
+if distances:
+    print(f"Distances from starting node {start_node}:")
+    for idx, dist_val in enumerate(distances):
+        print(f"  To {idx}: Distance {dist_val}")
 
-# --- TEST SHORTEST VERSION ---
-print("\nShortest implementation result:")
-print(bellman_ford_shortest_code(sample_edges, num_nodes, start_point))
+# Run compact version
+c_dist = compact_bf(E, v_count, start_node)
+print(f"\nCompact code result: {c_dist} ✅")

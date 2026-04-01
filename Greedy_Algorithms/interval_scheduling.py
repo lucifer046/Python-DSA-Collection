@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: INTERVAL SCHEDULING (GREEDY ALGORITHM)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(n log n) (Due to sorting the intervals by end-time)
+- AVERAGE CASE: O(n log n) 
+- WORST CASE:   O(n log n) 
+--------------------------------
+- SPACE COMPLEXITY: O(n) (To store the final scheduled list of intervals)
+
+STATUS: INDEPENDENT (Contains a single complete implementation)
+================================================================================
+
 1. THE PROBLEM:
    You have a list of tasks (intervals), each with a Start time and an End time.
    You want to pick as many tasks as possible without any of them overlapping.
@@ -35,63 +45,51 @@ CONCEPTS AND THEORY: INTERVAL SCHEDULING (GREEDY ALGORITHM)
 ================================================================================
 """
 
-def schedule_intervals(meeting_requests):
+def schedule(intervals):
     """
-    Imagine you have a single room and several friends want to use it for meetings.
-    Each meeting has a START time and an END time.
-    Your goal is to fit as many meetings as possible in that one room without overlapping!
+    Selects the maximum number of non-overlapping intervals.
+    intervals: list of [start, end] pairs
     """
+    # 1. Logic: Sort the meetings by their END times primarily.
+    # The sooner a meeting finishes, the more room remains for future tasks.
+    # i: interval iterator [start, end]
+    intervals.sort(key=lambda i: i[1]) # i[1] is the end_time
 
-    # 1. First, we sort the meetings by their END times.
-    # Logic: The sooner a meeting finishes, the sooner the room is free for the next one!
-    # 'meeting_info[1]' refers to the index 1 (the end time) of each meeting.
-    meeting_requests.sort(key=lambda meeting_info: meeting_info[1])
-
-    # This 'scheduled_list' will keep track of the meetings we pick
-    scheduled_list = []
+    # 2. res: list to store the final successfully scheduled intervals
+    res = [] # res = result list
     
-    # This 'last_finish_time' tracks when the room becomes empty after the last meeting we chose
-    # We start it at 0 (assuming meetings start at or after 0)
-    last_finish_time = 0
+    # 3. f_time: tracks when the room becomes available after the last meeting.
+    # initialized to 0 (assuming meetings occur after time 0)
+    f_time = 0 # f_time = current finish time boundary
 
-    # 2. Now we check every single meeting one by one
-    for current_meeting in meeting_requests:
-        start_time = current_meeting[0]  # When this meeting wants to START
-        end_time = current_meeting[1]    # When this meeting wants to END
+    # 4. Greedy Selection loop
+    for i in intervals: # i: current meeting request
+        # 5. Rule: can we FIT this meeting if it starts after the room is free?
+        # i[0]: start_time of current meeting
+        if i[0] >= f_time:
+            # 6. Yes! Add to schedule and update the boundary to its end_time
+            res.append(i) # add i to result
+            f_time = i[1] # set new boundary to current meeting end_time
 
-        # 3. Rule: If the new meeting starts AFTER or EXACTLY when the last one finished...
-        if start_time >= last_finish_time:
-            # ...then we can FIT it!
-            scheduled_list.append(current_meeting)
-            # Update our tracker to show when the room will be free next
-            last_finish_time = end_time
+    # 7. Return the final collection of maximum possible meetings
+    return res
 
-    # Finally, we return the list of meetings we managed to fit in for our room
-    return scheduled_list
+# --- START OF PROGRAM ---
 
-# --- Let's Try Running It! ---
-
-# Imagine these are your friends' meeting requests:
-# Each bracket [start, end] is a meeting.
-all_requests = [
-    [1, 4],   # Meeting A: Starts at 1, ends at 4
-    [3, 5],   # Meeting B: Starts at 3, ends at 5 (Ouch! This overlaps with A)
-    [0, 6],   # Meeting C: Starts at 0, ends at 6 (Very long meeting!)
-    [5, 7],   # Meeting D: Starts at 5, ends at 7
-    [3, 8],   # Meeting E: Starts at 3, ends at 8
-    [5, 9],   # Meeting F: Starts at 5, ends at 9
-    [6, 10],  # Meeting G: Starts at 6, ends at 10
-    [8, 11]   # Meeting H: Starts at 8, ends at 11
+# reqs: sample meeting requests [start, end]
+reqs = [
+    [1, 4], [3, 5], [0, 6], [5, 7], 
+    [3, 8], [5, 9], [6, 10], [8, 11]
 ]
 
-print("Welcome to the Meeting Scheduler!")
-print("Here are all the requests:")
-print(all_requests)
+print("Welcome to the Greedy Interval Scheduler!\n")
 
-# We call our function 'schedule_intervals' with our list of requests
-optimized_schedule = schedule_intervals(all_requests)
+# Run the scheduling algorithm
+final_list = schedule(reqs)
 
-print("\n--- Optimized Schedule (Total:", len(optimized_schedule), "meetings) ---")
-# Let's show the meetings we picked!
-for chosen_meeting in optimized_schedule:
-    print(f"Meeting from {chosen_meeting[0]} to {chosen_meeting[1]}")
+# Display results
+print(f"Total meetings scheduled: {len(final_list)} ✅")
+for m in final_list: # m: meeting record
+    print(f" -> Meeting scheduled from {m[0]} to {m[1]}")
+    
+print("\nSchedule Optimization Complete! 🕒")

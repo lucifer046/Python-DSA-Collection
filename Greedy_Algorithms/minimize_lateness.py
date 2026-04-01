@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: MINIMIZING MAXIMUM LATENESS (GREEDY ALGORITHM)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(n log n) (Sorting the tasks by their deadlines takes most time)
+- AVERAGE CASE: O(n log n) 
+- WORST CASE:   O(n log n) 
+--------------------------------
+- SPACE COMPLEXITY: O(n) (To store the final sorted schedule and job results)
+
+STATUS: INDEPENDENT (Contains a single complete implementation)
+================================================================================
+
 1. THE PROBLEM:
    You have a list of tasks. Each task has:
    - A DURATION (how long it takes to finish).
@@ -38,75 +48,68 @@ CONCEPTS AND THEORY: MINIMIZING MAXIMUM LATENESS (GREEDY ALGORITHM)
 ================================================================================
 """
 
-from operator import itemgetter
-    
-def calculate_minimum_lateness_schedule(list_of_jobs):
+def schedule(jobs):
     """
-    This function takes a list of jobs and arranges them in a way that
-    nobody is 'too late' compared to everyone else.
+    Minimizes max lateness by sorting jobs by deadline.
+    jobs: list of (id, duration, deadline)
     """
-    # This list will store the result: (Job ID, Start Time, End Time)
-    final_schedule = []
-    
-    # We will track the biggest 'lateness' value we find
-    maximum_lateness_found = 0
-    
-    # 'current_time' tracks when the single worker is free to start the next job
-    current_time = 0
-        
-    # 1. First, we sort the jobs by their DEADLINE (the 3rd item in our tuple, index 2)
-    # This is our 'Earliest Deadline First' strategy!
-    jobs_sorted_by_deadline = sorted(list_of_jobs, key=itemgetter(2))
-        
-    # 2. Now we process each job one by one in the sorted order
-    for job_details in jobs_sorted_by_deadline:
-        # Variables for better readability:
-        job_id = job_details[0]           # The unique ID of the job
-        job_duration = job_details[1]     # How long the job takes
-        job_deadline = job_details[2]     # When it SHOULD be done
+    # 1. Strategy: Sort all jobs by their DEADLINE (3rd item, index 2).
+    # Logic: Earliest Deadline First (EDF) minimizes the maximum delay.
+    # j: job record (id, duration, deadline)
+    jobs.sort(key=lambda j: j[2]) # j[2] is the deadline
 
-        # The job starts as soon as we finish the previous one
-        job_start_time = current_time
-        # It finishes after its duration is added to the start time
-        job_finish_time = current_time + job_duration
+    # 2. res: stores scheduled jobs as (id, start, finish)
+    res = [] # res = result schedule
     
-        # Update our tracker: The worker is now busy until this finish time
-        current_time = job_finish_time
+    # 3. L_max: tracks the worst-case (maximum) lateness found in the schedule.
+    # lateness is defined as (Finish Time - Deadline) if > 0.
+    L_max = 0 # L_max = maximum lateness
+    
+    # 4. t: current time clock. Tracks when the worker completes a job.
+    t = 0 # t = current time boundary
+
+    # 5. Iterative scheduling loop
+    for j in jobs: # j: job details tuple (id, dur, dline)
+        jid, dur, dline = j # unpack: id, duration, deadline
         
-        # 3. Check if the job is late: 
-        # Lateness = (Finish Time - Deadline). If it's done before deadline, lateness is 0.
-        if job_finish_time > job_deadline:
-            lateness_for_this_job = job_finish_time - job_deadline
-            # We only remember the BIGGEST lateness value we've seen so far
-            maximum_lateness_found = max(maximum_lateness_found, lateness_for_this_job)
+        # 6. Calc: the job starts at current time t and ends after duration dur
+        s, f = t, t + dur # s: start, f: finish
+        
+        # 7. Update system clock to the finish time of current job
+        t = f 
+        
+        # 8. Check lateness for this specific job
+        # if the job finishes AFTER its deadline, calculate by how much
+        if f > dline:
+            l = f - dline # l: current job lateness
+            # update the global worst-case lateness value
+            L_max = max(L_max, l)
             
-        # Add the job's timing to our final schedule list
-        final_schedule.append((job_id, job_start_time, job_finish_time))
+        # 9. Record the job timings in final schedule list
+        res.append((jid, s, f))
     
-    # Return both the maximum lateness found and the full schedule
-    return maximum_lateness_found, final_schedule
-    
-# --- Let's Try Running It! ---
+    # 10. Return the worst lateness found and the full sorted schedule
+    return L_max, res
 
-# Imagine these are 6 jobs you have to complete:
-# Format: (Job ID, Duration, Deadline)
-job_requests = [
-    (1, 3, 6),   # Job 1: Takes 3 hours, due at hour 6
-    (2, 2, 9),   # Job 2: Takes 2 hours, due at hour 9
-    (3, 1, 8),   # Job 3: Takes 1 hour,  due at hour 8
-    (4, 4, 9),   # Job 4: Takes 4 hours, due at hour 9
-    (5, 3, 14),  # Job 5: Takes 3 hours, due at hour 14
-    (6, 2, 15)   # Job 6: Takes 2 hours, due at hour 15
+# --- START OF PROGRAM ---
+
+# reqs: sample jobs (id, duration, deadline)
+reqs = [
+    (1, 3, 6), (2, 2, 9), (3, 1, 8), 
+    (4, 4, 9), (5, 3, 14), (6, 2, 15)
 ]
 
-# We run our function to get the best organization
-max_lat, schedule_output = calculate_minimum_lateness_schedule(job_requests)
+print("Maximum Lateness Minimizer (Earliest Deadline First)!\n")
 
-print("Welcome to the Lateness Minimizer!")
-print(f"Maximum lateness across all jobs is: {max_lat} hours\n")
+# Run the greedy scheduling algorithm
+worst_lat, final_schedule = schedule(reqs[:]) # use slice to preserve list
 
-print("--- Optimized Work Schedule ---")
-for job_record in schedule_output:
-    # Unpack the tuple: (ID, Start, Finish)
-    task_id, start, finish = job_record
-    print(f"Job ID: {task_id} | Starts at: {start:2} | Finishes at: {finish:2}")
+# Display outcome
+print(f"Worst-case lateness across all jobs: {worst_lat} hours ✅\n")
+
+print("--- Optimized Timetable ---")
+for task in final_schedule: # task: record (id, start, finish)
+    tid, ts, tf = task # id, start, finish
+    print(f" Job ID {tid}: Starts at hour {ts:2} | Finishes at hour {tf:2}")
+
+print("\nWorkday Optimal Scheduling Complete! 🕒")

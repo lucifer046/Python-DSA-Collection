@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: QUICK SORT (THE 'PICK A PIVOT' METHOD)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(n log n) (When pivot splits the list perfectly in half)
+- AVERAGE CASE: O(n log n) 
+- WORST CASE:   O(n^2) (When pivot is the smallest or largest element)
+--------------------------------
+- SPACE COMPLEXITY: O(log n) (For the recursive search depth)
+
+STATUS: LINKED (Requires partition helper function)
+================================================================================
+
 1. WHAT IS IT?
    Quick Sort is one of the fastest and most efficient ways to sort 
    a list. It's often used by computers in the real world because it's 
@@ -38,68 +48,56 @@ CONCEPTS AND THEORY: QUICK SORT (THE 'PICK A PIVOT' METHOD)
 ================================================================================
 """
 
-# This helper function does the 'Shuffling' or 'Partitioning' work.
-# It places the pivot in the correct spot and moves smaller numbers to its left.
-def organize_around_pivot(number_list, start_point, end_point):
+def partition(L, low, high): # L: list, low/high: range indices
     """
-    Partitions the list so that smaller numbers end up on one side 
-    and larger ones on the other.
+    Rearranges the list around a pivot element.
+    Returns the final position of the pivot.
     """
-    # 1. We pick the first number in the list segment as our 'Pivot Benchmark' 
-    pivot_value = number_list[start_point]
+    # 1. Pick the first element as the pivot
+    p = L[low] # p: pivot value
     
-    # 2. 'smaller_elements_last_idx' tracks where the part for smaller numbers ends
-    # Initially, we set it right at our start point
-    smaller_elements_last_idx = start_point
+    # 2. i: tracks the end of the 'smaller elements' section
+    i = low 
     
-    # 3. SCAN LOOP: We check every number from the next position to the end.
-    for current_scanning_index in range(start_point + 1, end_point + 1):
-        # 4. If we find a number SMALLER than or equal to our pivot:
-        if number_list[current_scanning_index] <= pivot_value:
-            # Shift our 'smaller parts' boundary by one
-            smaller_elements_last_idx += 1
-            # Swap: Move that smaller number inside the boundary
-            (number_list[smaller_elements_last_idx], number_list[current_scanning_index]) = \
-            (number_list[current_scanning_index], number_list[smaller_elements_last_idx])
+    # 3. Scan through the list from low + 1 to high
+    for j in range(low + 1, high + 1): # j: current scan index
+        # 4. If current element is less than or equal to pivot:
+        if L[j] <= p:
+            # 5. Move it into the 'smaller elements' section
+            i += 1 # increment boundary
+            L[i], L[j] = L[j], L[i] # swap L[i] and L[j]
             
-    # 5. FINAL SWAP: After checking everyone, move the pivot from the 
-    # original start point to its final correctly sorted position!
-    (number_list[start_point], number_list[smaller_elements_last_idx]) = \
-    (number_list[smaller_elements_last_idx], number_list[start_point])
+    # 6. Place the pivot into its final correct position
+    L[low], L[i] = L[i], L[low] # swap pivot with the boundary item
     
-    # Give back the final position of our pivot
-    return smaller_elements_last_idx
+    # 7. Return the pivot's final index
+    return i
 
-# This is the main function that keeps 'Quick Sorting' smaller chunks
-def quick_sort(number_list, start_point, end_point):
+def quick_sort(L, low, high): # L: list, low/high: range
     """
-    Recursively sorts the list by repeatedly picking a pivot and partitioning.
+    Recursively sorts the list using partitioning.
     """
-    # 1. BASE CASE: If the start and end point overlap, the list piece is sorted!
-    if start_point < end_point:
-        # 2. PARTITION STEP: Organize around a pivot and find its final spot
-        final_pivot_spot = organize_around_pivot(number_list, start_point, end_point)
+    # 1. Base case: If start and end point cross, the segment is sorted
+    if low < high:
+        # 2. Partition the list and get the pivot's final spot
+        pi = partition(L, low, high) # pi: pivot index
         
-        # 3. RECURSIVE MOVES:
-        # Now, call Quick Sort for the group to the LEFT of the pivot spot
-        quick_sort(number_list, start_point, final_pivot_spot - 1)
+        # 3. Recursively sort elements before and after the pivot
+        quick_sort(L, low, pi - 1) # sort left half
+        quick_sort(L, pi + 1, high) # sort right half
         
-        # Then, call Quick Sort for the group to the RIGHT of the pivot spot
-        quick_sort(number_list, final_pivot_spot + 1, end_point)
-        
-    # Give back the final list
-    return number_list
+    # 4. Return the sorted list L
+    return L
 
 # --- START OF PROGRAM ---
 
-# 1. Our messy list of numbers
-my_numbers = [10, 80, 30, 90, 40, 50, 70]
+# L1: messy list of numbers
+L1 = [10, 80, 30, 90, 40, 50, 70]
 
 print("Welcome to Quick Sort!")
-print(f"Original messy list: {my_numbers}")
+print(f"Original messy list: {L1}")
 
-# 2. Run the sorting process
-# Note: We pass (list, first_index, last_index)
-sorted_result = quick_sort(my_numbers, 0, len(my_numbers) - 1)
+# Run process with first and last indices
+ans = quick_sort(L1, 0, len(L1) - 1)
 
-print(f"\nFinal sorted list:   {sorted_result}")
+print(f"\nFinal sorted list:   {ans} ✅")

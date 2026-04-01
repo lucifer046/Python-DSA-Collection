@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: PRIM'S ALGORITHM (THE 'GREEDY TREE' BUILDER)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(E log V) (Using a Binary Heap/Priority Queue)
+- AVERAGE CASE: O(E log V) 
+- WORST CASE:   O(V^2) (In this simple implementation using basic loops)
+--------------------------------
+- SPACE COMPLEXITY: O(V + E) (Requires space for graph and visited tracker)
+
+STATUS: INDEPENDENT (Contains both a full and a compact implementation)
+================================================================================
+
 1. WHAT IS PRIM'S ALGORITHM?
    Imagine you are building a social network. You want a way to connect 
    *everyone* together with the shortest possible length of cable. 
@@ -38,96 +48,82 @@ CONCEPTS AND THEORY: PRIM'S ALGORITHM (THE 'GREEDY TREE' BUILDER)
 ================================================================================
 """
 
-def prim_minimum_spanning_tree(adjacency_list):
+def prim_mst(G):
     """
-    Finds the cheapest total cost to connect all nodes into a tree structure.
+    Prim's algorithm to find Minimum Spanning Tree cost.
+    G: adjacency list [ (nbr, weight), ... ]
     """
-    # 1. INITIALIZATION: Count nodes and track who is 'Seen'
-    num_vertices = len(adjacency_list)
+    # 1. n: total number of vertices (nodes) in the graph G
+    n = len(G) # n = nodes count
     
-    # Trace which nodes are already part of our 'Spanning Tree'
-    visited_nodes_tracker = [False] * num_vertices
-    # We choose node 0 as our starting 'seed' node
-    visited_nodes_tracker[0] = True
+    # 2. v: tracker for nodes already included in our MST
+    v = [False] * n # v = visited list
+    v[0] = True # start with node 0 as our "seed"
     
-    # Store the total cost for the whole network
-    total_mst_cost = 0
+    # 3. tc: total cost budget for all connections in MST
+    tc = 0 # tc = total cost
     
-    # 2. THE GROWTH PASS: We need to find exactly (n-1) edges to connect n nodes
-    # (A tree with n nodes always has n-1 edges)
-    for edge_count_to_find in range(num_vertices - 1):
+    # 4. Growth loop: we need exactly n-1 edges to connect n nodes
+    # i: edge counter iterator
+    for i in range(n - 1):
+        # 5. min_w: smallest edge weight found connecting a seen node to an unseen node
+        min_w = float('inf') # start with infinity
+        nxt = -1 # nxt: index of the next node to add
         
-        next_cheapest_node = -1
-        current_best_edge_weight = float('inf')
+        # 6. Outer loop: scan every node 'u' that is already in our tree
+        for u in range(n):
+            if v[u]: # if u is part of our growing tree
+                # 7. Inner loop: check every neighbor 'nbr' of 'u'
+                for nbr, w in G[u]: # w: edge weight from u to nbr
+                    # 8. Greedy Selection: check if nbr is new and edge is cheapest
+                    if not v[nbr] and w < min_w:
+                        min_w = w # update the smallest cost
+                        nxt = nbr # mark nbr as the candidate to join
         
-        # 3. SCAN EVERY 'SEEN' PERSON: 
-        # For each node we have already connected...
-        for already_connected_node in range(num_vertices):
-            # Only look at nodes that are already in our tree
-            if visited_nodes_tracker[already_connected_node]:
-                # ...Look at every possible road (edge) from this connected person
-                for neighbor_node, edge_weight in adjacency_list[already_connected_node]:
-                    # 4. FIND NEW FRIENDS:
-                    # Is this a road to someone we *haven't* connected yet?
-                    if not visited_nodes_tracker[neighbor_node]:
-                        # 5. GREEDY CHECK: 
-                        # Is this the cheapest road found so far to an unvisited person?
-                        if edge_weight < current_best_edge_weight:
-                            current_best_edge_weight = edge_weight
-                            next_cheapest_node = neighbor_node
-        
-        # 6. UNLOCK THE NEW NODE: 
-        # Add the road cost to our total budget and mark them as 'Seen'
-        total_mst_cost += current_best_edge_weight
-        visited_nodes_tracker[next_cheapest_node] = True
-    
-    # 7. Return the final budget (total weight) of our pipe network
-    return total_mst_cost
+        # 9. Add the cheapest neighbor found to our tree
+        if nxt != -1:
+            tc += min_w # add edge weight to total budget
+            v[nxt] = True # mark nxt as part of the family
+            
+    # return the final MST construction cost
+    return tc
 
 # ================================================================================
-# VERSION 2: THE MOST COMPACT & SHORTEST WAY (USING A PRIORITY QUEUE)
+# COMPACT PRIM (USING PRIORITY QUEUE)
 # ================================================================================
 
-def prim_shortest_code(graph):
-    """
-    A short version using a HEAP for much faster speed.
-    """
+def compact_prim(G):
+    """ G: adjacency list. Returns MST cost using a heap. """
     import heapq
-    mst_cost, seen, pq = 0, {0}, [(w, v) for v, w in graph[0]]
-    heapq.heapify(pq) # Order by weights
-
-    while pq and len(seen) < len(graph):
+    # tc: total cost, s: seen set, pq: priority queue (weight, node)
+    tc, s, pq = 0, {0}, [(w, nbr) for nbr, w in G[0]]
+    heapq.heapify(pq) # order by weights
+    while pq and len(s) < len(G):
         w, u = heapq.heappop(pq)
-        if u not in seen:
-            seen.add(u)
-            mst_cost += w
-            for v, next_w in graph[u]:
-                if v not in seen:
-                    heapq.heappush(pq, (next_w, v))
-    return mst_cost
+        if u not in s:
+            s.add(u); tc += w
+            for v, next_w in G[u]:
+                if v not in s: heapq.heappush(pq, (next_w, v))
+    return tc # final budget calculation
 
 # --- START OF PROGRAM ---
 
-# 1. Our graph represented as an ADJACENCY LIST (neighbor, weight)
-# Node labels: 0, 1, 2, 3, 4
-# For Undirected graphs, edges are listed twice (e.g., 0-1 and 1-0)
-sample_prim_graph = [
-    [(1, 2), (3, 6)],                    # Node 0 (Link to 1 with weight 2, 3 with weight 6)
+# G: sample graph (0-4 towns connected by pipes)
+# (neighbor_id, cost)
+G = [
+    [(1, 2), (3, 6)],                    # Node 0
     [(0, 2), (2, 3), (3, 8), (4, 5)],    # Node 1
     [(1, 3), (3, 7)],                    # Node 2
     [(0, 6), (1, 8), (2, 7), (4, 1)],    # Node 3
     [(1, 5), (3, 1)]                     # Node 4
 ]
 
-print("Welcome to Prim's Minimum Spanning Tree Builder!")
+print("Prim's MST Budget Calculator!\n")
 
-# 2. Run the calculation
-final_budget = prim_minimum_spanning_tree(sample_prim_graph)
+# Run calculation
+total_budget = prim_mst(G)
+print(f"Minimum budget to connect all towns: ${total_budget} 💰")
 
-# 3. Print the results
-print(f"\nTotal budget needed to connect everyone: ${final_budget}")
-print("Every town is now connected to the water system with the lowest cost pipe network.")
-
-# --- TEST SHORTEST VERSION ---
-print("\nShortest implementation result (Budget):")
-print(prim_shortest_code(sample_prim_graph))
+# Run compact version
+c_budget = compact_prim(G)
+print(f"Compact result check: ${c_budget} ✅")

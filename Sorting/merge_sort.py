@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: MERGE SORT (THE 'DIVIDE AND CONQUER' WAY)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(n log n) (The list is already sorted)
+- AVERAGE CASE: O(n log n) 
+- WORST CASE:   O(n log n) 
+--------------------------------
+- SPACE COMPLEXITY: O(n) (For storing the new merged lists)
+
+STATUS: LINKED (Requires merge_two_sorted_lists helper function)
+================================================================================
+
 1. WHAT IS IT?
    Merge Sort is a very clever and fast way to sort a list. It follows 
    the 'Divide and Conquer' rule: "If a problem is too big, break it 
@@ -33,87 +43,54 @@ CONCEPTS AND THEORY: MERGE SORT (THE 'DIVIDE AND CONQUER' WAY)
 ================================================================================
 """
 
-# This helper function takes two lists that are ALREADY SORTED and 
-# 'zips' them together into one single sorted list.
-def merge_two_sorted_lists(left_list, right_list):
+def merge(L, R): # L: left list, R: right list
     """
-    Zips two sorted stacks into one big sorted stack.
+    Zips two sorted lists into one unified sorted list.
     """
-    # 1. Measure the length of both lists
-    left_length = len(left_list)
-    right_length = len(right_list)
+    n1, n2 = len(L), len(R) # n1, n2: lengths of L and R
+    res, i, j = [], 0, 0 # res: result list, i/j: pointers
     
-    # 2. Preparation: Create an empty result list and two index 'trackers'
-    merged_result = []
-    left_index = 0
-    right_index = 0
-    
-    # 3. CASE 1: While BOTH lists still have items to check...
-    while left_index < left_length and right_index < right_length:
-        # 4. Compare the 'top' item of the left list with the 'top' of the right
-        if left_list[left_index] <= right_list[right_index]:
-            # If the left item is smaller, add it to our result list
-            merged_result.append(left_list[left_index])
-            # Move the left tracker one step forward
-            left_index += 1
-        else:
-            # Otherwise, the right item is smaller, so add it
-            merged_result.append(right_list[right_index])
-            # Move the right tracker one step forward
-            right_index += 1
-    
-    # 5. CASE 2: If we finished the right list, but the left list still has items left...
-    # (Since the left list was ALREADY sorted, we can just grab everything at once!)
-    while left_index < left_length:
-        merged_result.append(left_list[left_index])
-        left_index += 1
-    
-    # 6. CASE 3: If we finished the left list, but the right still has items left...
-    while right_index < right_length:
-        merged_result.append(right_list[right_index])
-        right_index += 1
-    
-    # Return our newly combined, perfectly sorted list   
-    return merged_result
+    # 1. Compare elements from both lists while both have items
+    while i < n1 and j < n2: # Scan both L and R
+        if L[i] <= R[j]: # If L item is smaller
+            res.append(L[i]) # add L item to res
+            i += 1 # advance L pointer
+        else: # Otherwise R item is smaller
+            res.append(R[j]) # add R item to res
+            j += 1 # advance R pointer
+            
+    # 2. Append any leftover elements from L and R
+    return res + L[i:] + R[j:] # Merge remaining elements
 
-# This is the main function that keeps 'cutting' the list in half
-def merge_sort(input_list): 
+def merge_sort(A): # A: input list
     """
-    Recursively divides the problem into sub-problems until they are easy to solve.
+    Recursively splits the list and merges it back in sorted order.
     """
-    # 1. Grab the current length of the list we are looking at
-    current_length = len(input_list)
+    n = len(A) # n: length of list
     
-    # 2. BASE CASE: If the list has only 0 or 1 item, it's ALREADY sorted!
-    if current_length <= 1:
-        return(input_list)
+    # 1. Base case: 0 or 1 element is already sorted
+    if n <= 1: 
+        return A
+        
+    # 2. Divide: Split the list at the midpoint
+    m = n // 2 # m: midpoint index
     
-    # 3. DIVIDE STEPS:
-    # Find the middle point and split the current list into two halves.
-    middle_point = current_length // 2
+    # 3. Recurse: Sort the Left and Right halves
+    L = merge_sort(A[:m]) # L: sorted left half
+    R = merge_sort(A[m:]) # R: sorted right half
     
-    # Ask 'merge_sort' to go and sort the left half (Recursion!)
-    left_half_sorted = merge_sort(input_list[:middle_point]) 
-    
-    # Ask 'merge_sort' to go and sort the right half (Recursion!)
-    right_half_sorted = merge_sort(input_list[middle_point:]) 
-    
-    # 4. CONQUER STEP (Merging):
-    # Now that we have two sorted halves, use our 'zip' function to join them.
-    final_sorted_list = merge_two_sorted_lists(left_half_sorted, right_half_sorted) 
-    
-    # Give back the final result
-    return(final_sorted_list)
+    # 4. Merge: Combine the two sorted halves
+    return merge(L, R) # Return combined result
 
 # --- START OF PROGRAM ---
 
-# 1. Our messy, unsorted list of numbers
-my_numbers = [38, 27, 43, 3, 9, 82, 10]
+# L1: input list
+L1 = [38, 27, 43, 3, 9, 82, 10]
 
 print("Welcome to Merge Sort!")
-print(f"Original messy list: {my_numbers}")
+print(f"Original messy list: {L1}")
 
-# Run the sorting process
-sorted_result = merge_sort(my_numbers)
+# Run process
+ans = merge_sort(L1)
 
-print(f"\nFinal sorted list:   {sorted_result}")
+print(f"\nFinal sorted list:   {ans} ✅")

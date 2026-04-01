@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: INSERTION SORT (THE 'SLOT-IN' METHOD)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(n) (When the list is ALREADY sorted!)
+- AVERAGE CASE: O(n^2) 
+- WORST CASE:   O(n^2) (When the list is in reverse order)
+--------------------------------
+- SPACE COMPLEXITY: O(1) (In-place sorting)
+
+STATUS: INDEPENDENT
+================================================================================
+
 1. WHAT IS IT?
    Insertion Sort is a very natural way to sort items. It's almost 
    exactly how most people sort their cards in a game!
@@ -35,48 +45,45 @@ CONCEPTS AND THEORY: INSERTION SORT (THE 'SLOT-IN' METHOD)
 ================================================================================
 """
 
-def insertion_sort(unsorted_list):
+def insertion_sort(L):
     """
-    Sorts a list by picking each item and sliding it left until it 
-    finds its correct position.
+    Sorts a list by picking items and sliding them into their correct slots.
+    L: input list of items
     """
-    # 1. Measure how many numbers we need to sort
-    list_length = len(unsorted_list)
+    # n: length of the list
+    n = len(L)
     
-    # 2. Base case: If the list is empty, return it as is
-    if list_length < 1:
-        return(unsorted_list)
+    # 1. Base case: Check if list needs sorting
+    if n < 1: 
+        return L
     
-    # 3. Outer Loop: Go through every single number in the list
-    for current_index in range(list_length):
+    # 2. Outer loop: i represents the current item we want to 'insert'
+    for i in range(n): # i: index of the current item to sort
         
-        # 4. 'shifting_index' tracks our current number as it slides left
-        shifting_index = current_index
+        # 3. j: pointer to track the item as it slides left
+        j = i 
         
-        # 5. Inner Loop (Slide Left): While our current number is NOT at 
-        # the very start (index 0) AND is SMALLER than the number to its left:
-        while(shifting_index > 0 and unsorted_list[shifting_index] < unsorted_list[shifting_index - 1]):
+        # 4. Inner loop: Slide item left while it's smaller than its neighbor
+        while j > 0 and L[j] < L[j - 1]: # j > 0: ensure we don't go out of bounds
             
-            # 6. Swap! Since our current number is smaller, exchange it 
-            # with the one to its left to move it one step closer to the front.
-            (unsorted_list[shifting_index], unsorted_list[shifting_index - 1]) = \
-            (unsorted_list[shifting_index - 1], unsorted_list[shifting_index])
+            # 5. Swap the current item with the one to its left
+            L[j], L[j - 1] = L[j - 1], L[j] # swap L[j] and L[j-1]
             
-            # 7. Move our tracker one step to the left to follow the number we just swapped
-            shifting_index = shifting_index - 1
+            # 6. Move our tracker j one step to the left to follow the item
+            j -= 1 # move pointer left
             
-    # Give back the final, fully sorted list!
-    return(unsorted_list)
+    # 7. Return the final sorted list
+    return L
 
 # --- START OF PROGRAM ---
 
-# 1. Our messy list of numbers
-my_numbers = [12, 11, 13, 5, 6]
+# L1: unsorted numbers
+L1 = [12, 11, 13, 5, 6]
 
 print("Welcome to Insertion Sort!")
-print(f"Original messy list: {my_numbers}")
+print(f"Original messy list: {L1}")
 
-# Run the sorting process
-sorted_result = insertion_sort(my_numbers)
+# Run process
+ans = insertion_sort(L1)
 
-print(f"\nFinal sorted list:   {sorted_result}")
+print(f"\nFinal sorted list:   {ans} ✅")

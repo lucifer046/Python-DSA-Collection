@@ -3,6 +3,15 @@
 CONCEPTS AND THEORY: DEPTH-FIRST SEARCH (THE 'TRENCH EXPLORER' METHOD)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- ADJACENCY LIST (Best/Avg/Worst): O(V + E) (Visit every vertex and every edge)
+- ADJACENCY MATRIX (Best/Avg/Worst): O(V^2) (Must scan every column for each node)
+--------------------------------
+- SPACE COMPLEXITY: O(V) (Requires space for the recursion stack or manual stack)
+
+STATUS: INDEPENDENT (Contains Iterative, Recursive, and Compact versions)
+================================================================================
+
 1. WHAT IS DEPTH-FIRST SEARCH (DFS)?
    If BFS was ripples in a pond, DFS is someone exploring a deep cave. 
    Instead of checking every neighbor at the same distance, DFS picks 
@@ -40,125 +49,106 @@ CONCEPTS AND THEORY: DEPTH-FIRST SEARCH (THE 'TRENCH EXPLORER' METHOD)
 ================================================================================
 """
 
-import queue  # We will use queue.LifoQueue for our iterative stack
+import queue # q: standard python queue module for LIFO stack
 
 # ================================================================================
 # VERSION 1: ITERATIVE DFS (USING A MANUAL STACK)
 # ================================================================================
 
-def dfs_iterative(graph_adjacency_list, start_node):
+def dfs_iter(G, s):
     """
-    Explores the graph by pushing paths onto a manual Stack.
+    Depth-First Search using a manual LIFO stack.
+    G: adjacency list, s: start node
     """
-    # 1. INITIALIZATION: Track every node as 'Not Visited'
-    visited_nodes_tracker = {}
-    for node_name in graph_adjacency_list.keys():
-        visited_nodes_tracker[node_name] = False    
+    # 1. v: visited tracker dictionary for all nodes in G
+    v = {node: False for node in G} # node: vertex identifier
     
-    # 2. CREATE THE STACK: Use the standard 'LifoQueue' (Last-In, First-Out)
-    # This acts as our 'Breadcrumb Trail' for exploration
-    path_stack = queue.LifoQueue()
+    # 2. st: Stack for exploration (Last-In, First-Out)
+    st = queue.LifoQueue() # st = stack
     
-    # 3. START: Put the first node into the stack
-    path_stack.put(start_node)
+    # 3. Start by adding the initial node to the stack
+    st.put(s) # add s to stack
     
-    # 4. THE LOOP: Keep going until we have no more breadcrumbs
-    while not path_stack.empty():
-        # Pop the VERY LAST node we added (the deepest one)
-        current_node = path_stack.get()
+    # 4. Explore until no breadcrumbs are left in the stack
+    while not st.empty():
+        # 5. curr: take the most recently added node (go deep)
+        curr = st.get() # curr = current node
         
-        # 5. CHECK: Have we visited this node before?
-        if not visited_nodes_tracker[current_node]:
-            # Mark as visited (exploring its tunnel)
-            visited_nodes_tracker[current_node] = True
-            
-            # 6. SCAN NEIGHBORS: Look at all the neighbors of the current node
-            for neighbor_node in graph_adjacency_list[current_node]:
-                # If we haven't been there yet, push it onto the stack to explore later
-                if not visited_nodes_tracker[neighbor_node]:
-                    path_stack.put(neighbor_node)
+        # 6. If we haven't visited this node yet, explore it
+        if not v[curr]:
+            v[curr] = True # mark as seen
+            # 7. Add all neighbors to the stack for future exploration
+            for nbr in G[curr]: # nbr = neighbor
+                if not v[nbr]:
+                    st.put(nbr) # push nbr onto stack
                     
-    # Return the final results
-    return visited_nodes_tracker
+    # 8. Return final visited mapping
+    return v
 
 # ================================================================================
-# VERSION 2: RECURSIVE DFS (THE ELEGANT WAY)
+# VERSION 2: RECURSIVE DFS (MOST ELEGANT)
 # ================================================================================
 
-def initialize_dfs_trackers(graph_adjacency_list):
-    """
-    A helper function to set up our 'visited' and 'parent' dictionaries.
-    'parent' helps us trace the 'family tree' of how we got there.
-    """
-    visited_nodes_tracker = {}
-    parent_node_tracker = {}
-    
-    for vertex in graph_adjacency_list.keys():
-        visited_nodes_tracker[vertex] = False
-        parent_node_tracker[vertex] = -1 # -1 means 'No parent yet'
-        
-    return visited_nodes_tracker, parent_node_tracker
+def start_dfs(G):
+    """ Helper to setup trackers for recursive DFS. """
+    v = {x: False for x in G} # v: visited mapping
+    p = {x: -1 for x in G} # p: parent mapping (-1 = none)
+    return v, p
 
-def dfs_recursive(graph_adjacency_list, visited, parent, current_node):
+def dfs_rec(G, v, p, curr):
     """
-    Explores the graph by asking the function to call itself on its neighbors.
+    Recursive DFS explorer.
+    G: graph, v: visited dict, p: parent dict, curr: current node
     """
-    # 1. Mark the current node as 'Visited' as soon as we arrive
-    visited[current_node] = True
+    # 1. Mark node as arrived
+    v[curr] = True 
     
-    # 2. SCAN NEIGHBORS: For every person (neighbor) connected to us:
-    for neighbor_node in graph_adjacency_list[current_node]:
-        # If we haven't visited them yet:
-        if not visited[neighbor_node]:
-            # 3. SET PARENT: Mark the current node as their 'Father'
-            parent[neighbor_node] = current_node
+    # 2. For each neighbor nbr:
+    for nbr in G[curr]:
+        if not v[nbr]:
+            # 3. Mark current node as parent and recurse deeper
+            p[nbr] = curr # set parent relationship
+            dfs_rec(G, v, p, nbr) # jump into neighbor node
             
-            # 4. GO DEEPER: Ask the function to go explore that neighbor! (Recursion)
-            (visited, parent) = dfs_recursive(graph_adjacency_list, visited, parent, neighbor_node)
-            
-    # Return the results back to whoever called us
-    return visited, parent
+    # 4. Return the traversal state
+    return v, p
 
 # ================================================================================
-# VERSION 3: THE MOST COMPACT & SHORTEST WAY
+# VERSION 3: THE MOST COMPACT DFS
 # ================================================================================
 
-def dfs_shortest_code(graph, start, seen=None):
+def compact_dfs(G, s, v=None):
     """
-    Extremely short, recursive DFS using a set to remember visited nodes.
+    Recursive DFS in minimal code using a set.
+    G: graph, s: current node, v: visited set
     """
-    if seen is None: 
-        seen = set() # Create a single set for the whole search
-    
-    seen.add(start) # Mark current node as visited
-    
-    # For every neighbor, go deep IF we haven't been there yet
-    for neighbor in graph[start]:
-        if neighbor not in seen:
-            dfs_shortest_code(graph, neighbor, seen)
-            
-    return seen
+    if v is None: v = set() # v: set to store visited nodes
+    v.add(s) # mark current s as seen
+    # Explore neighbors m that haven't been seen
+    for m in G[s]: # m: neighbor node
+        if m not in v: compact_dfs(G, m, v)
+    return v # return set of discovered nodes
 
 # --- START OF PROGRAM ---
 
-# 1. Define our sample graph (same as the BFS example)
-sample_graph = {0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+# G1: sample graph dictionary (0-4)
+G1 = {0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
 
-print("Welcome to the Depth-First Explorer!")
+print("Welcome to the Depth-First Explorer!\n")
 
-# --- TEST 1 ---
-print("\n--- Testing Iterative DFS ---")
-iterative_result = dfs_iterative(sample_graph, 0)
-print(f"Nodes reached: {iterative_result}")
+# Run iterative version
+print("--- Testing Iterative DFS ---")
+res1 = dfs_iter(G1, 0)
+print(f"Nodes reached: {res1} ✅\n")
 
-# --- TEST 2 ---
-print("\n--- Testing Recursive DFS ---")
-vis, par = initialize_dfs_trackers(sample_graph)
-final_visits, final_family = dfs_recursive(sample_graph, vis, par, 0)
-print(f"Nodes reached (Visited): {final_visits}")
-print(f"Path taken (Parents):    {final_family}")
+# Run recursive version
+print("--- Testing Recursive DFS ---")
+v_init, p_init = start_dfs(G1)
+v_fin, p_fin = dfs_rec(G1, v_init, p_init, 0)
+print(f"Nodes visited: {v_fin}")
+print(f"Parent Path:   {p_fin} ✅\n")
 
-# --- TEST 3 ---
-print("\n--- Testing SHORTEST DFS VERSION ---")
-all_found = dfs_shortest_code(sample_graph, 0)
-print(f"All nodes reached (Set): {sorted(all_found)}")
+# Run compact version
+print("--- Testing Compact DFS ---")
+res3 = compact_dfs(G1, 0)
+print(f"All nodes reached: {sorted(list(res3))} ✅")

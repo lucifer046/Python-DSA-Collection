@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: SELECTION SORT (SORTING BY REPEATED PICKING)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(n^2) (Always scans the entire unsorted part)
+- AVERAGE CASE: O(n^2)
+- WORST CASE:   O(n^2)
+--------------------------------
+- SPACE COMPLEXITY: O(1) (In-place sorting)
+
+STATUS: INDEPENDENT
+================================================================================
+
 1. WHAT IS IT?
    Selection Sort is a simple way to organize a messy list of numbers 
    from smallest to largest. 
@@ -36,49 +46,48 @@ CONCEPTS AND THEORY: SELECTION SORT (SORTING BY REPEATED PICKING)
 ================================================================================
 """
 
-def selection_sort(unsorted_list):
+def selection_sort(L):
     """
-    Sorts a list by repeatedly picking the smallest item and putting it in front.
+    Sorts a list by picking the smallest item and putting it at the front.
+    L: input list of numbers
     """
-    # 1. Measure the length of the list so we know when to stop
-    list_length = len(unsorted_list)
+    # n: length of the list
+    n = len(L)
     
-    # 2. Base case: If the list is empty, there is nothing to sort!
-    if list_length < 1:
-        return(unsorted_list)
+    # 1. Base case: If list is empty, nothing to sort
+    if n < 1: 
+        return L
     
-    # 3. Outer Loop: This marks the 'Starting Gate' for our search.
-    # Everything to the left of this index is ALREADY sorted.
-    for current_start_index in range(list_length):
+    # 2. Outer loop: i represents the start of the current 'unsorted section'
+    for i in range(n): # i: current sorted boundary index
         
-        # 4. Assume the number at the 'Starting Gate' is the smallest for now
-        smallest_index_found = current_start_index
+        # 3. Assume the element at the current boundary is the minimum
+        m = i # m: index of the minimum element found so far
         
-        # 5. Inner Loop: Start searching from the next position all the way to the end
-        for search_index in range(current_start_index + 1, list_length):
+        # 4. Inner loop: j scans the remaining unsorted part of the list
+        for j in range(i + 1, n): # j: search index
             
-            # 6. Check: Is the number at our 'search_index' smaller than our current smallest?
-            if unsorted_list[search_index] < unsorted_list[smallest_index_found]:
-                # If yes, update our tracker to point to this new smaller number
-                smallest_index_found = search_index
+            # 5. If we find a value smaller than our current minimum:
+            if L[j] < L[m]:
+                # 6. Update m to point to this new smallest value
+                m = j # m tracks the smallest item's index
         
-        # 7. Once we finish scanning the whole unsorted part, we have the TRULY smallest.
-        # Now, swap it with the number at our 'Starting Gate' (current_start_index).
-        (unsorted_list[current_start_index], unsorted_list[smallest_index_found]) = \
-        (unsorted_list[smallest_index_found], unsorted_list[current_start_index])
+        # 7. Swap the smallest value found with the element at position i
+        # L[i] is now in its correct sorted position!
+        L[i], L[m] = L[m], L[i] # In-place swap
         
-    # Give back the final, fully sorted list!
-    return(unsorted_list)
+    # 8. Return the fully sorted list L
+    return L
 
 # --- START OF PROGRAM ---
 
-# 1. Our messy, unsorted list of numbers
-my_numbers = [64, 25, 12, 22, 11]
+# L1: messy list for sorting
+L1 = [64, 25, 12, 22, 11]
 
 print("Welcome to Selection Sort!")
-print(f"Original messy list: {my_numbers}")
+print(f"Original messy list: {L1}")
 
-# Run the sorting process
-sorted_result = selection_sort(my_numbers)
+# Run sorting process
+ans = selection_sort(L1)
 
-print(f"\nFinal sorted list:   {sorted_result}")
+print(f"\nFinal sorted list:   {ans} ✅")

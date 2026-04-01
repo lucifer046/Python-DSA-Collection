@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: KRUSKAL'S ALGORITHM (THE 'DISJOINT-SET' TREE BUILDER)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(E log E) (Sorting all edges takes the most time)
+- AVERAGE CASE: O(E log E) or O(E log V)
+- WORST CASE:   O(E log E)
+--------------------------------
+- SPACE COMPLEXITY: O(V + E) (To store the graph edges and the parent array)
+
+STATUS: INDEPENDENT (Contains both a full and a compact implementation)
+================================================================================
+
 1. WHAT IS KRUSKAL'S ALGORITHM?
    Like Prim's, Kruskal's is designed to find the **Minimum Spanning Tree (MST)**. 
    Connecting every node together with the minimum total budget. 
@@ -38,130 +48,107 @@ CONCEPTS AND THEORY: KRUSKAL'S ALGORITHM (THE 'DISJOINT-SET' TREE BUILDER)
 ================================================================================
 """
 
-class IslandConnector:
+class DSU:
+    """ 
+    Disjoint Set Union (Union-Find) to detect cycles and merge groups. 
+    n: number of elements (nodes)
     """
-    A simple Union-Find (Disjoint Set) class to manage our islands.
-    """
-    def __init__(self, node_count):
-        # Every node starts as its own parent (its own island)
-        self.island_parent = list(range(node_count))
-        # 'Rank' helps us keep our tree balanced for speed
-        self.island_rank = [0] * node_count
-
-    # The 'Find' function: Tells us which island a node belongs to
-    def find_island_id(self, node_id):
-        # If the node is not its own parent, it belongs to someone else's island
-        if self.island_parent[node_id] != node_id:
-            # We recursively find the 'Chief' of the island
-            # OPTIMIZATION: We update the parent to the Chief directly ('Path Compression')
-            self.island_parent[node_id] = self.find_island_id(self.island_parent[node_id])
-        return self.island_parent[node_id]
-
-    # The 'Union' function: Connects two islands together
-    def merge_islands(self, node_a, node_b):
-        # 1. Find the Chief of each island
-        root_a = self.find_island_id(node_a)
-        root_b = self.find_island_id(node_b)
+    def __init__(self, n):
+        # p: parent list, r: rank list for balancing
+        self.p = list(range(n)) # each node is its own parent initially
+        self.r = [0] * n        # rank helps keep tree flat
         
-        # 2. If they are already on the same island, DO NOTHING
-        if root_a == root_b:
-            return False
-            
-        # 3. Otherwise, connect the smaller island under the larger one (By Rank)
-        if self.island_rank[root_a] < self.island_rank[root_b]:
-            self.island_parent[root_a] = root_b
-        elif self.island_rank[root_a] > self.island_rank[root_b]:
-            self.island_parent[root_b] = root_a
+    def find(self, i):
+        """ Returns the 'Chief' (root) of node i's group. """
+        # i: node index
+        if self.p[i] == i: return i
+        # path compression optimization
+        self.p[i] = self.find(self.p[i])
+        return self.p[i]
+
+    def union(self, i, j):
+        """ Merges groups containing i and j. Returns True if merged. """
+        # 1. find roots of both elements
+        ri, rj = self.find(i), self.find(j) # ri: root of i, rj: root of j
+        
+        # 2. if already in the same group, cannot merge
+        if ri == rj: return False
+        
+        # 3. union by rank strategy
+        if self.r[ri] < self.r[rj]:
+            self.p[ri] = rj
+        elif self.r[ri] > self.r[rj]:
+            self.p[rj] = ri
         else:
-            # If they are same size, pick one and increase its rank
-            self.island_parent[root_b] = root_a
-            self.island_rank[root_a] += 1
+            self.p[rj] = ri
+            self.r[ri] += 1
         return True
 
-def find_minimum_spanning_tree_kruskal(edge_list, total_vertices):
+def kruskal(E, n):
     """
-    Finds the cheapest total budget to connect all nodes together using sorted edges.
+    Kruskal's MST algorithm.
+    E: list of (weight, source, dest) tuples, n: vertices count
     """
-    # 1. INITIALIZATION: Create our Island Connector (Union-Find)
-    connector = IslandConnector(total_vertices)
+    # 1. Sort all edges by weight (cheapest first)
+    # e: edge iterator (w, u, v)
+    E.sort() # w: weight, u: source, v: destination
     
-    # 2. SORT EDGES: Sort from Cheapest to Most Expensive (ascending)
-    # The 'edge' tuple is (weight, source, destination)
-    sorted_edges = sorted(edge_list, key=lambda current_edge: current_edge[0])
-
-    mst_selected_edges = []
-    total_budget_needed = 0
-
-    # 3. THE CONNECTING PROCESS:
-    for weight, source, destination in sorted_edges:
-        # Ask: "Would adding this bridge connect two DIFFERENT islands?"
-        if connector.merge_islands(source, destination):
-            # YES! Add the cost and remember the edge
-            mst_selected_edges.append((source, destination, weight))
-            total_budget_needed += weight
+    # 2. uf: Union-Find manager
+    uf = DSU(n) # uf = union-find instance
+    
+    # 3. Initialize collectors for MST
+    mst = [] # mst = minimum spanning tree edges
+    tc = 0   # tc = total cost (budget)
+    
+    # 4. Greedy edge selection
+    for w, u, v in E:
+        # 5. Only add if it doesn't form a cycle
+        if uf.union(u, v):
+            mst.append((u, v, w)) # save edge
+            tc += w # add cost
+            # exit early if we've found n-1 edges (MST complete)
+            if len(mst) == n - 1: break
             
-            # OPTIMIZATION: Once we have n-1 edges, we are DONE!
-            if len(mst_selected_edges) == total_vertices - 1:
-                break
-
-    return total_budget_needed, mst_selected_edges
+    # return total cost and the selected edges
+    return tc, mst
 
 # ================================================================================
-# VERSION 2: THE MOST COMPACT & SHORTEST WAY
+# COMPACT KRUSKAL
 # ================================================================================
 
-def kruskal_shortest_code(n, edges):
-    """
-    A very short version using simple parent links for union-find.
-    """
-    # 1. Sort edges (w, u, v)
-    edges.sort()
-    parent = list(range(n))
-    
-    # Helper to find the chief of an island
-    def find_chief(i):
-        if parent[i] == i: return i
-        parent[i] = find_chief(parent[i])
-        return parent[i]
-        
-    mst_cost, count = 0, 0
-    # 2. Connect if not on same island
-    for w, u, v in edges:
-        root_u, root_v = find_chief(u), find_chief(v)
-        if root_u != root_v:
-            parent[root_u] = root_v
-            mst_cost += w
-            count += 1
+def compact_kruskal(n, E):
+    """ n: vertices, E: (w,u,v) list. Minimalist MST cost. """
+    E.sort(); p = list(range(n)) # p: parent
+    def find(i):
+        if p[i] == i: return i
+        p[i] = find(p[i]); return p[i]
+    cost, count = 0, 0
+    for w, u, v in E:
+        ru, rv = find(u), find(v) # ru: root of u
+        if ru != rv:
+            p[ru] = rv; cost += w; count += 1
             if count == n - 1: break
-            
-    return mst_cost
+    return cost
 
 # --- START OF PROGRAM ---
 
-# 1. Our graph represented as a LIST of EDGES (weight, source, destination)
-# Node labels: 0, 1, 2, 3, 4
-sample_edges_list = [
-    (2, 0, 1),      # Bridge from 0 to 1 costs 2
-    (3, 1, 2),      # Bridge from 1 to 2 costs 3
-    (6, 0, 3),      # Bridge from 0 to 3 costs 6
-    (8, 1, 3),      # Bridge from 1 to 3 costs 8
-    (5, 1, 4),      # Bridge from 1 to 4 costs 5
-    (7, 2, 3),      # Bridge from 2 to 3 costs 7
-    (1, 3, 4)       # Bridge from 3 to 4 costs 1
+# E_list: list of possible bridges (weight, u, v)
+E_list = [
+    (2, 0, 1), (3, 1, 2), (6, 0, 3), 
+    (8, 1, 3), (5, 1, 4), (7, 2, 3), (1, 3, 4)
 ]
 
-print("Welcome to Kruskal's Minimum Spanning Tree Builder!")
+print("Kruskal's MST Builder Demo!\n")
 
-# 2. Run the calculation
-total_nodes_count = 5
-final_cost, selected_roads = find_minimum_spanning_tree_kruskal(sample_edges_list, total_nodes_count)
+# Run calculation
+v_count = 5
+total_c, mst_edges = kruskal(E_list, v_count)
 
-# 3. Print the results
-print(f"\nTotal budget needed to connect all islands: ${final_cost}")
-print("Selected Bridges (Source -- Cost --> Destination):")
-for src, dst, cost in selected_roads:
-    print(f"  Island {src} -- ${cost} --> Island {dst}")
+print(f"MST Total Construction Cost: ${total_c}")
+print("Selected Connections:")
+for u, v, w in mst_edges:
+    print(f"  {u} <--> {v} (Cost: {w})")
 
-# --- TEST SHORTEST VERSION ---
-print("\nShortest implementation result (Total Budget):")
-print(f"${kruskal_shortest_code(total_nodes_count, sample_edges_list)}")
+# Run compact version
+c_cost = compact_kruskal(v_count, E_list)
+print(f"\nCompact Result Check (Total Cost): ${c_cost} ✅")

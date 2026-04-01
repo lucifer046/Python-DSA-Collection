@@ -3,6 +3,18 @@
 CONCEPTS AND THEORY: LINKED LIST (THE 'CHAIN OF CLUES')
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- ACCESS (by Index):    O(n) (Must walk through each clue from the head)
+- SEARCH (by Value):    O(n) 
+- INSERT (at Head):     O(1) (Instant addition at the start)
+- INSERT (at Tail):     O(n) (Must walk to the very end to append)
+- DELETE (at Head):     O(1) (Instant removal)
+--------------------------------
+- SPACE COMPLEXITY: O(n) (One node is created for every single item)
+
+STATUS: INDEPENDENT (Self-contained Node class with helper methods)
+================================================================================
+
 1. WHAT IS A LINKED LIST?
    A Linked List is a series of data points called **NODES**. 
    Unlike a standard list (array), where all items sit together in a row, 
@@ -33,155 +45,125 @@ CONCEPTS AND THEORY: LINKED LIST (THE 'CHAIN OF CLUES')
 ================================================================================
 """
 
-class LinkedListNode:
+class Node:
     """
-    A single link in our chain. Each Node knows its value and the next person in line.
+    A single link in the chain. knows its value and the next person in line.
     """
-    def __init__(self, initial_value=None):
-        # The actual data we want to keep
-        self.value = initial_value
-        # The link to the next Node (starts at None because it's the last one for now)
-        self.next = None
+    def __init__(self, v=None):
+        # v: value stored in node, n: next node pointer
+        self.v = v # v = node value
+        self.n = None # n = next node link
         return
 
-    # A simple way to check: "Is this node empty?"
-    def isempty(self):
-        # If the value is None, nobody lives in this node
-        return self.value is None
+    def is_empty(self):
+        """ Checks if the node is empty. """
+        return self.v is None # returns True if value is None
 
-    # --- RECURSIVE APPEND (The 'Pass the Parcel' Method) ---
-    def append_recursive(self, new_value):
-        """
-        Asks the current node to add a new value. If it's busy, it passes the task to the next node.
-        """
-        # 1. If this exact node is empty, just take the value
-        if self.isempty(): 
-            self.value = new_value
+    def add(self, x):
+        """ Appends a new value x to the end of the chain (Recursive). """
+        # 1. If this node is empty, take the value
+        if self.is_empty(): 
+            self.v = x
             
-        # 2. If this is the LAST node in the chain (no one follows me):
-        elif self.next is None:
-            # Create a new Node and hook it up as my next person
-            self.next = LinkedListNode(new_value)
+        # 2. If this is the last node, create a new link
+        elif self.n is None:
+            self.n = Node(x)
             
-        # 3. Otherwise, pass the request to the next person in line
+        # 3. Otherwise, pass the value to the next link
         else:
-            self.next.append_recursive(new_value) 
+            self.n.add(x) # pass the value down
         return
 
-    # --- ITERATIVE APPEND (The 'Walking' Method) ---
-    def append_iterative(self, new_value):
-        """
-        Starts at the beginning and walks the entire chain to find the end.
-        """
-        # 1. If the starting node is empty, take the value and finish
-        if self.isempty():
-            self.value = new_value
+    def put(self, x):
+        """ Appends a new value x to the end of the chain (Iterative). """
+        # 1. If starting node is empty, take x
+        if self.is_empty():
+            self.v = x
             return
             
-        # 2. Start at 'self' and use a 'walker' to go through the list
-        current_walker = self
+        # 2. w: walker that traverses the list
+        w = self # w = current node walker
         
-        # 3. While there is a next person in line, keep moving forward
-        while current_walker.next is not None:
-            current_walker = current_walker.next
+        # 3. Walk until we reach the end of the chain
+        while w.n is not None:
+            w = w.n # move walker to next node
             
-        # 4. Once we reach the last person, hook the new Node to them
-        current_walker.next = LinkedListNode(new_value) 
+        # 4. Create and attach the new node at the end
+        w.n = Node(x) 
         return
 
-    # --- INSERT AT FRONT (The 'Swap and Connect' Method) ---
-    def insert_at_front(self, new_value):
-        """
-        Inserts a new value into the current spot by shifting the old value forward.
-        """
-        # 1. If the node is currently empty, just take the value
-        if self.isempty():
-            self.value = new_value
+    def push(self, x):
+        """ Inserts a new value x at the current front position. """
+        # 1. If empty, simply assign x
+        if self.is_empty():
+            self.v = x
             return
             
-        # 2. Create a 'copy' node to hold our current information
-        newly_created_node = LinkedListNode(new_value)
+        # 2. Create a new node to hold the incoming value
+        nx = Node(x) # nx = new node
         
-        # 3. Swap Trick: 
-        # Exchange the value in 'self' with the value in 'newly_created_node'
-        (self.value, newly_created_node.value) = (newly_created_node.value, self.value)
-        
-        # 4. Change Links: 
-        # Hook the 'newly_created_node' as my next child, and have it point 
-        # to my *original* next child.
-        (self.next, newly_created_node.next) = (newly_created_node, self.next)
+        # 3. Swap current value with new node's value and re-link
+        self.v, nx.v = nx.v, self.v # exchange values
+        self.n, nx.n = nx, self.n # re-link new node as next
         return
 
-    # --- RECURSIVE DELETE (The 'Search and Cut' Method) ---
-    def delete_recursive(self, target_value):
-        """
-        Finds a specific value and removes its node from the chain.
-        """
-        # 1. If the list is completely empty, there's nothing to delete
-        if self.isempty():
+    def drop(self, t):
+        """ Removes the first occurrence of target value 't'. """
+        # 1. Check if list has any content
+        if self.is_empty(): return
+            
+        # 2. If this node matches the target t
+        if self.v == t:
+            self.v = None # clear value
+            
+            # 3. If there's a next node, copy its data and skip it
+            if self.n is not None:
+                self.v = self.n.v # take next node's value
+                self.n = self.n.n # skip next node
             return
             
-        # 2. If WE are the one to be deleted:
-        if self.value == target_value:
-            # Clear our value
-            self.value = None
-            # If we have a child, we 'copy' their life into ours and skip them!
-            if self.next is not None:
-                self.value = self.next.value
-                self.next = self.next.next
-            return
-            
-        # 3. If we aren't the target, check our neighbor (the next node)
+        # 4. Search recursively in the next node
         else:
-            if self.next is not None:
-                # Ask the neighbor to try deleting the value
-                self.next.delete_recursive(target_value)
+            if self.n is not None:
+                self.n.drop(t) # ask next node to drop t
                 
-                # Cleanup Step: If the neighbor deleted itself and became empty:
-                if self.next.value is None:
-                    # Remove the link to them entirely
-                    self.next = None
+                # 5. Cleanup: If next node cleared itself, remove the link
+                if self.n.v is None:
+                    self.n = None
         return
 
-    # --- DISPLAY (The 'Show the Whole Chain' Method) ---
-    def display_list(self):
-        """
-        Prints the entire chain from the current spot to the end.
-        """
-        if self.isempty():
-            print('None')
+    def show(self):
+        """ Prints the entire list structure. """
+        # 1. If empty, print None
+        if self.is_empty():
+            print('Empty Chain 🚫')
         else:
-            current_walker = self
-            # Keep walking and printing until we run out of clues
-            while current_walker is not None:
-                print(f"[{current_walker.value}]", end=" -> ")
-                current_walker = current_walker.next
-            print("None") # Marks the end of the chain
+            w = self # w: list walker
+            # 2. Traverse and print each value
+            while w is not None:
+                print(f"({w.v})", end=" 🔗 ") # print node value
+                w = w.n
+            print("END") # end of chain indicator
 
 # --- START OF PROGRAM ---
 
-print("Welcome to the Linked List Chain!")
+# H: the base 'head' node of our chain list
+H = Node(10)
 
-# 1. Create the 'Head' (the first clue of our treasure hunt)
-head = LinkedListNode(10)
+print("Welcome to the Linked List Chain Demo!\n")
 
-# 2. Let's add more clues using different methods
-print("\n--- Adding nodes 20 and 30 (Recursively) ---")
-head.append_recursive(20)
-head.append_recursive(30)
+# Adding values using different methods
+H.add(20); H.add(30) # recursive add
+H.put(40); H.put(50) # iterative add
 
-print("--- Adding nodes 40 and 50 (Iteratively) ---")
-head.append_iterative(40)
-head.append_iterative(50)
+# Display chain
+print("Chain status after adding values:")
+H.show()
 
-# 3. Let's see our hunt so far
-print("\n--- Current Chain ---")
-head.display_list()
+# Deleting a value
+print("\nRemoving value (30) from the chain...")
+H.drop(30)
 
-# 4. Let's delete a clue (The number 30)
-print("\n--- Deleting node 30 ---")
-head.delete_recursive(30)
-
-# 5. Final Result
-print("--- Final Chain ---")
-head.display_list()
+# Final result
+print("\nFinal Result:")
+H.show()

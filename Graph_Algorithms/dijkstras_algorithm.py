@@ -3,6 +3,16 @@
 CONCEPTS AND THEORY: DIJKSTRA'S ALGORITHM (THE 'SMARTEST PATH' FINDER)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- BEST CASE:    O(E + V log V) (Matches the average case efficiency)
+- AVERAGE CASE: O(E log V) (Using a Priority Queue/Min-Heap)
+- WORST CASE:   O(V^2) (If implemented using a simple list as a queue)
+--------------------------------
+- SPACE COMPLEXITY: O(V + E) (Requires space for graph and distance tracker)
+
+STATUS: INDEPENDENT (Contains both a full and a compact implementation)
+================================================================================
+
 1. WHAT IS IT?
    Dijkstra's algorithm is the gold standard for finding the SHORTEST 
    distance between two points in a graph where every road (edge) has 
@@ -37,139 +47,100 @@ CONCEPTS AND THEORY: DIJKSTRA'S ALGORITHM (THE 'SMARTEST PATH' FINDER)
 ================================================================================
 """
 
-from heapq import heappop, heappush # Special tools for our Priority Queue (Min-Heap)
+from heapq import heappop, heappush # priority queue tools: min-heap
 
-def find_shortest_path_dijkstra(adjacency_list, source_node, destination_node):
+def dijkstra(G, s, t):
     """
-    Finds the absolute cheapest way to get from source to destination.
+    Finds shortest path from s to t in graph G.
+    G: adjacency list [ (nbr, weight), ... ], s: start, t: target
     """
-    # 1. INITIALIZATION: Count nodes and set initial 'best' distances to Infinity
-    total_nodes = len(adjacency_list)
+    # 1. n: total number of vertices in G
+    n = len(G) # n = vertices count
     
-    # 'parent_map' stores which node led us to the current one (for rebuilding the path)
-    parent_map = {}
-
-    # 'dist_tracker' stores the best cost to reach each node found so far
-    # Initially, we know nothing, so we set it to math Infinity
-    dist_tracker = [float('inf')] * total_nodes
+    # 2. p: parent map to trace the final route sequence
+    p = {} # p[child] = parent
     
-    # Distance to the starting point is obviously 0!
-    dist_tracker[source_node] = 0
-
-    # 2. CREATE THE MIN-HEAP: Stores (cost_to_reach, node_id)
-    # The heap always keeps the SMALLEST cost at the top (top of the pyramid)
-    min_priority_queue = [(0, source_node)]
-
-    # 3. THE WORKER LOOP: 
-    while min_priority_queue:
-        # Grab the node that is currently the CHEAPEST to reach
-        current_cost, current_node = heappop(min_priority_queue)
-
-        # OPTIMIZATION: If we reached our actual target, we can stop early!
-        if current_node == destination_node:
-            return current_cost, parent_map
-
-        # 4. EXPLORE NEIGHBORS (The 'Relaxation' part):
-        # Look at every neighbor we can reach from this current_node
-        for neighbor_node, edge_weight in adjacency_list[current_node]:
-            # Calculate: "Is reaching the neighbor THROUGH me cheaper than their current best?"
-            newly_proposed_cost = current_cost + edge_weight
-            
-            if dist_tracker[neighbor_node] > newly_proposed_cost:
-                # YES! Update their best cost
-                dist_tracker[neighbor_node] = newly_proposed_cost
-                # Remember that *we* were the one who led them to this cheaper path
-                parent_map[neighbor_node] = current_node
-                # Add this improved path to the heap so we can explore it later
-                heappush(min_priority_queue, (newly_proposed_cost, neighbor_node))
-                
-    return float('inf'), parent_map
-
-def rebuild_path_sequence(parent_map, target_node):
-    """
-    Helper function: Walks backwards from the target using parent links 
-    to show the full path.
-    """
-    final_path = []
-    # Loop backwards as long as we have a parent link
-    while target_node in parent_map:
-        final_path.append(target_node)
-        target_node = parent_map[target_node]
-
-    # Add the starting node (which has no parent)
-    final_path.append(target_node)
+    # 3. d: tracker for current best distance to each node
+    # set to Infinity initially as we don't know the routes yet
+    d = [float('inf')] * n # d = distances list
+    d[s] = 0 # distance to start point is 0
     
-    # Reverse it because we walked BACKWARDS!
-    return final_path[::-1]
-
-def find_path_via_middle_point(adjacency_list, start, end, via_point):
-    """
-    A special version: Finds the best path from Start to End that MUST pass through Via.
-    Example: Going home to work, but stopping at the Bakery on the way.
-    """
-    # 1. Find shortest path to the 'Via' point
-    cost_1, parents_1 = find_shortest_path_dijkstra(adjacency_list, start, via_point)
-    # 2. Find shortest path from 'Via' to the final 'End'
-    cost_2, parents_2 = find_shortest_path_dijkstra(adjacency_list, via_point, end)
-
-    # 3. Combine the paths carefully
-    part_1 = rebuild_path_sequence(parents_1, via_point)
-    part_2 = rebuild_path_sequence(parents_2, end)[1:] # Skip the first node to avoid duplicate 'via_point'
+    # 4. pq: Priority Queue (Heap) stores tuples of (distance, node)
+    pq = [(0, s)] # pq = min-heap priority queue
     
-    return (cost_1 + cost_2, part_1 + part_2)
-
-# ================================================================================
-# VERSION 2: THE MOST COMPACT & SHORTEST WAY
-# ================================================================================
-
-def dijkstra_shortest_code(graph, source):
-    """
-    A very short version that gives the distances to ALL nodes in the graph.
-    """
-    import heapq
-    dist = {n: float('inf') for n in range(len(graph))}
-    dist[source], pq = 0, [(0, source)]
-    
+    # 5. Greedy Search Loop
     while pq:
-        d, u = heapq.heappop(pq)
-        if d > dist[u]: continue # Already found a better way
-        for v, w in graph[u]:
-            if dist[u] + w < dist[v]:
-                dist[v] = dist[u] + w
-                heapq.heappush(pq, (dist[v], v))
-    return dist
+        # popped node 'u' is the closest unvisited node
+        # d_curr: current distance from s to u
+        d_curr, u = heappop(pq)
+        
+        # early exit: if we reached the target t, we can stop
+        if u == t: return d_curr, p
+        
+        # 6. Relaxation loop for neighbors 'v' of node 'u'
+        for v, w in G[u]: # v: neighbor node index, w: edge weight
+            # d_new: potential shorter distance to v via u
+            d_new = d_curr + w 
+            
+            # if d_new is better than previously known best for v
+            if d[v] > d_new:
+                d[v] = d_new # update best distance
+                p[v] = u # mark u as the best 'parent' for v
+                heappush(pq, (d_new, v)) # add to queue for exploration
+                
+    # return infinity if t is unreachable
+    return float('inf'), p
+
+def get_path(p, t):
+    """ Rebuilds the path sequence from start to target 't'. """
+    # p: parent mapping from dijkstra function
+    pth = [] # pth = path list
+    curr = t # curr = current node being traced back
+    
+    while curr in p:
+        pth.append(curr)
+        curr = p[curr] # step back to parent
+        
+    pth.append(curr) # add the start node
+    return pth[::-1] # reverse list to get Start -> End order
+
+# ================================================================================
+# COMPACT DIJKSTRA (DISTANCES TO ALL NODES)
+# ================================================================================
+
+def compact_dijkstra(G, s):
+    """ G: graph, s: source node. Returns all shortest distances. """
+    d = {n: float('inf') for n in range(len(G))} # d: distance mapping
+    d[s], pq = 0, [(0, s)] # pq: priority queue
+    while pq:
+        dist_u, u = heappop(pq)
+        if dist_u > d[u]: continue # skip stale entries
+        for v, w in G[u]: # v: nbr, w: weight
+            if d[u] + w < d[v]:
+                d[v] = d[u] + w; heappush(pq, (d[v], v))
+    return d # mapping of node indices to shortest distance
 
 # --- START OF PROGRAM ---
 
-# 1. Create a sample graph (Adjacency List)
-# Each list contains (neighbor, weight)
-# Node 0 connects to: 1 (cost 4), 2 (cost 2)
-sample_graph = [
+# G: sample adjacency list graph
+# Index -> list of (neighbor_id, cost)
+G = [
     [(1, 4), (2, 2)],           # Node 0
     [(0, 4), (2, 1), (3, 5)],   # Node 1
-    [(0, 2), (1, 1), (3, 8), (4, 10)],  # Node 2
+    [(0, 2), (1, 1), (3, 8), (4, 10)], # Node 2
     [(1, 5), (2, 8), (4, 2)],   # Node 3
     [(2, 10), (3, 2)]           # Node 4
 ]
 
-print("Welcome to Dijkstra's Path Finder!")
+print("Dijkstra's Shortest Path Simulator!\n")
 
-# --- TEST 1 ---
-start, target = 0, 4
-total_cost, p_map = find_shortest_path_dijkstra(sample_graph, start, target)
-full_path = rebuild_path_sequence(p_map, target)
+start_pt, end_pt = 0, 4
+cost, parents = dijkstra(G, start_pt, end_pt)
+path_res = get_path(parents, end_pt)
 
-print(f"\n--- Best Path from {start} to {target} ---")
-print(f"Total Cost: {total_cost}")
-print(f"Path: {' -> '.join(map(str, full_path))}")
+print(f"Shortest path from {start_pt} to {end_pt}:")
+print(f"Route: {' -> '.join(map(str, path_res))}")
+print(f"Total Cost: {cost} 🏁\n")
 
-# --- TEST 2 ---
-via = 1
-via_cost, via_path = find_path_via_middle_point(sample_graph, start, target, via)
-print(f"\n--- Path from {start} to {target} (VIA Node {via}) ---")
-print(f"Total Cost: {via_cost}")
-print(f"Path: {' -> '.join(map(str, via_path))}")
-
-# --- TEST 3 ---
-print("\n--- All Distances (Shortest Version) ---")
-print(dijkstra_shortest_code(sample_graph, 0))
+print("All-Nodes Distances (Compact Version):")
+print(compact_dijkstra(G, 0))

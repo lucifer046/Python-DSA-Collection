@@ -3,6 +3,18 @@
 CONCEPTS AND THEORY: TWO-CLASS LINKED LIST (THE MANAGER & THE WORKER)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- ACCESS (by Index):    O(n) (Manager must walk the entire train starting from the head)
+- SEARCH (by Value):    O(n) 
+- INSERT (at Head):     O(1) (Manager simply swaps the 'Engine' head pointer)
+- INSERT (at Tail):     O(n) (Manager must travel to the very end of the train)
+- DELETE (at Head):     O(1) (Instant engine unhooking)
+--------------------------------
+- SPACE COMPLEXITY: O(n) (One 'CarriageNode' object is created for every item)
+
+STATUS: LINKED (The 'TrainManager' class relies on the 'CarriageNode' class)
+================================================================================
+
 1. WHAT IS THE DIFFERENCE?
    In the previous 'Single-Class' version, every Node thought it was 
    the entire list. In this 'Two-Class' version, we have a clear 
@@ -30,137 +42,96 @@ CONCEPTS AND THEORY: TWO-CLASS LINKED LIST (THE MANAGER & THE WORKER)
 ================================================================================
 """
 
-# --- CLASS 1: THE WORKER (THE CARRIAGE) ---
-class CarriageNode:
-    """
-    A simple container that holds data and a link to the next carriage.
-    """
-    def __init__(self, item_value):
-        # The 'self.data' stores our information
-        self.data = item_value
-        # The 'self.next' starts as None until we hook something to it
-        self.next = None
+# --- CLASS 1: THE WORKER (CARRIAGE) ---
+class Node:
+    """ Holds a value and a link to the next node. """
+    def __init__(self, x):
+        # x: data item value, n: next node link
+        self.v = x # v = value
+        self.n = None # n = next reference
 
-# --- CLASS 2: THE MANAGER (THE STATION MANAGER) ---
-class TrainManager:
-    """
-    The 'Boss' class that manages the entire train (Linked List).
-    It only needs to know where the very first carriage (the Head) is.
-    """
+# --- CLASS 2: THE MANAGER (LIST MANAGER) ---
+class LinkedList:
+    """ Manages the collection of Nodes as a single List. """
     def __init__(self):
-        # When we first start, the train is empty, so there is no Head.
-        self.head = None
+        # h: pointer to the very first node (Head)
+        self.h = None # h = head of the list
         
-    # A simple check: "Is there any train Engine parked here currently?"
-    def is_train_empty(self):
-        # If head is None, the train doesn't exist yet!
-        return self.head is None
+    def is_empty(self):
+        """ Checks if the list has any nodes. """
+        return self.h is None # returns True if head is None
         
-    # --- ADD TO THE END ---
-    def add_carriage_to_end(self, item_value):
-        """
-        Takes a value, creates a new carriage, and hooks it to the end of the train.
-        """
-        # 1. If the train is empty, this new carriage becomes the 'Head' (Engine)
-        if self.is_train_empty():
-            self.head = CarriageNode(item_value)
-        else:
-            # 2. Otherwise, start at the Head and 'walk' to the end
-            current_node = self.head
-            # While the current carriage has something hooked behind it...
-            while current_node.next is not None:
-                # ...move one step forward
-                current_node = current_node.next
-            # 3. Once we find the very last carriage, hook our new one there
-            current_node.next = CarriageNode(item_value)
+    def add(self, x):
+        """ Appends a new node with value x to the end of the list. """
+        # 1. If list is empty, new node becomes the Head
+        if self.is_empty():
+            self.h = Node(x)
+            return
             
-    # --- DELETE FROM THE TRAIN ---
-    def remove_carriage(self, target_value):
-        """
-        Searches for a carriage with target_value and unhooks it from the train.
-        """
-        # 1. Error check: If there is no train, we can't delete anything
-        if self.is_train_empty():
-            return 'Sorry, the train is empty!'
+        # 2. Walk to the end of the chain
+        w = self.h # w = walker node
+        while w.n is not None:
+            w = w.n # w moves forward
             
-        # 2. Special Case: Is the target in the very first carriage (The Head)?
-        if self.head.next is None:
-            # If there is ONLY one carriage and it's our target:
-            if self.head.data == target_value: 
-                # Just remove the head!
-                self.head = None
-            else:
-                return 'Target not found in the single carriage.'
-        
-        # 3. Scanning Move: We need two walkers (one ahead of the other)
-        # current_node traces where we are
-        # previous_node stays one step behind so we can 're-hook' the chain
-        current_node = self.head
-        previous_node = self.head
-        
-        # Keep walking as long as there's a next person AND we haven't found the target
-        while current_node.next is not None and current_node.data != target_value: 
-            # Move the previous_node to where current_node is
-            previous_node = current_node
-            # Move current_node one step forward
-            current_node = current_node.next
+        # 3. Hook the new node to the last node's next pointer
+        w.n = Node(x)
             
-        # 4. Now that the loop finished, let's check what we found
-        
-        # Case A: The target was in the very first carriage
-        if current_node.data == target_value and current_node == self.head: 
-            # Simply make the second carriage the new Head
-            self.head = current_node.next
+    def drop(self, t):
+        """ Removes the first node containing target value 't'. """
+        # 1. Error check: Cannot drop from empty list
+        if self.is_empty(): return
             
-        # Case B: The target was somewhere else in the train
-        elif current_node.data == target_value: 
-            # Bypass the 'current_node' by hooking 'previous' directly to 'next'
-            # (This 'cuts' the current_node out of the chain!)
-            previous_node.next = current_node.next
+        # 2. Special case: If the Head itself is the target
+        if self.h.v == t:
+            self.h = self.h.n # update Head to the next node
+            return
         
-        # Case C: We walked the whole train and didn't find it
-        else:
-            return 'Target value does not exist on this train.'
+        # 3. General search: Stay one step behind to re-link easily
+        p = self.h # p = previous node walker
+        c = self.h.n # c = current node walker
+        
+        # 4. Loop until current node matches target or end is reached
+        while c is not None:
+            if c.v == t:
+                # 5. Bypass current node 'c' by linking 'p' directly to c.n
+                p.n = c.n # 'cuts' node c from the chain
+                return
+            # 6. Move both walkers forward
+            p = c
+            c = c.n
             
-    # --- SHOW THE TRAIN ---
-    def show_all_carriages(self):
-        """
-        Prints the contents of every carriage from start to end.
-        """
-        if self.is_train_empty():
-            print('None')
-        else:
-            # Start at the Head walker
-            current_node = self.head
-            while current_node is not None:
-                # Print the data in the current carriage
-                print(f"[{current_node.data}]", end=" == ")
-                # Move to the next one
-                current_node = current_node.next
-            # Marks the end of the line
-            print("END")
+    def show(self):
+        """ Displays all nodes in the list. """
+        # 1. Handle empty list case
+        if self.is_empty():
+            print('List is Empty 🚫')
+            return
+            
+        # 2. Iterate and print each value
+        w = self.h # w = walker
+        while w is not None:
+            print(f"[{w.v}]", end=" 🔗 ") # print current value
+            w = w.n # move forward
+        print("END")
 
 # --- START OF PROGRAM ---
 
-# Create our 'Station Manager'
-my_train_manager = TrainManager()
+# L: instance of LinkedList manager
+L = LinkedList()
 
-print("Welcome to the Multi-Class Train Yard!")
+print("Welcome to the Multi-Class Linked List Yard!\n")
 
-# 1. Add some cargo (Carriages)
-print("\n--- Adding Carriages: 30, 40, and 50 ---")
-my_train_manager.add_carriage_to_end(30)
-my_train_manager.add_carriage_to_end(40)
-my_train_manager.add_carriage_to_end(50)
+# Adding data carraiges
+L.add(30); L.add(40); L.add(50)
 
-# 2. Let's see our train
-print("Current Train Layout:")
-my_train_manager.show_all_carriages()
+# Show current layout
+print("Initial Layout:")
+L.show()
 
-# 3. Unhook the number 30
-print("\n--- Unhooking Carriage 30 ---")
-my_train_manager.remove_carriage(30)
+# Removing cargo
+print("\nRemoving item (30) from the chain...")
+L.drop(30)
 
-# 4. Final Result
-print("Final Train Layout:")
-my_train_manager.show_all_carriages()
+# Final result
+print("\nFinal Layout:")
+L.show()

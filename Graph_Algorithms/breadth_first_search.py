@@ -3,6 +3,15 @@
 CONCEPTS AND THEORY: BREADTH-FIRST SEARCH (LAYER-BY-LAYER EXPLORATION)
 ================================================================================
 
+--- TIME COMPLEXITY ANALYSIS ---
+- ADJACENCY LIST (Best/Avg/Worst): O(V + E) (Visit every vertex and every edge)
+- ADJACENCY MATRIX (Best/Avg/Worst): O(V^2) (Must scan All V columns for each node)
+--------------------------------
+- SPACE COMPLEXITY: O(V) (Requires space for the 'visited' tracker and Queue)
+
+STATUS: INDEPENDENT (Contains Adjacency List, Matrix, and Compact versions)
+================================================================================
+
 1. WHAT IS BREADTH-FIRST SEARCH (BFS)?
    Imagine you drop a stone in a pond. Ripples spread outwards in perfect 
    circles. BFS is exactly like those ripples! 
@@ -35,151 +44,118 @@ CONCEPTS AND THEORY: BREADTH-FIRST SEARCH (LAYER-BY-LAYER EXPLORATION)
 ================================================================================
 """
 
-import queue  # We import the standard Python 'queue' module for efficiency
-import numpy as np
+import queue # q: standard python queue module
+import numpy as np # np: numerical python library
 
 # ================================================================================
-# VERSION 1: BFS FOR ADJACENCY LIST (THE DICTIONARY WAY)
+# VERSION 1: BFS FOR ADJACENCY LIST (USING DICTIONARY)
 # ================================================================================
 
-def bfs_using_adjacency_list(graph_adjacency_list, start_node):
+def bfs_list(G, s):
     """
-    Explores the graph using a dictionary representing nodes and neighbors.
+    Breadth-First Search on an Adjacency List.
+    G: graph dictionary, s: start node
     """
-    # 1. INITIALIZATION: Create a tracker to remember who we have already 'seen'
-    # Initially, every node is marked as False (Not visited)
-    visited_nodes_tracker = {}
-    for node_name in graph_adjacency_list.keys():
-        visited_nodes_tracker[node_name] = False    
+    # 1. Initialize 'seen' tracker for every node in the graph
+    v = {node: False for node in G} # v: visited tracker dictionary
     
-    # 2. CREATE THE QUEUE: Use the standard 'queue.Queue()' from Python
-    # This acts as our 'Waiting Line' for nodes to be processed
-    nodes_waiting_line = queue.Queue()
+    # 2. q: Queue for the 'Waiting Line' (FIFO)
+    q1 = queue.Queue() # q1: nodes queue
     
-    # 3. START: Mark the first node as visited and put it in the waiting line
-    visited_nodes_tracker[start_node] = True
-    nodes_waiting_line.put(start_node) # 'put' is like 'enqueue'
+    # 3. Start: Mark starting node s as seen and enqueue it
+    v[s] = True # mark s as visited
+    q1.put(s) # add s to queue
     
-    # 4. THE LOOP: Keep going as long as there is someone left in the line
-    while not nodes_waiting_line.empty():
+    # 4. Explore until the queue is empty
+    while not q1.empty(): # check if anyone is in line
+        # 5. Take the person from the very front of the line
+        curr = q1.get() # curr: current node being explored
         
-        # Pull the person at the VERY FRONT of the line
-        current_node = nodes_waiting_line.get() # 'get' is like 'dequeue'
-        
-        # 5. SCAN NEIGHBORS: Look at all the friends (neighbors) of the current node
-        for neighbor_node in graph_adjacency_list[current_node]:
-            # If we HAVEN'T visited this neighbor yet:
-            if not visited_nodes_tracker[neighbor_node]:
-                # Mark them as visited (Found them!)
-                visited_nodes_tracker[neighbor_node] = True
-                # Add them to the back of the waiting line to check their friends later
-                nodes_waiting_line.put(neighbor_node)
+        # 6. Look at all the neighbors (friends) of 'curr'
+        for nbr in G[curr]: # nbr: neighbor node
+            # 7. If this neighbor hasn't been seen yet:
+            if not v[nbr]:
+                v[nbr] = True # mark as visited
+                q1.put(nbr) # add to the back of the line
                 
-    # Return the final tracker showing who was reached
-    return visited_nodes_tracker
+    # 8. Return the final list of visited nodes
+    return v
 
 # ================================================================================
-# VERSION 2: BFS FOR ADJACENCY MATRIX (THE GRID WAY)
+# VERSION 2: BFS FOR ADJACENCY MATRIX (USING GRID)
 # ================================================================================
 
-def find_neighbor_nodes_in_matrix(graph_matrix, node_index):
-    """
-    A helper function to look at a row in the grid and find all neighbors (marked as 1).
-    """
-    neighbor_list = []
-    # Find how many columns (potential neighbors) exist in the grid
-    row_count, column_count = graph_matrix.shape
-    
-    # Look at every 'seat' in the current node's row
-    for target_column in range(column_count):
-        # If there's a '1' in that column, they are connected!
-        if graph_matrix[node_index, target_column] == 1:
-            neighbor_list.append(target_column)
-            
-    return neighbor_list
+def get_nbrs(M, r):
+    """ Helper to find neighbors in matrix M for row 'r'. """
+    # M: 2D adjacency matrix, r: node index
+    return [c for c in range(M.shape[1]) if M[r, c] == 1] # c: column/neighbor
 
-def bfs_using_adjacency_matrix(graph_matrix, start_node_index):
+def bfs_matrix(M, s):
     """
-    Explores a graph represented by a 2D grid/matrix.
+    Breadth-First Search on an Adjacency Matrix.
+    M: adjacency grid, s: start node index
     """
-    # 1. INITIALIZATION: How many nodes are there in total?
-    row_count, column_count = graph_matrix.shape
+    # 1. n: total nodes in the matrix
+    n = M.shape[0] # n = number of rows
     
-    # Create the tracker (Everyone starts as 'Not Visited')
-    visited_nodes_tracker = {}
-    for node_index in range(row_count):
-        visited_nodes_tracker[node_index] = False    
+    # 2. v: tracker for visited node indices
+    v = {i: False for i in range(n)} # i: index iterator
     
-    # 2. CREATE THE QUEUE
-    nodes_waiting_line = queue.Queue()
+    # 3. q1: waiting line queue
+    q1 = queue.Queue() # q1 = queue
     
-    # 3. START: Mark start node as visited and put in line
-    visited_nodes_tracker[start_node_index] = True
-    nodes_waiting_line.put(start_node_index)
+    # 4. Initialize search at s
+    v[s] = True
+    q1.put(s)
     
-    # 4. THE LOOP: Process the line one by one
-    while not nodes_waiting_line.empty():
-        # Remove the front node
-        current_node_index = nodes_waiting_line.get()
-        
-        # 5. FIND FRIENDS: Use our helper to find every neighbor in the grid
-        for neighbor_index in find_neighbor_nodes_in_matrix(graph_matrix, current_node_index):
-            # If neighbor is new to us:
-            if not visited_nodes_tracker[neighbor_index]:
-                # Mark as seen
-                visited_nodes_tracker[neighbor_index] = True
-                # Add to the back of the line
-                nodes_waiting_line.put(neighbor_index)
+    # 5. Exploration loop
+    while not q1.empty():
+        curr = q1.get() # curr: current node index
+        # 6. Search for neighbors in matrix row for curr
+        for nbr in get_nbrs(M, curr): # nbr: neighbor index
+            if not v[nbr]:
+                v[nbr] = True
+                q1.put(nbr)
                 
-    return visited_nodes_tracker
+    # 7. Return mapping of visited status
+    return v
 
 # ================================================================================
-# VERSION 3: THE MOST COMPACT & SHORTEST WAY
+# VERSION 3: THE MOST COMPACT BFS
 # ================================================================================
 
-def bfs_shortest_code(graph, start):
+def compact_bfs(G, s):
     """
-    A short, 6-line version of BFS using a list as a queue and a set to 'remember'.
+    Shortest BFS implementation using a simple list as a queue.
+    G: graph, s: start node
     """
-    # 1. 'visited' is a set (much faster than a dictionary!)
-    # 2. 'queue' is just a simple list
-    visited, line = {start}, [start]
-    
-    # 3. Keep going until the line is empty
-    for node in line:
-        # 4. For every unvisited friend, add them to the seen set and the line
-        for neighbor in graph[node]:
-            if neighbor not in visited:
-                visited.add(neighbor)
-                line.append(neighbor)
-                
-    # Return the list of nodes in the order they were discovered
-    return line
+    # v: visited set, q: queue list
+    v, q = {s}, [s] # v=set, q=list
+    for n in q: # n: current node in walk
+        for m in G[n]: # m: next neighbor
+            if m not in v:
+                v.add(m); q.append(m) # seen it, add to search
+    return q # return discovery order
 
 # --- START OF PROGRAM ---
 
-# 1. Define a sample graph with 5 vertices (0 to 4)
-# Links: 0-1, 0-2, 1-3, 1-4, 2-4, 2-3, 3-4
-sample_adj_list = {0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+# G1: sample graph with 5 vertices (0-4)
+G1 = {0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
 
 print("--- Testing BFS with Adjacency List ---")
-list_result = bfs_using_adjacency_list(sample_adj_list, 0)
-print(f"Nodes reached (Dict): {list_result}\n")
+res1 = bfs_list(G1, 0)
+print(f"Nodes reached: {res1} ✅\n")
 
-# 2. Define the SAME graph as a Matrix (Grid)
-# We use numpy to create a grid of zeros and fill in the connections
-vertices = [0, 1, 2, 3, 4]
+# M1: same graph as a 2D Matrix (Numpy result)
+M1 = np.zeros(shape=(5, 5))
 edges = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)]
-grid_size = len(vertices)
-sample_matrix = np.zeros(shape=(grid_size, grid_size))
-
-for row, col in edges:
-    sample_matrix[row, col] = 1 # Mark the connection
+for r, c in edges: M1[r, c] = 1 # r: row, c: col
 
 print("--- Testing BFS with Adjacency Matrix ---")
-matrix_result = bfs_using_adjacency_matrix(sample_matrix, 0)
-print(f"Nodes reached (Matrix): {matrix_result}\n")
+res2 = bfs_matrix(M1, 0)
+print(f"Nodes reached (Matrix): {res2} ✅\n")
 
-print("--- Testing THE SHORTEST BFS VERSION ---")
-simple_list = bfs_shortest_code(sample_adj_list, 0)
-print(f"Order discovered: {simple_list}")
+# Run compact version
+print("--- Testing Compact BFS ---")
+res3 = compact_bfs(G1, 0)
+print(f"Discovery Order: {res3} ✅")
