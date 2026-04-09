@@ -78,12 +78,6 @@ All Python files in this repository adhere to the following educational standard
 
 ---
 
-## 🌟 Credits
-
-This collection is curated and standardized to provide a premium, visually-rich, and emoji-free educational resource. It is designed to turn "how to code" into "how to think."
-
----
-
 <!-- +--------------------------------------------------------------+ -->
 <!-- |                HAPPY CODING & PROBLEM SOLVING!               | -->
 <!-- +--------------------------------------------------------------+ -->
