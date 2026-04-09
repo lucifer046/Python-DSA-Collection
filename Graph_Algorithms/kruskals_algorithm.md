@@ -30,115 +30,42 @@ Both find the same MST, just using different approaches!
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### The Graph (Edge List):
+![Kruskal's MST "Cheapest Bridge" Diagram](../docs/images/kruskal_diagram.png)
 
-```
-  All possible bridges sorted by cost:
-  
-  +----------+--------+--------------+
-  | From     | To     | Cost         |
-  +----------+--------+--------------+
-  | Island 3 | Is. 4  | $1  < Cheapest|
-  | Island 0 | Is. 1  | $2           |
-  | Island 1 | Is. 2  | $3           |
-  | Island 1 | Is. 4  | $5           |
-  | Island 0 | Is. 3  | $6           |
-  | Island 2 | Is. 3  | $7           |
-  | Island 1 | Is. 3  | $8  < Most   |
-  +----------+--------+--------------+
-```
-
-### Initial State: 5 Separate Islands
-
-```
-  (o)0    (o)1    (o)2    (o)3    (o)4
-  
-  Each island is its own "component" (team).
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine there are many **tiny islands** 🏝️ in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**. Kruskal's strategy is like a bargain hunter at a sale: He looks at all the possible bridges, sorts them from cheapest to most expensive, and starts building the absolute cheapest ones first. But he has one golden rule: **'Never build a bridge that connects two islands that are already connected!'** because that would just be a waste of money and create a useless loop (cycle)."
 
 ---
 
-### Edge 1: Island 3 > Island 4, cost $1 ✅ ADD!
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-```
-  Are 3 and 4 on the same island? NO > BUILD!
+Let's build the cheapest bridge network for the islands:
 
-  (o)0    (o)1    (o)2    (o)3---(o)4
-                              $1
-  Components: {0}, {1}, {2}, {3,4}
-  MST cost: $1
-```
+### 1. The Bargain Hunt (Sorting)
+First, we look at every possible bridge and its cost. We put them in a list from cheapest to most expensive.
 
-### Edge 2: Island 0 > Island 1, cost $2 ✅ ADD!
+### 2. Building the Network
+- **The Cheapest Bridge:** We pick the $1 bridge. It connects Island 3 and Island 4. Since they weren't connected before, we build it!
+- **The Next Cheapest:** We pick the $2 bridge between Island 0 and Island 1. They are new to each other, so we build it!
+- **The $3 Bridge:** Connects Island 1 and Island 2. Still new, so we build!
 
-```
-  Are 0 and 1 on the same island? NO > BUILD!
+### 3. The "No Loops" Rule
+- Eventually, we see a $6 bridge between Island 0 and Island 3. 
+- **Wait!** If we look at our map, we can already get from 0 to 3 through our other bridges! 
+- **Action:** We **SKIP** this bridge. Building it would create a cycle, and we'd be wasting $6!
 
-  (o)0---(o)1    (o)2    (o)3---(o)4
-     $2
-  Components: {0,1}, {2}, {3,4}
-  MST cost: $1 + $2 = $3
-```
-
-### Edge 3: Island 1 > Island 2, cost $3 ✅ ADD!
-
-```
-  Are 1 and 2 on the same island? NO > BUILD!
-
-  (o)0---(o)1---(o)2    (o)3---(o)4
-     $2    $3
-  Components: {0,1,2}, {3,4}
-  MST cost: $1 + $2 + $3 = $6
-```
-
-### Edge 4: Island 1 > Island 4, cost $5 ✅ ADD!
-
-```
-  Are 1 and 4 on the same island? NO > BUILD!
-
-  (o)0---(o)1---(o)2
-     $2  | $3
-          |$5
-  (o)3---(o)4
-     $1
-
-  Components: {0,1,2,3,4}  < ALL CONNECTED! ✅
-  MST cost: $1 + $2 + $3 + $5 = $11
-```
-
-### Edge 5: Island 0 > Island 3, cost $6 ❌ SKIP!
-
-```
-  Are 0 and 3 on the same island? YES > SKIP! (Would create a loop)
-```
-
-### Edge 6: Island 2 > Island 3, cost $7 ❌ SKIP!
-
-```
-  Are 2 and 3 on the same island? YES > SKIP!
-```
-
-### DONE! We have n-1 = 4 edges. All islands connected! ✅
+### 4. Mission Accomplished
+We stop the moment every single island is part of the same big network. We've now connected everyone for the lowest possible price!
 
 ---
 
-## Complete Decision Diagram
+## 🧠 Why is "Union-Find" the Secret Partner?
+Kruskal's needs a fast way to check: "Is Island A already connected to Island B?" This is exactly what the **Union-Find** tool does! It keeps track of which 'team' each island belongs to. If two islands are on different teams, it's safe to build a bridge and then **Union** their teams together.
 
-```
-  Sorted Edges:        Decision:              Running MST:
-  ━━━━━━━━━━━━━━       ━━━━━━━━━              ━━━━━━━━━━━━
-  3>4, cost $1    -->  ✅ Different teams    -->  {3-4}
-  0>1, cost $2    -->  ✅ Different teams    -->  {0-1}, {3-4}
-  1>2, cost $3    -->  ✅ Different teams    -->  {0-1-2}, {3-4}
-  1>4, cost $5    -->  ✅ Different teams    -->  {0-1-2-4-3} ALL DONE!
-  0>3, cost $6    -->  ❌ Same team, skip!
-  2>3, cost $7    -->  ❌ Same team, skip!
-  1>3, cost $8    -->  ❌ Same team, skip!
-  
-  FINAL MST COST: $1 + $2 + $3 + $5 = $11 ✅
-```
+---
+
 
 ---
 

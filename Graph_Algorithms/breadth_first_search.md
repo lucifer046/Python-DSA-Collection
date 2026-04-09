@@ -13,143 +13,45 @@ Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circl
 
 ---
 
-## First: What is a Graph?
+## 🖼️ Visual Representation
 
-A **graph** is just a collection of **dots** (called Nodes) connected by **lines** (called Edges).
+![BFS "Ripples in a Pond" Layer-by-Layer Diagram](../docs/images/bfs_diagram.png)
 
-```
-  Example Graph:
-
-       0 ------- 1
-       |        ╱ |
-       |      ╱   |
-       |    ╱     |
-       2 -╱      |
-       |  ╲      |
-       |    ╲    |
-       |      ╲  |
-       3 ------- 4
-
-  Node 0 connects to: 1, 2
-  Node 1 connects to: 3, 4
-  Node 2 connects to: 4, 3
-  Node 3 connects to: 4
-  Node 4 connects to: (nothing outgoing)
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you **drop a stone in a calm pond**. Ripples spread outwards in perfect circles—first the circle right next to the stone, then the next circle, and then the next. **BFS** works exactly like those ripples! It visits all the 'Layer 1' neighbors first, then all the 'Layer 2' neighbors, and so on. It never moves to a deeper layer until it has finished exploring the current one. This 'fair' exploration is why BFS is the king of finding the **Shortest Path**!"
 
 ---
 
-## BFS Traversal — Step by Step
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-### Starting Node: **0**
+Let's see how the ripple spreads through a graph starting at Node **0**:
 
-**BFS uses a QUEUE (First-In, First-Out)** — like a ticket counter line!
+### 1. The Waiting Line (The Queue)
+BFS is very organized. It uses a **Queue** (First-In, First-Out)—just like a line at a ticket counter. Whoever gets in line first gets processed first!
 
----
+### 2. The First Ripple (Layer 1)
+- We start at Node 0 and look at its immediate friends (let's say 1 and 2).
+- We put 1 and 2 in the Queue.
+- **Queue:** `[1, 2]`
+- Node 0 is now done!
 
-### Step 1: Start at node 0
+### 3. Spreading Out (Layer 2)
+- Next in line is Node 1. We look at its friends (3 and 4).
+- We put 3 and 4 in the Queue. 
+- **Queue:** `[2, 3, 4]` (Notice 2 was already there, so it stays at the front!)
+- Node 1 is done!
 
-```
-  Queue:   [0]
-  Visited: {0}
-
-       ●0 ------- 1
-       |        ╱ |
-       |      ╱   |
-       2          |
-       |          |
-       3 ------- 4
-
-  ● = Currently processing (Layer 0)
-```
-
-### Step 2: Process node 0 > Add its neighbors (1, 2) to the queue
-
-```
-  Queue:   [1, 2]     < Added neighbors of 0
-  Visited: {0, 1, 2}
-
-       ✅0 ------- ○1
-       |        ╱  |
-       |      ╱    |
-       ○2         |
-       |           |
-       3 ------- 4
-
-  ✅ = Done    ○ = In queue (Layer 1)
-```
-
-### Step 3: Process node 1 > Add its unvisited neighbors (3, 4)
-
-```
-  Queue:   [2, 3, 4]  < 1 is done, added 3 and 4
-  Visited: {0, 1, 2, 3, 4}
-
-       ✅0 ------- ✅1
-       |        ╱   |
-       |      ╱     |
-       ○2          |
-       |            |
-       ○3 ------- ○4
-
-  ○ = In queue (Layer 2)
-```
-
-### Step 4: Process node 2 > Neighbors 4 and 3 already visited!
-
-```
-  Queue:   [3, 4]     < Nothing new to add
-  Visited: {0, 1, 2, 3, 4}
-
-       ✅0 ------- ✅1
-       |        ╱   |
-       ✅2          |
-       |            |
-       ○3 ------- ○4
-```
-
-### Step 5: Process node 3 > Neighbor 4 already visited
-
-```
-  Queue:   [4]
-  Visited: {0, 1, 2, 3, 4}
-
-       ✅0 ------- ✅1
-       |        ╱   |
-       ✅2          |
-       |            |
-       ✅3 ------- ○4
-```
-
-### Step 6: Process node 4 > No new neighbors. We're done!
-
-```
-  Queue:   []   < EMPTY! All done!
-  Visited: {0, 1, 2, 3, 4}
-
-       ✅0 ------- ✅1
-       |        ╱   |
-       ✅2          |
-       |            |
-       ✅3 ------- ✅4
-
-  BFS Order: 0 > 1 > 2 > 3 > 4
-```
+### 4. Finishing the Circle
+- We keep taking nodes from the front of the line until the line is empty.
+- Eventually, every node is visited in the exact order of their distance from the start!
 
 ---
 
-## Layer-by-Layer View
+## 🧠 Why is BFS the "Shortest Path" King?
+Because BFS explores layer by layer, the **first time** it sees a node, it *must* have found the shortest way to get there. If it took a longer way, it would have seen that node in a later "ripple"!
 
-```
-                Layer 0:        0
-                               / \
-                Layer 1:      1   2
-                             / \ /
-                Layer 2:    3   4
+---
 
-  BFS visits Layer 0 fully, then Layer 1 fully, then Layer 2 fully.
-  Order: 0, 1, 2, 3, 4
-```
 
 ---
 

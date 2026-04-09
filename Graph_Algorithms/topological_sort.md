@@ -1,6 +1,7 @@
 <!-- +---------------------------------------------+ -->
 <!-- |  TOPOLOGICAL SORT — THE TASK SCHEDULER       | -->
 <!-- +---------------------------------------------+ -->
+
 # Topological Sort — The Task Scheduler
 
 ## What is Topological Sort?
@@ -11,212 +12,67 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 
 > **Simple Definition:** Given tasks with dependencies (Task A must finish before Task B can start), Topological Sort finds a valid order to complete all tasks.
 
-> ⚠️ **Requirement:** The graph must be a **DAG** (Directed Acyclic Graph) — no circular dependencies allowed!
+## 🖼️ Visual Representation
+
+```mermaid
+graph LR
+    A((1. Socks)) --> B((2. Shoes))
+    C((3. Undershirt)) --> D((4. Shirt))
+    D --> E((5. Jacket))
+    B --> F((6. Ready!))
+    E --> F
+    style A fill:#4f46e5,color:#fff
+    style B fill:#4f46e5,color:#fff
+    style C fill:#ec4899,color:#fff
+    style D fill:#ec4899,color:#fff
+    style E fill:#ec4899,color:#fff
+    style F fill:#10b981,color:#fff
+```
+
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you're **getting dressed** 👔 in the morning. You can't put on your shoes before your socks, and your jacket must come after your shirt. **Topological Sort** is your personal 'Task Planner.' It looks at all your tasks and their rules (dependencies) and creates a perfect **legal sequence**. It ensures that by the time you reach any task, every single one of its prerequisites is already finished!"
 
 ---
 
-## Example: The Task Dependency Graph
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-```
-  Tasks: 0, 1, 2, 3, 4, 5, 6, 7
+Let's organize our task list:
 
-  Dependencies (arrows mean "must come before"):
-  0 > 2, 3, 4
-  1 > 2, 7
-  2 > 5
-  3 > 5, 7
-  4 > 7
-  5 > 6
-  6 > 7
+### 1. The "Prerequisite Count" (In-Degree)
 
-  Visual Graph:
-  
-  0----->2----->5----->6----->7
-  |       ^              ^     ^
-  +-->3--+--------------+     |
-  |   |                        |
-  +-->4------------------------+
-       ^
-  1--->2
-  |
-  +--------------------------->7
-```
+First, we look at every task and count how many other tasks must finish before it (we call this its **In-Degree**).
+
+- Tasks with **0 In-Degree** are "Ready to Start" right now (like your socks!).
+
+### 2. Picking the Ready Tasks
+
+- We start our To-Do list by picking all tasks that have **0 prerequisites**.
+- Let's say we pick "Socks."
+
+### 3. Knocking Out the Hurdles
+
+- Once "Socks" is finished, we look at the tasks that were waiting for it (like "Shoes").
+- We reduce the prerequisite count for "Shoes" by 1.
+- If "Shoes" now has **0 prerequisites**, it becomes "Ready to Start"!
+
+### 4. Mission AccomplISHED
+
+We keep repeating this—pick a ready task, knock out its dependencies, and find new ready tasks—until every single task is finished. If we get stuck, it means we have a **circular dependency** (like needing a key that is locked inside the box the key opens!), which topological sort neatly helps us identify as impossible!
 
 ---
 
-## The "In-Degree" Concept
+## 🧠 Why is it a "Task Scheduler"?
 
-**In-Degree** = How many arrows point **INTO** a node = How many prerequisites it has.
-
-```
-  +------+-----------+----------------------+
-  | Node | In-Degree | Meaning               |
-  +------+-----------+----------------------+
-  |  0   |     0     | No prerequisites! [*]  |
-  |  1   |     0     | No prerequisites! [*]  |
-  |  2   |     2     | Needs 0 and 1 first   |
-  |  3   |     1     | Needs 0 first          |
-  |  4   |     1     | Needs 0 first          |
-  |  5   |     2     | Needs 2 and 3 first   |
-  |  6   |     1     | Needs 5 first          |
-  |  7   |     4     | Needs 1,3,4,6 first   |
-  +------+-----------+----------------------+
-
-  Rule: A task is READY when its In-Degree becomes 0!
-```
+Topological Sort is the brain behind how **Excel** recalculates formulas, how **compilers** build software from thousands of files, and how **NASA** schedules complex space missions. It ensures nothing happens a second before it's supposed to!
 
 ---
-
-## Kahn's Algorithm — Step by Step
-
-### Step 1: Find all tasks with In-Degree 0 (no prerequisites)
-
-```
-  Ready Queue: [0, 1]   < These can start immediately!
-  
-  Tasks 0 and 1 have NO prerequisites.
-```
-
-### Step 2: Process task 0
-
-```
-  Remove task 0 from queue > Add to result.
-  Result: [0]
-  
-  Task 0 was a prerequisite for: 2, 3, 4
-  Reduce their in-degrees by 1:
-
-  +------+-----------+
-  | Node | In-Degree |
-  +------+-----------+
-  |  2   | 2>1       |
-  |  3   | 1>0 [*]    |  < NOW READY!
-  |  4   | 1>0 [*]    |  < NOW READY!
-  +------+-----------+
-  
-  Ready Queue: [1, 3, 4]
-```
-
-### Step 3: Process task 1
-
-```
-  Result: [0, 1]
-  
-  Task 1 was a prerequisite for: 2, 7
-  
-  +------+-----------+
-  | Node | In-Degree |
-  +------+-----------+
-  |  2   | 1>0 [*]    |  < NOW READY!
-  |  7   | 4>3       |
-  +------+-----------+
-  
-  Ready Queue: [3, 4, 2]
-```
-
-### Step 4: Process task 3
-
-```
-  Result: [0, 1, 3]
-  
-  Task 3 was a prerequisite for: 5, 7
-  
-  +------+-----------+
-  |  5   | 2>1       |
-  |  7   | 3>2       |
-  +------+-----------+
-  
-  Ready Queue: [4, 2]
-```
-
-### Step 5: Process task 4
-
-```
-  Result: [0, 1, 3, 4]
-  
-  Task 4 was a prerequisite for: 7
-  
-  +------+-----------+
-  |  7   | 2>1       |
-  +------+-----------+
-  
-  Ready Queue: [2]
-```
-
-### Step 6: Process task 2
-
-```
-  Result: [0, 1, 3, 4, 2]
-  
-  Task 2 was a prerequisite for: 5
-  
-  +------+-----------+
-  |  5   | 1>0 ⭐    |  < NOW READY!
-  +------+-----------+
-  
-  Ready Queue: [5]
-```
-
-### Step 7: Process task 5
-
-```
-  Result: [0, 1, 3, 4, 2, 5]
-  
-  Task 5 was a prerequisite for: 6
-  
-  +------+-----------+
-  |  6   | 1>0 ⭐    |  < NOW READY!
-  +------+-----------+
-  
-  Ready Queue: [6]
-```
-
-### Step 8: Process task 6
-
-```
-  Result: [0, 1, 3, 4, 2, 5, 6]
-  
-  Task 6 was a prerequisite for: 7
-  
-  +------+-----------+
-  |  7   | 1>0 ⭐    |  < NOW READY!
-  +------+-----------+
-  
-  Ready Queue: [7]
-```
-
-### Step 9: Process task 7
-
-```
-  Result: [0, 1, 3, 4, 2, 5, 6, 7]   < FINAL ORDER! ✅
-  
-  Ready Queue: [] < Empty! ALL DONE!
-```
-
----
-
-## 📐 The Final Valid Order
-
-```
-  0 > 1 > 3 > 4 > 2 > 5 > 6 > 7
-
-  Verification:
-  ✅ 0 before 2, 3, 4     (0's dependencies)
-  ✅ 1 before 2, 7         (1's dependencies)
-  ✅ 2 before 5             (2's dependency)
-  ✅ 3 before 5, 7          (3's dependencies)
-  ✅ 4 before 7             (4's dependency)
-  ✅ 5 before 6             (5's dependency)
-  ✅ 6 before 7             (6's dependency)
-  
-  ALL DEPENDENCIES SATISFIED! ✅
-```
 
 ---
 
 ## Real-Life Examples
 
 ### Getting Dressed:
+
 ```
   Socks > Shoes
   Underwear > Pants > Shoes
@@ -227,6 +83,7 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 ```
 
 ### University Course Planning:
+
 ```
   Math 101 > Math 201 > Math 301
   CS 101 > CS 201

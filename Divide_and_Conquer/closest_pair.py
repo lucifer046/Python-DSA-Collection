@@ -141,7 +141,7 @@ def compact_solve(pts):
 # --- START OF PROGRAM ---
 
 # L: input coordinates list
-L = [(2, 15), (40, 5), (20, 1), (21, 14), (1, 4), (3, 11)]
+L = [(46, 67), (52, 49), (7, 1), (10, 35), (31, 19), (57, 3), (64, 23), (75, 71), (29, 34), (39, 61), (26, 30), (16, 11), (61, 43), (51, 0), (60, 20), (1, 60), (34, 28), (8, 68)]
 
 print("Welcome to the Closest Pair of Points Solver!")
 print(f"Points: {L}")

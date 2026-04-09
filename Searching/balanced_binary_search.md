@@ -55,99 +55,39 @@ For every node:
 
 ---
 
-## Building an AVL Tree — Step by Step
+## 🖼️ Visual Representation
 
-### Example: Insert numbers [1, 2, 3, 4, 5, 6, 7]
+![AVL Tree Balancing Rotations Diagram](../docs/images/avl_tree_diagram.png)
 
-**Insert 1:**
-```
-     1
-  
-  (Balance Factor = 0) ✅ All good!
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine a balanced scale! If you add too much weight (numbers) to one side, the scale tips. In a normal tree, it just stays tipped over and becomes hard to use. But an **AVL Tree** is smart! The moment it feels too much weight on one side, it performs a **Rotation**—a quick 'swing' of the branches—to bring everything back to a perfect balance. This keeps the tree short and the search speed lightning fast!"
 
-**Insert 2:**
-```
-     1
-      \
-       2
-  
-  (BF of node 1 = 0 - 1 = -1) ✅ Still fine!
-```
+---
 
-**Insert 3: [!] UNBALANCED!**
-```
-     1          Balance Factor of 1 = 0 - 2 = -2  ❌
-      \
-       2        PROBLEM: Right-Right heavy!
-        \       
-         3      SOLUTION: LEFT ROTATION on node 1
-```
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-### LEFT ROTATION (Fixing Right-Right Imbalance)
+Let's see why we need these "rotations" to keep things fair.
 
-Think of it like a see-saw that's tilting too much to the right. We need to **lift the right side up**!
+### The Problem: The "Straight Line" Disaster
+If we add numbers in perfect order (1, 2, 3, 4, 5), a normal tree grows like a long, spindly twig. 
+- To find **5**, you'd have to walk down 5 steps. 
+- In a big tree of 1 million items, you'd walk **1 million steps**! That's too slow.
 
-```
-  BEFORE (leaning right):          AFTER LEFT ROTATION:
-  
-       1                                 2
-        \                               / \
-         2                             1   3
-          \
-           3                    ✅ BALANCED!
-```
+### The Solution: The AVL "Self-Fix"
+An AVL tree has a rule: No side can be more than **1 level** taller than the other. If it is, we **ROTATE**.
 
-**What happened:**
-1. Node **2** (the right child) becomes the **new boss** (root)
-2. Node **1** (the old boss) becomes the **left child** of 2
-3. Node **3** stays as the right child of 2
+1. **Insert 1, then 2:** Tree looks fine.
+2. **Insert 3:** Now the right side is 2 levels deep while the left is empty. **TILT!**
+3. **Action (Left Rotation):** We lift 2 up to be the new boss. 1 becomes its left child, and 3 becomes its right child.
+4. **Result:** A perfect, balanced triangle! Now to find any number, you only need **2 steps** instead of 3.
 
-**Continue inserting 4:**
-```
-       2                        2
-      / \                      / \
-     1   3          >         1   3
-          \                        \
-           4                        4
-           
-  (BF of 3 = -1) ✅ Fine!
-```
+---
 
-**Insert 5: [!] UNBALANCED at node 3!**
-```
-       2                        2
-      / \                      / \
-     1   3          >         1   4      < LEFT ROTATION on 3
-          \                      / \
-           4                    3   5
-            \
-             5
-```
+## 🧠 Why are "Rotations" the Secret Sauce?
+A rotation is a mathematical trick that changes the structure of the tree **without** breaking the sorted order rule (smaller numbers still on the left, larger on the right). It's like re-organizing your bookshelf so you can reach every book easily!
 
-**Insert 6: [!] UNBALANCED at node 2!**
-```
-       2                            4
-      / \                          / \
-     1   4          >             2   5      < LEFT ROTATION on 2
-        / \                      / \   \
-       3   5                    1   3   6
-            \
-             6
-```
+---
 
-**Insert 7: [!] UNBALANCED at node 5!**
-```
-         4                          4
-        / \                        / \
-       2   5          >           2   6      < LEFT ROTATION on 5
-      / \   \                    / \ / \
-     1   3   6                  1  3 5  7
-              \
-               7
-
-  FINAL BALANCED TREE! ✅
-```
 
 ---
 

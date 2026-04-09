@@ -15,112 +15,42 @@ Imagine you have **100 exam papers** to sort by student name. Instead of doing i
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### Original List: `[38, 27, 43, 3, 9, 82, 10]`
+![Merge Sort Divide and Conquer Diagram](../docs/images/merge_sort_diagram.png)
 
----
-
-### Phase 1: DIVIDE (Keep splitting in half)
-
-```
-                        [38, 27, 43, 3, 9, 82, 10]
-                       /                            \
-              [38, 27, 43]                      [3, 9, 82, 10]
-              /          \                      /             \
-          [38]        [27, 43]            [3, 9]          [82, 10]
-                      /      \            /    \          /      \
-                   [27]      [43]       [3]   [9]      [82]    [10]
-```
-
-We keep splitting until every piece has only **ONE number**. A single number is already "sorted"!
-
-### Phase 2: MERGE (Zip the sorted pieces back together)
-
-Now we merge the tiny pieces back — always keeping them in order:
-
-**Merge [27] and [43]:**
-```
-  Left: [27]    Right: [43]
-  
-  Compare: 27 vs 43 > 27 is smaller > Take 27 first
-  Take remaining: 43
-  
-  Result: [27, 43] ✅
-```
-
-**Merge [3] and [9]:**
-```
-  Left: [3]     Right: [9]
-  
-  Compare: 3 vs 9 > 3 is smaller > Take 3 first
-  Take remaining: 9
-  
-  Result: [3, 9] ✅
-```
-
-**Merge [82] and [10]:**
-```
-  Left: [82]    Right: [10]
-  
-  Compare: 82 vs 10 > 10 is smaller > Take 10 first
-  Take remaining: 82
-  
-  Result: [10, 82] ✅
-```
-
-**Merge [38] and [27, 43]:**
-```
-  Left: [38]    Right: [27, 43]
-  
-  Compare: 38 vs 27 > 27 is smaller > Take 27
-  Compare: 38 vs 43 > 38 is smaller > Take 38
-  Take remaining: 43
-  
-  Result: [27, 38, 43] ✅
-```
-
-**Merge [3, 9] and [10, 82]:**
-```
-  Left: [3, 9]    Right: [10, 82]
-  
-  Compare: 3 vs 10  > 3  is smaller > Take 3
-  Compare: 9 vs 10  > 9  is smaller > Take 9
-  Compare: 10 vs 82 > Both remaining > Take 10, then 82
-  
-  Result: [3, 9, 10, 82] ✅
-```
-
-**Final Merge [27, 38, 43] and [3, 9, 10, 82]:**
-```
-  Left: [27, 38, 43]    Right: [3, 9, 10, 82]
-  
-  Compare: 27 vs 3  > 3  wins > Take 3
-  Compare: 27 vs 9  > 9  wins > Take 9
-  Compare: 27 vs 10 > 10 wins > Take 10
-  Compare: 27 vs 82 > 27 wins > Take 27
-  Compare: 38 vs 82 > 38 wins > Take 38
-  Compare: 43 vs 82 > 43 wins > Take 43
-  Take remaining: 82
-  
-  Result: [3, 9, 10, 27, 38, 43, 82] ✅ SORTED!
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Merge Sort is all about teamwork! First, we **Divide** the big problem into tiny, single-person tasks (Phase 1). Then, we **Merge** them back together, two by two, ensuring they stay in order at every step (Phase 2). It's like building a puzzle—you can't see the whole picture until you start joining the pieces correctly!"
 
 ---
 
-## Complete Visual — Divide and Merge Together
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-```
-  DIVIDE PHASE (Top > Down):           MERGE PHASE (Bottom > Up):
+Let's look at how we sort `[38, 27, 43, 3, 9, 82, 10]`:
 
-      [38, 27, 43, 3, 9, 82, 10]           [3, 9, 10, 27, 38, 43, 82] ✅
-              ↙        ↘                           ↗           ↖
-    [38, 27, 43]    [3, 9, 82, 10]        [27, 38, 43]    [3, 9, 10, 82]
-      ↙      ↘        ↙        ↘           ↗      ↖        ↗        ↖
-   [38]  [27,43]    [3,9]   [82,10]      [38]  [27,43]   [3,9]   [10,82]
-          ↙   ↘     ↙  ↘    ↙   ↘               ↗  ↖    ↗  ↖     ↗   ↖
-        [27] [43]  [3] [9] [82] [10]           [27] [43] [3] [9] [82] [10]
-```
+### Phase 1: The Great Divide
+We keep splitting the list in half until every number is by itself.
+- `[38, 27, 43]` and `[3, 9, 82, 10]`
+- `[38]`, `[27, 43]`, `[3, 9]`, `[82, 10]`
+- Finally: `[38]`, `[27]`, `[43]`, `[3]`, `[9]`, `[82]`, `[10]`
+Congratulations! Every single number is now "sorted" because a list of one is always in order.
+
+### Phase 2: The Perfect Merge
+Now we zip them back together carefully.
+1. **Merge [27] and [43]** → `[27, 43]`
+2. **Merge [3] and [9]** → `[3, 9]`
+3. **Merge [82] and [10]** → `[10, 82]`
+4. **Merge [38] and [27, 43]** → `[27, 38, 43]`
+5. **Merge [3, 9] and [10, 82]** → `[3, 9, 10, 82]`
+6. **Final Boss Merge:** `[27, 38, 43]` + `[3, 9, 10, 82]` → `[3, 9, 10, 27, 38, 43, 82]`
+
+---
+
+## 🧠 Why is this so powerful?
+Instead of comparing everything with everything else (which takes a long time), Merge Sort only ever compares the **smallest** items from two already-sorted lists. This "top cards" method is incredibly efficient!
+
+---
+
 
 ---
 

@@ -11,162 +11,42 @@ Imagine you're the **mayor of a town** and you need to build **water pipelines**
 
 ---
 
-## What is a Minimum Spanning Tree (MST)?
+## 🖼️ Visual Representation
 
-A tree that:
-- **MINIMUM** — Cheapest total cost
-- **SPANNING** — Reaches every single node
-- **TREE** — No cycles (no loops)
+![Prim's MST "Growing Seed" Diagram](../docs/images/prim_diagram.png)
 
-```
-  ORIGINAL GRAPH:                    MST (Cheapest connections):
-  
-       2        8                         2
-  0-------1-------3                  0-------1        3
-  |       |      ╱|                          |       |
-  | 6     |3   7  |1                         |3      |1
-  |       | ╱     |                          |       |
-  3-------2-------4                  3       2       4
-       5
-
-  Total edges: 7                     Total edges: 4 (n-1)
-  Total cost: 2+8+6+3+7+5+1 = 32    Total cost: 2+3+1+... = MINIMUM!
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you're the **Mayor of a small town** 🏛️ and you need to connect all the houses with water pipes. Each pipe costs money based on how long it is. You want to **connect everyone** while spending the **least total money**. **Prim's Algorithm** is like planting a seed: You start at one house (the seed), and then you look for the absolute cheapest pipe that connects a new house to your existing network. You keep 'growing' your network, one cheap pipe at a time, until every single house in town has water!"
 
 ---
 
-## Step-by-Step Example
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-### The Graph:
+Let's watch our network grow from a single house (Node 0):
 
-```
-  Node 0: > 1(cost 2), > 3(cost 6)
-  Node 1: > 0(cost 2), > 2(cost 3), > 3(cost 8), > 4(cost 5)
-  Node 2: > 1(cost 3), > 3(cost 7)
-  Node 3: > 0(cost 6), > 1(cost 8), > 2(cost 7), > 4(cost 1)
-  Node 4: > 1(cost 5), > 3(cost 1)
-```
+### 1. Plant the Seed (Node 0)
+We pick Node 0 as our starting point. We look at all the pipes leading out of it.
+- Pipe to Node 1 costs $2.
+- Pipe to Node 3 costs $6.
+- **The Rule:** We *always* pick the cheapest one that connects to a new house. So, we build the **$2 pipe to Node 1**.
 
----
+### 2. Expanding the Network
+Now we have two houses (0 and 1) in our network. We look at ALL the pipes leading from either of them to houses we haven't visited yet.
+- From 1, we see a pipe to 2 for $3.
+- From 1, we see a pipe to 4 for $5.
+- From 0, we still have that $6 pipe to 3.
+- **The Winner:** The **$3 pipe to Node 2** is the cheapest! We add it to our network.
 
-### Step 1: Start with Node 0 (the seed 🌱)
-
-```
-  In MST: {0}
-  Not yet: {1, 2, 3, 4}
-  
-  Available edges from MST to outside:
-  • 0 > 1, cost 2  < CHEAPEST! ⭐
-  • 0 > 3, cost 6
-
-  Pick: Edge 0>1 (cost 2)
-  
-       ●0-------●1        3
-       |                  |
-       | 6                |1
-       |                  |
-       3        2        4
-
-  MST cost so far: 2
-```
-
-### Step 2: Add Node 1
-
-```
-  In MST: {0, 1}
-  Not yet: {2, 3, 4}
-  
-  Available edges from MST to outside:
-  • 0 > 3, cost 6
-  • 1 > 2, cost 3  < CHEAPEST! [*]
-  • 1 > 3, cost 8
-  • 1 > 4, cost 5
-
-  Pick: Edge 1>2 (cost 3)
-  
-       ●0-------●1        3
-                 |        |
-                 | 3      |1
-                 |        |
-       3        ●2        4
-
-  MST cost so far: 2 + 3 = 5
-```
-
-### Step 3: Add Node 2
-
-```
-  In MST: {0, 1, 2}
-  Not yet: {3, 4}
-  
-  Available edges from MST to outside:
-  • 0 > 3, cost 6
-  • 1 > 3, cost 8
-  • 1 > 4, cost 5
-  • 2 > 3, cost 7
-
-  Pick: Edge 1>4 (cost 5)... Wait, let me check ALL options:
-  Cheapest = 1 > 4, cost 5 [*]
-  
-       ●0-------●1        3
-                 |╲       |
-                 |  ╲5    |1
-                 |   ╲    |
-       3        ●2   ●4
-
-  MST cost so far: 2 + 3 + 5 = 10
-```
-
-### Step 4: Add Node 4
-
-```
-  In MST: {0, 1, 2, 4}
-  Not yet: {3}
-  
-  Available edges from MST to outside:
-  • 0 > 3, cost 6
-  • 1 > 3, cost 8
-  • 2 > 3, cost 7
-  • 4 > 3, cost 1  < CHEAPEST! [*]
-
-  Pick: Edge 4>3 (cost 1)
-  
-       ●0-------●1        ●3
-                 |╲       |
-                 |  ╲5    |1
-                 |   ╲    |
-                ●2   ●4--+
-
-  MST cost so far: 2 + 3 + 5 + 1 = 11
-```
-
-### DONE! All nodes connected! ✅
-
-```
-  FINAL MST:                        +--------------+
-                                    | SELECTED EDGES|
-       0-------1                    | 0-1 (cost 2)  |
-               |╲                   | 1-2 (cost 3)  |
-               |  ╲                 | 1-4 (cost 5)  |
-               |   ╲                | 4-3 (cost 1)  |
-              2    4---3            |               |
-                                    | TOTAL: $11    |
-                                    +--------------+
-```
+### 3. Reaching Every House
+We keep repeating this—checking the "fringe" of our network for the cheapest possible expansion—until every house is connected. By always taking the shortest leap, we ensure the total cost of all pipes combined is the lowest possible!
 
 ---
 
-## Prim's Growth Animation
+## 🧠 Prim's vs. Kruskal's: What's the difference?
+While both find the exact same "Minimum Spanning Tree," they have different styles. **Prim's** grows like a **plant** 🌱 from a single seed, always staying connected. **Kruskal's** builds **bridges** 🏝️ all over the ocean at once and merges them later. Both are smart, just different!
 
-```
-  Step 1:    {0}                -->  Connect cheapest neighbor
-  Step 2:    {0, 1}             -->  Connect cheapest neighbor
-  Step 3:    {0, 1, 2}          -->  Connect cheapest neighbor
-  Step 4:    {0, 1, 2, 4}       -->  Connect cheapest neighbor
-  Step 5:    {0, 1, 2, 4, 3}    -->  ALL CONNECTED! ✅
+---
 
-  MST grows like a plant — starting from a seed and reaching outward!
-```
 
 ---
 

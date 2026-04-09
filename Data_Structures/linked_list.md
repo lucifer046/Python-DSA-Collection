@@ -19,157 +19,42 @@ That's exactly how a **Linked List** works in a computer!
 
 ---
 
-## How Does a Node Look?
+## 🖼️ Visual Representation
 
-```
-+----------+----------+
-|  Value   |   Next   | ------> (points to the next node)
-|  (Data)  | (Pointer)|
-+----------+----------+
-```
+![Singly Linked List "Memory Bridge" Diagram](../docs/images/linked_list_diagram.png)
 
-Each node only knows **two things**: what it's holding, and who comes after it. That's it!
+> [!NOTE]
+> **Teacher's Perspective:** "Think of a **Treasure Hunt**! You find the first clue in a box (Node). That box gives you a piece of treasure (**Value**) and a slip of paper telling you exactly where to find the next box (**Next pointer**). You follow the clues from box to box until you find one that says 'The End' (Null). That's a Linked List—a chain where every piece knows only its value and its next neighbor!"
 
 ---
 
-## Building a Linked List — Step by Step
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-Let's say we want to store the numbers **10, 20, 30, 40, 50** in a linked list.
+Let's build a chain for the numbers: `[10, 20, 30]`
 
-### Step 1: Create the First Node (The Head)
+### 1. The Head (The First Clue)
+We start with a single box holding **10**. Since there are no other clues yet, its 'Next' pointer just says "None". We call this first box the **Head**—it's how we enter the list!
 
-```
-    HEAD
-     |
-     v
-  +------+------+
-  |  10  | None |
-  +------+------+
-```
+### 2. Adding a Link (Append)
+We want to add **20**. 
+- We walk to the Head (10).
+- We see its pointer is "None", so we know it's currently the last box.
+- We create a new box for **20** and make the 10-box point to it.
+- **Result:** `[10] -> [20] -> None`
 
-We start with just **one node** holding the value `10`. Since there's no one after it, the "Next" pointer says `None` (which means "end of the line").
-
-### Step 2: Append 20 (Add to the End)
-
-```
-    HEAD
-     |
-     v
-  +------+---+    +------+------+
-  |  10  | --|-> |  20  | None |
-  +------+---+    +------+------+
-```
-
-We walk to the end of the chain (node 10), and attach a new node with value `20`.
-
-### Step 3: Append 30, 40, 50
-
-```
-    HEAD
-     |
-     v
-  [ 10 | next ] -> [ 20 | next ] -> [ 30 | next ] -> [ 40 | next ] -> [ 50 | NULL ]
-```
-
-Now we have a **complete chain** of 5 nodes. The last node (50) has `None` — meaning there's nobody after it.
+### 3. The "Bypass" Trick (Delete)
+What if we want to remove **20**?
+- We find the box **before** 20 (which is 10).
+- We tell the 10-box: "Don't point to 20 anymore. Point to whatever 20 was pointing to (None)."
+- **Result:** `[10] -> None`. The 20-box is now disconnected and effectively gone!
 
 ---
 
-## How APPEND Works (Adding to the End)
-
-There are two styles used in the code:
-
-### Method 1: Recursive Append ("Pass the Parcel")
-
-Imagine you're at a birthday party and you want to put a gift at the end of a line of gifts. You ask the first person: _"Are you the last one?"_. If they say no, they **pass the question** to the next person. This continues until someone says _"Yes, I'm last!"_, and they place the gift.
-
-```
- "Am I last?" --> "Am I last?" --> "Am I last?" --> "YES! I'll take it!"
-
-  +------+---+    +------+---+    +------+------+    +------+------+
-  |  10  | --|-> |  20  | --|-> |  30  | None |--> |  40  | None | < NEW!
-  +------+---+    +------+---+    +------+------+    +------+------+
-```
-
-### Method 2: Iterative Append ("Walking")
-
-Instead of passing messages, you personally **walk** from the first node all the way to the last one, and then attach the new node yourself.
-
-```
-  Walker starts here --> walks --> walks --> reached the end! Attach new node!
-
-  +------+---+    +------+---+    +------+------+
-  |  10  | --|-> |  20  | --|-> |  30  | None |
-  +------+---+    +------+---+    +------+------+
-       [walk] --------> [walk] --------> [walk] arrived! > Attach [40]
-```
+## 🧠 Why is this useful?
+Unlike a normal list where everyone has to sit together in memory, a Linked List lets boxes be scattered **anywhere**! As long as every box has a reliable "clue" to the next one, the chain stays strong. This makes it super fast to add or remove things in the middle—you just change one pointer!
 
 ---
 
-## Insert at Front (Adding at the Beginning)
-
-What if we want to add a new number **at the very start** instead of the end?
-
-### Before:
-
-```
-    HEAD
-     |
-     v
-  +------+---+    +------+---+    +------+------+
-  |  10  | --|-> |  20  | --|-> |  30  | None |
-  +------+---+    +------+---+    +------+------+
-```
-
-### Insert value 5 at front:
-
-```
-    HEAD
-     |
-     v
-  [ 5 | next ] -> [ 10 | next ] -> [ 20 | next ] -> [ 30 | NULL ]
-    ^ NEW HEAD!
-```
-
-The trick used in the code is a **swap method**:
-
-1. Create a new node with the new value
-2. **Swap** the value of the head with the new node
-3. **Re-link** the pointers so the new node comes first
-
----
-
-## Delete a Node (Removing from the Chain)
-
-Let's say we want to **remove the value 30** from our chain.
-
-### Before:
-
-```
-  +------+---+    +------+---+    +------+---+    +------+------+
-  |  10  | --|-> |  20  | --|-> |  30  | --|-> |  40  | None |
-  +------+---+    +------+---+    +------+---+    +------+------+
-```
-
-### Step 1: Find 30
-
-We walk through the chain: 10 > 20 > **30 found!**
-
-### Step 2: Bypass it!
-
-We make node 20 point **directly** to node 40, skipping 30 entirely.
-
-### After:
-
-```
-  +------+---+    +------+---+    +------+------+
-  |  10  | --|-> |  20  | --|-> |  40  | None |
-  +------+---+    +------+---+    +------+------+
-
-                     +------+---+
-                        |  30  |   |  < Disconnected! Gone!
-                     +------+---+
-```
 
 ---
 

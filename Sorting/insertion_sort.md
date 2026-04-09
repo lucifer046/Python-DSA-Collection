@@ -13,111 +13,50 @@ You pick up cards one at a time. Each time you pick a new card, you **slide it l
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### Original List: `[12, 11, 13, 5, 6]`
+![Insertion Sort "Card Sliding" Diagram](../docs/images/insertion_sort_diagram.png)
 
----
-
-### Step 1: Start with the first number (12)
-
-```
-  SORTED   | UNSORTED
-  +----+   +----+----+----+----+
-  | 12 |   | 11 | 13 |  5 |  6 |
-  +----+   +----+----+----+----+
-    ✅       Pick next: 11
-```
-
-A single number is already "sorted" by itself!
-
-### Step 2: Pick 11 and INSERT it in the correct spot
-
-```
-  Pick up 11. Compare with 12.
-  11 < 12? YES > Slide 12 to the right, insert 11 before it.
-
-  +----+----+   +----+----+----+
-  | 11 | 12 |   | 13 |  5 |  6 |
-  +----+----+   +----+----+----+
-    ✅   ✅       Pick next: 13
-
-  Visualization of the slide:
-  [12, 11, ...]  >  11 picks up  >  12 slides right  >  11 drops in  >  [11, 12, ...]
-       ^ pick         [card]              -->               [v]
-```
-
-### Step 3: Pick 13 and INSERT
-
-```
-  Pick up 13. Compare with 12.
-  13 < 12? NO > 13 stays where it is!
-
-  +----+----+----+   +----+----+
-  | 11 | 12 | 13 |   |  5 |  6 |
-  +----+----+----+   +----+----+
-    ✅   ✅   ✅       Pick next: 5
-```
-
-### Step 4: Pick 5 and INSERT
-
-```
-  Pick up 5. Compare backwards:
-  5 < 13? YES > Slide 13 right
-  5 < 12? YES > Slide 12 right
-  5 < 11? YES > Slide 11 right
-  No more to check > Insert 5 at position 0!
-
-  Sliding animation:
-  [11, 12, 13,  5, ...]
-                ^ pick up 5 [card]
-  
-  [11, 12, __, 13, ...]  < 13 slides right
-  [11, __, 12, 13, ...]  < 12 slides right
-  [__, 11, 12, 13, ...]  < 11 slides right
-  [ 5, 11, 12, 13, ...]  < Insert 5! ✅
-
-  Result:
-  +----+----+----+----+   +----+
-  |  5 | 11 | 12 | 13 |   |  6 |
-  +----+----+----+----+   +----+
-    ✅   ✅   ✅   ✅       Pick next: 6
-```
-
-### Step 5: Pick 6 and INSERT
-
-```
-  Pick up 6. Compare backwards:
-  6 < 13? YES > Slide 13 right
-  6 < 12? YES > Slide 12 right
-  6 < 11? YES > Slide 11 right
-  6 < 5?  NO  > Insert 6 RIGHT HERE!
-
-  [ 5, __, 11, 12, 13]  
-  [ 5,  6, 11, 12, 13]  < Insert 6! ✅
-
-  FINAL RESULT:
-  +----+----+----+----+----+
-  |  5 |  6 | 11 | 12 | 13 |
-  +----+----+----+----+----+
-    ✅   ✅   ✅   ✅   ✅   ALL SORTED!
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you're playing a card game. You pick up cards one by one. Each time you get a new card, you **slide it left** through your hand until it finds its perfect spot between a smaller card and a larger one. By the time you've picked up all the cards, your hand is perfectly sorted!"
 
 ---
 
-## Summary of All Steps
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-```
-  Start:    [12, 11, 13,  5,  6]
-  
-  Step 1:   [12] 11, 13,  5,  6     < 12 is sorted by itself
-  Step 2:   [11, 12] 13,  5,  6     < 11 inserted before 12
-  Step 3:   [11, 12, 13]  5,  6     < 13 already in place
-  Step 4:   [ 5, 11, 12, 13]  6     < 5 inserted at the start
-  Step 5:   [ 5,  6, 11, 12, 13]    < 6 inserted after 5
-  
-  DONE! ✅
-```
+Let's sort these numbers: `[12, 11, 13, 5, 6]`
+
+### Step 1: Holding the first card
+- You hold **12**. A single card is already sorted!
+- **Hand:** `[12]` | Next card to pick: 11
+
+### Step 2: Picking 11
+- You pick up 11. Is 11 smaller than 12? **Yes!**
+- **Action:** Slide 12 to the right and drop 11 into the first spot.
+- **Hand:** `[11, 12]` | Next card to pick: 13
+
+### Step 3: Picking 13
+- You pick up 13. Is 13 smaller than 12? **No.**
+- **Action:** Keep 13 right where it is.
+- **Hand:** `[11, 12, 13]` | Next card: 5
+
+### Step 4: Picking 5 (The Big Slide)
+- You pick up 5. It's smaller than 13... smaller than 12... even smaller than 11!
+- **Action:** Everyone slides to the right to make room. 5 drops into the very first spot.
+- **Hand:** `[5, 11, 12, 13]` | Next card: 6
+
+### Step 5: Final Card (6)
+- Pick up 6. Smaller than 13, 12, 11... but BIGGER than 5.
+- **Action:** It slides past 13, 12, and 11, then settles right after 5.
+- **Final Hand:** `[5, 6, 11, 12, 13]` ✅ **Perfectly Sorted!**
+
+---
+
+## 🧠 Why is it called "Insertion" Sort?
+Because you take an item and **Insert** it into its correct position within the already-sorted part of the list. It's exactly how humans naturally sort things!
+
+---
+
 
 ---
 

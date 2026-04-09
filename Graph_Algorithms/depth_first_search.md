@@ -11,178 +11,43 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 
 ---
 
-## BFS vs DFS at a Glance
+## 🖼️ Visual Representation
 
-```
-  BFS (Breadth-First):                DFS (Depth-First):
-  Explores WIDE first                 Explores DEEP first
-  
-       0                                   0
-      / \                                  |
-     1   2    < Layer by Layer             1
-    / \ / \                                |
-   3   4        Visit: 0,1,2,3,4           3
-                                           |
-                                           4
-                                           (then backtrack and try 2)
-                                          Visit: 0,1,3,4,2
-```
+![DFS "Maze Explorer" Deep-First Diagram](../docs/images/dfs_diagram.png)
+
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you're exploring a **pitch-black maze** with only a ball of string. You enter a tunnel and keep walking **as deep as possible** until you hit a dead end. Then, you follow your string **backtrack** to the last fork in the road and try a different tunnel. You keep doing this—diving deep, then coming back—until you've touched every wall of the maze. **DFS** is that brave explorer who always wants to see how far the rabbit hole goes before looking at anything else!"
 
 ---
 
-## DFS Traversal — Step by Step
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-### The Graph:
-```
-       0 ------- 1
-       |        ╱ |
-       |      ╱   |
-       2          |
-       |          |
-       3 ------- 4
+Let's watch our explorer dive into a graph starting at Node **0**:
 
-  Adjacency List:
-  0: [1, 2]
-  1: [3, 4]
-  2: [4, 3]
-  3: [4]
-  4: []
-```
+### 1. The Strategy (The Stack)
+DFS is a "Go Deep First" strategy. It uses a **Stack** (Last-In, First-Out)—like a stack of heavy plates. You can only look at the plate on the very top. If you find a new path, you put a new plate on top and focus *only* on that until it's done.
 
-### Starting Node: **0**
+### 2. The Deep Dive
+- Start at Node 0. It has friends 1 and 2. 
+- We pick **1** and dive in! (Node 2 is left waiting on the stack).
+- From Node 1, we see friend 3. **Dive again!**
+- From Node 3, we see friend 4. **Dive again!**
+- Now at Node 4, there are no new friends. **Dead end!**
 
-**DFS uses a STACK (Last-In, First-Out)** — like a stack of plates!
+### 3. The Backtrack (The String)
+- We "pop" Node 4 off our stack and go back to Node 3.
+- Node 3 has no other friends. "Pop" it and go back to Node 1.
+- Node 1 has no other friends. "Pop" it and go back to Node 0.
+- **Wait!** Node 0 still has that friend **2** we ignored earlier. 
+- **Dive into 2!**
 
 ---
 
-### Step 1: Start at node 0, push it on the stack
-
-```
-  Stack:   [0]    < Push 0
-  Visited: {}
-
-       ★0 ------- 1
-       |        ╱ |
-       2          |
-       |          |
-       3 ------- 4
-
-  ★ = Next to process
-```
-
-### Step 2: Pop 0, visit it. Push its neighbors (1, 2)
-
-```
-  Stack:   [2, 1]    < Pushed 1 and 2 (1 is on top!)
-  Visited: {0}
-
-       ✅0 ------- ★1
-       |        ╱   |
-       ★2          |
-       |            |
-       3 ------- 4
-```
-
-### Step 3: Pop 1 (top of stack), visit it. Push its unvisited neighbors (3, 4)
-
-```
-  Stack:   [2, 4, 3]    < Pushed 3 and 4 (3 is on top!)
-  Visited: {0, 1}
-
-       ✅0 ------- ✅1
-       |        ╱    |
-       ★2           |
-       |             |
-       ★3 ------- ★4
-```
-
-### Step 4: Pop 3 (top), visit it. Push its unvisited neighbor (4)
-
-```
-  Stack:   [2, 4, 4]    < Pushed 4 (already in stack, but that's ok)
-  Visited: {0, 1, 3}
-
-       ✅0 ------- ✅1
-       |                |
-       ★2               |
-       |                |
-       ✅3 ------- ★4
-```
-
-### Step 5: Pop 4 (top), visit it. No unvisited neighbors.
-
-```
-  Stack:   [2, 4]
-  Visited: {0, 1, 3, 4}
-
-       ✅0 ------- ✅1
-       |                |
-       ★2               |
-       |                |
-       ✅3 ------- ✅4
-```
-
-### Step 6: Pop 4 again — already visited! Skip. Pop 2, visit it.
-
-```
-  Stack:   []    < EMPTY!
-  Visited: {0, 1, 3, 4, 2}
-
-       ✅0 ------- ✅1
-       |                |
-       ✅2              |
-       |                |
-       ✅3 ------- ✅4
-
-  DFS Order: 0 > 1 > 3 > 4 > 2
-```
+## 🧠 Why does DFS "backtrack"?
+Because DFS doesn't want to miss anything! Backtracking is how it says, "Okay, I've seen everything down *this* tunnel, now let me go back and check the other one I saw earlier." It's perfect for things like **solving puzzles** or **detecting if a road leads back in a circle (cycles)**.
 
 ---
 
-## DFS Path Visualization (Recursive Version)
-
-The recursive version uses the computer's built-in "call stack" — it's more elegant!
-
-```
-  Start: 0
-    |
-    +--> Visit 0, then go deeper into neighbor 1
-    |      |
-    |      +--> Visit 1, then go deeper into neighbor 3
-    |      |      |
-    |      |      +--> Visit 3, then go deeper into neighbor 4
-    |      |      |      |
-    |      |      |      +--> Visit 4 (no unvisited neighbors)
-    |      |      |           BACKTRACK! <--
-    |      |      |
-    |      |      +--> Neighbor 4? Already visited. BACKTRACK! <--
-    |      |
-    |      +--> Neighbor 4? Already visited. BACKTRACK! <--
-    |
-    +--> Go deeper into neighbor 2
-           |
-           +--> Visit 2, neighbor 4? Already visited.
-           |      neighbor 3? Already visited.
-           +--> BACKTRACK! <--
-
-  ALL DONE! ✅
-  
-  DFS Order: 0 > 1 > 3 > 4 > 2
-  Parent tree: {1: 0, 3: 1, 4: 3, 2: 0}
-```
-
-### The Parent Tree:
-```
-  "Who discovered whom?"
-
-       0           < Root (discovered itself)
-      / \
-     1   2         < 0 discovered both 1 and 2
-     |
-     3             < 1 discovered 3
-     |
-     4             < 3 discovered 4
-```
 
 ---
 

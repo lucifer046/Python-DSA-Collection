@@ -11,130 +11,44 @@ Imagine you're using **Google Maps** to find the fastest route from your home to
 
 ---
 
-## The Graph We'll Use
+## 🖼️ Visual Representation
 
-```
-          (4)           (5)
-    [0] --------- [1] --------- [3]
-     |             |             |
-    (2)           (1)           (2)
-     |             |             |
-    [2] -----------+           [4]
-     |                          |
-     |           (10)           |
-     +--------------------------+
+![Dijkstra's Shortest Path "GPS" Diagram](../docs/images/dijkstra_diagram.png)
 
-  Adjacency List & Costs:
-  Node 0: > 1(4), > 2(2)
-  Node 1: > 0(4), > 2(1), > 3(5)
-  Node 2: > 0(2), > 1(1), > 4(10)
-  Node 3: > 1(5), > 4(2)
-  Node 4: > 2(10), > 3(2)
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you're using **Google Maps** to get to a concert. There are many roads, but some have heavy traffic (high cost) and some are clear highways (low cost). **Dijkstra's Algorithm** is the brain inside your GPS! It starts at your house and 'explores' every road, but it's very smart—it always focuses on the path that currently has the **lowest total time**. This clever 'greedy' strategy ensures that when it finally reaches the concert hall, it has found the absolute fastest way to get there!"
 
 ---
 
-## Finding Shortest Path: 0 --> 4
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-### Step 1: Initialize — Everything starts at "infinity" (unknown)
+Let's find the shortest path from your House (0) to the Concert (4):
 
-```
-  +------+----------+---------+
-  | Node | Distance | Visited |
-  +------+----------+---------+
-  |  0   |    0     |   No    |  < Start here! Distance = 0
-  |  1   |    ∞     |   No    |
-  |  2   |    ∞     |   No    |
-  |  3   |    ∞     |   No    |
-  |  4   |    ∞     |   No    |
-  +------+----------+---------+
-```
+### 1. The Scoreboard (Initialization)
+Before we start, we write "Infinity" (∞) on every node because we don't know the cost yet. The only node we know is our House (0), which has a cost of **0**.
 
-### Step 2: Process node 0 (cheapest unvisited = 0 with distance 0)
+### 2. Checking the Neighbors
+- We look at the roads leading out of our House. Node 1 costs 4 minutes, and Node 2 costs 2 minutes.
+- We update our scoreboard: `Node 1 = 4`, `Node 2 = 2`.
+- **The Rule:** We *always* pick the cheapest unvisited node next. So, we go to **Node 2**!
 
-```
-  From node 0, we can reach:
-  • Node 1 via cost 4:  0 + 4 = 4   (4 < ∞? YES! Update!)
-  • Node 2 via cost 2:  0 + 2 = 2   (2 < ∞? YES! Update!)
+### 3. The "Wait, I Found a Shortcut!" (Relaxation)
+- From Node 2, we see a road to Node 1 that only costs 1 minute.
+- Now, think: We already knew a way to Node 1 that took 4 minutes (directly from House). 
+- But now we see: `House -> Node 2 -> Node 1` only takes `2 + 1 = 3` minutes!
+- **Scoreboard Update:** We erase "4" and write **"3"**. 
+- This update is called **Relaxation**—we've found a better, "more relaxed" way to get there!
 
-  +------+----------+---------+------------------------+
-  | Node | Distance | Visited | How we got there        |
-  +------+----------+---------+------------------------+
-  |  0   |    0     |   ✅    | Start                   |
-  |  1   |    4     |   No    | 0 > 1 (cost 4)         |
-  |  2   |    2     |   No    | 0 > 2 (cost 2)         |
-  |  3   |    ∞     |   No    |                         |
-  |  4   |    ∞     |   No    |                         |
-  +------+----------+---------+------------------------+
-```
+### 4. Reaching the Goal
+We keep picking the cheapest node and updating the scoreboard until we've visited our destination. The final number on the Concert (Node 4) is our guaranteed shortest time!
 
-### Step 3: Process node 2 (cheapest unvisited = 2 with distance 2)
+---
 
-```
-  From node 2, we can reach:
-  • Node 0: already visited, skip
-  • Node 1 via cost 1:  2 + 1 = 3   (3 < 4? YES! SHORTER PATH FOUND!)
-  • Node 3 via cost 8:  2 + 8 = 10  (10 < ∞? YES!)
-  • Node 4 via cost 10: 2 + 10 = 12 (12 < ∞? YES!)
+## 🧠 Why "Greedy" works here?
+Because Dijkstra *always* picks the shortest known path first, it builds the solution bit by bit. It's like building a puzzle where you only ever place the pieces that you're 100% sure about. By the time the puzzle is finished, you know it's perfect!
 
-  +------+----------+---------+------------------------+
-  | Node | Distance | Visited | How we got there        |
-  +------+----------+---------+------------------------+
-  |  0   |    0     |   ✅    | Start                   |
-  |  1   |    3 ⬇️  |   No    | 0 > 2 > 1 (cost 2+1)  |
-  |  2   |    2     |   ✅    | 0 > 2 (cost 2)         |
-  |  3   |   10     |   No    | 0 > 2 > 3 (cost 2+8)  |
-  |  4   |   12     |   No    | 0 > 2 > 4 (cost 2+10) |
-  +------+----------+---------+------------------------+
+---
 
-  ⬇️ = Distance was REDUCED! This is called "RELAXATION"
-```
-
-### Step 4: Process node 1 (cheapest unvisited = 1 with distance 3)
-
-```
-  From node 1, we can reach:
-  • Node 0: already visited, skip
-  • Node 2: already visited, skip
-  • Node 3 via cost 5:  3 + 5 = 8   (8 < 10? YES! SHORTER PATH FOUND!)
-
-  +------+----------+---------+------------------------+
-  | Node | Distance | Visited | How we got there        |
-  +------+----------+---------+------------------------+
-  |  0   |    0     |   ✅    | Start                   |
-  |  1   |    3     |   ✅    | 0 > 2 > 1              |
-  |  2   |    2     |   ✅    | 0 > 2                   |
-  |  3   |    8 ⬇️  |   No    | 0 > 2 > 1 > 3 (2+1+5) |
-  |  4   |   12     |   No    | 0 > 2 > 4              |
-  +------+----------+---------+------------------------+
-```
-
-### Step 5: Process node 3 (cheapest unvisited = 3 with distance 8)
-
-```
-  From node 3, we can reach:
-  • Node 4 via cost 2:  8 + 2 = 10   (10 < 12? YES! SHORTER PATH FOUND!)
-
-  +------+----------+---------+------------------------------+
-  | Node | Distance | Visited | How we got there              |
-  +------+----------+---------+------------------------------+
-  |  0   |    0     |   ✅    | Start                         |
-  |  1   |    3     |   ✅    | 0 > 2 > 1                    |
-  |  2   |    2     |   ✅    | 0 > 2                         |
-  |  3   |    8     |   ✅    | 0 > 2 > 1 > 3                |
-  |  4   |   10 ⬇️  |   No    | 0 > 2 > 1 > 3 > 4 (2+1+5+2)|
-  +------+----------+---------+------------------------------+
-```
-
-### Step 6: Process node 4 — This is our DESTINATION! 🎉
-
-```
-  SHORTEST PATH FROM 0 TO 4:
-  
-  0 --(2)--> 2 --(1)--> 1 --(5)--> 3 --(2)--> 4
-  
-  Total Cost: 2 + 1 + 5 + 2 = 10 ✅
-```
 
 ---
 

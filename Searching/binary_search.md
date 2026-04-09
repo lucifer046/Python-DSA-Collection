@@ -15,94 +15,42 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### The Sorted List:
-```
-  Index:   0    1    2    3    4    5    6    7    8    9
-        +----+----+----+----+----+----+----+----+----+----+
-  List: |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
-        +----+----+----+----+----+----+----+----+----+----+
-```
+![Binary Search Halving Diagram](../docs/images/binary_search_diagram.png)
 
-### Goal: Find the number **23**
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you're looking for a name in a thick phone book. You don't start at page 1, right? You open it to the **Middle**. If the name starts with 'S' and the middle page is 'M', you know for a fact that 'S' must be in the second half. You just **threw away half the book** in one second! You keep doing this until you're looking at the exact name you want."
 
 ---
 
-### Step 1: Look at the FULL list
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-```
-  start = 0                                          end = 9
-    |                                                  |
-    v                                                  v
-  +----+----+----+----+----+----+----+----+----+----+
-  |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
-  +----+----+----+----+----+----+----+----+----+----+
-                        ^
-                   middle = 4
-                   value = 16
+Let's find the number **23** in this sorted list: `[2, 5, 8, 12, 16, 23, 38, 56, 72, 91]`
 
-  Question: Is 16 == 23?  NO.
-  Question: Is 16 < 23?   YES > Target is in the RIGHT half!
-  Action:   Move start to middle + 1 = 5
-```
+### Step 1: The First Cut
+- we look at the whole list (10 items).
+- The **Middle** is 16.
+- **Question:** Is 16 the same as 23? **No.**
+- **Decision:** 16 is smaller than 23, so our target must be in the **Right Half**.
+- **Action:** Throw away all numbers from 16 to the left!
 
-### Step 2: Search the RIGHT half only
+### Step 2: The Second Cut
+- Now we only care about: `[23, 38, 56, 72, 91]`.
+- The **Middle** of this new group is 56.
+- **Question:** Is 56 the same as 23? **No.**
+- **Decision:** 56 is bigger than 23, so our target must be in the **Left Half** of this group.
+- **Action:** Throw away 56 and everything to its right!
 
-```
-                              start = 5                end = 9
-                                |                        |
-                                v                        v
-  +----+----+----+----+----+----+----+----+----+----+
-  |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
-  +----+----+----+----+----+----+----+----+----+----+
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░         ^
-    (ignored — thrown away!)      middle = 7
-                                 value = 56
-
-  Question: Is 56 == 23?  NO.
-  Question: Is 56 > 23?   YES > Target is in the LEFT half!
-  Action:   Move end to middle - 1 = 6
-```
-
-### Step 3: Search an even smaller section
-
-```
-                              start = 5   end = 6
-                                |           |
-                                v           v
-  +----+----+----+----+----+----+----+----+----+----+
-  |  2 |  5 |  8 | 12 | 16 | 23 | 38 | 56 | 72 | 91 |
-  +----+----+----+----+----+----+----+----+----+----+
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░    ^
-                             middle = 5
-                            value = 23
-
-  Question: Is 23 == 23?  YES!!
-  FOUND IT at index 5!
-```
+### Step 3: Success!
+- Now we're looking at: `[23, 38]`.
+- The **Middle** calculation lands us right on 23.
+- **Result:** **FOUND IT!** 23 is at index 5.
 
 ---
 
-## The "Halving" Effect — Why It's So Fast
-
-```
-  Step 1:  Search 10 items     ------------------------------
-  Step 2:  Search 5 items      ---------------
-  Step 3:  Search 2 items      ------
-  FOUND!
-
-  Total steps: Just 3! (instead of checking all 10 one by one)
-```
-
-### How many steps for bigger lists?
-
-| List Size | Linear Search (One-by-One) | Binary Search (Halving) |
-|---|---|---|
-| 10 items | Up to 10 checks | Up to 4 checks |
-| 1,000 items | Up to 1,000 checks | Up to 10 checks |
-| 1,000,000 items | Up to 1,000,000 checks | Up to 20 checks |
-| 1,000,000,000 items | Up to 1 billion checks | Up to **30 checks**! |
+## 🧠 Why is it so fast?
+Binary Search is like a superpower. Every time you make a comparison, you **destroy half the problem**. Even if you had a list of **one billion** items, you would find your target in only **30 steps**!
 
 ---
 

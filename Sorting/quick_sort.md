@@ -16,125 +16,39 @@ Imagine you're a teacher sorting students by **height**. You pick **one student*
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### Original List: `[10, 80, 30, 90, 40, 50, 70]`
+![Quick Sort Partitioning Diagram](../docs/images/quick_sort_diagram.png)
 
----
-
-### Pass 1: Partition around the first element (Pivot = 10)
-
-```
-  Pivot = 10
-  +----+----+----+----+----+----+----+
-  | 10 | 80 | 30 | 90 | 40 | 50 | 70 |
-  +----+----+----+----+----+----+----+
-    ^ PIVOT
-  
-  Scan all elements:
-  80 > 10 > stays right ✓
-  30 > 10 > stays right ✓
-  90 > 10 > stays right ✓
-  40 > 10 > stays right ✓
-  50 > 10 > stays right ✓
-  70 > 10 > stays right ✓
-  
-  Nothing is smaller than 10, so 10 goes to position 0!
-  
-  Result:
-  +----+ +----+----+----+----+----+----+
-  | 10 | | 80 | 30 | 90 | 40 | 50 | 70 |
-  +----+ +----+----+----+----+----+----+
-    ✅      (now sort this part)
-  
-  [PIVOT IS IN ITS FINAL SPOT!]
-```
-
-### Pass 2: Partition the right section (Pivot = 80)
-
-```
-  Pivot = 80
-  +----+----+----+----+----+----+
-  | 80 | 30 | 90 | 40 | 50 | 70 |
-  +----+----+----+----+----+----+
-    ^ PIVOT
-
-  Scan:
-  30 ≤ 80 > Move to left section ✓
-  90 > 80 > stays right ✓
-  40 ≤ 80 > Move to left section ✓
-  50 ≤ 80 > Move to left section ✓
-  70 ≤ 80 > Move to left section ✓
-  
-  After partition:
-  +----+----+----+----+ +----+ +----+
-  | 30 | 40 | 50 | 70 | | 80 | | 90 |
-  +----+----+----+----+ +----+ +----+
-    (sort this)          ✅ (sort this)
-  
-                    [PIVOT IN FINAL SPOT!]
-```
-
-### The process continues recursively...
-
-```
-  [30, 40, 50, 70] > Pivot=30 > [30] [40, 50, 70]
-  [40, 50, 70]     > Pivot=40 > [40] [50, 70]
-  [50, 70]         > Pivot=50 > [50] [70]
-```
-
-### Final Sorted List:
-```
-  +----+----+----+----+----+----+----+
-  | 10 | 30 | 40 | 50 | 70 | 80 | 90 |
-  +----+----+----+----+----+----+----+
-    ✅   ✅   ✅   ✅   ✅   ✅   ✅
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Look at the diagram above. The **Pivot** (gold) is the middle-ground student we picked. Notice how everyone shorter (to the left) and everyone taller (to the right) is organized around them. Once this step is done, the Pivot doesn't need to move ever again—they are in their final, perfect spot!"
 
 ---
 
-## How Partitioning Works (The Core Magic)
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-Let's zoom into one partition step with a clearer example:
+Let's walk through an example. If we have a list of students with heights `[10, 80, 30, 90, 40, 50, 70]`:
 
-### Partition `[50, 30, 80, 20, 70, 40]` with Pivot = 50
+### Pass 1: Choosing a Leader (Pivot)
+We pick the first student, **10**, as our Pivot. 
+- We scan the rest of the line. 
+- Since **10** is the shortest already, everyone else naturally stays to its right.
+- **Result:** `[10]` is locked in. Now we focus on `[80, 30, 90, 40, 50, 70]`.
 
-```
-  Step 0:  Pivot = 50, boundary at position 0
-           [50, 30, 80, 20, 70, 40]
-            ^P  ^scan
-            B=0
+### Pass 2: The Next Group
+We pick **80** as the new leader for this group.
+- **Shorty Check:** 30, 40, 50, and 70 are all shorter than 80. They move to the **LEFT** of 80.
+- **Tall Check:** 90 is taller than 80. It stays to the **RIGHT**.
+- **Result:** `[30, 40, 50, 70]` < **80** > `[90]`. 
+- Now **80** and **90** are perfectly placed!
 
-  Step 1:  30 ≤ 50 > Move boundary right, swap
-           [50, 30, 80, 20, 70, 40]
-                 ^B  ^scan
+### Pass 3: Finishing Up
+We repeat this for the small group `[30, 40, 50, 70]` until everyone is standing in line perfectly from shortest to tallest.
 
-  Step 2:  80 > 50 > Do nothing
-           [50, 30, 80, 20, 70, 40]
-                 ^B      ^scan
+---
 
-  Step 3:  20 ≤ 50 > Move boundary right, swap 80 and 20
-           [50, 30, 20, 80, 70, 40]
-                     ^B      ^scan
-
-  Step 4:  70 > 50 > Do nothing
-           [50, 30, 20, 80, 70, 40]
-                     ^B          ^scan
-
-  Step 5:  40 ≤ 50 > Move boundary right, swap 80 and 40
-           [50, 30, 20, 40, 70, 80]
-                         ^B      
-
-  Final:   Swap Pivot(50) with boundary position(40)
-           [40, 30, 20, 50, 70, 80]
-                         ^
-                    PIVOT IS HERE!
-                    (Perfect spot!)
-
-  Result:  [40, 30, 20] < 50 > [70, 80]
-             LEFT SIDE    ^    RIGHT SIDE
-                        PIVOT
-```
+## 🧠 Why does this work so well?
+Quick Sort is like a delegator. Instead of trying to sort 100 people at once, it picks one person to divide the group into two smaller, easier-to-manage groups. It keeps doing this until the groups are so small (1 person) that they are already "sorted"!
 
 ---
 

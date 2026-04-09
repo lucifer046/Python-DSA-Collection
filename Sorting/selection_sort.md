@@ -17,111 +17,48 @@ Imagine you have a messy hand of **playing cards**. To sort them:
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### Original List: `[64, 25, 12, 22, 11]`
+![Selection Sort "Minimum Finder" Diagram](../docs/images/selection_sort_diagram.png)
 
----
-
-### Pass 1: Find the smallest in the ENTIRE list
-
-```
-  UNSORTED (everything)
-  +----+----+----+----+----+
-  | 64 | 25 | 12 | 22 | 11 |
-  +----+----+----+----+----+
-    ^                    ^
-  start                smallest = 11 (at index 4)
-
-  ACTION: Swap 64 and 11
-
-  Result:
-  SORTED | UNSORTED
-  +----+ +----+----+----+----+
-  | 11 | | 25 | 12 | 22 | 64 |
-  +----+ +----+----+----+----+
-    ✅
-```
-
-### Pass 2: Find the smallest in the UNSORTED part
-
-```
-  SORTED | UNSORTED
-  +----+ +----+----+----+----+
-  | 11 | | 25 | 12 | 22 | 64 |
-  +----+ +----+----+----+----+
-           ^    ^
-         start  smallest = 12 (at index 2)
-
-  ACTION: Swap 25 and 12
-
-  Result:
-  SORTED      | UNSORTED
-  +----+----+ +----+----+----+
-  | 11 | 12 | | 25 | 22 | 64 |
-  +----+----+ +----+----+----+
-    ✅   ✅
-```
-
-### Pass 3: Find the smallest again
-
-```
-  SORTED      | UNSORTED
-  +----+----+ +----+----+----+
-  | 11 | 12 | | 25 | 22 | 64 |
-  +----+----+ +----+----+----+
-                ^    ^
-              start  smallest = 22 (at index 3)
-
-  ACTION: Swap 25 and 22
-
-  Result:
-  SORTED           | UNSORTED
-  +----+----+----+ +----+----+
-  | 11 | 12 | 22 | | 25 | 64 |
-  +----+----+----+ +----+----+
-    ✅   ✅   ✅
-```
-
-### Pass 4: Almost done!
-
-```
-  SORTED           | UNSORTED
-  +----+----+----+ +----+----+
-  | 11 | 12 | 22 | | 25 | 64 |
-  +----+----+----+ +----+----+
-                      ^
-                smallest = 25 (already in place!)
-
-  Result:
-  SORTED                | UNSORTED
-  +----+----+----+----+ +----+
-  | 11 | 12 | 22 | 25 | | 64 |
-  +----+----+----+----+ +----+
-    ✅   ✅   ✅   ✅
-```
-
-### Final Result:
-```
-  ALL SORTED! ✅
-  +----+----+----+----+----+
-  | 11 | 12 | 22 | 25 | 64 |
-  +----+----+----+----+----+
-    ✅   ✅   ✅   ✅   ✅
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine you have a row of students of different heights. You walk down the line, starting from the first student, looking for the absolute **shortest** one. Once you find them, you swap them with the first person in line. Now, that first spot is 'solved'! You repeat this for the rest of the line until everyone is perfectly organized."
 
 ---
 
-## Visual Summary of All Passes
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-```
-  Pass 1:  [64, 25, 12, 22, 11]  > Find min(11) > Swap with 64  > [11, 25, 12, 22, 64]
-  Pass 2:  [11, 25, 12, 22, 64]  > Find min(12) > Swap with 25  > [11, 12, 25, 22, 64]
-  Pass 3:  [11, 12, 25, 22, 64]  > Find min(22) > Swap with 25  > [11, 12, 22, 25, 64]
-  Pass 4:  [11, 12, 22, 25, 64]  > Find min(25) > Already there > [11, 12, 22, 25, 64]
-  
-  DONE! ✅  [11, 12, 22, 25, 64]
-```
+Let's sort these numbers: `[64, 25, 12, 22, 11]`
+
+### Pass 1: The First Scan
+- We look at everyone: 64, 25, 12, 22, 11.
+- **Winner:** 11 is the smallest!
+- **Action:** Swap 11 with the first person (64).
+- **Current Row:** `[11]` | `25, 12, 22, 64` (11 is now in his permanent home!)
+
+### Pass 2: The Second Scan
+- We ignore 11 and look at: 25, 12, 22, 64.
+- **Winner:** 12 is the smallest here.
+- **Action:** Swap 12 with the first person in the *unsorted* part (25).
+- **Current Row:** `[11, 12]` | `25, 22, 64`
+
+### Pass 3: Keep it Going
+- Scan 25, 22, 64.
+- **Winner:** 22.
+- **Action:** Swap 22 with 25.
+- **Current Row:** `[11, 12, 22]` | `25, 64`
+
+### Pass 4 & 5: Finishing Up
+- We see 25 is smaller than 64, so it stays. Finally, 64 is the last man standing.
+- **Final Result:** `[11, 12, 22, 25, 64]` ✅ **All Sorted!**
+
+---
+
+## 🧠 Why is it called "Selection" Sort?
+Because at every step, your only job is to **Select** the smallest remaining item and put it in the next available spot. It's like picking the best fruit from a basket one by one!
+
+---
+
 
 ---
 

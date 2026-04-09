@@ -23,106 +23,43 @@ Imagine a room full of **strangers** at a party. As people talk, they start form
 
 ---
 
-## Step-by-Step Example
+## 🖼️ Visual Representation
 
-### Start: Everyone is Alone (14 people: 0 to 13)
+![Union-Find "Islands and Bridges" Diagram](../docs/images/union_find_diagram.png)
 
-At the beginning, **everyone is their own leader**. Each person is a team of ONE.
-
-```
-  Person:  0   1   2   3   4   5   6   7   8   9  10  11  12  13
-  Leader:  0   1   2   3   4   5   6   7   8   9  10  11  12  13
-           ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^
-         (each person is their own boss)
-```
-
-```
-  (o)0  (o)1  (o)2  (o)3  (o)4  (o)5  (o)6  (o)7  (o)8  (o)9  (o)10  (o)11  (o)12  (o)13
- (14 individual islands)
-```
-
-### Friendship Link: UNION(0, 1) — Person 0 and 1 become friends
-
-```
-  BEFORE:                       AFTER:
-  (o)0  (o)1                     [ Team 0 ]
-                                 |  (o)0  |
-                       ------>   |  (o)1  |
-  Leader of 0: 0                   Leader of 0: 0
-  Leader of 1: 1                   Leader of 1: 0  < Changed!
-```
-
-### More Friendships: UNION(0, 2) and UNION(1, 3)
-
-```
-     [ Team 0 ]
-     | (o)0 (Boss)|
-     | (o)1       |
-     | (o)2       |
-     | (o)3       |
-```
-
-Now, person 0, 1, 2, and 3 all have the **same leader: 0**.
-
-### After ALL friendship links are processed:
-
-```
-  Friendship links:
-  (0,1) (0,2) (1,3) (2,3) (3,4) (4,5)
-  (5,6) (6,7) (7,8) (8,9) (9,10)
-  (10,11) (11,12) (12,13) (1,13)
-
-    [ Team 0 (Leader: 0) ]
-    | (o)0  (o)1  (o)2  (o)3  (o)4  (o)5  (o)6  (o)7  |
-    | (o)8  (o)9  (o)10 (o)11 (o)12 (o)13             |
-
-  Everyone ends up in ONE big group!
-```
+> [!NOTE]
+> **Teacher's Perspective:** "Imagine a sea full of tiny **Islands** (individual pieces of data). At first, every island is its own kingdom, and every person is their own **King** (the Representative). But as we build **Bridges** (Union), many islands merge into one big country. Now, if you ask any person on an island 'Who is your King?', they'll all point to the same person at the very top of their country! That is **Union-Find**—managing who belongs to which kingdom."
 
 ---
 
-## The Smart Trick: Union by Rank (Size)
+## 🎓 Step-by-Step Breakdown (Teacher's Guide)
 
-When merging two groups, we always make the **smaller group** join the **larger group**. This keeps things fast!
+Let's see how we manage our kingdoms:
 
-### Without Smart Merging (Bad):
-```
-  Small group   joins   Big group         Result: Tall tree (slow!)
-       (o)                 (o)
-       |           +      |
-       (o)                 (o)
-                          |
-                          (o)
-                          |
-                          (o)       < Very tall! Slow to find leader!
-```
+### 1. The Starting Line (Everyone is a King)
+Initially, every person (0, 1, 2, 3...) is a separate island. If you ask person 5, "Who is your leader?", they say "I am!".
 
-### With Smart Merging (Good — Union by Rank):
-```
-  Small group   joins   Big group         Result: Flat tree (fast!)
-       (o)                 (o)
-                          +--+--+
-                          (o) (o) (o)    < Flat! Quick to find leader!
-```
+### 2. Building a Bridge (Union)
+We decide to join person **0** and person **1**. 
+- We look at their leaders.
+- Since they are both currently kings, we pick one (let's say 0) to be the **New King**.
+- Now person 1 works for person 0.
+- **Action:** `Union(0, 1)`. Result: `[1] -> [0]`.
 
-> The flatter the tree, the faster we can find any person's leader!
+### 3. Finding the Boss (Find)
+What if we want to know if person **5** is in the same kingdom as person **0**?
+- We follow the chain of bosses for person 5.
+- "5 points to 3... 3 points to 1... 1 points to 0... 0 points to HIMSELF!"
+- So, **0 is the King of 5**.
+- Since 0 is also the King of 0, we know **0 and 5 are in the same kingdom!**
 
 ---
 
-## How FIND Works
+## 🧠 Why is "Union by Rank" the Secret Power?
+If we just blindly join islands, we might get one long, vertical line of bosses. That would be slow to climb! **Union by Rank** is a rule where we always make the **Smaller Kingdom** join the **Larger Kingdom**. This keeps the kingdom 'flat' and the climb to the King super fast!
 
-To find someone's leader, we just follow the chain of "who is your boss?" until we reach someone who is their **own boss**.
+---
 
-```
-  "Who is Person 5's leader?"
-
-  Person 5 > "My boss is Person 3"
-  Person 3 > "My boss is Person 1"
-  Person 1 > "My boss is Person 0"
-  Person 0 > "I AM my own boss!"  < This is the LEADER!
-
-  Answer: Person 0 is the leader of Person 5's group!
-```
 
 ---
 

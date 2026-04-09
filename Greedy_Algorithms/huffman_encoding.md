@@ -96,13 +96,13 @@ Start with every character as a **leaf node** sorted by frequency:
 
 **Round 4 (Final):** Merge the last two:
 ```
-              [ROOT:17]
-             ╱          ╲
-          [de:6]      [cba:11]
-         ╱     ╲      ╱      ╲
-      [d:3]  [e:3]  [cb:5]  [a:6]
-                    ╱      ╲
-                 [c:2]    [b:3]
+               [ROOT:17]
+              ╱          ╲
+           [de:6]      [cba:11]
+          ╱     ╲      ╱      ╲
+       [d:3]  [e:3]  [cb:5]  [a:6]
+                     ╱      ╲
+                  [c:2]    [b:3]
 ```
 
 ### Step 3: Assign codes by tracing paths
@@ -110,13 +110,13 @@ Start with every character as a **leaf node** sorted by frequency:
 **Rule:** Going **LEFT** = add **0**, Going **RIGHT** = add **1**
 
 ```
-              [ROOT]
-             ╱   0   ╲   1
-          [de]         [cba]
-        ╱ 0  ╲ 1     ╱ 0   ╲ 1
-      [d]    [e]   [cb]     [a]
-                  ╱ 0  ╲ 1
-                [c]    [b]
+               [ROOT]
+              ╱   0   ╲   1
+           [de]         [cba]
+         ╱ 0  ╲ 1     ╱ 0   ╲ 1
+       [d]    [e]   [cb]     [a]
+                   ╱ 0  ╲ 1
+                 [c]    [b]
   
   Tracing paths from ROOT:
   d: LEFT, LEFT         > Code: 00
