@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Python DSA Collection
+=======
+# 🐍 Python DSA Collection
+>>>>>>> b9ad0103a16bcb39ee971541cd6b5aeeb4264e2c
 
 > **Intuitive algorithm visualizations, interactive simulations, and standardized implementations.**
 
@@ -6,7 +10,7 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 A standardized collection of **Data Structures and Algorithms** in Python, designed for clarity and academic rigor.
 
@@ -19,9 +23,14 @@ Each entry includes:
 ---
 
 ## Key Resources
+<<<<<<< HEAD
 
 ### 1. Interactive Handbook
 
+=======
+
+### 1. Interactive Handbook
+>>>>>>> b9ad0103a16bcb39ee971541cd6b5aeeb4264e2c
 An immersive web-based experience for deep algorithm focus.
 
 - **Dual-Pane Layout**: Side-by-side theory and implementation.
@@ -30,7 +39,10 @@ An immersive web-based experience for deep algorithm focus.
 - **Mathematical Rendering**: Professional typography via MathJax.
 
 ### 2. PDF Revision Guide
+<<<<<<< HEAD
 
+=======
+>>>>>>> b9ad0103a16bcb39ee971541cd6b5aeeb4264e2c
 A data-driven summary of 23+ algorithms, optimized for technical interview preparation.
 
 - **Condensed Insights**: Core mechanisms and complexity tables at a glance.
