@@ -1,85 +1,63 @@
-# 🚀 Python DSA Collection: Standardized & Educational
+# 🚀 Python DSA Collection
 
-> **Elevate your algorithm intuition with premium visuals, interactive simulations, and standardized implementations.**
+> **Intuitive algorithm visualizations, interactive simulations, and standardized implementations.**
 
-[**🌐 Open Interactive DSA Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**📜 Download Premium Revision PDF**](./DSA_Cheatsheet.pdf)
-
----
-
-## 📖 Project Overview
-
-This repository is a professionally standardized collection of **essential Data Structures and Algorithms** implemented in Python. It is specifically crafted for students and beginners, focusing on clarity, intuition, and academic rigor.
-
-Every algorithm follows a uniform structure:
-1. **Theory & Concept:** Detailed high-level explanations and real-life analogies.
-2. **Complexity Analysis:** Best, Worst, and Average case time complexity tables.
-3. **Double Implementation:** 
-   - **Educational:** Exhaustive line-by-line comments.
-   - **Compact:** Short-form, production-ready versions.
+[**🌐 Interactive Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**📜 Revision PDF**](./DSA_Cheatsheet.pdf)
 
 ---
 
-## ✨ Premium Features
+## 📖 Overview
 
-### 1. 📘 Interactive DSA Handbook
-A web-based, immersive learning experience designed for deep focus.
-- **Dual-Pane Interface**: Read conceptual theory and study implementation code simultaneously.
-- **X-Ray Code View**: Interactive variable tooltips that explain local state during execution.
-- **Premium Visuals**: Custom high-fidelity diagrams (AVL Rotations, D&C Strips, Graph Traversals).
-- **Mathematical Rendering**: Textbook-quality formula rendering using MathJax.
+A standardized collection of **Data Structures and Algorithms** in Python, designed for clarity and academic rigor.
 
-### 2. 📑 Premium PDF Revision Guide
-A high-readability, data-driven revision guide covering 23+ algorithms, optimized for technical interview preparation.
-- **Detailed Content**: "Designed For," "Practical Use," "Mechanism," and full Complexity Tables.
-- **Dynamic Generation**: Automatically synced with the repository core data.
+Each entry includes:
+- **Theory & Concept**: High-level explanations and real-life analogies.
+- **Complexity Analysis**: Detailed time/space complexity tables.
+- **Implementations**: Educational (fully documented) and Compact (production-ready) versions.
 
 ---
 
-## 🛠️ Repository Organization
+## ✨ Key Resources
 
-The collection is organized into logical modules for easy navigation:
+### 1. 📘 Interactive Handbook
+An immersive web-based experience for deep algorithm focus.
+- **Dual-Pane Layout**: Side-by-side theory and implementation.
+- **X-Ray View**: Interactive tooltips explaining variable states.
+- **High-Fidelity Visuals**: Technical diagrams for complex logic (AVL, Graphs, D&C).
+- **Mathematical Rendering**: Professional typography via MathJax.
+
+### 2. 📑 PDF Revision Guide
+A data-driven summary of 23+ algorithms, optimized for technical interview preparation.
+- **Condensed Insights**: Core mechanisms and complexity tables at a glance.
+- **Auto-Sync**: Automatically generated from the repository core data.
+
+---
+
+## 🛠️ Repository Map
 
 ### 📁 [Data Structures](./Data_Structures/)
-- **Stack & Queue:** LIFO/FIFO implementations.
-- **Linked Lists:** Head/Node pattern structures.
-- **Union-Find:** Disjoint set management with path compression.
+Fundamental units: Stacks, Queues, Linked Lists, and Union-Find.
 
 ### 📁 [Sorting Algorithms](./Sorting/)
-- **Simple Sorts:** Insertion and Selection sort.
-- **Advanced Sorts:** Merge Sort and Quick Sort (Standard & Median-of-Medians).
+Standard and recursive: Merge Sort, Quick Sort, and classical comparison sorts.
 
 ### 📁 [Searching Algorithms](./Searching/)
-- **Binary Search:** Iterative and Recursive halving.
-- **AVL Tree:** Self-balancing Binary Search Tree for guaranteed efficiency.
+Efficiency-focused: Binary Search and self-balancing AVL Trees.
 
 ### 📁 [Graph Algorithms](./Graph_Algorithms/)
-- **Traversals:** BFS and DFS (Iterative/Recursive).
-- **Shortest Paths:** Dijkstra, Bellman-Ford, and Floyd-Warshall.
-- **MST & Flows:** Kruskal’s, Prim’s, and Topological Sort.
+Networks & Paths: Dijkstra, Bellman-Ford, Floyd-Warshall, MSTs, and flows.
 
 ### 📁 [Divide & Conquer](./Divide_and_Conquer/)
-- **Fast Multiply:** Karatsuba’s Integer Multiplication.
-- **Geometry:** Closest Pair of Points (O(n log n)).
-- **Statistics:** QuickSelect / FastSelect (Median-of-Medians).
+Optimized math & geometry: Karatsuba, Closest Pair, and QuickSelect.
 
 ---
 
-## ✨ Standardized Coding Style
+## 🎓 Learning Path
 
-All Python files adhere to a strict educational standard:
-- **Concise Variables:** Uses industry-standard short-form names (e.g., `l` for left, `r` for right) to mirror academic pseudo-code.
-- **Line-by-Line Documentation:** Every single line of code is explained with a comment.
-- **Theoretical Headers:** Every file starts with a complete conceptual overview and real-life use cases.
-
----
-
-## 🎓 Recommended Learning Path
-
-1. **Start with the Handbook:** Launch the [Live Site](https://lucifer046.github.io/Python-DSA-Collection/) to grasp the intuition through visuals.
-2. **Study the Code:** Read the `.py` files, focusing on the comments to trace the execution flow.
-3. **Experiment:** Change input variables like `L` or `G` and observe how the logic adapts.
-4. **Final Review:** Use the [PDF Cheatsheet](./DSA_Cheatsheet.pdf) to solidify your memory of edge cases and complexities.
+1. **Visualize**: Use the [Handbook](https://lucifer046.github.io/Python-DSA-Collection/) to grasp algorithm intuition.
+2. **Implementation**: Trace the documented `.py` files to understand line-by-line logic.
+3. **Solidify**: Use the [Revision PDF](./DSA_Cheatsheet.pdf) for complexities and edge cases.
 
 ---
 
-Created with ❤️ by **Divya Prakash**
+Created by **Divya Prakash**
