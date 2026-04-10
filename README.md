@@ -1,4 +1,4 @@
-# 🚀 Python DSA Collection
+# 🐍 Python DSA Collection
 
 > **Intuitive algorithm visualizations, interactive simulations, and standardized implementations.**
 
