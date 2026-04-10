@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA HandBook</title>
+  <link rel="icon" type="image/png" href="book/assets/logo.png">
+  <meta name="description" content="A premium, interactive manual for mastering Data Structures and Algorithms with Python.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lucifer046.github.io/Python-DSA-Collection/">
+  <meta property="og:title" content="DSA HandBook">
+  <meta property="og:description" content="Interactive DSA learning experience with premium visuals and Python implementations.">
+  <meta property="og:image" content="https://lucifer046.github.io/Python-DSA-Collection/book/assets/preview.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lucifer046.github.io/Python-DSA-Collection/">
+  <meta property="twitter:title" content="DSA HandBook">
+  <meta property="twitter:description" content="Interactive DSA learning experience with premium visuals and Python implementations.">
+  <meta property="twitter:image" content="https://lucifer046.github.io/Python-DSA-Collection/book/assets/preview.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Prism CSS (Dark theme for high contrast) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  
+  <!-- Custom Aesthetics -->
+  <link rel="stylesheet" href="book/style.css">
+  
+</head>
+<body>
+
+  <!-- Top Bar Layout (Focus Mode Activation) -->
+  <header>
+    <div class="header-left">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <span>Topics</span>
+      </button>
+      <div class="brand">
+        <img src="book/assets/logo.png" alt="Logo" class="brand-logo">
+        <span class="brand-title">DSA HANDBOOK</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fullscreen Modal Navigation -->
+  <div id="sidebar-overlay" class="sidebar-overlay">
+    <div class="menu-container">
+      <button class="close-menu" onclick="toggleMenu()">
+        <i data-lucide="x" width="32" height="32"></i>
+      </button>
+      <div id="menu-content"></div>
+    </div>
+  </div>
+
+  <!-- Dual-Pane Immersive Layout -->
+  <main id="book-layout" class="book-layout">
+    <div class="theory-pane">
+      <div id="theory-content-area"></div>
+    </div>
+    
+    <div class="code-pane">
+      <!-- Sync Status & Code Badge -->
+      <div class="code-box-wrapper">
+        <div class="code-header">
+          <div class="code-badge">
+            <div class="status-dot"></div>
+            implementation.py
+          </div>
+        </div>
+        <div class="code-box">
+          <pre id="code-container" class="language-python"><code></code></pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/lucide.min.js"></script>
+
+  <!-- Data Payload (Bypasses CORS) -->
+  <script src="book/dsa_book_data.js"></script>
+
+  <!-- Application Logic -->
+  <script src="book/app.js"></script>
+</body>
+</html>

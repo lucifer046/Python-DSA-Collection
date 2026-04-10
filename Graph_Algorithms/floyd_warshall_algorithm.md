@@ -41,7 +41,11 @@ We start with a simple grid. If two cities have a direct road, we write down the
 
 We pick one city at a time (let's call it B) to act as a "Layover City." We then check every pair of cities (A and C) to see if stopping at B saves time.
 
-- **The Equation:** `A to C = Minimum of (Current A to C, OR A to B + B to C)`
+**The Recurrence Formula:**
+$$SP^k[i, j] = \min(SP^{k-1}[i, j], SP^{k-1}[i, k] + SP^{k-1}[k, j])$$
+Where $k$ is the intermediate node being considered.
+
+- **The logic:** `A to C = Minimum of (Current A to C, OR A to B + B to C)`
 - If stopping at B is cheaper, we update our Master Table with the new, shorter cost!
 
 ### 3. Shortest Path for Everyone!
@@ -73,6 +77,8 @@ While algorithms like Dijkstra are fast for one-to-all travel, Floyd-Warshall is
 
 1. **All-to-All:** A single run gives the distance matrix for the entire graph.
 2. **Logic:** $dist(i,j) = \min(dist(i,j), dist(i,k) + dist(k,j))$.
-3. **Negative Weights:** It can handle negative weights but NOT negative cycles.
+3. **The Golden Rule (Negatives):** 
+   - **Negative Weights?** YES ✅! It handles negative paths perfectly.
+   - **Negative Cycles?** NO ❌. It cannot provide a valid answer if the graph contains a negative total cycle.
 4. **Performance:** $O(V^3)$ is slow for large graphs, so use it when the number of nodes is small (usually less than 500).
 5. **Real-Life Use:** Transitive closure (finding "who knows whom"), network routing, and project scheduling.

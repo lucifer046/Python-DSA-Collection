@@ -7,7 +7,13 @@
 
 Imagine you're using **Google Maps** to find the fastest route from your home to your office. Each road has a **travel time** (weight). Dijkstra's Algorithm finds the **absolute shortest path** considering all road times.
 
-> **Simple Definition:** Dijkstra's finds the cheapest/fastest/shortest path between two points in a graph where each edge has a **cost** (weight).
+**Dijkstra's Algorithm** is the gold standard for finding the shortest path, but it has one major rule: every road **MUST** have a positive weight.
+
+### ⚖️ The Golden Rule of Negatives
+- **Negative Weights?** NO ❌. Dijkstra's greedy nature assumes once a node is visited, its distance is finalized. A negative weight later on would break its brain!
+- **Negative Cycles?** NO ❌. If it can't handle single negative weights, it definitely can't handle loops that subtract cost infinitely.
+
+> **Simple Definition:** Dijkstra's finds the cheapest/fastest/shortest path between two points in a graph carefully picking the closest city first. It only works if all costs are positive.
 
 ---
 

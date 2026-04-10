@@ -9,7 +9,11 @@ Remember Dijkstra's Algorithm? It finds the shortest path, but it **panics** if 
 
 **Bellman-Ford** is the slower but **smarter** brother. It CAN handle negative weights AND it can **detect infinite money loops** (negative cycles)!
 
-> **Simple Definition:** Bellman-Ford finds the shortest path to all nodes by repeatedly checking every edge. It works even with negative weights and can detect negative cycles.
+### ⚖️ The Golden Rule of Negatives
+- **Negative Weights?** YES ✅! It is specifically designed to handle roads that "pay you" to drive on them.
+- **Negative Cycles?** NO ❌. If a loop's total sum is negative, there is no "shortest" path (you'd loop forever!). Bellman-Ford will detect this and sound an alarm.
+
+> **Simple Definition:** Bellman-Ford finds the shortest path to all nodes by repeatedly checking every edge. It works perfectly with negative weights and identifies when a negative cycle makes a solution impossible.
 
 ---
 

@@ -162,6 +162,7 @@
         "designed_for": "Shortest path in weighted graphs (Positive).",
         "purpose": "GPS Navigation, Network routing (OSPF).",
         "how_it_works": "Greedy exploration with a priority queue.",
+        "negatives_behavior": "Strictly NO ❌. Cannot handle negative edge weights as they break the greedy assumption.",
         "pros": ["Efficiently finds optimal path."],
         "cons": ["Cannot handle negative weights."],
         "complexities": {
@@ -178,6 +179,7 @@
         "how_it_works": "Relaxes all edges V-1 times; V-th time for cycles.",
         "pros": ["Handles negative weights.", "Cycle detection."],
         "cons": ["Slower than Dijkstra."],
+        "negatives_behavior": "Works with negative edge weights but NOT with negative cycles (it detects the cycle instead).",
         "complexities": {
           "best": { "time": "O(E)", "note": "Shortest paths found early." },
           "avg": { "time": "O(VE)", "note": "Standard iterations." },
@@ -190,8 +192,10 @@
         "designed_for": "All-pairs shortest path.",
         "purpose": "Network density analysis and connectivity matrices.",
         "how_it_works": "DP with a 3D matrix (dist[i][j][k]).",
+        "recurrence_formula": "SP^k[i, j] = min(SP^(k-1)[i, j], SP^(k-1)[i, k] + SP^(k-1)[k, j])",
         "pros": ["Finds all paths in one run."],
         "cons": ["Very high O(V^3) complexity."],
+        "negatives_behavior": "Handles negative edge weights but NOT negative cycles.",
         "complexities": {
           "best": { "time": "O(V^3)", "note": "Mandatory triple loops." },
           "avg": { "time": "O(V^3)", "note": "Fixed data pattern." },

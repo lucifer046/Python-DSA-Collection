@@ -24,6 +24,10 @@ STATUS: INDEPENDENT (Contains both a full and a compact implementation)
    The algorithm asks: "Is taking the path through B shorter than my 
    current best for A to C?" 
 
+   **THE RECURRENCE FORMULA:**
+   SP^k[i, j] = min(SP^(k-1)[i, j], SP^(k-1)[i, k] + SP^(k-1)[k, j])
+   Where k is the intermediate node being considered.
+
 3. HOW IT WORKS:
    - We start with an 'Adjacency Matrix' (a grid of all costs).
    - We pick every possible intermediate node 'k'.
@@ -45,6 +49,13 @@ STATUS: INDEPENDENT (Contains both a full and a compact implementation)
    "Is it cheaper to fly direct from Paris to Sydney, or is it cheaper 
    to fly Paris -> London -> Sydney?" It repeats this for EVERY city until 
    it finds the absolute cheapest ticket for any possible trip!
+
+6. THE GOLDEN RULE (NEGATIVES):
+   - **Negative Weights?** YES ✅! It can navigate through paths that 
+     have negative costs without any issues.
+   - **Negative Cycles?** NO ❌. Like most algorithms, it will fail if a 
+     cycle has a total negative sum. The distances would just keep 
+     dropping towards -Infinity every time you go around the loop.
 ================================================================================
 """
 

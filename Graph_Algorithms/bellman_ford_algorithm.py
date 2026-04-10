@@ -47,6 +47,14 @@ STATUS: INDEPENDENT (Contains both a full and a compact version)
    - If there is a loop of squares that lets you gain INFINITE energy, 
      Bellman-Ford will wave a red flag and say, "Wait, this is an 
      illegal infinite loop!" 
+
+6. THE GOLDEN RULE (NEGATIVES):
+   - **Negative Weights?** YES ✅! This algorithm is specifically built 
+     to handle edges that subtract cost (unlike Dijkstra's).
+   - **Negative Cycles?** NO ❌. If there is a loop that keeps decreasing 
+     the total cost forever, a "shortest" path doesn't actually exist 
+     (it would be -Infinity). Bellman-Ford will detect this and raise 
+     a red flag instead of giving a wrong answer.
 ================================================================================
 """
 

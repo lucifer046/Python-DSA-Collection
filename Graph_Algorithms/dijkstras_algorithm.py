@@ -44,6 +44,14 @@ STATUS: INDEPENDENT (Contains both a full and a compact implementation)
    Dijkstra starts at your home station, looks at all the immediate 
    stops, and keeps picking the 'earliest' arrivals until it finds 
    the fastest possible route to your office.
+
+7. THE GOLDEN RULE (NEGATIVES):
+   - **Negative Weights?** NO ❌. Dijkstra's greedy nature assumes once 
+     a node is visited, its distance is finalized. A negative weight 
+     later on could invalidate this assumption, breaking the logic.
+   - **Negative Cycles?** NO ❌. Negative weights already break it, so 
+     a negative cycle (which is just a loop of negative weights) is 
+     definitely out of the question.
 ================================================================================
 """
 

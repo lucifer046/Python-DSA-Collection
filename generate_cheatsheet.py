@@ -19,18 +19,69 @@ class DSACheatsheetPDF(FPDF):
         self.cell(0, 12, f'  {label.upper()}', ln=True, fill=True)
         self.ln(6)
 
+    def render_math_text(self, text, size=None, lh=8):
+        """ Renders text with superscripts (e.g., n^2 -> n²) """
+        if size: self.set_font_size(size)
+        
+        # Split by potential superscript marker '^'
+        parts = text.split('^')
+        self.write(lh, parts[0])
+        
+        for part in parts[1:]:
+            # Check for parenthesized exponents like ^(k-1)
+            if part.startswith('('):
+                end_idx = part.find(')')
+                if end_idx != -1:
+                    exp = part[1:end_idx]
+                    rest = part[end_idx+1:]
+                else: 
+                    exp, rest = part, ""
+            else:
+                # Basic exponent (numbers and simple letters)
+                import re
+                match = re.match(r'^([0-9a-km-z\.\-\+]+)(.*)', part) # Avoid catching 'l' from 'log'
+                if match:
+                    exp, rest = match.groups()
+                else:
+                    exp, rest = "", part
+            
+            if exp:
+                # Save state
+                curr_x = self.get_x()
+                curr_y = self.get_y()
+                curr_fs = self.font_size_pt
+                # Render Superscript
+                self.set_xy(curr_x, curr_y - (lh * 0.3))
+                self.set_font_size(curr_fs * 0.7)
+                self.write(lh, exp)
+                # Restore state
+                new_x = self.get_x()
+                self.set_xy(new_x, curr_y)
+                self.set_font_size(curr_fs)
+                self.write(lh, rest)
+            else:
+                self.write(lh, '^' + part)
+
     def draw_row(self, label, content):
         self.set_x(12)
-        # Bold label in Deep Blue for clear hierarchy
         self.set_font('helvetica', 'B', 10)
         self.set_text_color(26, 35, 126)
         self.cell(45, 8, label, ln=0)
         
-        # Soft Body Text with better line spacing (h=8)
         self.set_font('helvetica', '', 11)
-        self.set_text_color(44, 44, 44) # Near black
-        self.multi_cell(0, 8, content)
-        self.ln(2) # Space between rows
+        self.set_text_color(44, 44, 44)
+        
+        curr_x = self.get_x()
+        self.set_left_margin(curr_x)
+        
+        if '^' in content:
+            self.render_math_text(content, lh=8)
+            self.ln(8)
+        else:
+            self.multi_cell(0, 8, content)
+            
+        self.set_left_margin(10)
+        self.ln(2)
 
     def algorithm_section(self, algo):
         # Algorithm Name with bottom border
@@ -47,6 +98,32 @@ class DSACheatsheetPDF(FPDF):
             self.draw_row('Practical Use:', algo['purpose'])
         self.draw_row('Mechanism:', algo['how_it_works'])
         
+        # Recurrence Formula (Specific for DP/Recursive algorithms)
+        if 'recurrence_formula' in algo:
+            self.draw_row('Recurrence:', algo['recurrence_formula'])
+
+        # Negatives Behavior (Critical for Shortest Path algorithms)
+        if 'negatives_behavior' in algo:
+            self.set_x(12)
+            self.set_font('helvetica', 'B', 10)
+            self.set_text_color(183, 28, 28) # Red for high-importance alert
+            self.cell(45, 8, 'Negatives Rule:', ln=0)
+            
+            self.set_font('helvetica', 'I', 11)
+            self.set_text_color(44, 44, 44)
+            
+            curr_x = self.get_x()
+            self.set_left_margin(curr_x)
+            
+            if '^' in algo['negatives_behavior']:
+                self.render_math_text(algo['negatives_behavior'], lh=8)
+                self.ln(8)
+            else:
+                self.multi_cell(0, 8, algo['negatives_behavior'])
+                
+            self.set_left_margin(10)
+            self.ln(2)
+        
         # Pros & Cons Section
         self.ln(4)
         start_y = self.get_y()
@@ -57,18 +134,38 @@ class DSACheatsheetPDF(FPDF):
         self.set_text_color(183, 28, 28) # Dark Red
         self.cell(90, 8, '  (-) WEAKNESSES / CONS', ln=1)
         
+        text_y = self.get_y()
         self.set_font('helvetica', '', 10)
         self.set_text_color(60, 60, 60)
-        pros_text = "* " + "\n* ".join(algo['pros'])
-        cons_text = "* " + "\n* ".join(algo['cons'])
         
-        text_y = self.get_y()
-        self.multi_cell(90, 7, pros_text) # Soft line spacing for list
+        # Draw Pros
+        self.set_xy(12, text_y)
+        self.set_left_margin(12)
+        self.set_right_margin(105)
+        for pro in algo['pros']:
+            self.write(7, "* ")
+            if '^' in pro:
+                self.render_math_text(pro, lh=7)
+            else:
+                self.write(7, pro)
+            self.ln(7)
         end_y_pros = self.get_y()
         
+        # Draw Cons
         self.set_xy(105, text_y)
-        self.multi_cell(90, 7, cons_text)
+        self.set_left_margin(105)
+        self.set_right_margin(10)
+        for con in algo['cons']:
+            self.write(7, "* ")
+            if '^' in con:
+                self.render_math_text(con, lh=7)
+            else:
+                self.write(7, con)
+            self.ln(7)
         end_y_cons = self.get_y()
+        
+        self.set_left_margin(10) # Reset
+        self.set_right_margin(10) # Reset
         
         self.set_y(max(end_y_pros, end_y_cons) + 6)
         
@@ -92,8 +189,16 @@ class DSACheatsheetPDF(FPDF):
         for name, data in cases:
             self.set_font('helvetica', 'B', 10)
             self.cell(30, 9, name, border='B', align='C')
+            
+            # Start Complexity Cell
+            start_x = self.get_x()
             self.set_text_color(26, 35, 126)
-            self.cell(30, 9, data['time'], border='B', align='C')
+            self.cell(30, 9, "", border='B') # Background/Border
+            self.set_x(start_x + 6) # Small offset for centering
+            self.render_math_text(data['time'], lh=9)
+            
+            # Note Column
+            self.set_x(start_x + 30)
             self.set_text_color(60, 60, 60)
             self.set_font('helvetica', '', 9)
             self.cell(0, 9, f" {data['note']}", border='B')
@@ -102,8 +207,11 @@ class DSACheatsheetPDF(FPDF):
         self.ln(12) # Major gap between algorithms
 
 def generate():
-    with open('dsa_cheatsheet_data.json', 'r') as f:
-        data = json.load(f)
+    with open('dsa_cheatsheet_data.json', 'r', encoding='utf-8') as f:
+        data_raw = f.read()
+        # Sanitize emojis for FPDF compatibility
+        data_clean = data_raw.replace('✅', '[YES]').replace('❌', '[NO]').replace('🚩', '[ALERT]')
+        data = json.loads(data_clean)
         
     pdf = DSACheatsheetPDF()
     pdf.set_auto_page_break(auto=True, margin=20)
