@@ -277,13 +277,19 @@ function renderContent(topic) {
         </div>
     `;
 
+    let theory = topic.theory || '*Theory content placeholder*';
+    
+    // Fix image paths for GitHub Pages sub-directories
+    // Ensure they always resolve relative to the root index.html
+    theory = theory.replace(/docs\/images\//g, './docs/images/');
+
     theoryContainer.innerHTML = `
         <div class="theory-header">
             <h1 class="theory-title">${topic.name}</h1>
             ${complexityHtml}
         </div>
         <div class="theory-content">
-            ${marked.parse(topic.theory || '*Theory content placeholder*')}
+            ${marked.parse(theory)}
         </div>
     `;
 
