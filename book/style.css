@@ -42,6 +42,7 @@ header {
     width: 100%;
     z-index: 1000;
     flex-shrink: 0;
+    min-height: 70px;
     background: var(--bg-base);
     border-bottom: 2px solid var(--border-light);
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -57,10 +58,51 @@ header {
     font-size: 1.15rem;
     font-weight: 800;
     letter-spacing: 0.1em;
-    color: #111111; /* Solid Dark Black */
+    color: #111111;
     display: flex;
     align-items: center;
     gap: 0.85rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .mobile-only {
+        display: block;
+    }
+}
+
+.view-switcher {
+    display: flex;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.25rem;
+    border-radius: 2rem;
+    border: 1px solid var(--border-light);
+}
+
+.view-btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    background: transparent;
+    border-radius: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.view-btn.active {
+    background: var(--bg-surface);
+    color: var(--accent-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .brand-logo {
@@ -449,28 +491,54 @@ pre {
 
 /* Responsive Design System */
 @media (max-width: 1024px) {
-    .book-layout {
-        flex-direction: column;
-        padding: 2rem 2rem 2rem 2rem;
-        gap: 2rem;
-        overflow-y: auto;
-    }
-    
-    .theory-pane {
-        flex: none;
-        padding-right: 0;
-        overflow-y: visible;
+    .mobile-only {
+        display: block;
     }
 
-    .code-pane {
-        flex: none;
+    .book-layout {
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+        height: calc(100vh - 70px);
+        overflow: hidden;
+    }
+    
+    .theory-pane, .code-pane {
+        width: 100%;
         max-width: 100%;
-        height: 60vh;
-        margin-top: 2rem;
+        height: 100%;
+        padding: 1.5rem;
+        margin: 0;
+        flex: 1;
+        overflow-y: auto;
+        display: none;
+    }
+
+    /* Active view display */
+    .book-layout.show-theory .theory-pane {
+        display: block;
+    }
+
+    .book-layout.show-code .code-pane {
+        display: block;
+        padding: 0;
+    }
+
+    .code-box-wrapper {
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    .code-box {
+        height: 100%;
     }
 
     .home-canvas-container {
-        height: 60vh;
+        height: 100%;
+        border-radius: 0;
+        border: none;
     }
 }
 
@@ -480,9 +548,14 @@ pre {
     }
 
     .brand-title {
-        display: block; /* Restored title on mobile */
-        font-size: 0.9rem;
-        letter-spacing: 0.05em;
+        display: none; /* Hide title on very small screens to make room for switcher */
+    }
+
+    @media (min-width: 480px) {
+        .brand-title {
+            display: block; /* Show title on larger mobiles */
+            font-size: 0.9rem;
+        }
     }
 
     .brand {
@@ -490,15 +563,17 @@ pre {
     }
 
     .menu-toggle span {
-        display: inline-block; /* Restored Topics text so button isn't blank if offline */
+        display: none; /* Only show icon on mobile to save space */
+    }
+
+    @media (min-width: 400px) {
+        .menu-toggle span {
+            display: inline-block;
+        }
     }
 
     .menu-toggle {
         padding: 0.6rem;
-    }
-
-    .book-layout {
-        padding: 1.5rem 1rem 1rem 1rem;
     }
 
     .theory-title {
@@ -506,25 +581,8 @@ pre {
     }
 
     .menu-container {
-        width: 100%; /* Full screen menu on mobile */
+        width: 100%;
         padding: 2rem 1.5rem;
-    }
-
-    .home-canvas-container div {
-        padding: 2rem 1.5rem !important;
-        width: 90%;
-    }
-
-    .home-canvas-container h1 {
-        font-size: 1.8rem !important;
-    }
-
-    .code-pane {
-        height: 50vh;
-    }
-
-    .code-header {
-        padding: 0.75rem;
     }
 
     .complexity-dashboard {

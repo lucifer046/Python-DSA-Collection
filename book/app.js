@@ -17,6 +17,24 @@ const XRAY_DICTIONARY = {
     'res': 'Resulting merged/sorted list'
 };
 
+function switchView(view) {
+    const layout = document.getElementById('book-layout');
+    const theoryBtn = document.getElementById('show-theory');
+    const codeBtn = document.getElementById('show-code');
+    
+    if (view === 'theory') {
+        layout.classList.add('show-theory');
+        layout.classList.remove('show-code');
+        theoryBtn.classList.add('active');
+        codeBtn.classList.remove('active');
+    } else {
+        layout.classList.add('show-code');
+        layout.classList.remove('show-theory');
+        codeBtn.classList.add('active');
+        theoryBtn.classList.remove('active');
+    }
+}
+
 async function init() {
     console.log("Initializing App...");
     try {
@@ -49,6 +67,12 @@ async function init() {
         
         // Default to Home View
         loadHome();
+        
+        // Initialize mobile view classes
+        const layout = document.getElementById('book-layout');
+        if (!layout.classList.contains('show-theory') && !layout.classList.contains('show-code')) {
+            layout.classList.add('show-theory');
+        }
     } catch (error) {
         console.error('Initialization Error:', error);
     }
