@@ -15,7 +15,7 @@ You pick up cards one at a time. Each time you pick a new card, you **slide it l
 
 ## 🖼️ Visual Representation
 
-![Insertion Sort "Card Sliding" Diagram](../docs/images/insertion_sort_diagram.png)
+![Insertion Sort "Card Sliding" Diagram](docs/images/insertion_sort_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you're playing a card game. You pick up cards one by one. Each time you get a new card, you **slide it left** through your hand until it finds its perfect spot between a smaller card and a larger one. By the time you've picked up all the cards, your hand is perfectly sorted!"
@@ -80,3 +80,4 @@ Because you take an item and **Insert** it into its correct position within the 
 3. The sorted section grows from left to right
 4. **Best case: O(n)** — if the list is nearly sorted, it's blazing fast!
 5. **Worst case: O(n²)** — if the list is in reverse order, lots of sliding needed
+

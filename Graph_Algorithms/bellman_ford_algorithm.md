@@ -19,7 +19,7 @@ Remember Dijkstra's Algorithm? It finds the shortest path, but it **panics** if 
 
 ## 🖼️ Visual Representation
 
-![Bellman-Ford "Negative Weight Specialist" Diagram](../docs/images/bellman_ford_diagram.png)
+![Bellman-Ford "Negative Weight Specialist" Diagram](docs/images/bellman_ford_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Remember our smart GPS, Dijkstra? He's great, but he **panics** if a road actually *pays you* to drive on it (a negative weight). **Bellman-Ford** is the slower but much **smarter** brother. He doesn't just look for the cheapest road; he patiently checks *every single road* multiple times to find the absolute best deal, even if it involves those tricky negative weights. And most importantly, he's a detective—he can spot **Infinite Loops** (negative cycles) where you could drive in a circle forever and keep 'earning' money!"
@@ -147,3 +147,4 @@ Dijkstra is "Greedy"—he picks one house and is done with it. Bellman-Ford is "
 3. It can **detect negative cycles** — infinite loops with decreasing cost
 4. It's **slower** than Dijkstra but more **versatile**
 5. Why n-1 times? Because the longest simple path has at most n-1 edges
+

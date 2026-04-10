@@ -15,7 +15,7 @@ Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circl
 
 ## 🖼️ Visual Representation
 
-![BFS "Ripples in a Pond" Layer-by-Layer Diagram](../docs/images/bfs_diagram.png)
+![BFS "Ripples in a Pond" Layer-by-Layer Diagram](docs/images/bfs_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you **drop a stone in a calm pond**. Ripples spread outwards in perfect circles—first the circle right next to the stone, then the next circle, and then the next. **BFS** works exactly like those ripples! It visits all the 'Layer 1' neighbors first, then all the 'Layer 2' neighbors, and so on. It never moves to a deeper layer until it has finished exploring the current one. This 'fair' exploration is why BFS is the king of finding the **Shortest Path**!"
@@ -100,3 +100,4 @@ Because BFS explores layer by layer, the **first time** it sees a node, it *must
 3. It guarantees the **shortest path** in unweighted graphs
 4. It visits nodes in **increasing order of distance** from the start
 5. Works like ripples in a pond — spreading outwards evenly!
+

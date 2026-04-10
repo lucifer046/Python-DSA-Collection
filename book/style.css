@@ -66,10 +66,12 @@ header {
 .brand-logo {
     width: 32px;
     height: 32px;
+    background: #111; /* Dark background to contrast the white logo */
+    padding: 3px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    object-fit: contain;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .menu-toggle {
@@ -240,13 +242,14 @@ header {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    background: #282c34; /* Dark refined gray */
+    background: #1e2229; /* Dark slate-gray for premium dashboard feel */
     padding: 1.25rem;
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.08);
     box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 10px 40px -5px rgba(0, 0, 0, 0.3);
+        0 10px 40px -10px rgba(0, 0, 0, 0.5),
+        0 8px 15px -8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255,255,255,0.05); /* Soft inner highlights */
     margin: 0.5rem 0 2.5rem 0;
 }
 

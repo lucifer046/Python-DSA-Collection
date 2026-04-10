@@ -32,7 +32,7 @@ Both find the same MST, just using different approaches!
 
 ## 🖼️ Visual Representation
 
-![Kruskal's MST "Cheapest Bridge" Diagram](../docs/images/kruskal_diagram.png)
+![Kruskal's MST "Cheapest Bridge" Diagram](docs/images/kruskal_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine there are many **tiny islands** 🏝️ in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**. Kruskal's strategy is like a bargain hunter at a sale: He looks at all the possible bridges, sorts them from cheapest to most expensive, and starts building the absolute cheapest ones first. But he has one golden rule: **'Never build a bridge that connects two islands that are already connected!'** because that would just be a waste of money and create a useless loop (cycle)."
@@ -106,3 +106,4 @@ This is exactly what **Union-Find** does!
 3. Uses **Union-Find** to efficiently check for cycles
 4. Stop when you have **n-1 edges** (all nodes connected)
 5. Both Kruskal's and Prim's find the **same MST** — just different approaches!
+

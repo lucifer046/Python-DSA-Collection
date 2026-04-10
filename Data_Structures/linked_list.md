@@ -21,7 +21,7 @@ That's exactly how a **Linked List** works in a computer!
 
 ## 🖼️ Visual Representation
 
-![Singly Linked List "Memory Bridge" Diagram](../docs/images/linked_list_diagram.png)
+![Singly Linked List "Memory Bridge" Diagram](docs/images/linked_list_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Think of a **Treasure Hunt**! You find the first clue in a box (Node). That box gives you a piece of treasure (**Value**) and a slip of paper telling you exactly where to find the next box (**Next pointer**). You follow the clues from box to box until you find one that says 'The End' (Null). That's a Linked List—a chain where every piece knows only its value and its next neighbor!"
@@ -77,3 +77,4 @@ Unlike a normal list where everyone has to sit together in memory, a Linked List
 4. **Adding** to the chain = create a new node and link it
 5. **Deleting** from the chain = bypass the node by re-linking its neighbors
 6. It's great for **inserting** and **deleting**, but slow for **searching** (you can't jump to the middle!)
+

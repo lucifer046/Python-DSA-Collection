@@ -26,7 +26,7 @@ Think of a **cinema ticket counter**.
 
 ## 🖼️ Visual Representation
 
-![Queue "FIFO" Ticket Line Diagram](../docs/images/queue_diagram.png)
+![Queue "FIFO" Ticket Line Diagram](docs/images/queue_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Think of a **Cinema Ticket Counter**! When a new customer arrives, they join at the **BACK** of the line (Enqueue). The ticket seller only talks to the person at the very **FRONT** (Dequeue). The person who has been waiting the longest is always served first! This fair rule is called **FIFO**—First In, First Out."
@@ -78,3 +78,4 @@ The Queue is the "Fairness King" of your computer. When you send 5 documents to 
 3. Items come out in the **SAME order** they went in
 4. It's the opposite of a Stack (Stack = reverse order, Queue = same order)
 5. Used everywhere: printers, web servers, customer support lines
+

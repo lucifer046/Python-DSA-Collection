@@ -17,7 +17,7 @@ Imagine you have **100 exam papers** to sort by student name. Instead of doing i
 
 ## 🖼️ Visual Representation
 
-![Merge Sort Divide and Conquer Diagram](../docs/images/merge_sort_diagram.png)
+![Merge Sort Divide and Conquer Diagram](docs/images/merge_sort_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Merge Sort is all about teamwork! First, we **Divide** the big problem into tiny, single-person tasks (Phase 1). Then, we **Merge** them back together, two by two, ensuring they stay in order at every step (Phase 2). It's like building a puzzle—you can't see the whole picture until you start joining the pieces correctly!"
@@ -92,3 +92,4 @@ Merge Sort is **~50,000x faster** than Selection Sort for 1 million items!
 3. Time complexity: **O(n log n)** — much faster than O(n²) algorithms
 4. It's like sorting exam papers by splitting the workload among friends
 5. The "merge" step is the real magic — combining two sorted lists is very efficient
+

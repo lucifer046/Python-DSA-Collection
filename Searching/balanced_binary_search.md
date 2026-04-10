@@ -57,7 +57,7 @@ For every node:
 
 ## 🖼️ Visual Representation
 
-![AVL Tree Balancing Rotations Diagram](../docs/images/avl_tree_diagram.png)
+![AVL Tree Balancing Rotations Diagram](docs/images/avl_tree_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine a balanced scale! If you add too much weight (numbers) to one side, the scale tips. In a normal tree, it just stays tipped over and becomes hard to use. But an **AVL Tree** is smart! The moment it feels too much weight on one side, it performs a **Rotation**—a quick 'swing' of the branches—to bring everything back to a perfect balance. This keeps the tree short and the search speed lightning fast!"
@@ -204,3 +204,4 @@ There are 3 ways to "read" all numbers from a tree:
 5. **Rotations** are the self-correcting moves: Left, Right, Left-Right, Right-Left
 6. **Inorder traversal** always gives numbers in **sorted order**
 7. Guaranteed **O(log n)** search time — even with millions of items!
+

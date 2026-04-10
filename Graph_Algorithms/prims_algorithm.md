@@ -13,7 +13,7 @@ Imagine you're the **mayor of a town** and you need to build **water pipelines**
 
 ## 🖼️ Visual Representation
 
-![Prim's MST "Growing Seed" Diagram](../docs/images/prim_diagram.png)
+![Prim's MST "Growing Seed" Diagram](docs/images/prim_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you're the **Mayor of a small town** 🏛️ and you need to connect all the houses with water pipes. Each pipe costs money based on how long it is. You want to **connect everyone** while spending the **least total money**. **Prim's Algorithm** is like planting a seed: You start at one house (the seed), and then you look for the absolute cheapest pipe that connects a new house to your existing network. You keep 'growing' your network, one cheap pipe at a time, until every single house in town has water!"
@@ -68,3 +68,4 @@ While both find the exact same "Minimum Spanning Tree," they have different styl
 3. It's **Greedy** — always picks the locally cheapest option
 4. The result has exactly **n-1 edges** (for n nodes)
 5. Total cost is the **minimum possible** to connect all nodes without cycles
+

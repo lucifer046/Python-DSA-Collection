@@ -19,7 +19,7 @@ Imagine you're using **Google Maps** to find the fastest route from your home to
 
 ## 🖼️ Visual Representation
 
-![Dijkstra's Shortest Path "GPS" Diagram](../docs/images/dijkstra_diagram.png)
+![Dijkstra's Shortest Path "GPS" Diagram](docs/images/dijkstra_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you're using **Google Maps** to get to a concert. There are many roads, but some have heavy traffic (high cost) and some are clear highways (low cost). **Dijkstra's Algorithm** is the brain inside your GPS! It starts at your house and 'explores' every road, but it's very smart—it always focuses on the path that currently has the **lowest total time**. This clever 'greedy' strategy ensures that when it finally reaches the concert hall, it has found the absolute fastest way to get there!"
@@ -100,3 +100,4 @@ Think of it like this: You thought it took 4 hours to get to City B. But then yo
 4. Time complexity: **O((V+E) log V)** with a priority queue
 5. ⚠️ **Cannot handle negative edge weights** — use Bellman-Ford for that
 6. Used in **GPS navigation, network routing, and game pathfinding**
+

@@ -18,7 +18,7 @@ Imagine you're a teacher sorting students by **height**. You pick **one student*
 
 ## 🖼️ Visual Representation
 
-![Quick Sort Partitioning Diagram](../docs/images/quick_sort_diagram.png)
+![Quick Sort Partitioning Diagram](docs/images/quick_sort_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Look at the diagram above. The **Pivot** (gold) is the middle-ground student we picked. Notice how everyone shorter (to the left) and everyone taller (to the right) is organized around them. Once this step is done, the Pivot doesn't need to move ever again—they are in their final, perfect spot!"
@@ -98,3 +98,4 @@ Quick Sort is like a delegator. Instead of trying to sort 100 people at once, it
 4. **Average case: O(n log n)** — very fast!
 5. **Worst case: O(n²)** — happens when the pivot is always the smallest or largest
 6. It sorts **in-place** — no extra memory needed (unlike Merge Sort)
+

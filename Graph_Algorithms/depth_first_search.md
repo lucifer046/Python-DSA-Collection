@@ -13,7 +13,7 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 
 ## 🖼️ Visual Representation
 
-![DFS "Maze Explorer" Deep-First Diagram](../docs/images/dfs_diagram.png)
+![DFS "Maze Explorer" Deep-First Diagram](docs/images/dfs_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you're exploring a **pitch-black maze** with only a ball of string. You enter a tunnel and keep walking **as deep as possible** until you hit a dead end. Then, you follow your string **backtrack** to the last fork in the road and try a different tunnel. You keep doing this—diving deep, then coming back—until you've touched every wall of the maze. **DFS** is that brave explorer who always wants to see how far the rabbit hole goes before looking at anything else!"
@@ -81,3 +81,4 @@ Because DFS doesn't want to miss anything! Backtracking is how it says, "Okay, I
 4. It's great for **mazes, cycles, and topological sorting**
 5. **Iterative** = manual stack, **Recursive** = function calls itself
 6. DFS visits nodes like exploring a cave — go deep, then come back and try another tunnel!
+

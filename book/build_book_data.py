@@ -54,12 +54,16 @@ def main():
             # Explicit Mappings
             explicit_map = {
                 "Balanced Binary Search Tree (AVL)": "balanced_binary_search",
+                "Quick Select / Fast Select": "Divide_and_Conquer/quick_select_algorithm",
+                "Closest Pair of Points": "closest_pair",
                 "Dijkstra's Algorithm": "dijkstras_algorithm",
                 "Bellman-Ford": "bellman_ford_algorithm",
                 "Floyd-Warshall": "floyd_warshall_algorithm",
                 "BFS / DFS": ["breadth_first_search", "depth_first_search"],
                 "Kruskal / Prim (MST)": ["kruskals_algorithm", "prims_algorithm"],
-                "Topological Sort / Longest Path": ["topological_sort", "longest_path_dag"]
+                "Topological Sort / Longest Path": ["topological_sort", "longest_path_dag"],
+                "Stack / Queue": ["stack_implementation", "queue_implementation"],
+                "Union-Find (Disjoint Set)": "union_find"
             }
 
             slugs = explicit_map.get(topic_name, slug)
@@ -70,11 +74,20 @@ def main():
             code_content = []
 
             for s in slugs:
-                # Try direct slug, then with _algorithm suffix
-                options = [s, f"{s}_algorithm", f"{s}_implementation"]
+                # Handle cross-directory mappings (e.g., "Divide_and_Conquer/slug")
+                if "/" in s:
+                    parts = s.split("/")
+                    current_dir = parts[0]
+                    actual_slug = parts[1]
+                else:
+                    current_dir = dir_name
+                    actual_slug = s
+
+                # Try direct slug, then with common suffixes
+                options = [actual_slug, f"{actual_slug}_algorithm", f"{actual_slug}_implementation"]
                 for opt in options:
-                    md_path = os.path.join("..", dir_name, f"{opt}.md")
-                    py_path = os.path.join("..", dir_name, f"{opt}.py")
+                    md_path = os.path.join("..", current_dir, f"{opt}.md")
+                    py_path = os.path.join("..", current_dir, f"{opt}.py")
                     
                     t = load_file_content(md_path)
                     c = load_file_content(py_path)

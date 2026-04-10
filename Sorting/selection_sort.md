@@ -19,7 +19,7 @@ Imagine you have a messy hand of **playing cards**. To sort them:
 
 ## 🖼️ Visual Representation
 
-![Selection Sort "Minimum Finder" Diagram](../docs/images/selection_sort_diagram.png)
+![Selection Sort "Minimum Finder" Diagram](docs/images/selection_sort_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you have a row of students of different heights. You walk down the line, starting from the first student, looking for the absolute **shortest** one. Once you find them, you swap them with the first person in line. Now, that first spot is 'solved'! You repeat this for the rest of the line until everyone is perfectly organized."
@@ -82,3 +82,4 @@ Because at every step, your only job is to **Select** the smallest remaining ite
 3. The sorted section **grows by 1** with each pass
 4. It's **simple to understand** but **slow** for big lists — O(n²)
 5. Best for small lists or when you want a simple, easy-to-code solution
+
