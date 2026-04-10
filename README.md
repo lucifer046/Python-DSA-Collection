@@ -6,7 +6,7 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 A standardized collection of **Data Structures and Algorithms** in Python, designed for clarity and academic rigor.
 
@@ -17,23 +17,23 @@ Each entry includes:
 
 ---
 
-## ✨ Key Resources
+## Key Resources
 
-### 1. 📘 Interactive Handbook
+### 1. Interactive Handbook
 An immersive web-based experience for deep algorithm focus.
 - **Dual-Pane Layout**: Side-by-side theory and implementation.
 - **X-Ray View**: Interactive tooltips explaining variable states.
 - **High-Fidelity Visuals**: Technical diagrams for complex logic (AVL, Graphs, D&C).
 - **Mathematical Rendering**: Professional typography via MathJax.
 
-### 2. 📑 PDF Revision Guide
+### 2. PDF Revision Guide
 A data-driven summary of 23+ algorithms, optimized for technical interview preparation.
 - **Condensed Insights**: Core mechanisms and complexity tables at a glance.
 - **Auto-Sync**: Automatically generated from the repository core data.
 
 ---
 
-## 🛠️ Repository Map
+## Repository Map
 
 ### 📁 [Data Structures](./Data_Structures/)
 Fundamental units: Stacks, Queues, Linked Lists, and Union-Find.
@@ -52,7 +52,7 @@ Optimized math & geometry: Karatsuba, Closest Pair, and QuickSelect.
 
 ---
 
-## 🎓 Learning Path
+## Learning Path
 
 1. **Visualize**: Use the [Handbook](https://lucifer046.github.io/Python-DSA-Collection/) to grasp algorithm intuition.
 2. **Implementation**: Trace the documented `.py` files to understand line-by-line logic.
