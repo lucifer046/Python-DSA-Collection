@@ -70,7 +70,32 @@ header {
 }
 
 .mobile-only {
+    display: none !important;
+}
+
+.app-footer {
     display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-light);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+}
+
+.footer-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    opacity: 0.4;
 }
 
 @media (max-width: 1024px) {
@@ -492,14 +517,14 @@ pre {
 /* Responsive Design System */
 @media (max-width: 1024px) {
     .mobile-only {
-        display: block;
+        display: flex !important;
     }
 
     .book-layout {
+        flex: 1;
         flex-direction: column;
         padding: 0;
         gap: 0;
-        height: calc(100vh - 70px);
         overflow: hidden;
     }
     
@@ -507,7 +532,7 @@ pre {
         width: 100%;
         max-width: 100%;
         height: 100%;
-        padding: 1.5rem;
+        padding: 1.5rem 1.5rem 5rem 1.5rem; /* Large bottom padding for mobile */
         margin: 0;
         flex: 1;
         overflow-y: auto;
@@ -533,6 +558,7 @@ pre {
 
     .code-box {
         height: 100%;
+        padding-bottom: 5rem; /* Extra spacing for mobile */
     }
 
     .home-canvas-container {
