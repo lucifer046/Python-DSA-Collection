@@ -1,0 +1,340 @@
+[
+  {
+    "category": "Sorting Algorithms",
+    "topics": [
+      {
+        "name": "Selection Sort",
+        "designed_for": "Sorting very small datasets where simplicity and memory-write minimization are prioritized.",
+        "purpose": "Used in embedded systems or hardware where the cost of writing to memory is significantly higher than reading. It performs exactly O(n) swaps.",
+        "how_it_works": "Repeatedly finds the minimum element from the unsorted part and swaps it with the first element of that part.",
+        "pros": ["Minimum swaps (O(n))", "In-place O(1) space", "Extremely simple."],
+        "cons": ["Very slow O(n^2) even for sorted lists", "Not stable."],
+        "complexities": {
+          "best": { "time": "O(n^2)", "note": "Always scans the full unsorted list." },
+          "avg": { "time": "O(n^2)", "note": "Consistent performance profile." },
+          "worst": { "time": "O(n^2)", "note": "Quadratic comparisons are mandatory." },
+          "space": "O(1)"
+        }
+      },
+      {
+        "name": "Insertion Sort",
+        "designed_for": "Sorting small datasets or lists that are already mostly sorted.",
+        "purpose": "A foundational algorithm used in hybrid sorts like Timsort. It is excellent for real-time data streaming where items arrive one by one.",
+        "how_it_works": "Processes elements one by one, finds the correct position in the sorted part and shifts larger elements.",
+        "pros": ["O(n) for mostly sorted data", "Stable and In-place"],
+        "cons": ["Slow O(n^2) for large datasets", "Inefficient for reverse-sorted data."],
+        "complexities": {
+          "best": { "time": "O(n)", "note": "Occurs when original list is already sorted." },
+          "avg": { "time": "O(n^2)", "note": "Expected behavior on random data." },
+          "worst": { "time": "O(n^2)", "note": "Occurs when list is reverse-sorted." },
+          "space": "O(1)"
+        }
+      },
+      {
+        "name": "Merge Sort",
+        "designed_for": "Stable, high-performance sorting for large datasets.",
+        "purpose": "The standard choice for sorting linked lists and for external sorting where data is too large for RAM.",
+        "how_it_works": "A Divide and Conquer algorithm. Splits the array into single-element sub-lists, then merges them back together in sorted order.",
+        "pros": ["Guaranteed O(n log n)", "Stable sorting", "Highly predictable."],
+        "cons": ["High memory usage (O(n) auxiliary space)."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Always divides and merges the full tree." },
+          "avg": { "time": "O(n log n)", "note": "Consistent log-linear performance." },
+          "worst": { "time": "O(n log n)", "note": "Guaranteed performance under any data." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Quick Sort",
+        "designed_for": "Extreme performance general-purpose in-memory sorting.",
+        "purpose": "Used widely in performance-critical software and standard libraries (like C++ std::sort).",
+        "how_it_works": "Chooses a pivot and partitions the array into two sub-arrays: smaller than pivot and larger. Recursively sorts them.",
+        "pros": ["Fastest sort in practice", "Cache-efficient", "In-place."],
+        "cons": ["Worst case O(n^2) with poor pivot selection", "Not stable."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Pivot always splits the list roughly in half." },
+          "avg": { "time": "O(n log n)", "note": "Average behavior with random pivots." },
+          "worst": { "time": "O(n^2)", "note": "Unlucky pivot choice (e.g., already sorted data)." },
+          "space": "O(log n)"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Searching & Selection",
+    "topics": [
+      {
+        "name": "Binary Search",
+        "designed_for": "Instant lookups in sorted datasets.",
+        "purpose": "The foundation for database indexing and fast search in pre-sorted libraries.",
+        "how_it_works": "Checks the middle element. Halves the search space every single time based on comparison.",
+        "pros": ["Extremely fast (Logarithmic time)", "Simple to implement."],
+        "cons": ["Input MUST be sorted", "No faster than linear for linked lists."],
+        "complexities": {
+          "best": { "time": "O(1)", "note": "Target is exactly at the middle." },
+          "avg": { "time": "O(log n)", "note": "Standard depth of binary split." },
+          "worst": { "time": "O(log n)", "note": "Target is at the leaves or not found." },
+          "space": "O(1)"
+        }
+      },
+      {
+        "name": "Balanced Binary Search Tree (AVL)",
+        "designed_for": "Dynamic datasets where both search and insertion must be fast.",
+        "purpose": "Used in databases and memory managers where data frequently changes. Prevents skewing.",
+        "how_it_works": "Maintains a strict balance during insertion/deletion using Rotations.",
+        "pros": ["Guaranteed O(log n) for Search/Insert/Delete.", "Efficient performance."],
+        "cons": ["Complex to implement", "Overhead from rotations."],
+        "complexities": {
+          "best": { "time": "O(log n)", "note": "Strict height balancing." },
+          "avg": { "time": "O(log n)", "note": "Consistent log pathing." },
+          "worst": { "time": "O(log n)", "note": "No degeneration to O(n)." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Quick Select / Fast Select",
+        "designed_for": "Finding the k-th smallest element (Statistics/Median).",
+        "purpose": "Used in median algorithms and picking top-k without full sort. Fast Select (Median of Medians) provides a better worst-case guarantee.",
+        "how_it_works": "Partitions like Quick Sort but only recurses into one half.",
+        "pros": ["O(n) on average.", "Faster than O(n log n) sorting."],
+        "cons": ["Quick Select can be O(n^2); Fast Select is more stable."],
+        "complexities": {
+          "best": { "time": "O(n)", "note": "Partitioning finds it early." },
+          "avg": { "time": "O(n)", "note": "Expected for random data." },
+          "worst": { "time": "O(n^2) / O(n)", "note": "O(n^2) for QuickSelect; O(n) for FastSelect (Median of Medians)." },
+          "space": "O(1)"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Divide & Conquer",
+    "topics": [
+      {
+        "name": "Closest Pair of Points",
+        "designed_for": "Finding the 2 closest points in a plane.",
+        "purpose": "Air traffic control collision detection and graphics proximity checks.",
+        "how_it_works": "Divide by X-coord, solve halves, check strip near divide.",
+        "pros": ["Much faster than O(n^2) brute force."],
+        "cons": ["Complex to implement."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Standard merge-like logic." },
+          "avg": { "time": "O(n log n)", "note": "Consistent complexity." },
+          "worst": { "time": "O(n log n)", "note": "Standard divide/conquer performance." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Counting Inversions",
+        "designed_for": "Measuring how unsorted a list is.",
+        "purpose": "Recommendation engines (comparing user preferences).",
+        "how_it_works": "Sort and count cross-inversions during the merge step.",
+        "pros": ["Efficiently counts inversions during sort."],
+        "cons": ["O(n) extra space."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Sort-based complexity." },
+          "avg": { "time": "O(n log n)", "note": "Expected sort speed." },
+          "worst": { "time": "O(n log n)", "note": "Same as Merge Sort." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Karatsuba's Multiplication",
+        "designed_for": "Multiplying very large integers.",
+        "purpose": "Cryptography (RSA) and high-precision calculations.",
+        "how_it_works": "Breaks multiplication into 3 smaller multiplications (n/2).",
+        "pros": ["Faster than O(n^2) school-book method."],
+        "cons": ["Overhead for small numbers."],
+        "complexities": {
+          "best": { "time": "O(n^1.58)", "note": "Recursive reduction." },
+          "avg": { "time": "O(n^1.58)", "note": "Consistent result." },
+          "worst": { "time": "O(n^1.58)", "note": "Standard complexity." },
+          "space": "O(n)"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Graph Algorithms",
+    "topics": [
+      {
+        "name": "Dijkstra's Algorithm",
+        "designed_for": "Shortest path in weighted graphs (Positive).",
+        "purpose": "GPS Navigation, Network routing (OSPF).",
+        "how_it_works": "Greedy exploration with a priority queue.",
+        "pros": ["Efficiently finds optimal path."],
+        "cons": ["Cannot handle negative weights."],
+        "complexities": {
+          "best": { "time": "O(E log V)", "note": "With Min-Priority Queue." },
+          "avg": { "time": "O(E log V)", "note": "Standard complexity." },
+          "worst": { "time": "O(E log V)", "note": "Heap processing overhead." },
+          "space": "O(V)"
+        }
+      },
+      {
+        "name": "Bellman-Ford",
+        "designed_for": "Weighted shortest path with negative weights.",
+        "purpose": "Detecting negative cycles and RIP routing.",
+        "how_it_works": "Relaxes all edges V-1 times; V-th time for cycles.",
+        "pros": ["Handles negative weights.", "Cycle detection."],
+        "cons": ["Slower than Dijkstra."],
+        "complexities": {
+          "best": { "time": "O(E)", "note": "Shortest paths found early." },
+          "avg": { "time": "O(VE)", "note": "Standard iterations." },
+          "worst": { "time": "O(VE)", "note": "Complete relaxation sequence." },
+          "space": "O(V)"
+        }
+      },
+      {
+        "name": "Floyd-Warshall",
+        "designed_for": "All-pairs shortest path.",
+        "purpose": "Network density analysis and connectivity matrices.",
+        "how_it_works": "DP with a 3D matrix (dist[i][j][k]).",
+        "pros": ["Finds all paths in one run."],
+        "cons": ["Very high O(V^3) complexity."],
+        "complexities": {
+          "best": { "time": "O(V^3)", "note": "Mandatory triple loops." },
+          "avg": { "time": "O(V^3)", "note": "Fixed data pattern." },
+          "worst": { "time": "O(V^3)", "note": "Consistent performance." },
+          "space": "O(V^2)"
+        }
+      },
+      {
+        "name": "BFS / DFS",
+        "designed_for": "Graph traversal and searching.",
+        "purpose": "BFS: Unweighted shortest path. DFS: Cycle detection and puzzles.",
+        "how_it_works": "Queue (BFS) vs Stack/Recursion (DFS) traversal.",
+        "pros": ["Linear time O(V+E).", "Simple to implement."],
+        "cons": ["BFS has high space for wide graphs."],
+        "complexities": {
+          "best": { "time": "O(V+E)", "note": "Standard exploration." },
+          "avg": { "time": "O(V+E)", "note": "Linear traversal." },
+          "worst": { "time": "O(V+E)", "note": "Full graph search." },
+          "space": "O(V)"
+        }
+      },
+      {
+        "name": "Kruskal / Prim (MST)",
+        "designed_for": "Minimum Spanning Tree.",
+        "purpose": "Building cheapest supply networks (Power, Fiber).",
+        "how_it_works": "Greedy selection of edges (Kruskal) or proximity expansion (Prim).",
+        "pros": ["Guarantees minimal cost for connectivity."],
+        "cons": ["Requires sorting or Priority Queues."],
+        "complexities": {
+          "best": { "time": "O(E log V)", "note": "Edge sorting complexity." },
+          "avg": { "time": "O(E log V)", "note": "Heap/sorting time." },
+          "worst": { "time": "O(E log V)", "note": "Logarithmic factor is fixed." },
+          "space": "O(V+E)"
+        }
+      },
+      {
+        "name": "Topological Sort / Longest Path",
+        "designed_for": "Linear ordering of tasks in a DAG.",
+        "purpose": "Critical path analysis in project management.",
+        "how_it_works": "Uses DFS or Indegree-zero steps (Kahn's). Finds longest path using order.",
+        "pros": ["Essential for dependency graphs.", "Linear time O(V+E)."],
+        "cons": ["Cannot handle cycles (requires DAG)."],
+        "complexities": {
+          "best": { "time": "O(V+E)", "note": "Basic graph processing." },
+          "avg": { "time": "O(V+E)", "note": "Linear efficiency." },
+          "worst": { "time": "O(V+E)", "note": "Visiting every node/edge." },
+          "space": "O(V)"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Basic Data Structures",
+    "topics": [
+      {
+        "name": "Linked List",
+        "designed_for": "Dynamic memory and frequent insertions.",
+        "purpose": "Implementation of stacks, queues, and graph adjacency lists.",
+        "how_it_works": "Chain of nodes with next-pointers.",
+        "pros": ["Dynamic size.", "O(1) insertion at head/tail."],
+        "cons": ["O(n) search.", "No random access."],
+        "complexities": {
+          "best": { "time": "O(1)", "note": "Head operations." },
+          "avg": { "time": "O(n)", "note": "Traversal needed." },
+          "worst": { "time": "O(n)", "note": "Last element operations." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Stack / Queue",
+        "designed_for": "Restricted LIFO (Stack) / FIFO (Queue) access.",
+        "purpose": "Stack: Recursion/Backtracking. Queue: Scheduling/BFS.",
+        "how_it_works": "Endpoint pushes/pops only.",
+        "pros": ["Predictable O(1) ops."],
+        "cons": ["No access to middle items."],
+        "complexities": {
+          "best": { "time": "O(1)", "note": "Standard operations." },
+          "avg": { "time": "O(1)", "note": "Endpoint manipulation." },
+          "worst": { "time": "O(1)", "note": "Operational speed is constant." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Union-Find (Disjoint Set)",
+        "designed_for": "Disjoint set tracking and connectivity checking.",
+        "purpose": "Kruskal's MST, detecting groups in networks.",
+        "how_it_works": "Find-root and Union-by-rank with path compression.",
+        "pros": ["Near O(1) performance.", "Highly efficient."],
+        "cons": ["One-way merging only."],
+        "complexities": {
+          "best": { "time": "O(a(n))", "note": "Near constant speed." },
+          "avg": { "time": "O(a(n))", "note": "Inverse Ackermann function." },
+          "worst": { "time": "O(a(n))", "note": "Extremely fast overhead." },
+          "space": "O(n)"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Greedy & Practical Tech",
+    "topics": [
+      {
+        "name": "Huffman Encoding",
+        "designed_for": "Optimal lossless data compression.",
+        "purpose": "Foundation of ZIP, JPEG, and MP3 formats.",
+        "how_it_works": "Greedy tree building based on frequency.",
+        "pros": ["Maximum compression for static text."],
+        "cons": ["Requires two-pass processing."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Priority Queue tree build." },
+          "avg": { "time": "O(n log n)", "note": "Consistent log-linear build." },
+          "worst": { "time": "O(n log n)", "note": "Heap sorting factors." },
+          "space": "O(n)"
+        }
+      },
+      {
+        "name": "Interval Scheduling",
+        "designed_for": "Selecting max number of non-overlapping tasks.",
+        "purpose": "Resource booking and scheduling systems.",
+        "how_it_works": "Always pick the task ending earliest.",
+        "pros": ["Simple and optimal.", "O(n log n)."],
+        "cons": ["No weighting (all tasks equal)."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Sorting by finish time." },
+          "avg": { "time": "O(n log n)", "note": "Standard sort time." },
+          "worst": { "time": "O(n log n)", "note": "Dominant sort cost." },
+          "space": "O(1)"
+        }
+      },
+      {
+        "name": "Minimize Lateness",
+        "designed_for": "Scheduling tasks to reduce specific delays.",
+        "purpose": "Industrial scheduling and management fairness.",
+        "how_it_works": "Sort based on the earliest deadlines first.",
+        "pros": ["Optimal for minimizing maximum lateness."],
+        "cons": ["Doesn't minimize late count."],
+        "complexities": {
+          "best": { "time": "O(n log n)", "note": "Deadline sorting time." },
+          "avg": { "time": "O(n log n)", "note": "Consistent sorting speed." },
+          "worst": { "time": "O(n log n)", "note": "Sort performance profile." },
+          "space": "O(1)"
+        }
+      }
+    ]
+  }
+]

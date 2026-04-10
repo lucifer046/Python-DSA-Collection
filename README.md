@@ -24,6 +24,24 @@ Every algorithm follows a uniform structure:
 
 ---
 
+## 📑 Premium Revision Guide (New)
+
+This repository now includes a **Premium DSA Cheatsheet** designed for last-minute revisions and technical interview preparation.
+
+*   **[Download DSA_Cheatsheet.pdf](./DSA_Cheatsheet.pdf)**: A high-readability, data-driven revision guide covering all 23+ algorithms in this repository.
+*   **Detailed Content**: Each entry includes "Designed For," "Practical Use," "Mechanism," and full Complexity Tables with logic notes.
+*   **Automatic Updates**: The PDF is generated dynamically from `dsa_cheatsheet_data.json` using `generate_cheatsheet.py`.
+
+### 🖨️ How to regenerate the PDF:
+If you add new algorithms to the JSON data, you can update the PDF by running:
+```bash
+pip install fpdf2
+python generate_cheatsheet.py
+```
+
+
+---
+
 ## 🛠️ Repository Organization
 
 The collection is organized into logical modules, making it easy to navigate through different algorithmic families:
