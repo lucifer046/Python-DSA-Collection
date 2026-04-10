@@ -30,6 +30,22 @@
   
   <!-- Custom Aesthetics -->
   <link rel="stylesheet" href="book/style.css">
+
+  <!-- MathJax for Beautiful Formulas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'code-pane', // Don't try to render LaTeX inside code blocks
+        processHtmlClass: 'theory-pane'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   
 </head>
 <body>

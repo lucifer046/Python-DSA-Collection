@@ -257,6 +257,9 @@ function loadPage(catIndex, topIndex) {
         renderContent(topic);
         layout.classList.add('loaded');
         applyXRay();
+        if (window.MathJax) {
+            window.MathJax.typesetPromise();
+        }
         document.querySelector('.theory-pane').scrollTop = 0;
         document.querySelector('.code-box').scrollTop = 0;
         layout.style.pointerEvents = 'all';
