@@ -1,118 +1,85 @@
-<!-- +--------------------------------------------------------------+ -->
-
-<!-- |  PYTHON DATA STRUCTURES AND ALGORITHMS (DSA) COLLECTION      | -->
-
-<!-- +--------------------------------------------------------------+ -->
-
 # 🚀 Python DSA Collection: Standardized & Educational
 
-> [!IMPORTANT]
-> **For Better Readability:** This repository is designed for **VS Code**. For the best experience with diagrams and documentation, install the **Office Viewer** extension (by **cweijan**) to view `.md` files as intended.
+> **Elevate your algorithm intuition with premium visuals, interactive simulations, and standardized implementations.**
+
+[**🌐 Open Interactive DSA Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**📜 Download Premium Revision PDF**](./DSA_Cheatsheet.pdf)
 
 ---
 
-## 📖 What is this project?
+## 📖 Project Overview
 
 This repository is a professionally standardized collection of **essential Data Structures and Algorithms** implemented in Python. It is specifically crafted for students and beginners, focusing on clarity, intuition, and academic rigor.
 
 Every algorithm follows a uniform structure:
-
 1. **Theory & Concept:** Detailed high-level explanations and real-life analogies.
-2. **Complexity Analysis:** Best, Worst, and Average case time complexity.
-3. **Standardized Implementation:** Concise variable naming combined with exhaustive line-by-line educational comments.
-4. **Compact Version:** A "production-ready" short-form version of the algorithm.
+2. **Complexity Analysis:** Best, Worst, and Average case time complexity tables.
+3. **Double Implementation:** 
+   - **Educational:** Exhaustive line-by-line comments.
+   - **Compact:** Short-form, production-ready versions.
 
 ---
 
-## 📑 Premium Revision Guide (New)
+## ✨ Premium Features
 
-This repository now includes a **Premium DSA Cheatsheet** designed for last-minute revisions and technical interview preparation.
+### 1. 📘 Interactive DSA Handbook
+A web-based, immersive learning experience designed for deep focus.
+- **Dual-Pane Interface**: Read conceptual theory and study implementation code simultaneously.
+- **X-Ray Code View**: Interactive variable tooltips that explain local state during execution.
+- **Premium Visuals**: Custom high-fidelity diagrams (AVL Rotations, D&C Strips, Graph Traversals).
+- **Mathematical Rendering**: Textbook-quality formula rendering using MathJax.
 
-*   **[Download DSA_Cheatsheet.pdf](./DSA_Cheatsheet.pdf)**: A high-readability, data-driven revision guide covering all 23+ algorithms in this repository.
-*   **Detailed Content**: Each entry includes "Designed For," "Practical Use," "Mechanism," and full Complexity Tables with logic notes.
-*   **Automatic Updates**: The PDF is generated dynamically from `dsa_cheatsheet_data.json` using `generate_cheatsheet.py`.
-
-### 🖨️ How to regenerate the PDF:
-If you add new algorithms to the JSON data, you can update the PDF by running:
-```bash
-pip install fpdf2
-python generate_cheatsheet.py
-```
-
+### 2. 📑 Premium PDF Revision Guide
+A high-readability, data-driven revision guide covering 23+ algorithms, optimized for technical interview preparation.
+- **Detailed Content**: "Designed For," "Practical Use," "Mechanism," and full Complexity Tables.
+- **Dynamic Generation**: Automatically synced with the repository core data.
 
 ---
 
 ## 🛠️ Repository Organization
 
-The collection is organized into logical modules, making it easy to navigate through different algorithmic families:
+The collection is organized into logical modules for easy navigation:
 
 ### 📁 [Data Structures](./Data_Structures/)
-
-Fundamental building blocks for managing data.
-
-- **Stack & Queue:** LIFO and FIFO implementations.
-- **Linked Lists:** Both basic and multi-class (Head/Node) structures.
+- **Stack & Queue:** LIFO/FIFO implementations.
+- **Linked Lists:** Head/Node pattern structures.
 - **Union-Find:** Disjoint set management with path compression.
 
 ### 📁 [Sorting Algorithms](./Sorting/)
-
-Techniques for organizing data efficiently.
-
 - **Simple Sorts:** Insertion and Selection sort.
-- **Advanced Sorts:** Merge Sort and Quick Sort (standard & median-of-medians).
+- **Advanced Sorts:** Merge Sort and Quick Sort (Standard & Median-of-Medians).
 
 ### 📁 [Searching Algorithms](./Searching/)
-
-Finding needles in haystacks.
-
 - **Binary Search:** Iterative and Recursive halving.
 - **AVL Tree:** Self-balancing Binary Search Tree for guaranteed efficiency.
 
 ### 📁 [Graph Algorithms](./Graph_Algorithms/)
-
-Navigating complex networks and dependencies.
-
 - **Traversals:** BFS and DFS (Iterative/Recursive).
 - **Shortest Paths:** Dijkstra, Bellman-Ford, and Floyd-Warshall.
-- **MST:** Kruskal’s and Prim’s algorithms.
-- **Flow & Order:** Topological Sort and Longest Path in DAGs.
+- **MST & Flows:** Kruskal’s, Prim’s, and Topological Sort.
 
-### 📁 [Greedy Algorithms](./Greedy_Algorithms/)
-
-Making optimal local choices for global solutions.
-
-- **Huffman Encoding:** Data compression and frequency trees.
-- **Scheduling:** Interval Scheduling and Maximum Lateness minimization.
-
-### 📁 [Divide &amp; Conquer](./Divide_and_Conquer/)
-
-Breaking problems down into manageable pieces.
-
-- **Fast Multiply:** Karatsuba-inspired multiplication.
-- **Fast Select:** Median of medians selection algorithm.
+### 📁 [Divide & Conquer](./Divide_and_Conquer/)
+- **Fast Multiply:** Karatsuba’s Integer Multiplication.
+- **Geometry:** Closest Pair of Points (O(n log n)).
+- **Statistics:** QuickSelect / FastSelect (Median-of-Medians).
 
 ---
 
 ## ✨ Standardized Coding Style
 
-All Python files in this repository adhere to the following educational standards:
-
-- **Concise Variables:** Using industry-standard short-form names (e.g., `l` for left, `r` for right, `q` for queue) to mirror academic pseudo-code.
-- **Line-by-Line Documentation:** Every single line of code is explained with a comment, bridging the gap between syntax and logic.
-- **Theoretical Headers:** Every file includes a complete conceptual overview including "What is it?", "Why is it useful?", and "Real-life examples."
+All Python files adhere to a strict educational standard:
+- **Concise Variables:** Uses industry-standard short-form names (e.g., `l` for left, `r` for right) to mirror academic pseudo-code.
+- **Line-by-Line Documentation:** Every single line of code is explained with a comment.
+- **Theoretical Headers:** Every file starts with a complete conceptual overview and real-life use cases.
 
 ---
 
 ## 🎓 Recommended Learning Path
 
-1. **Start with the Concepts:** Open the `.md` file for an algorithm first to understand the mental model.
-2. **Study the Code:** Open the `.py` file. Read the comments as you trace the execution flow.
-3. **Run and Experiment:** Execute the file to see the output. Try changing the input variables `L`, `G`, or `E` to see how the logic adapts.
+1. **Start with the Handbook:** Launch the [Live Site](https://lucifer046.github.io/Python-DSA-Collection/) to grasp the intuition through visuals.
+2. **Study the Code:** Read the `.py` files, focusing on the comments to trace the execution flow.
+3. **Experiment:** Change input variables like `L` or `G` and observe how the logic adapts.
+4. **Final Review:** Use the [PDF Cheatsheet](./DSA_Cheatsheet.pdf) to solidify your memory of edge cases and complexities.
 
 ---
 
-<!-- +--------------------------------------------------------------+ -->
-
-<!-- |                HAPPY CODING & PROBLEM SOLVING!               | -->
-
-<!-- +--------------------------------------------------------------+ -->
+Created with ❤️ by **Divya Prakash**
