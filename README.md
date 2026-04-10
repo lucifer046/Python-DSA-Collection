@@ -1,8 +1,8 @@
 # 🐍 Python DSA Collection
 
-> **Intuitive algorithm visualizations, interactive simulations, and standardized implementations.**
+> **Intuitive algorithm visualizations, simulations, and standardized implementations.**
 
-[**🌐 Interactive Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**📜 Revision PDF**](./DSA_Cheatsheet.pdf)
+[**🌐 Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**📜 Revision PDF**](./DSA_Cheatsheet.pdf)
 
 ---
 
@@ -20,11 +20,11 @@ Each entry includes:
 
 ## Key Resources
 
-### 1. Interactive Handbook
+### 1. Handbook
 An immersive web-based experience for deep algorithm focus.
 
 - **Dual-Pane Layout**: Side-by-side theory and implementation.
-- **X-Ray View**: Interactive tooltips explaining variable states.
+- **X-Ray View**: Tooltips explaining variable states.
 - **High-Fidelity Visuals**: Technical diagrams for complex logic (AVL, Graphs, D&C).
 - **Mathematical Rendering**: Professional typography via MathJax.
 

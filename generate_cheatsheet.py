@@ -264,7 +264,7 @@ def generate():
             pdf.algorithm_section(topic)
             
     pdf.output('DSA_Cheatsheet.pdf')
-    print("Premium PDF generated successfully.")
+    print("Professional PDF generated successfully.")
 
 if __name__ == "__main__":
     generate()
