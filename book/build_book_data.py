@@ -13,7 +13,7 @@ CATEGORY_MAP = {
 
 def slugify(text):
     """Converts 'Selection Sort' to 'selection_sort'"""
-    return text.lower().replace(" ", "_").replace("-", "_").replace("(", "").replace(")", "").replace("/", "_")
+    return text.lower().replace(" ", "_").replace("-", "_").replace("'", "").replace("(", "").replace(")", "").replace("/", "_")
 
 def load_file_content(filepath):
     """Loads content of a file if it exists, otherwise returns empty string."""
@@ -56,6 +56,8 @@ def main():
                 "Balanced Binary Search Tree (AVL)": "balanced_binary_search",
                 "Quick Select / Fast Select": "Divide_and_Conquer/quick_select_algorithm",
                 "Closest Pair of Points": "closest_pair",
+                "Karatsuba's Multiplication": "karatsubas_multiplication",
+                "Counting Inversions": "counting_inversions",
                 "Dijkstra's Algorithm": "dijkstras_algorithm",
                 "Bellman-Ford": "bellman_ford_algorithm",
                 "Floyd-Warshall": "floyd_warshall_algorithm",
