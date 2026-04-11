@@ -4,6 +4,7 @@
     "topics": [
       {
         "name": "Selection Sort",
+        "description": "It repeatedly searches for the minimum element in the unsorted portion and swaps it to the front.",
         "designed_for": "Sorting very small datasets where simplicity and memory-write minimization are prioritized.",
         "purpose": "Used in embedded systems or hardware where the cost of writing to memory is significantly higher than reading. It performs exactly O(n) swaps.",
         "how_it_works": "Repeatedly finds the minimum element from the unsorted part and swaps it with the first element of that part.",
@@ -18,6 +19,7 @@
       },
       {
         "name": "Insertion Sort",
+        "description": "It picks elements one by one and inserts them into their correct sorted position relative to the already-sorted part.",
         "designed_for": "Sorting small datasets or lists that are already mostly sorted.",
         "purpose": "A foundational algorithm used in hybrid sorts like Timsort. It is excellent for real-time data streaming where items arrive one by one.",
         "how_it_works": "Processes elements one by one, finds the correct position in the sorted part and shifts larger elements.",
@@ -32,6 +34,7 @@
       },
       {
         "name": "Merge Sort",
+        "description": "It recursively divides the list into halves, sorts them, and merges them using a sorted combination step.",
         "designed_for": "Stable, high-performance sorting for large datasets.",
         "purpose": "The standard choice for sorting linked lists and for external sorting where data is too large for RAM.",
         "how_it_works": "A Divide and Conquer algorithm. Splits the array into single-element sub-lists, then merges them back together in sorted order.",
@@ -46,6 +49,7 @@
       },
       {
         "name": "Quick Sort",
+        "description": "It partitions the array around a pivot element so that smaller elements are on the left and larger on the right.",
         "designed_for": "Extreme performance general-purpose in-memory sorting.",
         "purpose": "Used widely in performance-critical software and standard libraries (like C++ std::sort).",
         "how_it_works": "Chooses a pivot and partitions the array into two sub-arrays: smaller than pivot and larger. Recursively sorts them.",
@@ -65,6 +69,7 @@
     "topics": [
       {
         "name": "Binary Search",
+        "description": "It repeatedly halves the search space by comparing the target value to the middle element of a sorted list.",
         "designed_for": "Instant lookups in sorted datasets.",
         "purpose": "The foundation for database indexing and fast search in pre-sorted libraries.",
         "how_it_works": "Checks the middle element. Halves the search space every single time based on comparison.",
@@ -79,6 +84,7 @@
       },
       {
         "name": "Balanced Binary Search Tree (AVL)",
+        "description": "It performs tree rotations during insertion and deletion to keep the height difference of subtrees to at most one.",
         "designed_for": "Dynamic datasets where both search and insertion must be fast.",
         "purpose": "Used in databases and memory managers where data frequently changes. Prevents skewing.",
         "how_it_works": "Maintains a strict balance during insertion/deletion using Rotations.",
@@ -93,6 +99,7 @@
       },
       {
         "name": "Quick Select / Fast Select",
+        "description": "It partitions the array like Quick Sort but only recurses into the side containing the desired k-th element.",
         "designed_for": "Finding the k-th smallest element (Statistics/Median).",
         "purpose": "Used in median algorithms and picking top-k without full sort. Fast Select (Median of Medians) provides a better worst-case guarantee.",
         "how_it_works": "Partitions like Quick Sort but only recurses into one half.",
@@ -112,6 +119,7 @@
     "topics": [
       {
         "name": "Closest Pair of Points",
+        "description": "It splits points by x-coordinates, solves for halves, and checks a central strip for pairs closer than current candidates.",
         "designed_for": "Finding the 2 closest points in a plane.",
         "purpose": "Air traffic control collision detection and graphics proximity checks.",
         "how_it_works": "Divide by X-coord, solve halves, check strip near divide.",
@@ -126,6 +134,7 @@
       },
       {
         "name": "Counting Inversions",
+        "description": "It counts elements in the right half that are smaller than the left half during the Merge step of a sort.",
         "designed_for": "Measuring how unsorted a list is.",
         "purpose": "Recommendation engines (comparing user preferences).",
         "how_it_works": "Sort and count cross-inversions during the merge step.",
@@ -140,6 +149,7 @@
       },
       {
         "name": "Karatsuba's Multiplication",
+        "description": "It breaks large multiplications into three smaller recursive calls, reducing complexity from O(n^2) to O(n^1.58).",
         "designed_for": "Multiplying very large integers.",
         "purpose": "Cryptography (RSA) and high-precision calculations.",
         "how_it_works": "Breaks multiplication into 3 smaller multiplications (n/2).",
@@ -159,6 +169,7 @@
     "topics": [
       {
         "name": "Dijkstra's Algorithm",
+        "description": "It greedily selects the closest unvisited node and relaxes its outgoing edges (usually via a Priority Queue).",
         "designed_for": "Shortest path in weighted graphs (Positive).",
         "purpose": "GPS Navigation, Network routing (OSPF).",
         "how_it_works": "Greedy exploration with a priority queue.",
@@ -174,6 +185,7 @@
       },
       {
         "name": "Bellman-Ford",
+        "description": "It iteratively relaxes all E edges (V-1) times to find shortest paths and detect negative cycles.",
         "designed_for": "Weighted shortest path with negative weights.",
         "purpose": "Detecting negative cycles and RIP routing.",
         "how_it_works": "Relaxes all edges V-1 times; V-th time for cycles.",
@@ -189,6 +201,7 @@
       },
       {
         "name": "Floyd-Warshall",
+        "description": "It uses dynamic programming to check if every node k can serve as an intermediate shortcut between all pairs (i, j).",
         "designed_for": "All-pairs shortest path.",
         "purpose": "Network density analysis and connectivity matrices.",
         "how_it_works": "DP with a 3D matrix (dist[i][j][k]).",
@@ -205,6 +218,7 @@
       },
       {
         "name": "BFS / DFS",
+        "description": "BFS explores levels layer-by-layer using a Queue; DFS explores as deep as possible using a Stack or Recursion.",
         "designed_for": "Graph traversal and searching.",
         "purpose": "BFS: Unweighted shortest path. DFS: Cycle detection and puzzles.",
         "how_it_works": "Queue (BFS) vs Stack/Recursion (DFS) traversal.",
@@ -218,21 +232,38 @@
         }
       },
       {
-        "name": "Kruskal / Prim (MST)",
-        "designed_for": "Minimum Spanning Tree.",
-        "purpose": "Building cheapest supply networks (Power, Fiber).",
-        "how_it_works": "Greedy selection of edges (Kruskal) or proximity expansion (Prim).",
-        "pros": ["Guarantees minimal cost for connectivity."],
-        "cons": ["Requires sorting or Priority Queues."],
+        "name": "Kruskal's Algorithm",
+        "description": "It first sorts all edges in the graph by weight and greedily adds them if they don't form a cycle (via Union-Find).",
+        "designed_for": "Minimum Spanning Tree (MST) in Sparse Graphs.",
+        "purpose": "Efficiently connecting all nodes with minimum total edge weight, best for graphs with fewer edges.",
+        "how_it_works": "Sorts all edges and uses Union-Find to add edges in greedy order while avoiding cycles.",
+        "pros": ["Simple logic.", "Optimal for sparse graphs."],
+        "cons": ["Requires sorting all edges."],
         "complexities": {
-          "best": { "time": "O(E log V)", "note": "Edge sorting complexity." },
-          "avg": { "time": "O(E log V)", "note": "Heap/sorting time." },
-          "worst": { "time": "O(E log V)", "note": "Logarithmic factor is fixed." },
+          "best": { "time": "O(E log E)", "note": "Initial sort dominant." },
+          "avg": { "time": "O(E log E)", "note": "Standard sort time." },
+          "worst": { "time": "O(E log E)", "note": "Fixed sort overhead." },
           "space": "O(V+E)"
         }
       },
       {
+        "name": "Prim's Algorithm",
+        "description": "It greedily selects the minimum edge from the current frontier to connect to an unvisited node (usually via Priority Queue).",
+        "designed_for": "Minimum Spanning Tree (MST) in Dense Graphs.",
+        "purpose": "Efficiently connecting all nodes with minimum total edge weight, best for graphs with many edges.",
+        "how_it_works": "Uses a Priority Queue to pick the smallest edge connecting the growing tree to an external vertex.",
+        "pros": ["Faster for dense graphs.", "Works naturally from a source."],
+        "cons": ["Requires Priority Queue overhead."],
+        "complexities": {
+          "best": { "time": "O(E log V)", "note": "With Binary Heap." },
+          "avg": { "time": "O(E log V)", "note": "Logarithmic factor is fixed." },
+          "worst": { "time": "O(E log V)", "note": "Priority Queue processing." },
+          "space": "O(V)"
+        }
+      },
+      {
         "name": "Topological Sort / Longest Path",
+        "description": "It iteratively removes nodes with zero in-degree (Kahn's) or uses post-order DFS to determine task dependencies.",
         "designed_for": "Linear ordering of tasks in a DAG.",
         "purpose": "Critical path analysis in project management.",
         "how_it_works": "Uses DFS or Indegree-zero steps (Kahn's). Finds longest path using order.",
@@ -252,6 +283,7 @@
     "topics": [
       {
         "name": "Linked List",
+        "description": "It organizes data in nodes linked by pointers to allow constant-time insertions at endpoints and dynamic growth.",
         "designed_for": "Dynamic memory and frequent insertions.",
         "purpose": "Implementation of stacks, queues, and graph adjacency lists.",
         "how_it_works": "Chain of nodes with next-pointers.",
@@ -266,6 +298,7 @@
       },
       {
         "name": "Stack / Queue",
+        "description": "It restricts element access to one end (LIFO Stack) or opposite ends (FIFO Queue).",
         "designed_for": "Restricted LIFO (Stack) / FIFO (Queue) access.",
         "purpose": "Stack: Recursion/Backtracking. Queue: Scheduling/BFS.",
         "how_it_works": "Endpoint pushes/pops only.",
@@ -280,6 +313,7 @@
       },
       {
         "name": "Union-Find (Disjoint Set)",
+        "description": "It manages disjoint sets by merging them based on rank and using path compression for fast root lookups.",
         "designed_for": "Disjoint set tracking and connectivity checking.",
         "purpose": "Kruskal's MST, detecting groups in networks.",
         "how_it_works": "Find-root and Union-by-rank with path compression.",
@@ -299,6 +333,7 @@
     "topics": [
       {
         "name": "Huffman Encoding",
+        "description": "It greedily merges the two least frequent characters into a tree to build optimal, variable-length binary codes.",
         "designed_for": "Optimal lossless data compression.",
         "purpose": "Foundation of ZIP, JPEG, and MP3 formats.",
         "how_it_works": "Greedy tree building based on frequency.",
@@ -313,6 +348,7 @@
       },
       {
         "name": "Interval Scheduling",
+        "description": "It greedily selects the task that ends earliest and doesn't overlap with previously chosen tasks.",
         "designed_for": "Selecting max number of non-overlapping tasks.",
         "purpose": "Resource booking and scheduling systems.",
         "how_it_works": "Always pick the task ending earliest.",
@@ -327,6 +363,7 @@
       },
       {
         "name": "Minimize Lateness",
+        "description": "It sorts all tasks by their deadlines and processes them in that order to minimize the maximum lateness.",
         "designed_for": "Scheduling tasks to reduce specific delays.",
         "purpose": "Industrial scheduling and management fairness.",
         "how_it_works": "Sort based on the earliest deadlines first.",

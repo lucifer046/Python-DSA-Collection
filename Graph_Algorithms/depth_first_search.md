@@ -3,6 +3,17 @@
 <!-- +--------------------------------------------------------------+ -->
 # Depth-First Search (DFS) — The Maze Explorer
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Depth-First Search (DFS) is a graph traversal algorithm that explores as deep as possible along a single branch before backtracking. It relies on a Stack (LIFO structure), usually implemented via system recursion.
+
+**Comparison (Graph Traversals):**
+*   **Depth-First Search (DFS):** Best for cycle detection, compiling topological sorts, solving puzzles (like mazes), and exploring all possibilities in decision trees.
+*   **Breadth-First Search (BFS):** Explores layer-by-layer rather than deep-diving. Best for finding the absolute **shortest path** on unweighted graphs and analyzing level depths.
+
+---
+
 ## What is DFS?
 
 Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **as deep as possible** until you hit a dead end. Then you **turn back** (backtrack) to the last fork and try a different tunnel. You keep doing this until you've explored every part of the maze.

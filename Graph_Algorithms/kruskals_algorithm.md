@@ -3,6 +3,26 @@
 <!-- +------------------------------------------------------+ -->
 # Kruskal's Algorithm — The Island Bridge Builder
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Kruskal's Algorithm is a greedy approach to finding the Minimum Spanning Tree (MST) of a connected, undirected graph. It does this by sorting all edges by weight and iteratively adding the cheapest edge that does not form a cycle (checked via Union-Find).
+
+## MST Algorithms Comparison
+
+For most graphs, both find the same MST, but their efficiency depends on graph density:
+
+| Feature | Kruskal's Algorithm | Prim's Algorithm |
+|---|---|---|
+| **Strategy** | Edge-by-Edge (Global) | Node-by-Node (Local) |
+| **Logic** | Sort all edges; add cheapest if no cycle. | Pick cheapest edge connecting to unvisited node. |
+| **Core Tool** | Union-Find (DSU) | Priority Queue (Min-Heap) |
+| **Complexity** | $O(E \log E)$ or $O(E \log V)$ | $O(E \log V)$ |
+| **Best For** | **Sparse Graphs** (fewer edges) | **Dense Graphs** (many edges) |
+| **Metaphor** | Building bridges between islands. | Growing a plant from a single seed. |
+
+---
+
 ## What is Kruskal's Algorithm?
 
 Imagine there are many **tiny islands** in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**.
@@ -17,14 +37,6 @@ Kruskal's strategy is simple:
 
 ---
 
-## Prim's vs Kruskal's
-
-| Feature                  | Prim's                           | Kruskal's                             |
-| ------------------------ | -------------------------------- | ------------------------------------- |
-| **Strategy**       | Grow from a seed node            | Sort all edges, add cheapest          |
-| **How it works**   | Always expands the existing tree | Connects disconnected components      |
-| **Uses**           | Priority Queue                   | Union-Find (to check for cycles)      |
-| **Visual analogy** | Growing a plant               | Building bridges between islands |
 
 Both find the same MST, just using different approaches!
 

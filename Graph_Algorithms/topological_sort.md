@@ -4,6 +4,17 @@
 
 # Topological Sort — The Task Scheduler
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Topological Sort produces a linear ordering of vertices in a Directed Acyclic Graph (DAG) such that for every directed edge `$u \rightarrow v$`, vertex `u` comes before vertex `v`. It can be implemented using DFS (Push to stack on finish) or Kahn's Algorithm (In-degree queueing).
+
+**Context & Comparison (DAG Algorithms):**
+*   **Topological Sort:** Purely responsible for establishing the **dependency order** (e.g., determining which task must run before another).
+*   **Longest / Shortest Path in a DAG:** Once a Topological Sort is established, calculating path lengths becomes a simple linear pass $O(V+E)$ without needing expensive algorithms like Dijkstra or Bellman-Ford.
+
+---
+
 ## What is Topological Sort?
 
 Imagine you're **getting dressed** in the morning. You can't put on **shoes before socks**, and you can't put on a **shirt before undershirt**. Some tasks MUST happen before others!

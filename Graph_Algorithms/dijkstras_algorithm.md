@@ -3,6 +3,26 @@
 <!-- +------------------------------------------------------+ -->
 # Dijkstra's Algorithm — The Smartest Path Finder
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Dijkstra's algorithm is a greedy algorithm that finds the shortest path from a single source vertex to all other vertices in a weighted graph with strictly non-negative edge weights.
+
+## Shortest Path Algorithms Comparison
+
+While Dijkstra's is the most common, different graph scenarios require different shortest-path strategies:
+
+| Feature | Dijkstra's Algorithm | Bellman-Ford Algorithm | Floyd-Warshall Algorithm |
+|---|---|---|---|
+| **Goal** | Single-Source Shortest Path | Single-Source Shortest Path | **All-Pairs** Shortest Path |
+| **Negative Weights** | **NO** ❌ | **YES** ✅ | **YES** ✅ |
+| **Cycle Detection** | ❌ No | ✅ Detects Negative Cycles | ✅ Detects Negative Cycles |
+| **Strategy** | Greedy (Priority Queue) | Iterative Relaxation | Dynamic Programming |
+| **Complexity** | $O(E \log V)$ | $O(V \times E)$ | $O(V^3)$ |
+| **Best Use Case** | Standard maps & networks. | Graphs with potential negative costs. | When you need paths between *every* city pairs. |
+
+---
+
 ## What is Dijkstra's Algorithm?
 
 Imagine you're using **Google Maps** to find the fastest route from your home to your office. Each road has a **travel time** (weight). Dijkstra's Algorithm finds the **absolute shortest path** considering all road times.

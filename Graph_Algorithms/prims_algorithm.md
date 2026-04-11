@@ -3,6 +3,26 @@
 <!-- +------------------------------------------------------+ -->
 # Prim's Algorithm — The Greedy Tree Builder
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Prim's Algorithm is a greedy algorithm that finds the Minimum Spanning Tree (MST) for a connected, undirected graph. It grows a single tree from a starting vertex by repeatedly adding the cheapest edge extending from the currently visited vertices to an unvisited vertex.
+
+## MST Algorithms Comparison
+
+For most graphs, both find the same MST, but their efficiency depends on graph density:
+
+| Feature | Kruskal's Algorithm | Prim's Algorithm |
+|---|---|---|
+| **Strategy** | Edge-by-Edge (Global) | Node-by-Node (Local) |
+| **Logic** | Sort all edges; add cheapest if no cycle. | Pick cheapest edge connecting to unvisited node. |
+| **Core Tool** | Union-Find (DSU) | Priority Queue (Min-Heap) |
+| **Complexity** | $O(E \log E)$ or $O(E \log V)$ | $O(E \log V)$ |
+| **Best For** | **Sparse Graphs** (fewer edges) | **Dense Graphs** (many edges) |
+| **Metaphor** | Building bridges between islands. | Growing a plant from a single seed. |
+
+---
+
 ## What is Prim's Algorithm?
 
 Imagine you're the **mayor of a town** and you need to build **water pipelines** to connect ALL houses. Each pipe costs money based on distance. You want to **connect everyone** while spending the **least total money**.

@@ -4,6 +4,26 @@
 
 # Floyd-Warshall — All-Pairs Shortest Path
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Floyd-Warshall is an All-Pairs Shortest Path (APSP) algorithm. Using dynamic programming, it systematically checks if a path between any two nodes `i` and `j` can be made shorter by passing through an intermediate node `k`.
+
+## Shortest Path Algorithms Comparison
+
+While Dijkstra's is the most common, different graph scenarios require different shortest-path strategies:
+
+| Feature | Dijkstra's Algorithm | Bellman-Ford Algorithm | Floyd-Warshall Algorithm |
+|---|---|---|---|
+| **Goal** | Single-Source Shortest Path | Single-Source Shortest Path | **All-Pairs** Shortest Path |
+| **Negative Weights** | **NO** ❌ | **YES** ✅ | **YES** ✅ |
+| **Cycle Detection** | ❌ No | ✅ Detects Negative Cycles | ✅ Detects Negative Cycles |
+| **Strategy** | Greedy (Priority Queue) | Iterative Relaxation | Dynamic Programming |
+| **Complexity** | $O(E \log V)$ | $O(V \times E)$ | $O(V^3)$ |
+| **Best Use Case** | Standard maps & networks. | Graphs with potential negative costs. | When you need paths between *every* city pairs. |
+
+---
+
 ## What is Floyd-Warshall?
 
 Imagine you are an **airline logistics manager**. You need a **master table** that shows the shortest flying path between EVERY combination of cities in the world (e.g., London to Tokyo, Paris to New York, Sydney to Dubai).
@@ -47,19 +67,6 @@ We repeat this for _every_ city in the graph. In the end, our grid is transforme
 ## Why is it a "Grand Master Plan"?
 
 While algorithms like Dijkstra are fast for one-to-all travel, Floyd-Warshall is the only one that gives you **All-to-All** answers in one go. It's slower ($O(V^3)$), but it's incredibly thorough and can even handle those tricky negative-weight roads that Dijkstra hates!
-
----
-
----
-
-## Comparing Algorithms
-
-| Feature        | Dijkstra               | Bellman-Ford              | Floyd-Warshall             |
-| :------------- | :--------------------- | :------------------------ | :------------------------- |
-| **Goal**       | One node to all others | One node to all others    | **ALL nodes to ALL nodes** |
-| **Complexity** | $O(E \log V)$          | $O(VE)$                   | $O(V^3)$                   |
-| **Negatives?** | No ❌                  | Yes ✅                    | Yes ✅                     |
-| **Best For**   | Daily GPS/Navigation   | Detecting negative cycles | Large offline path tables  |
 
 ---
 

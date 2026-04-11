@@ -4,6 +4,17 @@
 
 # Longest Path in DAG — The Critical Path Method
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+The Longest Path / Shortest Path in a DAG algorithm utilizes the acyclic nature of the graph to find optimal paths in strictly linear time $O(V+E)$. It first sorts the graph topologically, then processes each node forward, passing its distances to neighbors.
+
+**Context & Comparison:**
+*   **Longest Path (DAG):** Highly efficient because it evaluates nodes perfectly in dependency order. Solves the scheduling critical-path problem.
+*   **Dijkstra / Bellman-Ford:** Standard shortest-path algorithms are completely unnecessary in a DAG. Bellman-Ford is $O(VE)$ and Dijkstra is $O(E \log V)$, whereas DAG traversal achieves $O(V+E)$ linearly and handles negative edge weights naturally without infinite looping.
+
+---
+
 ## What is the Longest Path?
 
 Imagine you're **building a spaceship**. There are many tasks to complete: build the engine, wire the electronics, assemble the cabin, paint the exterior. Some tasks can happen **at the same time**, but many must **wait** for others.

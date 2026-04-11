@@ -3,6 +3,26 @@
 <!-- +----------------------------------------------------------+ -->
 # Bellman-Ford Algorithm — The Negative Weight Specialist
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+The Bellman-Ford algorithm is a dynamic programming-like algorithm that finds the shortest path from a single source vertex to all other vertices. It systematically relaxes all edges $V-1$ times, making it robust enough to handle negative edge weights and detect negative cost cycles.
+
+## Shortest Path Algorithms Comparison
+
+While Dijkstra's is the most common, different graph scenarios require different shortest-path strategies:
+
+| Feature | Dijkstra's Algorithm | Bellman-Ford Algorithm | Floyd-Warshall Algorithm |
+|---|---|---|---|
+| **Goal** | Single-Source Shortest Path | Single-Source Shortest Path | **All-Pairs** Shortest Path |
+| **Negative Weights** | **NO** ❌ | **YES** ✅ | **YES** ✅ |
+| **Cycle Detection** | ❌ No | ✅ Detects Negative Cycles | ✅ Detects Negative Cycles |
+| **Strategy** | Greedy (Priority Queue) | Iterative Relaxation | Dynamic Programming |
+| **Complexity** | $O(E \log V)$ | $O(V \times E)$ | $O(V^3)$ |
+| **Best Use Case** | Standard maps & networks. | Graphs with potential negative costs. | When you need paths between *every* city pairs. |
+
+---
+
 ## What is Bellman-Ford?
 
 Remember Dijkstra's Algorithm? It finds the shortest path, but it **panics** if any road has a **negative weight** (like a road that *pays you* to drive on it!).
@@ -116,17 +136,15 @@ Dijkstra is "Greedy"—he picks one house and is done with it. Bellman-Ford is "
 
 ---
 
+## Algorithm Comparison Summary
 
----
-
-## Dijkstra vs Bellman-Ford
-
-| Feature | Dijkstra | Bellman-Ford |
-|---|---|---|
-| **Speed** | O((V+E) log V) — Fast | O(V × E) — Slower |
-| **Negative weights?** | ❌ Cannot handle | ✅ Works perfectly |
-| **Negative cycle detection?** | ❌ No | ✅ Yes! |
-| **Strategy** | Greedy (pick cheapest) | Brute force (check all edges repeatedly) |
+| Algorithm | Type | Complexity | Negative Weights | Negative Cycles |
+|---|---|---|---|---|
+| **Dijkstra** | Shortest Path | $O(E \log V)$ | No | No |
+| **Bellman-Ford** | Shortest Path | $O(VE)$ | Yes | Yes |
+| **Floyd-Warshall** | Shortest Path | $O(V^3)$ | Yes | Yes |
+| **Kruskal's** | MST | $O(E \log E)$ | Yes | N/A |
+| **Prim's** | MST | $O(E \log V)$ | Yes | N/A |
 
 ---
 

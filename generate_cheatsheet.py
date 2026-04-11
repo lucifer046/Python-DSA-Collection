@@ -93,6 +93,7 @@ class DSACheatsheetPDF(FPDF):
         self.ln(4)
         
         # Section Content
+        self.draw_row('Definition:', algo['description'])
         self.draw_row('Key Concept:', algo['designed_for'])
         if 'purpose' in algo:
             self.draw_row('Practical Use:', algo['purpose'])
@@ -126,6 +127,9 @@ class DSACheatsheetPDF(FPDF):
         
         # Pros & Cons Section
         self.ln(4)
+        # Ensure Pros/Cons & Complexity Grid do not page break internally.
+        if self.get_y() > 185:
+            self.add_page()
         start_y = self.get_y()
         self.set_font('helvetica', 'B', 10)
         self.set_text_color(27, 94, 32) # Dark Forest Green
@@ -142,6 +146,8 @@ class DSACheatsheetPDF(FPDF):
         self.set_xy(12, text_y)
         self.set_left_margin(12)
         self.set_right_margin(105)
+        start_page = self.page_no()
+        
         for pro in algo['pros']:
             self.write(7, "* ")
             if '^' in pro:
@@ -152,6 +158,10 @@ class DSACheatsheetPDF(FPDF):
         end_y_pros = self.get_y()
         
         # Draw Cons
+        # If Pros caused a page break, restart Cons at the top of the NEW page
+        if self.page_no() > start_page:
+            text_y = 20 # Standard top margin
+            
         self.set_xy(105, text_y)
         self.set_left_margin(105)
         self.set_right_margin(10)
@@ -207,10 +217,10 @@ class DSACheatsheetPDF(FPDF):
         self.ln(12) # Major gap between algorithms
 
 def generate():
-    with open('dsa_cheatsheet_data.json', 'r', encoding='utf-8') as f:
+    with open('book/dsa_cheatsheet_data.json', 'r', encoding='utf-8') as f:
         data_raw = f.read()
         # Sanitize emojis for FPDF compatibility
-        data_clean = data_raw.replace('✅', '[YES]').replace('❌', '[NO]').replace('', '[ALERT]')
+        data_clean = data_raw.replace('✅', '[YES]').replace('❌', '[NO]').replace('⚠️', '[ALERT]')
         data = json.loads(data_clean)
         
     pdf = DSACheatsheetPDF()
@@ -259,7 +269,7 @@ def generate():
         
         pdf.chapter_title(category['category'])
         for topic in category['topics']:
-            if pdf.get_y() > 190: # Careful page break calculation
+            if pdf.get_y() > 240: # Allow using bottom page space
                 pdf.add_page()
             pdf.algorithm_section(topic)
             

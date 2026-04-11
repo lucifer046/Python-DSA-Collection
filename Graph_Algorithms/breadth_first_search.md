@@ -3,6 +3,17 @@
 <!-- +--------------------------------------------------------------+ -->
 # Breadth-First Search (BFS) — Layer-by-Layer Exploration
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Breadth-First Search (BFS) is a graph traversal algorithm that explores the graph level-by-level (outward from the source node). It uses a Queue (FIFO structure) to process all neighbors of the current node before probing deeper.
+
+**Comparison (Graph Traversals):**
+*   **Breadth-First Search (BFS):** Best for finding the **shortest path in unweighted graphs**, discovering levels, or analyzing peer networks. Uses more memory for wide graphs (Queue).
+*   **Depth-First Search (DFS):** Explores as deep as possible before backtracking. Best for cycle detection, topological sorting, solving mazes, and exhaustively searching paths. Uses a Stack/Recursion.
+
+---
+
 ## What is BFS?
 
 Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circles — first the closest ring, then the next ring, then the next.
