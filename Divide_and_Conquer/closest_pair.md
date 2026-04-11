@@ -76,7 +76,7 @@ We create a "Strip" around the middle line with width $2\delta$.
             P1 and P2 are closer than δ!
 ```
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Closest Pair of Points "Divide and Conquer" Diagram](docs/images/closest_pair_diagram.png)
 

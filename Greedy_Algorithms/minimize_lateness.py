@@ -112,4 +112,4 @@ for task in final_schedule: # task: record (id, start, finish)
     tid, ts, tf = task # id, start, finish
     print(f" Job ID {tid}: Starts at hour {ts:2} | Finishes at hour {tf:2}")
 
-print("\nWorkday Optimal Scheduling Complete! 🕒")
+print("\nWorkday Optimal Scheduling Complete! ")

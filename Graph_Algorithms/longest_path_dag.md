@@ -12,7 +12,7 @@ The **Longest Path** through this dependency map tells NASA exactly how long the
 
 > **Simple Definition:** The Longest Path in a DAG (Directed Acyclic Graph) finds the **maximum number of steps** needed to reach each node from the starting points.
 
----## 🖼️ Visual Representation
+---## Visual Representation
 
 ```mermaid
 graph LR
@@ -29,11 +29,11 @@ graph LR
 ```
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you're **building a spaceship** 🚀 for NASA. You have a hundred tasks, and many of them can happen at the same time. But here's the catch: You can't finish the spaceship until the **longest chain** of dependent tasks is done. If the Engine takes 10 days and the Cabin takes 2 days, your 'Critical Path' is 10 days long. Even if you finish the Cabin early, the spaceship isn't flying until that Engine is ready! **Longest Path in DAG** helps us find exactly which tasks are 'Critical' and will delay the entire mission if they fall behind."
+> **Teacher's Perspective:** "Imagine you're **building a spaceship** for NASA. You have a hundred tasks, and many of them can happen at the same time. But here's the catch: You can't finish the spaceship until the **longest chain** of dependent tasks is done. If the Engine takes 10 days and the Cabin takes 2 days, your 'Critical Path' is 10 days long. Even if you finish the Cabin early, the spaceship isn't flying until that Engine is ready! **Longest Path in DAG** helps us find exactly which tasks are 'Critical' and will delay the entire mission if they fall behind."
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's find the Critical Path for our Spaceship:
 
@@ -54,7 +54,7 @@ By the time we've checked every task, the house with the largest time on the sco
 
 ---
 
-## 🧠 Why "Longest" instead of "Shortest"?
+## Why "Longest" instead of "Shortest"?
 
 In a graph like Google Maps, we want the shortest path to save time. But in project management, the **Longest Path** represents the **Bottleneck**. It tells you: 'This is the fastest you can possibly go, because you're tied to your slowest dependency.'
 

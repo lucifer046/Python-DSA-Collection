@@ -15,7 +15,7 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Binary Search Halving Diagram](docs/images/binary_search_diagram.png)
 
@@ -24,7 +24,7 @@ You'd open the book **in the middle**. If the name you want comes before the mid
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's find the number **23** in this sorted list: `[2, 5, 8, 12, 16, 23, 38, 56, 72, 91]`
 
@@ -49,7 +49,7 @@ Let's find the number **23** in this sorted list: `[2, 5, 8, 12, 16, 23, 38, 56,
 
 ---
 
-## 🧠 Why is it so fast?
+## Why is it so fast?
 Binary Search is like a superpower. Every time you make a comparison, you **destroy half the problem**. Even if you had a list of **one billion** items, you would find your target in only **30 steps**!
 
 ---

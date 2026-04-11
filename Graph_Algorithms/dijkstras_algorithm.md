@@ -9,7 +9,7 @@ Imagine you're using **Google Maps** to find the fastest route from your home to
 
 **Dijkstra's Algorithm** is the gold standard for finding the shortest path, but it has one major rule: every road **MUST** have a positive weight.
 
-### ⚖️ The Golden Rule of Negatives
+### The Golden Rule of Negatives
 - **Negative Weights?** NO ❌. Dijkstra's greedy nature assumes once a node is visited, its distance is finalized. A negative weight later on would break its brain!
 - **Negative Cycles?** NO ❌. If it can't handle single negative weights, it definitely can't handle loops that subtract cost infinitely.
 
@@ -17,7 +17,7 @@ Imagine you're using **Google Maps** to find the fastest route from your home to
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Dijkstra's Shortest Path "GPS" Diagram](docs/images/dijkstra_diagram.png)
 
@@ -26,7 +26,7 @@ Imagine you're using **Google Maps** to find the fastest route from your home to
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's find the shortest path from your House (0) to the Concert (4):
 
@@ -50,7 +50,7 @@ We keep picking the cheapest node and updating the scoreboard until we've visite
 
 ---
 
-## 🧠 Why "Greedy" works here?
+## Why "Greedy" works here?
 Because Dijkstra *always* picks the shortest known path first, it builds the solution bit by bit. It's like building a puzzle where you only ever place the pieces that you're 100% sure about. By the time the puzzle is finished, you know it's perfect!
 
 ---
@@ -98,6 +98,6 @@ Think of it like this: You thought it took 4 hours to get to City B. But then yo
 2. It uses **Relaxation** — keep updating distances when shorter paths are found
 3. It's **Greedy** — always processes the cheapest unvisited node
 4. Time complexity: **O((V+E) log V)** with a priority queue
-5. ⚠️ **Cannot handle negative edge weights** — use Bellman-Ford for that
+5. **Cannot handle negative edge weights** — use Bellman-Ford for that
 6. Used in **GPS navigation, network routing, and game pathfinding**
 

@@ -210,7 +210,7 @@ def generate():
     with open('dsa_cheatsheet_data.json', 'r', encoding='utf-8') as f:
         data_raw = f.read()
         # Sanitize emojis for FPDF compatibility
-        data_clean = data_raw.replace('✅', '[YES]').replace('❌', '[NO]').replace('🚩', '[ALERT]')
+        data_clean = data_raw.replace('✅', '[YES]').replace('❌', '[NO]').replace('', '[ALERT]')
         data = json.loads(data_clean)
         
     pdf = DSACheatsheetPDF()

@@ -6,7 +6,7 @@ CONCEPTS AND THEORY: FAST SELECT USING MEDIAN OF MEDIANS (THE 'GUARANTEED' PIVOT
 --- TIME COMPLEXITY ANALYSIS ---
 - BEST CASE:    O(n) (Linear time for pivot selection)
 - AVERAGE CASE: O(n) 
-- WORST CASE:   O(n) (Guarantees linear time for QuickSelect! 🎉)
+- WORST CASE:   O(n) (Guarantees linear time for QuickSelect! )
 --------------------------------
 - SPACE COMPLEXITY: O(n) (Recursion depth and storage for block medians)
 

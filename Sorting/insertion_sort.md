@@ -13,7 +13,7 @@ You pick up cards one at a time. Each time you pick a new card, you **slide it l
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Insertion Sort "Card Sliding" Diagram](docs/images/insertion_sort_diagram.png)
 
@@ -22,7 +22,7 @@ You pick up cards one at a time. Each time you pick a new card, you **slide it l
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's sort these numbers: `[12, 11, 13, 5, 6]`
 
@@ -52,7 +52,7 @@ Let's sort these numbers: `[12, 11, 13, 5, 6]`
 
 ---
 
-## 🧠 Why is it called "Insertion" Sort?
+## Why is it called "Insertion" Sort?
 Because you take an item and **Insert** it into its correct position within the already-sorted part of the list. It's exactly how humans naturally sort things!
 
 ---

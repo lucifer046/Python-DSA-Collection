@@ -122,7 +122,7 @@ print("Prim's MST Budget Calculator!\n")
 
 # Run calculation
 total_budget = prim_mst(G)
-print(f"Minimum budget to connect all towns: ${total_budget} 💰")
+print(f"Minimum budget to connect all towns: ${total_budget} ")
 
 # Run compact version
 c_budget = compact_prim(G)

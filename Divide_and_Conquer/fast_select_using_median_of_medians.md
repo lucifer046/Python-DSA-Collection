@@ -61,8 +61,8 @@ Perform the same algorithm on the list of medians until you find the final "Medi
 
 | Method | Avg Time | Worst Time | Memory |
 | :--- | :--- | :--- | :--- |
-| **Standard QuickSelect** | $O(n)$ | **$O(n^2)$** 🐌 | $O(\log N)$ |
-| **MoM QuickSelect** | $O(n)$ | **$O(n)$** ⚡ | $O(N)$ |
+| **Standard QuickSelect** | $O(n)$ | **$O(n^2)$** | $O(\log N)$ |
+| **MoM QuickSelect** | $O(n)$ | **$O(n)$** | $O(N)$ |
 
 ---
 

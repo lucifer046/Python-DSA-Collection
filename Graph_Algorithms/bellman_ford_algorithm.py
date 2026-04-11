@@ -81,7 +81,7 @@ def bellman_ford(E, n, s):
     for u, v, w in E:
         # if a path can STILL be shortened, we have a negative cycle
         if d[u] != float('inf') and d[v] > d[u] + w:
-            print("ERROR: Negative cycle detected! 🚩")
+            print("ERROR: Negative cycle detected! ")
             return None # no stable shortest path exists
     
     # 6. Return the final distances to all nodes

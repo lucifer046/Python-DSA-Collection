@@ -6,34 +6,20 @@
 
 ## What is the Minimize Lateness Problem?
 
-Imagine a **busy baker** 👩‍🍳 with 5 wedding cake orders. Each cake takes a few hours to decorate, and each has a strict delivery deadline. You want to be a fair baker: even if some cakes will be a bit late, you want to organize them so that the **most delayed** cake is only late by a **minimum amount**. You're minimizing the "worst-case scenario" for your customers!
+Imagine a **busy baker** ‍with 5 wedding cake orders. Each cake takes a few hours to decorate, and each has a strict delivery deadline. You want to be a fair baker: even if some cakes will be a bit late, you want to organize them so that the **most delayed** cake is only late by a **minimum amount**. You're minimizing the "worst-case scenario" for your customers!
 
 > **Simple Definition:** Given tasks with durations and deadlines, arrange them so the **maximum lateness** across all tasks is as small as possible.
 
 ---
 
-## 🖼️ Visual Representation
-
-```mermaid
-gantt
-    title Optimal Baker's Schedule
-    dateFormat  X
-    axisFormat %s
-    section Tasks
-    Cake 1 (Deadline: 6) :active, 0, 3
-    Cake 3 (Deadline: 8) :active, 3, 4
-    Cake 2 (Deadline: 9) :active, 4, 6
-    Cake 4 (Deadline: 9) :crit, 6, 10
-    Cake 5 (Deadline: 14) :active, 10, 13
-    Cake 6 (Deadline: 15) :active, 13, 15
-```
+![Minimize Lateness "Deadline Priority" Diagram](docs/images/minimize_lateness_diagram.png)
 
 > [!NOTE]
 > **Teacher's Perspective:** "Imagine you have **homework** due tomorrow and a **large project** due in two weeks. Even if the project is huge and important, you should tackle the homework first! Why? Because the homework's deadline is breathing down your neck. **Minimize Lateness** tells us the most logical thing in the world: **Handle the most URGENT thing first!** By following the Earliest Deadline, you're making sure that if _anyone_ is late, they're only late by a tiny bit, rather than one person being hours behind."
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's save our bakery from angry customers:
 
@@ -63,7 +49,7 @@ By sorting by the **Earliest Deadline**, we have mathematically ensured that the
 
 ---
 
-## 🧠 Why not the "Shortest Cake" First?
+## Why not the "Shortest Cake" First?
 
 If you bake the shortest cake first, you might ignore a long, urgent cake until its deadline has already passed by miles! Sorting by **Deadline** is the only way to be fair to every customer's timeline.
 

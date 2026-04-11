@@ -104,13 +104,13 @@ class LinkedList:
         """ Displays all nodes in the list. """
         # 1. Handle empty list case
         if self.is_empty():
-            print('List is Empty 🚫')
+            print('List is Empty ')
             return
             
         # 2. Iterate and print each value
         w = self.h # w = walker
         while w is not None:
-            print(f"[{w.v}]", end=" 🔗 ") # print current value
+            print(f"[{w.v}]", end=" ") # print current value
             w = w.n # move forward
         print("END")
 

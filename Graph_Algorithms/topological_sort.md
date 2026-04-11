@@ -12,29 +12,14 @@ Imagine you're **getting dressed** in the morning. You can't put on **shoes befo
 
 > **Simple Definition:** Given tasks with dependencies (Task A must finish before Task B can start), Topological Sort finds a valid order to complete all tasks.
 
-## 🖼️ Visual Representation
-
-```mermaid
-graph LR
-    A((1. Socks)) --> B((2. Shoes))
-    C((3. Undershirt)) --> D((4. Shirt))
-    D --> E((5. Jacket))
-    B --> F((6. Ready!))
-    E --> F
-    style A fill:#4f46e5,color:#fff
-    style B fill:#4f46e5,color:#fff
-    style C fill:#ec4899,color:#fff
-    style D fill:#ec4899,color:#fff
-    style E fill:#ec4899,color:#fff
-    style F fill:#10b981,color:#fff
-```
+![Topological Sorting "Legal Sequence" Diagram](docs/images/topological_sorting_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you're **getting dressed** 👔 in the morning. You can't put on your shoes before your socks, and your jacket must come after your shirt. **Topological Sort** is your personal 'Task Planner.' It looks at all your tasks and their rules (dependencies) and creates a perfect **legal sequence**. It ensures that by the time you reach any task, every single one of its prerequisites is already finished!"
+> **Teacher's Perspective:** "Imagine you're **getting dressed** in the morning. You can't put on your shoes before your socks, and your jacket must come after your shirt. **Topological Sort** is your personal 'Task Planner.' It looks at all your tasks and their rules (dependencies) and creates a perfect **legal sequence**. It ensures that by the time you reach any task, every single one of its prerequisites is already finished!"
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's organize our task list:
 
@@ -61,7 +46,7 @@ We keep repeating this—pick a ready task, knock out its dependencies, and find
 
 ---
 
-## 🧠 Why is it a "Task Scheduler"?
+## Why is it a "Task Scheduler"?
 
 Topological Sort is the brain behind how **Excel** recalculates formulas, how **compilers** build software from thousands of files, and how **NASA** schedules complex space missions. It ensures nothing happens a second before it's supposed to!
 

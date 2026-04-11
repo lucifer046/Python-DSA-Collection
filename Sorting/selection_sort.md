@@ -17,7 +17,7 @@ Imagine you have a messy hand of **playing cards**. To sort them:
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Selection Sort "Minimum Finder" Diagram](docs/images/selection_sort_diagram.png)
 
@@ -26,7 +26,7 @@ Imagine you have a messy hand of **playing cards**. To sort them:
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's sort these numbers: `[64, 25, 12, 22, 11]`
 
@@ -54,7 +54,7 @@ Let's sort these numbers: `[64, 25, 12, 22, 11]`
 
 ---
 
-## 🧠 Why is it called "Selection" Sort?
+## Why is it called "Selection" Sort?
 Because at every step, your only job is to **Select** the smallest remaining item and put it in the next available spot. It's like picking the best fruit from a basket one by one!
 
 ---

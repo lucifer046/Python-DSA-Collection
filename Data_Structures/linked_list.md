@@ -19,7 +19,7 @@ That's exactly how a **Linked List** works in a computer!
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Singly Linked List "Memory Bridge" Diagram](docs/images/linked_list_diagram.png)
 
@@ -28,7 +28,7 @@ That's exactly how a **Linked List** works in a computer!
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's build a chain for the numbers: `[10, 20, 30]`
 
@@ -50,7 +50,7 @@ What if we want to remove **20**?
 
 ---
 
-## 🧠 Why is this useful?
+## Why is this useful?
 Unlike a normal list where everyone has to sit together in memory, a Linked List lets boxes be scattered **anywhere**! As long as every box has a reliable "clue" to the next one, the chain stays strong. This makes it super fast to add or remove things in the middle—you just change one pointer!
 
 ---

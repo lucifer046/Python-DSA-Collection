@@ -133,4 +133,4 @@ print(f"Iterative Search: Found at Index {res1} ✅")
 res2 = search_recursive(L1, t1, 0, len(L1) - 1)
 print(f"Recursive Search: Found at Index {res2} ✅")
 
-print("\nSearch operation successful! 🎯")
+print("\nSearch operation successful! ")

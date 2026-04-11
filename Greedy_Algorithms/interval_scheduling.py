@@ -92,4 +92,4 @@ print(f"Total meetings scheduled: {len(final_list)} ✅")
 for m in final_list: # m: meeting record
     print(f" -> Meeting scheduled from {m[0]} to {m[1]}")
     
-print("\nSchedule Optimization Complete! 🕒")
+print("\nSchedule Optimization Complete! ")

@@ -9,7 +9,7 @@ Remember Dijkstra's Algorithm? It finds the shortest path, but it **panics** if 
 
 **Bellman-Ford** is the slower but **smarter** brother. It CAN handle negative weights AND it can **detect infinite money loops** (negative cycles)!
 
-### ⚖️ The Golden Rule of Negatives
+### The Golden Rule of Negatives
 - **Negative Weights?** YES ✅! It is specifically designed to handle roads that "pay you" to drive on them.
 - **Negative Cycles?** NO ❌. If a loop's total sum is negative, there is no "shortest" path (you'd loop forever!). Bellman-Ford will detect this and sound an alarm.
 
@@ -17,7 +17,7 @@ Remember Dijkstra's Algorithm? It finds the shortest path, but it **panics** if 
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Bellman-Ford "Negative Weight Specialist" Diagram](docs/images/bellman_ford_diagram.png)
 
@@ -26,7 +26,7 @@ Remember Dijkstra's Algorithm? It finds the shortest path, but it **panics** if 
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's see how Bellman-Ford solves a graph with 5 houses (Nodes 0-4):
 
@@ -111,7 +111,7 @@ After finishing his 4 rounds, he does **one final check**. If he finds *yet anot
   +------+----------+--------------------------+
 ```
 
-## 🧠 Why is it slower than Dijkstra?
+## Why is it slower than Dijkstra?
 Dijkstra is "Greedy"—he picks one house and is done with it. Bellman-Ford is "Persistent"—he checks every house, over and over, just to be 100% sure about those negative weights. It's the difference between a quick guess and a deep investigation!
 
 ---

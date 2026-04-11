@@ -210,4 +210,4 @@ for n in L: # n: current number to add
 print(f"\nFinal Sorted List:  {T.inorder()} ✅")
 print(f"Final Tree Layout:  {T.preorder()}")
 
-print("\nAVL Tree is perfectly Balanced! ⚖️")
+print("\nAVL Tree is perfectly Balanced! ")

@@ -23,7 +23,7 @@ Imagine a room full of **strangers** at a party. As people talk, they start form
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Union-Find "Islands and Bridges" Diagram](docs/images/union_find_diagram.png)
 
@@ -32,7 +32,7 @@ Imagine a room full of **strangers** at a party. As people talk, they start form
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's see how we manage our kingdoms:
 
@@ -55,7 +55,7 @@ What if we want to know if person **5** is in the same kingdom as person **0**?
 
 ---
 
-## 🧠 Why is "Union by Rank" the Secret Power?
+## Why is "Union by Rank" the Secret Power?
 If we just blindly join islands, we might get one long, vertical line of bosses. That would be slow to climb! **Union by Rank** is a rule where we always make the **Smaller Kingdom** join the **Larger Kingdom**. This keeps the kingdom 'flat' and the climb to the King super fast!
 
 ---

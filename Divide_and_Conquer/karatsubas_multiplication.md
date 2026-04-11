@@ -63,8 +63,8 @@ By reducing 4 multiplications to 3 at every step of recursion, we save a **massi
 
 | Method | Algorithm Type | Complexity | Digits: 1,000 | Digits: 1,000,000 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Schoolbook** | Traditional | $O(n^2)$ | 1,000,000 ops | 1,000,000,000,000 ops 🐌 |
-| **Karatsuba** | Divide & Conquer | $O(n^{1.58})$ | ~60,000 ops | ~15,000,000 ops ⚡ |
+| **Schoolbook** | Traditional | $O(n^2)$ | 1,000,000 ops | 1,000,000,000,000 ops |
+| **Karatsuba** | Divide & Conquer | $O(n^{1.58})$ | ~60,000 ops | ~15,000,000 ops |
 
 ---
 

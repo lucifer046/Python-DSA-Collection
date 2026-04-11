@@ -24,7 +24,7 @@ Think of a **cinema ticket counter**.
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Queue "FIFO" Ticket Line Diagram](docs/images/queue_diagram.png)
 
@@ -33,7 +33,7 @@ Think of a **cinema ticket counter**.
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's build a queue with the numbers `[10, 20, 30, 40]`:
 
@@ -52,7 +52,7 @@ The ticket seller only speaks to the person at the **Front**:
 
 ---
 
-## 🧠 Why is this so useful?
+## Why is this so useful?
 The Queue is the "Fairness King" of your computer. When you send 5 documents to a **Printer**, they don't print in random order—they print in exactly the order you sent them! When millions of people visit a website, a **Web Server** puts them in a queue so everyone gets served fairly.
 
 ---

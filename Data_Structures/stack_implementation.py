@@ -60,18 +60,18 @@ class Stack:
         """ Adds item x to the top of the stack. """
         # x: data item to push
         self.s.append(x) # add x to end of list (top of stack)
-        print(f"Pushed: {x} 📥")
+        print(f"Pushed: {x} ")
         
     def pop(self):
         """ Removes and returns the top item from the stack. """
         # 1. Safety check for empty stack popping
         if self.is_empty():
-            print("Notice: Stack is empty! 🚫")
+            print("Notice: Stack is empty! ")
             return None # cannot pop from empty stack
             
         # 2. Use list.pop() to remove and return last element
         v = self.s.pop() # v: value taken from top
-        print(f"Popped: {v} 📤")
+        print(f"Popped: {v} ")
         
         # 3. Return the popped item
         return v    

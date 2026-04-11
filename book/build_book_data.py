@@ -106,14 +106,19 @@ def main():
 
         book_data.append(processed_category)
 
-    # Save aggregated data
-    output_path = "dsa_book_data.js"
-    with open(output_path, 'w', encoding='utf-8') as f:
+    # Save aggregated data as JS for browser usage
+    output_js = "dsa_book_data.js"
+    with open(output_js, 'w', encoding='utf-8') as f:
         f.write("const SOURCE_DATA = ")
         json.dump(book_data, f, indent=2)
         f.write(";")
     
-    print(f"Successfully generated {output_path}")
+    # Save aggregated data as JSON for reference
+    output_json = "dsa_book_data.json"
+    with open(output_json, 'w', encoding='utf-8') as f:
+        json.dump(book_data, f, indent=2)
+        
+    print(f"Successfully generated {output_js} and {output_json}")
 
 if __name__ == "__main__":
     main()

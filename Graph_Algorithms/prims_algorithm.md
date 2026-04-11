@@ -11,16 +11,16 @@ Imagine you're the **mayor of a town** and you need to build **water pipelines**
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Prim's MST "Growing Seed" Diagram](docs/images/prim_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you're the **Mayor of a small town** 🏛️ and you need to connect all the houses with water pipes. Each pipe costs money based on how long it is. You want to **connect everyone** while spending the **least total money**. **Prim's Algorithm** is like planting a seed: You start at one house (the seed), and then you look for the absolute cheapest pipe that connects a new house to your existing network. You keep 'growing' your network, one cheap pipe at a time, until every single house in town has water!"
+> **Teacher's Perspective:** "Imagine you're the **Mayor of a small town** and you need to connect all the houses with water pipes. Each pipe costs money based on how long it is. You want to **connect everyone** while spending the **least total money**. **Prim's Algorithm** is like planting a seed: You start at one house (the seed), and then you look for the absolute cheapest pipe that connects a new house to your existing network. You keep 'growing' your network, one cheap pipe at a time, until every single house in town has water!"
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's watch our network grow from a single house (Node 0):
 
@@ -42,8 +42,8 @@ We keep repeating this—checking the "fringe" of our network for the cheapest p
 
 ---
 
-## 🧠 Prim's vs. Kruskal's: What's the difference?
-While both find the exact same "Minimum Spanning Tree," they have different styles. **Prim's** grows like a **plant** 🌱 from a single seed, always staying connected. **Kruskal's** builds **bridges** 🏝️ all over the ocean at once and merges them later. Both are smart, just different!
+## Prim's vs. Kruskal's: What's the difference?
+While both find the exact same "Minimum Spanning Tree," they have different styles. **Prim's** grows like a **plant** from a single seed, always staying connected. **Kruskal's** builds **bridges** all over the ocean at once and merges them later. Both are smart, just different!
 
 ---
 

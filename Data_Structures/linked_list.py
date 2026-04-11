@@ -136,12 +136,12 @@ class Node:
         """ Prints the entire list structure. """
         # 1. If empty, print None
         if self.is_empty():
-            print('Empty Chain 🚫')
+            print('Empty Chain ')
         else:
             w = self # w: list walker
             # 2. Traverse and print each value
             while w is not None:
-                print(f"({w.v})", end=" 🔗 ") # print node value
+                print(f"({w.v})", end=" ") # print node value
                 w = w.n
             print("END") # end of chain indicator
 

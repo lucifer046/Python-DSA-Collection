@@ -15,7 +15,7 @@ Imagine you have **100 exam papers** to sort by student name. Instead of doing i
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Merge Sort Divide and Conquer Diagram](docs/images/merge_sort_diagram.png)
 
@@ -24,7 +24,7 @@ Imagine you have **100 exam papers** to sort by student name. Instead of doing i
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's look at how we sort `[38, 27, 43, 3, 9, 82, 10]`:
 
@@ -46,7 +46,7 @@ Now we zip them back together carefully.
 
 ---
 
-## 🧠 Why is this so powerful?
+## Why is this so powerful?
 Instead of comparing everything with everything else (which takes a long time), Merge Sort only ever compares the **smallest** items from two already-sorted lists. This "top cards" method is incredibly efficient!
 
 ---

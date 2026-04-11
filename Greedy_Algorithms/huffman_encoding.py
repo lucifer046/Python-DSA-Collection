@@ -159,4 +159,4 @@ print("\n--- Testing Version 2: Optimized Heap ---")
 codes2 = huffman_heap(T)
 for ch in sorted(codes2): print(f" '{ch}': {codes2[ch]}")
 
-print("\nCompression Successful! 📊")
+print("\nCompression Successful! ")

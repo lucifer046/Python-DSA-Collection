@@ -60,13 +60,13 @@ class Queue:
         """ Adds item x to the back of the queue. """
         # x: data item to join the line
         self.q.append(x) # add x to end of list (back of queue)
-        print(f"Enqueued: {x} 📥")
+        print(f"Enqueued: {x} ")
         
     def dequeue(self):
         """ Removes and returns the front item of the queue. """
         # 1. Safety check for empty queue dequeueing
         if self.is_empty():
-            print("Notice: Queue is empty! 🚫")
+            print("Notice: Queue is empty! ")
             return None
             
         # 2. In a simple list queue, the front is at index 0
@@ -74,7 +74,7 @@ class Queue:
         
         # 3. Shift everyone forward by slicing the list from index 1
         self.q = self.q[1:] # ignore the first item (O(n) shift)
-        print(f"Dequeued: {v} 📤")
+        print(f"Dequeued: {v} ")
         
         # 4. Return the removed item
         return v    

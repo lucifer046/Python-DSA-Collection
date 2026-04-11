@@ -1,8 +1,8 @@
-# 🐍 Python DSA Collection
+# Python DSA Collection
 
 > **Intuitive algorithm visualizations, simulations, and standardized implementations.**
 
-[**🌐 Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**📜 Revision PDF**](./DSA_Cheatsheet.pdf)
+[**Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**Revision PDF**](./DSA_Cheatsheet.pdf)
 
 ---
 
@@ -21,6 +21,7 @@ Each entry includes:
 ## Key Resources
 
 ### 1. Handbook
+
 An immersive web-based experience for deep algorithm focus.
 
 - **Dual-Pane Layout**: Side-by-side theory and implementation.
@@ -29,6 +30,7 @@ An immersive web-based experience for deep algorithm focus.
 - **Mathematical Rendering**: Professional typography via MathJax.
 
 ### 2. PDF Revision Guide
+
 A data-driven summary of 23+ algorithms, optimized for technical interview preparation.
 
 - **Condensed Insights**: Core mechanisms and complexity tables at a glance.
@@ -38,23 +40,23 @@ A data-driven summary of 23+ algorithms, optimized for technical interview prepa
 
 ## Repository Map
 
-### 📁 [Data Structures](./Data_Structures/)
+### 📂 [Data Structures](./Data_Structures/)
 
 Fundamental units: Stacks, Queues, Linked Lists, and Union-Find.
 
-### 📁 [Sorting Algorithms](./Sorting/)
+### 📂 [Sorting Algorithms](./Sorting/)
 
 Standard and recursive: Merge Sort, Quick Sort, and classical comparison sorts.
 
-### 📁 [Searching Algorithms](./Searching/)
+### 📂 [Searching Algorithms](./Searching/)
 
 Efficiency-focused: Binary Search and self-balancing AVL Trees.
 
-### 📁 [Graph Algorithms](./Graph_Algorithms/)
+### 📂 [Graph Algorithms](./Graph_Algorithms/)
 
 Networks & Paths: Dijkstra, Bellman-Ford, Floyd-Warshall, MSTs, and flows.
 
-### 📁 [Divide &amp; Conquer](./Divide_and_Conquer/)
+### 📂 [Divide &amp; Conquer](./Divide_and_Conquer/)
 
 Optimized math & geometry: Karatsuba, Closest Pair, and QuickSelect.
 

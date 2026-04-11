@@ -11,7 +11,7 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![DFS "Maze Explorer" Deep-First Diagram](docs/images/dfs_diagram.png)
 
@@ -20,7 +20,7 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's watch our explorer dive into a graph starting at Node **0**:
 
@@ -43,7 +43,7 @@ DFS is a "Go Deep First" strategy. It uses a **Stack** (Last-In, First-Out)—li
 
 ---
 
-## 🧠 Why does DFS "backtrack"?
+## Why does DFS "backtrack"?
 Because DFS doesn't want to miss anything! Backtracking is how it says, "Okay, I've seen everything down *this* tunnel, now let me go back and check the other one I saw earlier." It's perfect for things like **solving puzzles** or **detecting if a road leads back in a circle (cycles)**.
 
 ---

@@ -148,7 +148,7 @@ path_res = get_path(parents, end_pt)
 
 print(f"Shortest path from {start_pt} to {end_pt}:")
 print(f"Route: {' -> '.join(map(str, path_res))}")
-print(f"Total Cost: {cost} 🏁\n")
+print(f"Total Cost: {cost} \n")
 
 print("All-Nodes Distances (Compact Version):")
 print(compact_dijkstra(G, 0))

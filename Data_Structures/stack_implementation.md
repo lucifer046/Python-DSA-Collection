@@ -24,7 +24,7 @@ Think of a **stack of dinner plates**.
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Stack "LIFO" Bookshelf Diagram](docs/images/stack_diagram.png)
 
@@ -33,7 +33,7 @@ Think of a **stack of dinner plates**.
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's build a stack using the numbers `[10, 20, 30, 40]`:
 
@@ -52,7 +52,7 @@ Since we can only take from the top, look at what happens when we remove items:
 
 ---
 
-## 🧠 Why is this so useful?
+## Why is this so useful?
 The Stack is the "Memory King" of your computer. Every time you press **Undo (Ctrl+Z)**, your computer is just "Popping" your last action off a stack! Every time you click the **Back Button** in your browser, you're popping the current page to reveal the one underneath it.
 
 ---

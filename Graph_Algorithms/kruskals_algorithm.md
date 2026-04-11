@@ -5,7 +5,7 @@
 
 ## What is Kruskal's Algorithm?
 
-Imagine there are many **tiny islands** 🏝️ in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**.
+Imagine there are many **tiny islands** in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**.
 
 Kruskal's strategy is simple:
 
@@ -24,22 +24,22 @@ Kruskal's strategy is simple:
 | **Strategy**       | Grow from a seed node            | Sort all edges, add cheapest          |
 | **How it works**   | Always expands the existing tree | Connects disconnected components      |
 | **Uses**           | Priority Queue                   | Union-Find (to check for cycles)      |
-| **Visual analogy** | Growing a plant 🌱               | Building bridges between islands 🏝️ |
+| **Visual analogy** | Growing a plant               | Building bridges between islands |
 
 Both find the same MST, just using different approaches!
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Kruskal's MST "Cheapest Bridge" Diagram](docs/images/kruskal_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine there are many **tiny islands** 🏝️ in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**. Kruskal's strategy is like a bargain hunter at a sale: He looks at all the possible bridges, sorts them from cheapest to most expensive, and starts building the absolute cheapest ones first. But he has one golden rule: **'Never build a bridge that connects two islands that are already connected!'** because that would just be a waste of money and create a useless loop (cycle)."
+> **Teacher's Perspective:** "Imagine there are many **tiny islands** in the ocean. You want to build **bridges** to connect ALL islands so everyone can visit everyone else. But bridges are expensive! You want to spend the **least total money**. Kruskal's strategy is like a bargain hunter at a sale: He looks at all the possible bridges, sorts them from cheapest to most expensive, and starts building the absolute cheapest ones first. But he has one golden rule: **'Never build a bridge that connects two islands that are already connected!'** because that would just be a waste of money and create a useless loop (cycle)."
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's build the cheapest bridge network for the islands:
 
@@ -61,7 +61,7 @@ We stop the moment every single island is part of the same big network. We've no
 
 ---
 
-## 🧠 Why is "Union-Find" the Secret Partner?
+## Why is "Union-Find" the Secret Partner?
 Kruskal's needs a fast way to check: "Is Island A already connected to Island B?" This is exactly what the **Union-Find** tool does! It keeps track of which 'team' each island belongs to. If two islands are on different teams, it's safe to build a bridge and then **Union** their teams together.
 
 ---

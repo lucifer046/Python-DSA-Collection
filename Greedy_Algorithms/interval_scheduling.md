@@ -12,28 +12,16 @@ Imagine you have **one meeting room** and **8 friends** all want to use it. Each
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
-```mermaid
-gantt
-    title Optimal Meeting Schedule
-    dateFormat  X
-    axisFormat %s
-    section Booked
-    Meeting A (End: 4) :active, 1, 4
-    Meeting D (End: 7) :active, 5, 7
-    Meeting H (End: 11) :active, 10, 11
-    section Rejected
-    Meeting B (Overlaps A) :crit, 3, 5
-    Meeting C (Overlaps A) :crit, 0, 6
-```
+![Interval Scheduling "Earliest DeadlineFirst" Diagram](docs/images/interval_scheduling_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Think of yourself as a **Busy Hotel Manager** 🏨. You only have one grand ballroom, and everyone wants to host their party there. You want to host the _most_ parties possible to make your customers happy. The secret isn't picking the shortest party or the one that starts first. The trick is to always pick the party that **FINISHES earliest**. Why? Because the sooner a party ends, the sooner your room is free to host the next one!"
+> **Teacher's Perspective:** "Think of yourself as a **Busy Hotel Manager** . You only have one grand ballroom, and everyone wants to host their party there. You want to host the _most_ parties possible to make your customers happy. The secret isn't picking the shortest party or the one that starts first. The trick is to always pick the party that **FINISHES earliest**. Why? Because the sooner a party ends, the sooner your room is free to host the next one!"
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's book our ballroom like a pro:
 
@@ -62,7 +50,7 @@ We keep going down the list until we've checked every request. Because we always
 
 ---
 
-## 🧠 Why is "Earliest End" the Winner?
+## Why is "Earliest End" the Winner?
 
 If you pick the _shortest_ meeting, it might start in the middle of two others and block both. If you pick the one that _starts first_, it might be 10 hours long and block the whole day!
 

@@ -13,7 +13,7 @@ Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circl
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![BFS "Ripples in a Pond" Layer-by-Layer Diagram](docs/images/bfs_diagram.png)
 
@@ -22,7 +22,7 @@ Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circl
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's see how the ripple spreads through a graph starting at Node **0**:
 
@@ -47,7 +47,7 @@ BFS is very organized. It uses a **Queue** (First-In, First-Out)—just like a l
 
 ---
 
-## 🧠 Why is BFS the "Shortest Path" King?
+## Why is BFS the "Shortest Path" King?
 Because BFS explores layer by layer, the **first time** it sees a node, it *must* have found the shortest way to get there. If it took a longer way, it would have seen that node in a later "ripple"!
 
 ---

@@ -12,24 +12,14 @@ Imagine you are an **airline logistics manager**. You need a **master table** th
 
 Unlike Dijkstra's (which starts at ONE node), Floyd-Warshall finds the answers for **everyone**!
 
-## 🖼️ Visual Representation
-
-```mermaid
-graph LR
-    A((A)) -- 3 --> B((B))
-    B -- 4 --> C((C))
-    A -.->|Shortcut Identified: 7| C
-    style A fill:#4f46e5,color:#fff,stroke:#fff,stroke-width:2px
-    style B fill:#ec4899,color:#fff,stroke:#fff,stroke-width:2px
-    style C fill:#06b6d4,color:#fff,stroke:#fff,stroke-width:2px
-```
+![Floyd-Warshall "All-Pairs Shortest Path" Diagram](docs/images/floyd_warshall_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you are an **Airline Logistics Manager** ✈️. You don't just need the shortest path from one city to another; you need a **Master Master-Table** that shows the quickest route between _every single_ pair of cities in the world! Floyd-Warshall is the grandmaster of this task. It looks at every node and asks a simple question: 'Is it faster to go directly from A to C, or is there a **B** somewhere in the middle that provides a better shortcut?' By checking every possible middle-man, it builds the ultimate travel guide for your entire network!"
+> **Teacher's Perspective:** "Imagine you are an **Airline Logistics Manager** . You don't just need the shortest path from one city to another; you need a **Master Master-Table** that shows the quickest route between _every single_ pair of cities in the world! Floyd-Warshall is the grandmaster of this task. It looks at every node and asks a simple question: 'Is it faster to go directly from A to C, or is there a **B** somewhere in the middle that provides a better shortcut?' By checking every possible middle-man, it builds the ultimate travel guide for your entire network!"
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's see how our Master Table evolves:
 
@@ -54,7 +44,7 @@ We repeat this for _every_ city in the graph. In the end, our grid is transforme
 
 ---
 
-## 🧠 Why is it a "Grand Master Plan"?
+## Why is it a "Grand Master Plan"?
 
 While algorithms like Dijkstra are fast for one-to-all travel, Floyd-Warshall is the only one that gives you **All-to-All** answers in one go. It's slower ($O(V^3)$), but it's incredibly thorough and can even handle those tricky negative-weight roads that Dijkstra hates!
 

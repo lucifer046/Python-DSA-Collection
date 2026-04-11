@@ -16,7 +16,7 @@ Imagine you're a teacher sorting students by **height**. You pick **one student*
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![Quick Sort Partitioning Diagram](docs/images/quick_sort_diagram.png)
 
@@ -25,7 +25,7 @@ Imagine you're a teacher sorting students by **height**. You pick **one student*
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's walk through an example. If we have a list of students with heights `[10, 80, 30, 90, 40, 50, 70]`:
 
@@ -47,7 +47,7 @@ We repeat this for the small group `[30, 40, 50, 70]` until everyone is standing
 
 ---
 
-## 🧠 Why does this work so well?
+## Why does this work so well?
 Quick Sort is like a delegator. Instead of trying to sort 100 people at once, it picks one person to divide the group into two smaller, easier-to-manage groups. It keeps doing this until the groups are so small (1 person) that they are already "sorted"!
 
 ---

@@ -17,23 +17,9 @@ This way, your message becomes **much shorter** overall!
 
 ---
 
-## Regular vs Huffman Encoding
+![Regular vs Huffman Comparison](docs/images/huffman_encoding_comparison.png)
 
-```
-  Regular (Fixed Length):               Huffman (Variable Length):
-  
-  A = 000  (3 bits)                     A = 0    (1 bit!)    < Used most!
-  B = 001  (3 bits)                     B = 10   (2 bits)
-  C = 010  (3 bits)                     C = 110  (3 bits)
-  D = 011  (3 bits)                     D = 1110 (4 bits)    < Used least!
-  E = 100  (3 bits)                     E = 1111 (4 bits)
-  
-  Message "AAABBC":                     Message "AAABBC":
-  000 000 000 001 001 010              0 0 0 10 10 110
-  = 18 bits                             = 10 bits
-  
-  Savings: 44%! ✅
-```
+![Huffman Encoding Tree Structure](docs/images/huffman_encoding_tree_diagram.png)
 
 ---
 
@@ -142,7 +128,7 @@ Start with every character as a **leaf node** sorted by frequency:
   Total with Huffman: 12+9+6+6+6 = 39 bits
   Total with Fixed (3 bits each): 17 × 3 = 51 bits
   
-  Space saved: 23.5%! 🎉
+  Space saved: 23.5%! 
 ```
 
 ---

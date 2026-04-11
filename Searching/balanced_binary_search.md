@@ -55,7 +55,7 @@ For every node:
 
 ---
 
-## 🖼️ Visual Representation
+## Visual Representation
 
 ![AVL Tree Balancing Rotations Diagram](docs/images/avl_tree_diagram.png)
 
@@ -64,7 +64,7 @@ For every node:
 
 ---
 
-## 🎓 Step-by-Step Breakdown (Teacher's Guide)
+## Step-by-Step Breakdown (Teacher's Guide)
 
 Let's see why we need these "rotations" to keep things fair.
 
@@ -83,7 +83,7 @@ An AVL tree has a rule: No side can be more than **1 level** taller than the oth
 
 ---
 
-## 🧠 Why are "Rotations" the Secret Sauce?
+## Why are "Rotations" the Secret Sauce?
 A rotation is a mathematical trick that changes the structure of the tree **without** breaking the sorted order rule (smaller numbers still on the left, larger on the right). It's like re-organizing your bookshelf so you can reach every book easily!
 
 ---

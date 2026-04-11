@@ -27,7 +27,7 @@ Like QuickSort, it uses a **Pivot**.
 1. **Pick a Pivot:** Choose a random element (e.g., $X$).
 2. **Partition:** Move everything smaller than $X$ to the left, and everything larger than $X$ to the right.
 3. **Check the Index:**
-   - Did the Pivot land on exactly the index you were looking for? **Return it! 🎉**
+   - Did the Pivot land on exactly the index you were looking for? **Return it! **
    - Is your target index in the Left half? **Search only the Left.**
    - Is it in the Right half? **Search only the Right.**
 
@@ -44,7 +44,7 @@ Like QuickSort, it uses a **Pivot**.
                          ^ 
                          | Pivot is at index 3. 
                            Target (index 2) is on the LEFT. 
-                           THROW AWAY [4, 6, 5, 8] 🗑️
+                           THROW AWAY [4, 6, 5, 8] 
    
    Searching only in [3, 2, 1]:
    Pivot = 3
