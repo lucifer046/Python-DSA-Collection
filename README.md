@@ -2,7 +2,7 @@
 
 > **Intuitive algorithm visualizations, simulations, and standardized implementations.**
 
-[**Handbook**](https://lucifer046.github.io/Python-DSA-Collection/) | [**Revision PDF**](./DSA_Cheatsheet.pdf)
+[**Handbook**](https://lucifer046.github.io/python-dsa-handbook/) | [**Revision PDF**](./DSA_Cheatsheet.pdf)
 
 ---
 
@@ -64,7 +64,7 @@ Optimized math & geometry: Karatsuba, Closest Pair, and QuickSelect.
 
 ## Learning Path
 
-1. **Visualize**: Use the [Handbook](https://lucifer046.github.io/Python-DSA-Collection/) to grasp algorithm intuition.
+1. **Visualize**: Use the [Handbook](https://lucifer046.github.io/python-dsa-handbook/) to grasp algorithm intuition.
 2. **Implementation**: Trace the documented `.py` files to understand line-by-line logic.
 3. **Solidify**: Use the [Revision PDF](./DSA_Cheatsheet.pdf) for complexities and edge cases.
 
