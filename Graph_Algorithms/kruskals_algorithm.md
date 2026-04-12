@@ -73,6 +73,56 @@ We stop the moment every single island is part of the same big network. We've no
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's build a bridge network between 4 islands.
+**Edges:** (0-1: 1), (2-3: 1), (1-2: 5), (0-3: 10).
+
+### 1. The Forest State (Start)
+Initially, every island is its own team. Total cost: 0.
+```text
+(0)      (1)
+
+(2)      (3)
+```
+
+### 2. Pick Cheapest Edge: (0-1) Cost 1
+0 and 1 are in different teams. **Build bridge!**
+- **Teams:** {0,1}, {2}, {3}
+```text
+(0)---[1]---(1)
+
+(2)      (3)
+```
+
+### 3. Pick Next Cheapest: (2-3) Cost 1
+2 and 3 are in different teams. **Build bridge!**
+- **Teams:** {0,1}, {2,3}
+```text
+(0)---[1]---(1)
+
+(2)---[1]---(3)
+```
+
+### 4. Pick Next Cheapest: (1-2) Cost 5
+Teams {0,1} and {2,3} are separate. **Build bridge!**
+- **Teams:** {0,1,2,3}
+- **MST complete!** Total cost: $1+1+5=7$.
+```text
+(0)---[1]---(1)
+             |
+            [5]  <-- This connects the two halves!
+             |
+(2)---[1]---(3)
+```
+
+### 5. Final Check: (0-3) Cost 10
+If we tried to build the (0-3) bridge, **Union-Find** would warn us: "Wait! 0 and 3 are already on the same team ({0,1,2,3})!" We **SKIP** it to avoid a cycle.
+
+---
+
 ## Why is "Union-Find" the Secret Partner?
 Kruskal's needs a fast way to check: "Is Island A already connected to Island B?" This is exactly what the **Union-Find** tool does! It keeps track of which 'team' each island belongs to. If two islands are on different teams, it's safe to build a bridge and then **Union** their teams together.
 

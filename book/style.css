@@ -472,6 +472,20 @@ pre {
     line-height: 1.6 !important;
 }
 
+/* Override PrismJS dark theme colors for the light Theory Pane */
+.theory-content pre {
+    margin: 2rem 0 !important;
+    padding: 1rem 0;
+}
+
+.theory-content pre,
+.theory-content pre code,
+.theory-content pre[class*="language-"],
+.theory-content code[class*="language-"] {
+    color: var(--text-main) !important;
+    text-shadow: none !important;
+}
+
 /* X-Ray Variables */
 .xray-var {
     border-bottom: 2px solid var(--accent-primary);

@@ -112,6 +112,77 @@ Think of it like this: You thought it took 4 hours to get to City B. But then yo
 
 ---
 
+## Steps to Perform (Execution Trace)
+
+Let's trace Dijkstra's algorithm step-by-step on a 5-node graph. Our goal is to find the shortest path from **Node 0** to all other nodes.
+
+### 1. Initialization
+Everyone starts at $\infty$ except the source (Node 0).
+```text
+(0)---[0]---(1)---[∞]
+ |  \        | 
+[2]  [4]    [5]
+ |     \     | 
+(2)---[∞]---(3)---[∞]
+ |           | 
+[10]        [2]
+ |           | 
+(4)-----------[∞]
+```
+**Queue:** `[(0, Node 0)]`
+
+### 2. Process Node 0 (The Start)
+Look at neighbors (1, 2).
+- Node 1: $0 + 4 = 4$
+- Node 2: $0 + 2 = 2$
+```text
+(0)*--[0]---(1)---[4] 
+ |  \        | 
+[2]  [4]    [5]
+ |     \     | 
+(2)---[2]   (3)---[∞]
+```
+**Queue:** `[(2, Node 2), (4, Node 1)]`
+
+### 3. Process Node 2 (Greedy Choice)
+Pick **Node 2** (Cost 2) because it's the smallest in the queue. Look at neighbors (3, 4).
+- Node 3: $2 + 8 = 10$
+- Node 4: $2 + 10 = 12$
+```text
+(0)---[0]---(1)---[4]
+ |  \        | 
+[2]  [4]    [5]
+ |     \     | 
+(2)*--[2]---(3)---[10]
+ |           | 
+[10]        [2]
+ |           | 
+(4)-----------[12]
+```
+**Queue:** `[(4, Node 1), (10, Node 3), (12, Node 4)]`
+
+### 4. Process Node 1 (Relaxation)
+Pick **Node 1** (Cost 4). Check neighbor (3).
+- **Shortcut found!** $4 (\text{at } 1) + 5 (\text{edge}) = 9$. This is better than the existing $10$ at Node 3. Update!
+```text
+(0)---[0]---(1)*--[4]
+ |  \        | 
+[2]  [4]    [5]   <-- Relaxing this path!
+ |     \     | 
+(2)---[2]---(3)---[9] ✅ (Was 10)
+```
+**Queue:** `[(9, Node 3), (12, Node 4)]`
+
+### 5. Finalize Node 3 & 4
+Process **Node 3** (Cost 9). Check neighbor (4).
+- **Shortcut found!** $9 (\text{at } 3) + 2 (\text{edge}) = 11$. Better than the existing $12$ at Node 4. Update!
+```text
+(3)*--[9]---(4)---[11] ✅ (Was 12)
+```
+**Result:** All nodes visited. Final costs: `[0, 4, 2, 9, 11]`.
+
+---
+
 ## Key Takeaways
 
 1. Dijkstra's finds the **shortest path in a weighted graph**
@@ -120,4 +191,5 @@ Think of it like this: You thought it took 4 hours to get to City B. But then yo
 4. Time complexity: **O((V+E) log V)** with a priority queue
 5. **Cannot handle negative edge weights** — use Bellman-Ford for that
 6. Used in **GPS navigation, network routing, and game pathfinding**
+
 

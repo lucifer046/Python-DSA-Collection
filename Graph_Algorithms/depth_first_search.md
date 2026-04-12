@@ -54,6 +54,60 @@ DFS is a "Go Deep First" strategy. It uses a **Stack** (Last-In, First-Out)—li
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's watch our explorer dive deep from **Node 0**.
+
+### 1. The Initial Choice
+Explorer starts at 0. Neighbors are 1 and 2. We pick 1.
+- **Stack:** `[0, 1]`
+```text
+  [0]* <-- Start
+  / \
+(1) (2)
+ |
+(3)
+```
+
+### 2. The Deep Dive
+From 1, explorer dives into 3.
+- **Stack:** `[0, 1, 3]`
+```text
+  (0)
+  / \
+ [1] (2)
+  |
+ [3]* <-- Deepest point
+```
+
+### 3. The Dead End
+Node 3 has no more unvisited neighbors.
+- **Backtrack!** We return to Node 1.
+- Node 1 has no more neighbors. Return to Node 0.
+- **Stack:** `[0]`
+```text
+  (0) <-- Back at base
+  / \
+ (1) (2)
+  |
+ (3) (Visited)
+```
+
+### 4. Exploring the Other Branch
+Node 0 still has neighbor 2. **Dive into 2!**
+- **Stack:** `[0, 2]`
+```text
+  (0)
+  / \
+ (1)[2]* <-- Exploring new path
+  |
+ (3)
+```
+
+---
+
 ## Why does DFS "backtrack"?
 Because DFS doesn't want to miss anything! Backtracking is how it says, "Okay, I've seen everything down *this* tunnel, now let me go back and check the other one I saw earlier." It's perfect for things like **solving puzzles** or **detecting if a road leads back in a circle (cycles)**.
 

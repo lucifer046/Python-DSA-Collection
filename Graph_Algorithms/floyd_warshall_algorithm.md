@@ -64,6 +64,51 @@ We repeat this for _every_ city in the graph. In the end, our grid is transforme
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's see how the "Master Table" updates using Node 1 as a middle-man.
+
+### 1. The Starting Table (D0)
+Only direct roads are listed.
+```text
+(0)---[5]-->(1)
+ |           |
+[10]        [2]
+ |           v
+(2)<--------(1) (Wait, 3 nodes)
+```
+Let's use 3 nodes: 0, 1, 2.
+Edges: (0→1: 5), (1→2: 2), (0→2: 10).
+
+**Initial Matrix:**
+```text
+      TO:  0    1    2
+FROM: 0 [  0,   5,  10 ]
+      1 [  ∞,   0,   2 ]
+      2 [  ∞,   ∞,   0 ]
+```
+
+### 2. Node 1 as Intermediate (k=1)
+Can we get from 0 to 2 faster by stopping at 1?
+- **Current (0→2):** 10
+- **New Path (0→1→2):** $5 + 2 = 7$
+- **Result:** 7 is better than 10! **Update Table!**
+
+### 3. Updated Matrix (D1)
+```text
+      TO:  0    1    2
+FROM: 0 [  0,   5,   7 ] ✅ (Was 10)
+      1 [  ∞,   0,   2 ]
+      2 [  ∞,   ∞,   0 ]
+```
+
+### 4. Final Result
+The table now shows that even though the "direct" road to Node 2 was 10, the "shortcut" through Node 1 only takes 7!
+
+---
+
 ## Why is it a "Grand Master Plan"?
 
 While algorithms like Dijkstra are fast for one-to-all travel, Floyd-Warshall is the only one that gives you **All-to-All** answers in one go. It's slower ($O(V^3)$), but it's incredibly thorough and can even handle those tricky negative-weight roads that Dijkstra hates!

@@ -76,6 +76,46 @@ We create a "Strip" around the middle line with width $2\delta$.
             P1 and P2 are closer than δ!
 ```
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's find the closest pair among 4 points: **A(1,1), B(2,2), C(8,8), D(9,7)**.
+
+### 1. Divide by X
+Split at the middle ($X \approx 5$).
+```text
+  Y
+ 10|
+   |              *(C)
+   |                 *(D)
+  2| *(B)       |
+  1| *(A)       |
+   +------------|--------X
+    0   2   4   |  8   10
+              (Mid)
+```
+- **Left Closest:** dist(A,B) = $\sqrt{1^2+1^2} \approx 1.41$
+- **Right Closest:** dist(C,D) = $\sqrt{1^2+1^2} \approx 1.41$
+- **Current Min ($\delta$):** 1.41
+
+### 2. The Strip Check
+Check if any point on the left is closer to a point on the right than 1.41.
+- Boundary: $Mid \pm 1.41$
+- **Points in Strip:** None! (B is at X=2, C is at X=8).
+```text
+      |<- 1.41 -> Mid <- 1.41 ->|
+      |          |              |
+ (B)  |          |              |  (C)
+  X=2 |          |              |  X=8
+```
+
+### 3. Conclusion
+No points were found across the boundary within $\delta$.
+- **Closest Pair:** (A,B) or (C,D) with distance **1.41**.
+
+---
+
 ## Visual Representation
 
 ![Closest Pair of Points "Divide and Conquer" Diagram](docs/images/closest_pair_diagram.png)

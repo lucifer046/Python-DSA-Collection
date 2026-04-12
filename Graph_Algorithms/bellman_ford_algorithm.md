@@ -131,6 +131,41 @@ After finishing his 4 rounds, he does **one final check**. If he finds *yet anot
   +------+----------+--------------------------+
 ```
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's see Bellman-Ford handle a **Negative Weight**.
+**Graph:** Node 0 (Start), Node 1, Node 2.
+**Edges:** (0→1: 5), (0→2: 8), (1→2: -4).
+
+### 1. Initialization
+Source is 0, others are $\infty$.
+```text
+(0)---[0]    (1)---[∞]
+ |            |
+[8]         [-4]
+ |            |
+(2)-----------[∞]
+```
+
+### 2. Iteration 1: Relaxing all Edges
+- Try (0→1): $0 + 5 = 5$. Update Node 1.
+- Try (0→2): $0 + 8 = 8$. Update Node 2.
+- Try (1→2): $5 + (-4) = 1$. **Shortcut found!** Update Node 2.
+```text
+(0)---[0]-->(1)---[5]
+ |           |
+[8]        [-4]  <-- Negative edge!
+ |           v
+(2)<--------[1] ✅ (Was 8, then became 1)
+```
+
+### 3. Iteration 2: Verification
+Check all edges again. No more changes possible. The shortest path to Node 2 is via Node 1 because of that negative road!
+
+---
+
 ## Why is it slower than Dijkstra?
 Dijkstra is "Greedy"—he picks one house and is done with it. Bellman-Ford is "Persistent"—he checks every house, over and over, just to be 100% sure about those negative weights. It's the difference between a quick guess and a deep investigation!
 

@@ -37,6 +37,44 @@ Perform the same algorithm on the list of medians until you find the final "Medi
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's find a good pivot for a list of 15 numbers.
+
+### 1. The Block Division
+Divide into 3 groups of 5.
+```text
+  GROUP 1: [12, 45, 23, 89, 34]
+  GROUP 2: [ 7, 56, 12, 33, 21]
+  GROUP 3: [90, 11, 44, 67, 22]
+```
+
+### 2. Sort Each Tiny Group
+(Sorting 5 items is lightning fast!)
+```text
+  Sorted G1: [12, 23, (34), 45, 89]  <-- Median is 34
+  Sorted G2: [ 7, 12, (21), 33, 56]  <-- Median is 21
+  Sorted G3: [11, 22, (44), 67, 90]  <-- Median is 44
+```
+
+### 3. The "Medians" List
+Collect the representatives.
+- **Medians:** `[34, 21, 44]`
+
+### 4. Find the Median of Medians
+Sort the final representatives to find the absolute middle.
+- **Sorted Medians:** `[21, (34), 44]`
+- **The Global Pivot:** **34**.
+
+### 5. Why is [34] Great?
+Look at Group 1. Since 34 is the median, we know 12 and 23 are definitely smaller than it.
+Look at Group 2. Since 34 is larger than its median (21), we know at least 3 numbers from G2 (7, 12, 21) are smaller than 34.
+**Total Guaranteed:** At least 5 or 6 numbers are smaller. We've "shielded" ourselves from picking a tiny pivot!
+
+---
+
 ## Visualizing the Logic
 
 ```

@@ -33,6 +33,54 @@ Like QuickSort, it uses a **Pivot**.
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's find the **3rd smallest** (k=2) in: **[4, 2, 7, 1, 3]**.
+
+### 1. Initial State
+Pivot chosen: **4**.
+```text
+ [ 4,  2,  7,  1,  3 ]
+   ^
+(Pivot)
+```
+
+### 2. Partition Around 4
+Smallest on left, largest on right.
+```text
+ [ 2,  1,  3, (4),  7 ]
+              ^
+        (Pivot at Index 3)
+```
+- **Target Index:** 2.
+- **Decision:** $2 < 3$. Our answer must be in the **left side**.
+- **Discard:** [4, 7]
+
+### 3. Search Left Side: [2, 1, 3]
+Pivot chosen: **2**.
+```text
+ [ 2,  1,  3 ]
+   ^
+```
+
+### 4. Partition Around 2
+```text
+ [ 1, (2),  3 ]
+        ^
+  (Pivot at Index 1)
+```
+- **Target Index:** 2.
+- **Decision:** $2 > 1$. Our answer must be in the **right side**.
+- **Discard:** [1, 2]
+
+### 5. Match Found!
+Only **[3]** remains. Its sorted index is indeed 2.
+**Result:** 3.
+
+---
+
 ## Visualizing the Search
 
 ```

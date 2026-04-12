@@ -182,6 +182,25 @@ There are 3 ways to "read" all numbers from a tree:
 
 ---
 
+---
+
+## Node Count Calculations (Based on Height $H$)
+
+If we know the height $H$ of an AVL tree, we can calculate how "dense" or "sparse" it can be:
+
+| Metric | Formula | Explanation |
+|---|---|---|
+| **Maximum Nodes** | $N_{max} = 2^{H+1} - 1$ | Occurs when the tree is **Perfectly Balanced** (Full). |
+| **Minimum Nodes** | $N_{min}(H) = N(H-1) + N(H-2) + 1$ | Occurs when the tree is as **unbalanced as possible** (Min-AVL tree). |
+
+> **Note:** The minimum nodes follow a Fibonacci-like growth:  
+> - $N(0) = 1$  
+> - $N(1) = 2$  
+> - $N(2) = 1 + 2 + 1 = 4$  
+> - $N(3) = 2 + 4 + 1 = 7$
+
+---
+
 ## Why AVL Trees Matter
 
 | Feature | Normal BST | AVL Tree |

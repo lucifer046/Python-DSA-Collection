@@ -58,6 +58,58 @@ BFS is very organized. It uses a **Queue** (First-In, First-Out)—just like a l
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's watch the ripple spread from **Node 0** to its neighbors.
+
+### 1. Start at Node 0
+Node 0 is current. It sees 1 and 2.
+- **Queue:** `[1, 2]`
+```text
+  [0]*  <-- Current
+  / \
+(1) (2)
+ |   |
+(3) (4)
+```
+
+### 2. Enter Layer 1: Process Node 1
+Node 1 is taken from the queue. It sees 3 and 4.
+- **Added to Queue:** 3, 4
+- **Queue:** `[2, 3, 4]` (2 is still at the front!)
+```text
+  (0)
+  / \
+[1]* (2)  <-- Current
+ |   |
+(3) (4)
+```
+
+### 3. Enter Layer 1: Process Node 2
+Node 2 is taken. No new neighbors found.
+- **Queue:** `[3, 4]`
+```text
+  (0)
+  / \
+ (1) [2]* <-- Current
+  |   |
+ (3) (4)
+```
+
+### 4. Enter Layer 2: Process Node 3 & 4
+Process Node 3, then Node 4. Both are "Layer 2" because they took 2 steps to reach.
+```text
+  (0)  (Layer 0)
+  / \
+ (1)-(2) (Layer 1)
+  |   |
+ [3]-[4] (Layer 2)
+```
+
+---
+
 ## Why is BFS the "Shortest Path" King?
 Because BFS explores layer by layer, the **first time** it sees a node, it *must* have found the shortest way to get there. If it took a longer way, it would have seen that node in a later "ripple"!
 

@@ -62,6 +62,51 @@ We keep repeating this—checking the "fringe" of our network for the cheapest p
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's watch our "Network Plant" grow from **Node 0**.
+**Edges:** (0-1: 2), (0-3: 6), (1-2: 3), (1-4: 5).
+
+### 1. Plant the Seed (Node 0)
+Start at 0. Neighbors 1 and 3 are in sight.
+```text
+ [0]* <-- Seed
+  / \
+(1) (3)
+ |   |
+(2)-(4)
+```
+
+### 2. Grow to Node 1 (Cost 2)
+Choose the cheapest edge (0-1).
+- **Visited:** {0, 1}
+- **Fringe (Next possible):** (1-2), (1-4), (0-3)
+```text
+ [0]---[2]---[1]*
+  |           / \
+ [6]        [3] [5]
+  |         /     \
+ (3)      (2)     (4)
+```
+
+### 3. Grow to Node 2 (Cost 3)
+Between (1-2: 3), (1-4: 5), and (0-3: 6), we pick 3!
+- **Visited:** {0, 1, 2}
+```text
+ [0]----------[1]
+  |            |
+ [6]          [3]
+  |            |
+ (3)          [2]* <-- New member
+```
+
+### 4. Reaching the Finish
+We continue until all nodes are connected. Notice how the tree always stays in one piece, growing outward like a plant!
+
+---
+
 ## Prim's vs. Kruskal's: What's the difference?
 While both find the exact same "Minimum Spanning Tree," they have different styles. **Prim's** grows like a **plant** from a single seed, always staying connected. **Kruskal's** builds **bridges** all over the ocean at once and merges them later. Both are smart, just different!
 

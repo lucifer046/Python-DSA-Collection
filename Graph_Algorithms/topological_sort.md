@@ -57,6 +57,54 @@ We keep repeating this—pick a ready task, knock out its dependencies, and find
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's schedule 4 tasks: **A (Socks), B (Shoes), C (Pants), D (Belt)**.
+**Rules:** A→B, C→B, C→D.
+
+### 1. Prerequisite Counts (In-Degree)
+- **A:** 0 (Ready!)
+- **B:** 2 (Needs A and C)
+- **C:** 0 (Ready!)
+- **D:** 1 (Needs C)
+```text
+(A) [0] --↘ 
+           (B) [2]
+(C) [0] --↗
+     \
+      ↘(D) [1]
+```
+
+### 2. Pick Task A (Socks)
+Task A is finished. B's count drops to 1.
+- **Done:** [A]
+- **Queue:** [C]
+```text
+[A]* --↘ 
+         (B) [1]  <-- Almost ready!
+(C) [0]--↗
+```
+
+### 3. Pick Task C (Pants)
+Task C is finished. B's count drops to 0. D's count drops to 0.
+- **Done:** [A, C]
+- **Queue:** [B, D]
+```text
+[C]* --↘
+         (B) [0]  <-- Ready!
+      ↘
+         (D) [0]  <-- Ready!
+```
+
+### 4. Finish the Order
+Pick B, then D (or vice versa).
+- **Final Valid Order:** [A, C, B, D]
+All tasks were completed in a legal sequence where every prerequisite came first!
+
+---
+
 ## Why is it a "Task Scheduler"?
 
 Topological Sort is the brain behind how **Excel** recalculates formulas, how **compilers** build software from thousands of files, and how **NASA** schedules complex space missions. It ensures nothing happens a second before it's supposed to!

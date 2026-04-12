@@ -2,80 +2,111 @@ import json
 from fpdf import FPDF
 
 class DSACheatsheetPDF(FPDF):
+    THEME_BG = (240, 244, 248)      # Very light Cloud/Slate Blue
+    THEME_TEXT = (35, 45, 55)       # Stronger contrast for light BG
+    THEME_ACCENT = (26, 35, 126)    # Returning to deep blue for crispness
+    THEME_PAPER = (255, 255, 255)  
+    
+    def __init__(self):
+        super().__init__()
+        # Import handwriting font for signature
+        self.add_font('Handwriting', '', 'book/assets/Inkfree.ttf')
+
     def header(self):
-        pass
+        # Fill the entire page with the theme background color
+        self.set_fill_color(*self.THEME_BG)
+        self.rect(0, 0, 210, 297, 'F')
 
     def footer(self):
+        # Page number (Center)
         self.set_y(-15)
         self.set_font('helvetica', 'I', 9)
-        self.set_text_color(150, 150, 150)
+        self.set_text_color(80, 80, 80)
         self.cell(0, 10, f'Page {self.page_no()}', align='C')
+        
+        # Signature (Bottom-Right)
+        self.set_font('Handwriting', '', 14)
+        self.set_text_color(120, 120, 120) # Subtle grey signature
+        self.set_xy(-65, -18)
+        self.cell(50, 15, 'by ~ Divya Prakash', align='R')
 
     def chapter_title(self, label):
         self.ln(4)
         self.set_font('helvetica', 'B', 18)
-        self.set_fill_color(245, 245, 245) # Very light gray background
-        self.set_text_color(26, 35, 126) # Deep Blue
+        self.set_fill_color(240, 240, 240) # Slightly off-white for contrast
+        self.set_text_color(*self.THEME_ACCENT)
         self.cell(0, 12, f'  {label.upper()}', ln=True, fill=True)
         self.ln(6)
 
-    def render_math_text(self, text, size=None, lh=8):
-        """ Renders text with superscripts (e.g., n^2 -> n²) """
-        if size: self.set_font_size(size)
+    def render_styled_text(self, text, lh=8):
+        """ Renders text with bold segments (**text**) and superscripts (n^2). """
+        # Split by bold markers first
+        bold_parts = text.split('**')
+        is_bold_segment = False
         
-        # Split by potential superscript marker '^'
-        parts = text.split('^')
-        self.write(lh, parts[0])
+        base_color = self.THEME_TEXT
+        accent_color = self.THEME_ACCENT
         
-        for part in parts[1:]:
-            # Check for parenthesized exponents like ^(k-1)
-            if part.startswith('('):
-                end_idx = part.find(')')
-                if end_idx != -1:
-                    exp = part[1:end_idx]
-                    rest = part[end_idx+1:]
-                else: 
-                    exp, rest = part, ""
+        for segment in bold_parts:
+            if is_bold_segment:
+                self.set_font(style='B')
+                self.set_text_color(*accent_color)
             else:
-                # Basic exponent (numbers and simple letters)
-                import re
-                match = re.match(r'^([0-9a-km-z\.\-\+]+)(.*)', part) # Avoid catching 'l' from 'log'
-                if match:
-                    exp, rest = match.groups()
-                else:
-                    exp, rest = "", part
+                self.set_font(style='')
+                self.set_text_color(*base_color)
             
-            if exp:
-                # Save state
-                curr_x = self.get_x()
-                curr_y = self.get_y()
-                curr_fs = self.font_size_pt
-                # Render Superscript
-                self.set_xy(curr_x, curr_y - (lh * 0.3))
-                self.set_font_size(curr_fs * 0.7)
-                self.write(lh, exp)
-                # Restore state
-                new_x = self.get_x()
-                self.set_xy(new_x, curr_y)
-                self.set_font_size(curr_fs)
-                self.write(lh, rest)
+            # Now handle math/superscripts within this segment
+            if '^' in segment:
+                inner_parts = segment.split('^')
+                self.write(lh, inner_parts[0])
+                for part in inner_parts[1:]:
+                    # Check for parenthesized exponents like ^(k-1)
+                    if part.startswith('('):
+                        end_idx = part.find(')')
+                        if end_idx != -1:
+                            exp = part[1:end_idx]
+                            rest = part[end_idx+1:]
+                        else: exp, rest = part, ""
+                    else:
+                        import re
+                        match = re.match(r'^([0-9a-km-z\.\-\+]+)(.*)', part)
+                        if match: exp, rest = match.groups()
+                        else: exp, rest = "", part
+                    
+                    if exp:
+                        curr_x, curr_y = self.get_x(), self.get_y()
+                        curr_fs = self.font_size_pt
+                        self.set_xy(curr_x, curr_y - (lh * 0.3))
+                        self.set_font_size(curr_fs * 0.7)
+                        self.write(lh, exp)
+                        self.set_xy(self.get_x(), curr_y)
+                        self.set_font_size(curr_fs)
+                        self.write(lh, rest)
+                    else:
+                        self.write(lh, '^' + part)
             else:
-                self.write(lh, '^' + part)
+                self.write(lh, segment)
+            
+            is_bold_segment = not is_bold_segment
+        
+        # Reset to default for safety
+        self.set_font(style='')
+        self.set_text_color(*base_color)
 
     def draw_row(self, label, content):
         self.set_x(12)
         self.set_font('helvetica', 'B', 10)
-        self.set_text_color(26, 35, 126)
+        self.set_text_color(*self.THEME_ACCENT)
         self.cell(45, 8, label, ln=0)
         
         self.set_font('helvetica', '', 11)
-        self.set_text_color(44, 44, 44)
+        self.set_text_color(*self.THEME_TEXT)
         
         curr_x = self.get_x()
         self.set_left_margin(curr_x)
         
-        if '^' in content:
-            self.render_math_text(content, lh=8)
+        if '^' in content or '**' in content:
+            self.render_styled_text(content, lh=8)
             self.ln(8)
         else:
             self.multi_cell(0, 8, content)
@@ -111,13 +142,13 @@ class DSACheatsheetPDF(FPDF):
             self.cell(45, 8, 'Negatives Rule:', ln=0)
             
             self.set_font('helvetica', 'I', 11)
-            self.set_text_color(44, 44, 44)
+            self.set_text_color(*self.THEME_TEXT)
             
             curr_x = self.get_x()
             self.set_left_margin(curr_x)
             
-            if '^' in algo['negatives_behavior']:
-                self.render_math_text(algo['negatives_behavior'], lh=8)
+            if '^' in algo['negatives_behavior'] or '**' in algo['negatives_behavior']:
+                self.render_styled_text(algo['negatives_behavior'], lh=8)
                 self.ln(8)
             else:
                 self.multi_cell(0, 8, algo['negatives_behavior'])
@@ -140,7 +171,7 @@ class DSACheatsheetPDF(FPDF):
         
         text_y = self.get_y()
         self.set_font('helvetica', '', 10)
-        self.set_text_color(60, 60, 60)
+        self.set_text_color(*self.THEME_TEXT)
         
         # Draw Pros
         self.set_xy(12, text_y)
@@ -150,8 +181,8 @@ class DSACheatsheetPDF(FPDF):
         
         for pro in algo['pros']:
             self.write(7, "* ")
-            if '^' in pro:
-                self.render_math_text(pro, lh=7)
+            if '^' in pro or '**' in pro:
+                self.render_styled_text(pro, lh=7)
             else:
                 self.write(7, pro)
             self.ln(7)
@@ -167,8 +198,8 @@ class DSACheatsheetPDF(FPDF):
         self.set_right_margin(10)
         for con in algo['cons']:
             self.write(7, "* ")
-            if '^' in con:
-                self.render_math_text(con, lh=7)
+            if '^' in con or '**' in con:
+                self.render_styled_text(con, lh=7)
             else:
                 self.write(7, con)
             self.ln(7)
@@ -202,33 +233,75 @@ class DSACheatsheetPDF(FPDF):
             
             # Start Complexity Cell
             start_x = self.get_x()
-            self.set_text_color(26, 35, 126)
+            self.set_text_color(*self.THEME_ACCENT)
             self.cell(30, 9, "", border='B') # Background/Border
             self.set_x(start_x + 6) # Small offset for centering
-            self.render_math_text(data['time'], lh=9)
+            self.render_styled_text(data['time'], lh=9)
             
             # Note Column
             self.set_x(start_x + 30)
-            self.set_text_color(60, 60, 60)
+            self.set_text_color(*self.THEME_TEXT)
             self.set_font('helvetica', '', 9)
             self.cell(0, 9, f" {data['note']}", border='B')
             self.ln()
             
+        # Final Takeaways Section (Bulleted list)
+        if 'takeaways' in algo and algo['takeaways']:
+            self.ln(6)
+            if self.get_y() > 240:
+                self.add_page()
+            
+            self.set_font('helvetica', 'B', 11)
+            self.set_text_color(*self.THEME_ACCENT)
+            self.cell(0, 8, '  FINAL TAKEAWAYS:', ln=True)
+            
+            self.set_font('helvetica', '', 10)
+            self.set_text_color(*self.THEME_TEXT)
+            self.set_left_margin(16)
+            for takeaway in algo['takeaways']:
+                self.write(6, "- ")
+                if '^' in takeaway or '**' in takeaway:
+                    self.render_styled_text(takeaway, lh=6)
+                else:
+                    self.write(6, takeaway)
+                self.ln(6)
+            self.set_left_margin(10)
+
         self.ln(12) # Major gap between algorithms
+
+def sanitize_text(text):
+    """Replaces non-ASCII characters that cause FPDF errors."""
+    if not isinstance(text, str): return text
+    replacements = {
+        '—': '--', '–': '-', '’': "'", '‘': "'", '“': '"', '”': '"', '…': '...',
+        '✅': '[YES]', '❌': '[NO]', '⚠️': '[ALERT]', '\u2714': '[YES]', '\u274c': '[NO]', '\u26a0': '[ALERT]'
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    # Final strip of any non-latin1 characters that helvetica can't handle
+    return text.encode('ascii', 'ignore').decode('ascii')
+
+def sanitize_payload(obj):
+    """Recursively sanitizes all strings in a JSON object (list or dict)."""
+    if isinstance(obj, dict):
+        return {k: sanitize_payload(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_payload(v) for v in obj]
+    elif isinstance(obj, str):
+        return sanitize_text(obj)
+    return obj
 
 def generate():
     with open('book/dsa_cheatsheet_data.json', 'r', encoding='utf-8') as f:
-        data_raw = f.read()
-        # Sanitize emojis for FPDF compatibility
-        data_clean = data_raw.replace('✅', '[YES]').replace('❌', '[NO]').replace('⚠️', '[ALERT]')
-        data = json.loads(data_clean)
+        data_payload = json.load(f)
+        data = sanitize_payload(data_payload)
         
     pdf = DSACheatsheetPDF()
     pdf.set_auto_page_break(auto=True, margin=20)
     pdf.add_page()
     
     # Header (First page only)
-    pdf.set_fill_color(105, 105, 105) # Grey
+    pdf.set_fill_color(30, 42, 53) # Darker slate for header
     pdf.rect(0, 0, 210, 35, 'F')
     
     pdf.set_y(12)
@@ -238,11 +311,11 @@ def generate():
     pdf.ln(10)
     
     # Notation Key - Wrapped in a subtle box
-    pdf.set_fill_color(240, 244, 255) # Soft blueprint blue
+    pdf.set_fill_color(230, 235, 245) # Soft slate sky blue
     pdf.rect(10, pdf.get_y(), 190, 48, 'F')
     pdf.set_y(pdf.get_y() + 4)
     pdf.set_font('helvetica', 'B', 12)
-    pdf.set_text_color(26, 35, 126)
+    pdf.set_text_color(*pdf.THEME_ACCENT)
     pdf.cell(0, 8, '   NOTATION KEY (QUICK REFERENCE):', ln=True)
     pdf.ln(2)
     
@@ -257,7 +330,7 @@ def generate():
         pdf.set_x(15)
         pdf.cell(20, 6, f"{char}:", ln=0)
         pdf.set_font('helvetica', '', 10)
-        pdf.set_text_color(44, 44, 44)
+        pdf.set_text_color(*pdf.THEME_TEXT)
         pdf.cell(0, 6, desc, ln=True)
     pdf.ln(10)
     

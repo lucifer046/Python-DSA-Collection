@@ -65,6 +65,51 @@ By the time we've checked every task, the house with the largest time on the sco
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's find the **Critical Path** for building our Spaceship.
+**Tasks:** A (Start), B (Build Engine: 5d), C (Build Cabin: 2d), D (Assemble: 3d).
+
+### 1. Initial State (Time 0)
+Everyone starts at 0.
+```text
+(A) [0] --(5d)--> (B) [0]
+ |                 |
+(2d)              (3d)
+ |                 v
+(C) [0] ----------(D) [0]
+```
+
+### 2. Propagation: Finishing A
+A is done. We look at B and C.
+- **B:** $0 + 5 = 5$
+- **C:** $0 + 2 = 2$
+```text
+[A]* --(5d)--> (B) [5]
+ |               |
+(2d)            (3d)
+ |               v
+(C) [2] --------(D) [0]
+```
+
+### 3. Propagation: Assembly (D)
+Task D must wait for BOTH B and C.
+- From B: $5 + 3 = 8$
+- From C: $2 + 3 = 5$
+- **Rule:** We pick the **MAX**. So D is ready at Day 8!
+```text
+[B]* --(3d)--> [D]* [8] ✅ (Max of 5 and 8)
+                ^
+[C]* -----------|
+```
+
+### 4. Conclusion
+The longest path is `A -> B -> D` (Total: 8 days). This is our **Critical Path**. Even though the Cabin (C) finished in 2 days, the whole project takes 8 days!
+
+---
+
 ## Why "Longest" instead of "Shortest"?
 
 In a graph like Google Maps, we want the shortest path to save time. But in project management, the **Longest Path** represents the **Bottleneck**. It tells you: 'This is the fastest you can possibly go, because you're tied to your slowest dependency.'

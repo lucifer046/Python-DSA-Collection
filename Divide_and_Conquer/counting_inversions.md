@@ -62,6 +62,48 @@ When merging **Left: [2, 4]** and **Right: [1, 3, 5]**:
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's count inversions for: **[2, 4, 1, 3]**.
+
+### 1. Split into Halves
+```text
+      [2, 4, 1, 3]
+       /        \
+    [2, 4]     [1, 3]
+```
+
+### 2. Recursive Sort & Count
+- **Left half [2, 4]:** Sorted! Inversions = 0.
+- **Right half [1, 3]:** Sorted! Inversions = 0.
+
+### 3. The "Big Merge"
+We merge `L=[2, 4]` and `R=[1, 3]`.
+```text
+  L: [2, 4]      R: [1, 3]
+      ^              ^
+   (i=0)          (j=0)
+```
+
+- **Compare L[0]=2 and R[0]=1:**
+  - 1 is smaller. **INVERSION!**
+  - Since it jumped over 2 *and* 4, we add **2** to our count.
+  - **Count:** 0 + 2 = 2.
+- **Compare L[0]=2 and R[1]=3:**
+  - 2 is smaller. Normal order. No count.
+- **Compare L[1]=4 and R[1]=3:**
+  - 3 is smaller. **INVERSION!**
+  - Since it jumped over 4, we add **1** to our count.
+  - **Count:** 2 + 1 = 3.
+
+### 4. Final Result
+Total Inversions = 3.
+(The pairs are: (2,1), (4,1), and (4,3)).
+
+---
+
 ## The Logic Flow
 
 ```

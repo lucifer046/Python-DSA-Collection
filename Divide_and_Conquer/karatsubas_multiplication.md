@@ -46,6 +46,44 @@ By reducing 4 multiplications to 3 at every step of recursion, we save a **massi
 
 ---
 
+---
+
+## Steps to Perform (Visual Trace)
+
+Let's multiply **1234 × 5678**.
+
+### 1. Split the Numbers
+$n=4$. Split in half ($m=2$).
+- **X:** $a=12, b=34$ ($12 \cdot 10^2 + 34$)
+- **Y:** $c=56, d=78$ ($56 \cdot 10^2 + 78$)
+```text
+      1  2 | 3  4
+      a -- | -- b
+      
+      5  6 | 7  8
+      c -- | -- d
+```
+
+### 2. The 3 Recursive Hits
+- **Hit 1 (ac):** $12 \times 56 = 672$
+- **Hit 2 (bd):** $34 \times 78 = 2652$
+- **Hit 3 (Sum Product):** $(12+34) \times (56+78) = 46 \times 134 = 6164$
+
+### 3. The "Middle Term" Extraction
+- Middle = (Hit 3) - (Hit 1) - (Hit 2)
+- Middle = $6164 - 672 - 2652 = 2840$
+```text
+   ac      Middle term      bd
+ [672] <--- [2840] ---> [2652]
+```
+
+### 4. Combining the Result
+- Result = (Hit 1) $\cdot 10^4$ + (Middle) $\cdot 10^2$ + (Hit 2)
+- $6,720,000 + 284,000 + 2,652 = \mathbf{7,006,652}$
+We only did 3 "big" multiplications instead of 4!
+
+---
+
 ## Visualizing the Divide & Conquer
 
 ```

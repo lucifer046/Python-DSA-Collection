@@ -90,7 +90,7 @@ The Longest Path / Shortest Path in a DAG algorithm utilizes the acyclic nature 
 }
 
 # Apply definitions
-directory = "Graph_Algorithms"
+directory = os.path.join("..", "Graph_Algorithms")
 for filename, text in data.items():
     path = os.path.join(directory, filename)
     if os.path.exists(path):
