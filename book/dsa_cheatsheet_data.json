@@ -1030,5 +1030,217 @@
         ]
       }
     ]
+  },
+  {
+    "category": "Dynamic Programming",
+    "topics": [
+      {
+        "name": "Fibonacci (DP Case Study)",
+        "description": "Explores the transition from slow recursion to optimized Dynamic Programming using the Fibonacci sequence.",
+        "designed_for": "Understanding memoization, tabulation, and space optimization.",
+        "purpose": "Learning how to save results to avoid redundant work.",
+        "how_it_works": "Demonstrates three levels of optimization: Recursion -> Memoization -> Tabulation -> Space-Optimized.",
+        "pros": [
+          "Drastic speed improvement (Exponential to Linear).",
+          "Linear space can often be optimized to constant space."
+        ],
+        "cons": [
+          "Requires identifying overlapping subproblems.",
+          "Can be harder to conceptualize than simple recursion."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(n)",
+            "note": "Linear scan (Optimized/Tabulation)."
+          },
+          "avg": {
+            "time": "O(n)",
+            "note": "Linear scan."
+          },
+          "worst": {
+            "time": "O(n)",
+            "note": "Linear scan."
+          },
+          "space": "O(1)"
+        },
+        "takeaways": [
+          "**Don't Re-calculate:** If you see the same problem twice, save the answer!",
+          "**Memoization** is great for problems where you don't need to solve *every* single sub-part.",
+          "**Tabulation** is usually faster because it avoids the 'overhead' of calling functions thousands of times.",
+          "**Space Optimization** can often turn an O(n) space problem into an O(1) space problem.",
+          "**Dynamic Programming** makes the impossible O(2^n) problems possible in O(n) or O(n^2)."
+        ]
+      },
+      {
+        "name": "House Robber (Max Loot)",
+        "description": "A classic optimization problem where you must decide which houses to rob to maximize profit without triggering adjacent alarms.",
+        "designed_for": "Understanding constraints, recurrence relations, and space optimization.",
+        "purpose": "Learning the Rob/Skip decision pattern in DP.",
+        "how_it_works": "Builds a DP decision tree where each choice at house 'i' depends on the results from houses 'i-1' and 'i-2'.",
+        "pros": [
+          "Linear time complexity O(n).",
+          "Can be reduced to constant space O(1)."
+        ],
+        "cons": [
+          "Requires careful handling of base cases (0 or 1 houses).",
+          "Must correctly identify the dependency (skip current vs rob current)."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(n)",
+            "note": "Single pass."
+          },
+          "avg": {
+            "time": "O(n)",
+            "note": "Single pass."
+          },
+          "worst": {
+            "time": "O(n)",
+            "note": "Single pass."
+          },
+          "space": "O(1)"
+        },
+        "takeaways": [
+          "**Decision Power:** Every DP problem is just a series of choices (Rob or Skip).",
+          "**Dependency:** Your current best choice depends on your previous best choices.",
+          "**Memory Efficiency:** If you only need info from two steps back, use variables instead of an array.",
+          "**Base Cases:** Always handle the simplest scenarios (empty streets) first."
+        ]
+      },
+      {
+        "name": "Unique Grid Paths",
+        "description": "Calculate the number of unique ways a robot can travel from top-left to bottom-right of a grid moving only Right or Down.",
+        "designed_for": "Visualizing 2D DP grids and combinatorial counting.",
+        "purpose": "Learning how to sum paths from multiple inputs (Above and Left).",
+        "how_it_works": "Fills a grid where each cell (r, c) = Above + Left. Boundary cells are initialized to 1.",
+        "pros": [
+          "Highly visual and intuitive.",
+          "Demonstrates Pascal's Triangle properties."
+        ],
+        "cons": [
+          "Memory overhead for 2D table (if not optimized)."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(m * n)",
+            "note": "Full grid traversal."
+          },
+          "avg": {
+            "time": "O(m * n)",
+            "note": "Grid cell count."
+          },
+          "worst": {
+            "time": "O(m * n)",
+            "note": "Consistent scan."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "**The sum rule:** Paths(r, c) = Paths(Above) + Paths(Left).",
+          "**Boundaries:** The top row and left column always have only 1 way to be reached.",
+          "**Combinatorics:** This is actually a visual representation of Pascal's Triangle!",
+          "**Space Efficiency:** Since we only look at the row above, we only need $O(n)$ space."
+        ]
+      },
+      {
+        "name": "Longest Common Subsequence (LCS)",
+        "description": "Find the longest sequence of characters that appear in the same order in both strings, regardless of their adjacent positions.",
+        "designed_for": "Understanding global alignment and sequence similarity.",
+        "purpose": "Learning the Match/Skip-one-from-either logic.",
+        "how_it_works": "Builds a DP matrix to find character matches.",
+        "pros": [
+          "Handles variations in sequence length.",
+          "Foundation for genetic sequencing."
+        ],
+        "cons": [
+          "Quadratic complexity O(m * n) can be slow for long strings."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(m * n)",
+            "note": "Full matrix build."
+          },
+          "avg": {
+            "time": "O(m * n)",
+            "note": "Product of string lengths."
+          },
+          "worst": {
+            "time": "O(m * n)",
+            "note": "Standard DP matrix scan."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "**Subsequence vs Substring:** Subsequences don't need to be contiguous.",
+          "**The decision:** If characters match, add 1. If they don't, take the MAX of skipping one from either string.",
+          "**DNA Matching:** This is the core algorithm used in genetic sequencing.",
+          "**Space Optimization:** We only need the current and previous rows of the DP table."
+        ]
+      },
+      {
+        "name": "Longest Common Subword (LCW)",
+        "description": "Find the length of the longest contiguous piece of text present in two strings, highlighting the streak-based logic of substrings.",
+        "designed_for": "Understanding contiguous alignment and streak resets.",
+        "purpose": "Learning the Match/Reset-to-Zero logic.",
+        "how_it_works": "Builds a DP matrix tracking contiguous match streaks.",
+        "pros": [
+          "Identifies exact contiguous matches.",
+          "Useful for plagiarism detection."
+        ],
+        "cons": [
+          "Memory overhead for 2D table."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(m * n)",
+            "note": "Full scan required."
+          },
+          "avg": {
+            "time": "O(m * n)",
+            "note": "Product of string lengths."
+          },
+          "worst": {
+            "time": "O(m * n)",
+            "note": "Maximum string lengths."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "**The streak meter:** If characters don't match, the streak resets to 0 immediately.",
+          "**Contiguous match:** This is used for plagiarism detection and exact phrase matching.",
+          "**Global Max:** Unlike LCS where the answer is in the last cell, for LCW you must track the maximum value found anywhere in the table.",
+          "**Subword = Substring:** These terms are often used interchangeably in algorithm theory."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Practice Sessions",
+    "topics": [
+      {
+        "name": "Quiz 1 - Practice Problems",
+        "description": "A comprehensive set of practice questions covering function analysis, sorting logic, and linked list manipulations.",
+        "designed_for": "Exam preparation and conceptual reinforcement.",
+        "purpose": "To test understanding of core Python DSA concepts through manual tracing and theoretical analysis.",
+        "how_it_works": "Step-by-step solutions to 18 high-fidelity quiz problems with teacher's notes.",
+        "pros": [
+          "Detailed traces for complex logic.",
+          "Clear ASCII diagrams for data structures.",
+          "Pedagogical insights for every question."
+        ],
+        "cons": [
+          "Covers specific problem instances rather than generalized patterns."
+        ],
+        "takeaways": [
+          "Mastering **manual tracing** of code is essential for exam success.",
+          "Selection Sort condition counts reveal the inner mechanics of the algorithm.",
+          "Two-pointer techniques in Linked Lists (Fast/Slow) are powerful for finding midpoints.",
+          "Hash collisions and Linear Probing follow a systematic index-shift pattern.",
+          "Unique Topological Sorts in DAGs imply the existence of a Hamiltonian Path.",
+          "Binary Search logic (searching right for last occurrence) is key for finding bounds.",
+          "Adjacency Matrix DFS costs $O(n^2)$ due to mandatory $O(n)$ degree scans per vertex."
+        ]
+      }
+    ]
   }
 ]

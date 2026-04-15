@@ -211,39 +211,40 @@ class DSACheatsheetPDF(FPDF):
         self.set_y(max(end_y_pros, end_y_cons) + 6)
         
         # Complexity Grid (Clean Style)
-        self.set_fill_color(252, 252, 252)
-        self.set_font('helvetica', 'B', 10)
-        self.set_text_color(0, 0, 0)
-        self.cell(30, 10, 'Scenario', border='B', fill=True, align='C')
-        self.cell(30, 10, 'Complexity', border='B', fill=True, align='C')
-        self.cell(0, 10, 'Why / Logic?', border='B', fill=True, align='C')
-        self.ln()
-        
-        self.set_font('helvetica', '', 10)
-        cases = [
-            ('Best Case', algo['complexities']['best']),
-            ('Avg Case', algo['complexities']['avg']),
-            ('Worst Case', algo['complexities']['worst']),
-            ('Space Use', {'time': algo['complexities']['space'], 'note': 'Auxiliary memory'})
-        ]
-        
-        for name, data in cases:
+        if algo.get('complexities'):
+            self.set_fill_color(252, 252, 252)
             self.set_font('helvetica', 'B', 10)
-            self.cell(30, 9, name, border='B', align='C')
-            
-            # Start Complexity Cell
-            start_x = self.get_x()
-            self.set_text_color(*self.THEME_ACCENT)
-            self.cell(30, 9, "", border='B') # Background/Border
-            self.set_x(start_x + 6) # Small offset for centering
-            self.render_styled_text(data['time'], lh=9)
-            
-            # Note Column
-            self.set_x(start_x + 30)
-            self.set_text_color(*self.THEME_TEXT)
-            self.set_font('helvetica', '', 9)
-            self.cell(0, 9, f" {data['note']}", border='B')
+            self.set_text_color(0, 0, 0)
+            self.cell(30, 10, 'Scenario', border='B', fill=True, align='C')
+            self.cell(30, 10, 'Complexity', border='B', fill=True, align='C')
+            self.cell(0, 10, 'Why / Logic?', border='B', fill=True, align='C')
             self.ln()
+            
+            self.set_font('helvetica', '', 10)
+            cases = [
+                ('Best Case', algo['complexities']['best']),
+                ('Avg Case', algo['complexities']['avg']),
+                ('Worst Case', algo['complexities']['worst']),
+                ('Space Use', {'time': algo['complexities']['space'], 'note': 'Auxiliary memory'})
+            ]
+            
+            for name, data in cases:
+                self.set_font('helvetica', 'B', 10)
+                self.cell(30, 9, name, border='B', align='C')
+                
+                # Start Complexity Cell
+                start_x = self.get_x()
+                self.set_text_color(*self.THEME_ACCENT)
+                self.cell(30, 9, "", border='B') # Background/Border
+                self.set_x(start_x + 6) # Small offset for centering
+                self.render_styled_text(data['time'], lh=9)
+                
+                # Note Column
+                self.set_x(start_x + 30)
+                self.set_text_color(*self.THEME_TEXT)
+                self.set_font('helvetica', '', 9)
+                self.cell(0, 9, f" {data['note']}", border='B')
+                self.ln()
             
         # Final Takeaways Section (Bulleted list)
         if 'takeaways' in algo and algo['takeaways']:
@@ -336,6 +337,10 @@ def generate():
     
     first_category = True
     for category in data:
+        # Skip practice problems for the cheatsheet PDF to keep it a concise reference
+        if category['category'] == "Practice Sessions":
+            continue
+            
         if not first_category:
             pdf.add_page()
         first_category = False

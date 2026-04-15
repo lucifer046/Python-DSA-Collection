@@ -9,7 +9,8 @@ CATEGORY_MAP = {
     "Divide & Conquer": "Divide_and_Conquer",
     "Graph Algorithms": "Graph_Algorithms",
     "Basic Data Structures": "Data_Structures",
-    "Greedy & Practical Tech": "Greedy_Algorithms"
+    "Greedy & Practical Tech": "Greedy_Algorithms",
+    "Practice Sessions": "Practice_Problems"
 }
 
 def slugify(text):
@@ -89,7 +90,8 @@ def main():
                 "Union-Find (Disjoint Set)": "union_find",
                 "Binary Heap": "binary_heap_implementation",
                 "Binary Tree": "binary_tree",
-                "Strict Binary Tree": "strict_binary_tree"
+                "Strict Binary Tree": "strict_binary_tree",
+                "Quiz 1 - Practice Problems": "Practice_Problems/Quiz_1/quiz_1_practice"
             }
 
             slugs = explicit_map.get(topic_name, slug)
@@ -99,7 +101,7 @@ def main():
             all_takeaways = []
             for s in slugs:
                 if "/" in s:
-                    parts = s.split("/")
+                    parts = s.split("/", 1)
                     current_dir = parts[0]
                     actual_slug = parts[1]
                 else:

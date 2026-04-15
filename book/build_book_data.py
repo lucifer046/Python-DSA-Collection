@@ -8,7 +8,9 @@ CATEGORY_MAP = {
     "Divide & Conquer": "Divide_and_Conquer",
     "Graph Algorithms": "Graph_Algorithms",
     "Basic Data Structures": "Data_Structures",
-    "Greedy & Practical Tech": "Greedy_Algorithms"
+    "Greedy & Practical Tech": "Greedy_Algorithms",
+    "Dynamic Programming": "Dynamic_Programming",
+    "Practice Sessions": "Practice_Problems"
 }
 
 def slugify(text):
@@ -65,7 +67,13 @@ def main():
                 "Kruskal / Prim (MST)": ["kruskals_algorithm", "prims_algorithm"],
                 "Topological Sort / Longest Path": ["topological_sort", "longest_path_dag"],
                 "Stack / Queue": ["stack_implementation", "queue_implementation"],
-                "Union-Find (Disjoint Set)": "union_find"
+                "Union-Find (Disjoint Set)": "union_find",
+                "Quiz 1 - Practice Problems": "Practice_Problems/Quiz_1/quiz_1_practice",
+                "Fibonacci (DP Case Study)": ["dynamic_programming", "fibonacci"],
+                "House Robber (Max Loot)": "house_robber",
+                "Unique Grid Paths": "grid_paths",
+                "Longest Common Subsequence (LCS)": "longest_common_subsequence",
+                "Longest Common Subword (LCW)": "longest_common_substring"
             }
 
             slugs = explicit_map.get(topic_name, slug)
@@ -78,7 +86,7 @@ def main():
             for s in slugs:
                 # Handle cross-directory mappings (e.g., "Divide_and_Conquer/slug")
                 if "/" in s:
-                    parts = s.split("/")
+                    parts = s.split("/", 1)
                     current_dir = parts[0]
                     actual_slug = parts[1]
                 else:
