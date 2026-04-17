@@ -158,9 +158,7 @@ class DSACheatsheetPDF(FPDF):
         
         # Pros & Cons Section
         self.ln(4)
-        # Ensure Pros/Cons & Complexity Grid do not page break internally.
-        if self.get_y() > 185:
-            self.add_page()
+        # Content will flow naturally with auto_page_break
         start_y = self.get_y()
         self.set_font('helvetica', 'B', 10)
         self.set_text_color(27, 94, 32) # Dark Forest Green
@@ -248,9 +246,7 @@ class DSACheatsheetPDF(FPDF):
             
         # Final Takeaways Section (Bulleted list)
         if 'takeaways' in algo and algo['takeaways']:
-            self.ln(6)
-            if self.get_y() > 240:
-                self.add_page()
+            self.ln(4)
             
             self.set_font('helvetica', 'B', 11)
             self.set_text_color(*self.THEME_ACCENT)
@@ -268,7 +264,7 @@ class DSACheatsheetPDF(FPDF):
                 self.ln(6)
             self.set_left_margin(10)
 
-        self.ln(12) # Major gap between algorithms
+        self.ln(8) # Compact gap between algorithms (2-3 lines)
 
 def sanitize_text(text):
     """Replaces non-ASCII characters that cause FPDF errors."""
@@ -347,8 +343,6 @@ def generate():
         
         pdf.chapter_title(category['category'])
         for topic in category['topics']:
-            if pdf.get_y() > 240: # Allow using bottom page space
-                pdf.add_page()
             pdf.algorithm_section(topic)
             
     pdf.output('DSA_Cheatsheet.pdf')

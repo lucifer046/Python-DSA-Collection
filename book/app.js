@@ -534,14 +534,55 @@ function handleMarkComplete(catIndex, topIndex) {
 function applyXRay() {
     const codeEl = document.querySelector('code.language-python');
     if (!codeEl) return;
-    let html = codeEl.innerHTML;
+
     const keys = Object.keys(XRAY_DICTIONARY).sort((a, b) => b.length - a.length);
-    keys.forEach(key => {
-        const regex = new RegExp(`\\b(${key})\\b(?![^<]*>)`, 'g');
-        const tooltip = XRAY_DICTIONARY[key];
-        html = html.replace(regex, `<span class="xray-var" data-tooltip="${tooltip}">$1</span>`);
+    if (keys.length === 0) return;
+
+    // Build a single regex to match all keys in one pass (efficient and safe)
+    const pattern = keys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+    const regex = new RegExp(`\\b(${pattern})\\b`, 'g');
+
+    // Create a TreeWalker to find all text nodes
+    const walker = document.createTreeWalker(codeEl, NodeFilter.SHOW_TEXT, null, false);
+    const nodesToProcess = [];
+    
+    let node;
+    while (node = walker.nextNode()) {
+        // Skip text nodes inside comments or strings (docstrings)
+        let parent = node.parentElement;
+        let shouldSkip = false;
+        while (parent && parent !== codeEl) {
+            const list = parent.classList;
+            // Robust check for PrismJS tokens and typical comment/string classes
+            if (list.contains('comment') || 
+                list.contains('string') || 
+                list.contains('docstring') ||
+                (list.contains('token') && (list.contains('comment') || list.contains('string')))) {
+                shouldSkip = true;
+                break;
+            }
+            parent = parent.parentElement;
+        }
+        if (!shouldSkip) {
+            nodesToProcess.push(node);
+        }
+    }
+
+    // Process the collected nodes
+    nodesToProcess.forEach(textNode => {
+        const originalText = textNode.textContent;
+        const escapedText = escapeHtml(originalText);
+        
+        const newHtml = escapedText.replace(regex, (match) => {
+            const tooltip = XRAY_DICTIONARY[match] || XRAY_DICTIONARY[match.toLowerCase()];
+            return `<span class="xray-var" data-tooltip="${tooltip}">${match}</span>`;
+        });
+
+        if (newHtml !== escapedText) {
+            const fragment = document.createRange().createContextualFragment(newHtml);
+            textNode.parentNode.replaceChild(fragment, textNode);
+        }
     });
-    codeEl.innerHTML = html;
 }
 
 function escapeHtml(text) {

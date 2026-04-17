@@ -4,6 +4,18 @@
 
 # Longest Common Subword (LCW) — The Streak Meter
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Longest Common Subword (LCW) or Substring finds the longest contiguous block of characters shared by two strings.
+
+**Comparison (LCS vs LCW):**
+*   **LCW:** Focuses on consecutive "streaks".
+*   **LCS:** Focuses on overall "sequence" regardless of gaps.
+
+---
+
+
 ## The Scenario
 
 Imagine you are investigating **plagiarism**. You have two essays, and you want to see if any **exact sentences or phrases** have been copied-pasted. Unlike subsequences (LCS), where characters can be scattered, a copied phrase must be **contiguous** (no gaps allowed).

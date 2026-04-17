@@ -4,6 +4,18 @@
 
 # Longest Common Subsequence (LCS) — Genetic Matching
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+LCS finds the longest sequence of characters that appear in the same relative order in two strings. It is not necessarily contiguous.
+
+**Comparison (LCS vs LCW):**
+*   **LCS:** Non-contiguous. If characters don't match, we take $\max(Left, Above)$.
+*   **LCW (Substring):** Must be contiguous. If characters don't match, the streak resets to 0.
+
+---
+
+
 ## The Scenario
 
 Imagine you are a biologist comparing the **DNA** of two different species. You want to see how much of their code is shared. However, Evolution is messy—new bits get inserted, and old bits get deleted. 

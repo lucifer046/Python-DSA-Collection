@@ -589,14 +589,41 @@ pre {
     text-shadow: none !important;
 }
 
+/* Code Token Differentiation */
+.token.comment, 
+.token.prolog, 
+.token.doctype, 
+.token.cdata {
+    color: #99aaaa !important; /* Soft slate gray-green for comments */
+    font-style: italic;
+}
+
+.token.string,
+.token.docstring {
+    color: #addb67 !important; /* Muted lime green for strings */
+}
+
 /* X-Ray Variables */
 .xray-var {
     border-bottom: 2px solid var(--accent-primary);
     cursor: help;
     position: relative;
     transition: all 0.2s;
-    color: #82aaff !important; /* Brighter blue for dark background */
+    color: #82aaff !important; /* Distinct blue for code variables */
     font-weight: 600;
+}
+
+/* Ensure X-Ray styling doesn't leak into comments conceptually (CSS safety) */
+.token.comment .xray-var,
+.token.comment .xray-var:hover {
+    border-bottom: none !important;
+    color: inherit !important;
+    cursor: default !important;
+    background: transparent !important;
+}
+
+.token.comment .xray-var::after {
+    display: none !important;
 }
 
 .xray-var:hover {

@@ -1,5 +1,231 @@
 [
   {
+    "category": "Basic Data Structures",
+    "topics": [
+      {
+        "name": "Linked List",
+        "description": "It organizes data in nodes linked by pointers to allow constant-time insertions at endpoints and dynamic growth.",
+        "designed_for": "Dynamic memory and frequent insertions.",
+        "purpose": "Implementation of stacks, queues, and graph adjacency lists.",
+        "how_it_works": "Chain of nodes with next-pointers.",
+        "pros": [
+          "Dynamic size.",
+          "O(1) insertion at head/tail."
+        ],
+        "cons": [
+          "O(n) search.",
+          "No random access."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(1)",
+            "note": "Head operations."
+          },
+          "avg": {
+            "time": "O(n)",
+            "note": "Traversal needed."
+          },
+          "worst": {
+            "time": "O(n)",
+            "note": "Last element operations."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "A Linked List is a **chain of nodes**, each pointing to the next one",
+          "The first node is called the **Head** -- it's our entry point",
+          "The last node points to **None** -- meaning \"the chain ends here\"",
+          "**Adding** to the chain = create a new node and link it",
+          "**Deleting** from the chain = bypass the node by re-linking its neighbors",
+          "It's great for **inserting** and **deleting**, but slow for **searching** (you can't jump to the middle!)"
+        ]
+      },
+      {
+        "name": "Stack / Queue",
+        "description": "It restricts element access to one end (LIFO Stack) or opposite ends (FIFO Queue).",
+        "designed_for": "Restricted LIFO (Stack) / FIFO (Queue) access.",
+        "purpose": "Stack: Recursion/Backtracking. Queue: Scheduling/BFS.",
+        "how_it_works": "Endpoint pushes/pops only.",
+        "pros": [
+          "Predictable O(1) ops."
+        ],
+        "cons": [
+          "No access to middle items."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(1)",
+            "note": "Standard operations."
+          },
+          "avg": {
+            "time": "O(1)",
+            "note": "Endpoint manipulation."
+          },
+          "worst": {
+            "time": "O(1)",
+            "note": "Operational speed is constant."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "A Stack follows the **LIFO** rule -- Last In, First Out",
+          "You can only touch the **TOP** -- no peeking at the middle!",
+          "**PUSH** = Add to the top, **POP** = Remove from the top",
+          "Items come out in **reverse order** from how they went in",
+          "Stacks are used everywhere: Undo history, browser back, function calls",
+          "A Queue follows the **FIFO** rule -- First In, First Out",
+          "**ENQUEUE** = Join the BACK, **DEQUEUE** = Served from the FRONT",
+          "Items come out in the **SAME order** they went in",
+          "It's the opposite of a Stack (Stack = reverse order, Queue = same order)",
+          "Used everywhere: printers, web servers, customer support lines"
+        ]
+      },
+      {
+        "name": "Binary Tree",
+        "description": "A hierarchical data structure where each node has at most two children (left and right).",
+        "designed_for": "Representing hierarchical data and being the base for BSTs/Heaps.",
+        "purpose": "Organizing data into branches for efficient hierarchical access.",
+        "how_it_works": "Nodes are connected via edges, forming a parent-child relationship with a single root.",
+        "pros": [
+          "Flexible size.",
+          "Hierarchical structure."
+        ],
+        "cons": [
+          "Worst case O(n) for unstructured trees."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(log n)",
+            "note": "Balanced search."
+          },
+          "avg": {
+            "time": "O(log n)",
+            "note": "Standard depth."
+          },
+          "worst": {
+            "time": "O(n)",
+            "note": "Skewed structure."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "Each node has a **maximum of 2 children**.",
+          "**Height** determines the maximum capacity of the tree.",
+          "**Leaf nodes** have no children.",
+          "Standard for representing hierarchical data and hierarchical decisions."
+        ]
+      },
+      {
+        "name": "Strict Binary Tree",
+        "description": "A binary tree version where every node has either 0 or 2 children, never just one.",
+        "designed_for": "Optimal encoding (Huffman) and decision trees.",
+        "purpose": "Ensuring all internal nodes have a full set of children for symmetrical operations.",
+        "how_it_works": "Enforces a '0 or 2' child rule across all levels.",
+        "pros": [
+          "Symmetrical structure.",
+          "Mathematically predictable leaf counts."
+        ],
+        "cons": [
+          "Requires more nodes than standard trees for same height."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(log n)",
+            "note": "Full leaves."
+          },
+          "avg": {
+            "time": "O(log n)",
+            "note": "Balanced depth."
+          },
+          "worst": {
+            "time": "O(n)",
+            "note": "Skewed strict paths."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "No node can have **exactly one child**.",
+          "The number of leaf nodes is always one more than the number of internal nodes.",
+          "For a given height $H$, it requires **more nodes** than a standard binary tree to remain \"Strict\" ($2H+1$ vs $H+1$).",
+          "Commonly used in **Huffman Coding** and logic-based decision trees."
+        ]
+      },
+      {
+        "name": "Binary Heap",
+        "description": "A complete binary tree that maintains the heap property (Min/Max).",
+        "designed_for": "Fast access to the minimum or maximum element.",
+        "purpose": "Implementation of Priority Queues and efficient sorting.",
+        "how_it_works": "Maintains a semi-sorted structure where the parent is always smaller (Min) or larger (Max) than its children.",
+        "pros": [
+          "Efficient insertions/deletions O(log n).",
+          "Memory efficient (implemented as an array)."
+        ],
+        "cons": [
+          "Slow searching O(n)."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(1)",
+            "note": "Peeking at root."
+          },
+          "avg": {
+            "time": "O(log n)",
+            "note": "Insertion/Extraction."
+          },
+          "worst": {
+            "time": "O(log n)",
+            "note": "Path processing."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "Heaps are **not sorted**; they only guarantee the root is the extreme value.",
+          "Implemented using **arrays** for memory efficiency.",
+          "**Complete tree structure** ensures the height is always $\\log n$.",
+          "Standard tool for **Priority Queues** and **HeapSort**.",
+          "**Building a heap** from an array takes $O(n)$ time using the bottom-up approach."
+        ]
+      },
+      {
+        "name": "Union-Find (Disjoint Set)",
+        "description": "It manages disjoint sets by merging them based on rank and using path compression for fast root lookups.",
+        "designed_for": "Disjoint set tracking and connectivity checking.",
+        "purpose": "Kruskal's MST, detecting groups in networks.",
+        "how_it_works": "Find-root and Union-by-rank with path compression.",
+        "pros": [
+          "Near O(1) performance.",
+          "Highly efficient."
+        ],
+        "cons": [
+          "One-way merging only."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(a(n))",
+            "note": "Near constant speed."
+          },
+          "avg": {
+            "time": "O(a(n))",
+            "note": "Inverse Ackermann function."
+          },
+          "worst": {
+            "time": "O(a(n))",
+            "note": "Extremely fast overhead."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "Union-Find tracks **groups** (teams/friend circles)",
+          "**FIND** = \"Who is the leader of this person's group?\"",
+          "**UNION** = \"Merge these two groups into one\"",
+          "**Union by Rank** = Always make the smaller group join the bigger one (keeps things fast)",
+          "Operations are nearly **instant** -- almost O(1) time!",
+          "It's a key building block for many graph algorithms (like Kruskal's MST)"
+        ]
+      }
+    ]
+  },
+  {
     "category": "Sorting Algorithms",
     "topics": [
       {
@@ -149,7 +375,7 @@
           "After partitioning, the Pivot is in its **final correct position**",
           "The process repeats for the left and right groups",
           "**Average case: O(n log n)** -- very fast!",
-          "**Worst case: O(n)** -- happens when the pivot is always the smallest or largest",
+          "**Worst case: O(n)** -- happens when the pivot be smallest or largest",
           "It sorts **in-place** -- no extra memory needed (unlike Merge Sort)"
         ]
       }
@@ -228,7 +454,7 @@
           "A BST stores numbers with **smaller on the left, larger on the right**",
           "If data arrives in order, a normal BST becomes a **straight line** (very slow!)",
           "An **AVL Tree** fixes this by automatically **rotating** whenever it gets unbalanced",
-          "**Balance Factor** = Height(Left)  Height(Right), must be -1, 0, or +1",
+          "**Balance Factor** = Height(Left) - Height(Right), must be -1, 0, or +1",
           "**Rotations** are the self-correcting moves: Left, Right, Left-Right, Right-Left",
           "**Inorder traversal** always gives numbers in **sorted order**",
           "Guaranteed **O(log n)** search time -- even with millions of items!"
@@ -276,38 +502,37 @@
     "category": "Divide & Conquer",
     "topics": [
       {
-        "name": "Closest Pair of Points",
-        "description": "It splits points by x-coordinates, solves for halves, and checks a central strip for pairs closer than current candidates.",
-        "designed_for": "Finding the 2 closest points in a plane.",
-        "purpose": "Air traffic control collision detection and graphics proximity checks.",
-        "how_it_works": "Divide by X-coord, solve halves, check strip near divide.",
+        "name": "Karatsuba's Multiplication",
+        "description": "It breaks large multiplications into three smaller recursive calls, reducing complexity from O(n^2) to O(n^1.58).",
+        "designed_for": "Multiplying very large integers.",
+        "purpose": "Cryptography (RSA) and high-precision calculations.",
+        "how_it_works": "Breaks multiplication into 3 smaller multiplications (n/2).",
         "pros": [
-          "Much faster than O(n^2) brute force."
+          "Faster than O(n^2) school-book method."
         ],
         "cons": [
-          "Complex to implement."
+          "Overhead for small numbers."
         ],
         "complexities": {
           "best": {
-            "time": "O(n log n)",
-            "note": "Standard merge-like logic."
+            "time": "O(n^1.58)",
+            "note": "Recursive reduction."
           },
           "avg": {
-            "time": "O(n log n)",
-            "note": "Consistent complexity."
+            "time": "O(n^1.58)",
+            "note": "Consistent result."
           },
           "worst": {
-            "time": "O(n log n)",
-            "note": "Standard divide/conquer performance."
+            "time": "O(n^1.58)",
+            "note": "Standard complexity."
           },
           "space": "O(n)"
         },
         "takeaways": [
-          "**Comparison:** Brute force is $O(n^2)$, but Divide & Conquer is $O(n \\log n)$.",
-          "**Dividing:** Split points by a median line on the x-axis.",
-          "**The Strip:** Only check points in the middle that could possibly be closer than our current record.",
-          "**Efficiency:** Sorting by Y inside the strip is the \"secret sauce\" that makes it $O(n \\log n)$.",
-          "**Real-Life Use:** Air traffic control, pattern recognition, and computer graphics (collision detection)."
+          "**Efficiency:** For small numbers, $n^2$ is fine. For million-digit numbers, $n^{1.58}$ is a lifesaver.",
+          "**Strategy:** Divide the number into halves, perform 3 recursive multiplications, and combine the results.",
+          "**The Trick:** The middle term $ad + bc$ can be calculated from $(a+b)(c+d) - ac - bd$.",
+          "**Use-Case:** Large integer math, cryptography (RSA), and scientific simulations."
         ]
       },
       {
@@ -345,37 +570,151 @@
         ]
       },
       {
-        "name": "Karatsuba's Multiplication",
-        "description": "It breaks large multiplications into three smaller recursive calls, reducing complexity from O(n^2) to O(n^1.58).",
-        "designed_for": "Multiplying very large integers.",
-        "purpose": "Cryptography (RSA) and high-precision calculations.",
-        "how_it_works": "Breaks multiplication into 3 smaller multiplications (n/2).",
+        "name": "Closest Pair of Points",
+        "description": "It splits points by x-coordinates, solves for halves, and checks a central strip for pairs closer than current candidates.",
+        "designed_for": "Finding the 2 closest points in a plane.",
+        "purpose": "Air traffic control collision detection and graphics proximity checks.",
+        "how_it_works": "Divide by X-coord, solve halves, check strip near divide.",
         "pros": [
-          "Faster than O(n^2) school-book method."
+          "Much faster than O(n^2) brute force."
         ],
         "cons": [
-          "Overhead for small numbers."
+          "Complex to implement."
         ],
         "complexities": {
           "best": {
-            "time": "O(n^1.58)",
-            "note": "Recursive reduction."
+            "time": "O(n log n)",
+            "note": "Standard merge-like logic."
           },
           "avg": {
-            "time": "O(n^1.58)",
-            "note": "Consistent result."
+            "time": "O(n log n)",
+            "note": "Consistent complexity."
           },
           "worst": {
-            "time": "O(n^1.58)",
-            "note": "Standard complexity."
+            "time": "O(n log n)",
+            "note": "Standard divide/conquer performance."
           },
           "space": "O(n)"
         },
         "takeaways": [
-          "**Efficiency:** For small numbers, $n^2$ is fine. For million-digit numbers, $n^{1.58}$ is a lifesaver.",
-          "**Strategy:** Divide the number into halves, perform 3 recursive multiplications, and combine the results.",
-          "**The Trick:** The middle term $ad + bc$ can be calculated from $(a+b)(c+d) - ac - bd$.",
-          "**Use-Case:** Large integer math, cryptography (RSA), and scientific simulations."
+          "**Comparison:** Brute force is $O(n^2)$, but Divide & Conquer is $O(n \\log n)$.",
+          "**Dividing:** Split points by a median line on the x-axis.",
+          "**The Strip:** Only check points in the middle that could possibly be closer than our current record.",
+          "**Efficiency:** Sorting by Y inside the strip is the \"secret sauce\" that makes it $O(n \\log n)$.",
+          "**Real-Life Use:** Air traffic control, pattern recognition, and computer graphics (collision detection)."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Greedy & Practical Tech",
+    "topics": [
+      {
+        "name": "Huffman Encoding",
+        "description": "It greedily merges the two least frequent characters into a tree to build optimal, variable-length binary codes.",
+        "designed_for": "Optimal lossless data compression.",
+        "purpose": "Foundation of ZIP, JPEG, and MP3 formats.",
+        "how_it_works": "Greedy tree building based on frequency.",
+        "pros": [
+          "Maximum compression for static text."
+        ],
+        "cons": [
+          "Requires two-pass processing."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(n log n)",
+            "note": "Priority Queue tree build."
+          },
+          "avg": {
+            "time": "O(n log n)",
+            "note": "Consistent log-linear build."
+          },
+          "worst": {
+            "time": "O(n log n)",
+            "note": "Heap sorting factors."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "**Frequent characters** get **short codes**, **rare characters** get **long codes**",
+          "Build a tree by repeatedly merging the **two rarest** characters",
+          "**LEFT = 0, RIGHT = 1** when reading the tree",
+          "Codes are **prefix-free** -- no code starts with another code",
+          "Results in **significant space savings** (often 20-50% compression)",
+          "The **Heap version** is faster (O(n log n)) for large files"
+        ]
+      },
+      {
+        "name": "Interval Scheduling",
+        "description": "It greedily selects the task that ends earliest and doesn't overlap with previously chosen tasks.",
+        "designed_for": "Selecting max number of non-overlapping tasks.",
+        "purpose": "Resource booking and scheduling systems.",
+        "how_it_works": "Always pick the task ending earliest.",
+        "pros": [
+          "Simple and optimal.",
+          "O(n log n)."
+        ],
+        "cons": [
+          "No weighting (all tasks equal)."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(n log n)",
+            "note": "Sorting by finish time."
+          },
+          "avg": {
+            "time": "O(n log n)",
+            "note": "Standard sort time."
+          },
+          "worst": {
+            "time": "O(n log n)",
+            "note": "Dominant sort cost."
+          },
+          "space": "O(1)"
+        },
+        "takeaways": [
+          "**Sort by end time** (earliest first)",
+          "**Pick greedily** -- if a meeting starts after the room is free, take it!",
+          "This gives the **maximum number** of non-overlapping meetings",
+          "Time complexity: **O(n log n)** (just the sorting step!)",
+          "This is mathematically **proven** to be the optimal strategy"
+        ]
+      },
+      {
+        "name": "Minimize Lateness",
+        "description": "It sorts all tasks by their deadlines and processes them in that order to minimize the maximum lateness.",
+        "designed_for": "Scheduling tasks to reduce specific delays.",
+        "purpose": "Industrial scheduling and management fairness.",
+        "how_it_works": "Sort based on the earliest deadlines first.",
+        "pros": [
+          "Optimal for minimizing maximum lateness."
+        ],
+        "cons": [
+          "Doesn't minimize late count."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(n log n)",
+            "note": "Deadline sorting time."
+          },
+          "avg": {
+            "time": "O(n log n)",
+            "note": "Consistent sorting speed."
+          },
+          "worst": {
+            "time": "O(n log n)",
+            "note": "Sort performance profile."
+          },
+          "space": "O(1)"
+        },
+        "takeaways": [
+          "**Sort tasks by deadline** (earliest first) -- this is the greedy strategy",
+          "**Lateness** = Finish Time - Deadline (negative means on time!)",
+          "The goal is to minimize the **MAXIMUM** lateness, not the average",
+          "This strategy is **mathematically proven** to be optimal",
+          "Time complexity: **O(n log n)** -- just the sorting step!",
+          "Think of it as: \"Handle the most urgent thing first!\""
         ]
       }
     ]
@@ -383,6 +722,163 @@
   {
     "category": "Graph Algorithms",
     "topics": [
+      {
+        "name": "BFS / DFS",
+        "description": "BFS explores levels layer-by-layer using a Queue; DFS explores as deep as possible using a Stack or Recursion.",
+        "designed_for": "Graph traversal and searching.",
+        "purpose": "BFS: Unweighted shortest path. DFS: Cycle detection and puzzles.",
+        "how_it_works": "Queue (BFS) vs Stack/Recursion (DFS) traversal.",
+        "pros": [
+          "Linear time O(V+E).",
+          "Simple to implement."
+        ],
+        "cons": [
+          "BFS has high space for wide graphs."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(V+E)",
+            "note": "Standard exploration."
+          },
+          "avg": {
+            "time": "O(V+E)",
+            "note": "Linear traversal."
+          },
+          "worst": {
+            "time": "O(V+E)",
+            "note": "Full graph search."
+          },
+          "space": "O(V)"
+        },
+        "takeaways": [
+          "BFS uses a **Queue** (First-In, First-Out)",
+          "It explores **layer by layer** -- all neighbors first, then neighbors of neighbors",
+          "It guarantees the **shortest path** in unweighted graphs",
+          "It visits nodes in **increasing order of distance** from the start",
+          "Works like ripples in a pond -- spreading outwards evenly!",
+          "DFS uses a **Stack** (Last-In, First-Out) -- or recursion",
+          "It explores **as deep as possible** before backtracking",
+          "It does **NOT** guarantee the shortest path (unlike BFS)",
+          "It's great for **mazes, cycles, and topological sorting**",
+          "**Iterative** = manual stack, **Recursive** = function calls itself",
+          "DFS visits nodes like exploring a cave -- go deep, then come back and try another tunnel!"
+        ]
+      },
+      {
+        "name": "Topological Sort / Longest Path",
+        "description": "It iteratively removes nodes with zero in-degree (Kahn's) or uses post-order DFS to determine task dependencies.",
+        "designed_for": "Linear ordering of tasks in a DAG.",
+        "purpose": "Critical path analysis in project management.",
+        "how_it_works": "Uses DFS or Indegree-zero steps (Kahn's). Finds longest path using order.",
+        "pros": [
+          "Essential for dependency graphs.",
+          "Linear time O(V+E)."
+        ],
+        "cons": [
+          "Cannot handle cycles (requires DAG)."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(V+E)",
+            "note": "Basic graph processing."
+          },
+          "avg": {
+            "time": "O(V+E)",
+            "note": "Linear efficiency."
+          },
+          "worst": {
+            "time": "O(V+E)",
+            "note": "Visiting every node/edge."
+          },
+          "space": "O(V)"
+        },
+        "takeaways": [
+          "Topological Sort finds a **valid ordering** of tasks with dependencies",
+          "It only works on **DAGs** (Directed Acyclic Graphs) -- no circular dependencies!",
+          "**In-Degree** = number of prerequisites a task has",
+          "Tasks are **ready** when their In-Degree drops to **0**",
+          "There may be **multiple valid orderings** -- all are correct!",
+          "Used in **course planning, build systems, project management**",
+          "Combines **Topological Sort + Dynamic Programming**",
+          "The longest path determines the **minimum project completion time**",
+          "Uses the formula: `depth[neighbor] = MAX(depth[neighbor], depth[current] + 1)`",
+          "**MAX** ensures we always keep the **longest** path (not the shortest!)",
+          "A task on the critical path **cannot be delayed** without delaying the whole project",
+          "Only works on **DAGs** -- no cycles allowed!"
+        ]
+      },
+      {
+        "name": "Kruskal's Algorithm",
+        "description": "It first sorts all edges in the graph by weight and greedily adds them if they don't form a cycle (via Union-Find).",
+        "designed_for": "Minimum Spanning Tree (MST) in Sparse Graphs.",
+        "purpose": "Efficiently connecting all nodes with minimum total edge weight, best for graphs with fewer edges.",
+        "how_it_works": "Sorts all edges and uses Union-Find to add edges in greedy order while avoiding cycles.",
+        "pros": [
+          "Simple logic.",
+          "Optimal for sparse graphs."
+        ],
+        "cons": [
+          "Requires sorting all edges."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(E log E)",
+            "note": "Initial sort dominant."
+          },
+          "avg": {
+            "time": "O(E log E)",
+            "note": "Standard sort time."
+          },
+          "worst": {
+            "time": "O(E log E)",
+            "note": "Fixed sort overhead."
+          },
+          "space": "O(V+E)"
+        },
+        "takeaways": [
+          "**Sort all edges** by cost (cheapest first)",
+          "**Add edges** one by one -- skip if it creates a cycle",
+          "Uses **Union-Find** to efficiently check for cycles",
+          "Stop when you have **n-1 edges** (all nodes connected)",
+          "Both Kruskal's and Prim's find the **same MST** -- just different approaches!"
+        ]
+      },
+      {
+        "name": "Prim's Algorithm",
+        "description": "It greedily selects the minimum edge from the current frontier to connect to an unvisited node (usually via Priority Queue).",
+        "designed_for": "Minimum Spanning Tree (MST) in Dense Graphs.",
+        "purpose": "Efficiently connecting all nodes with minimum total edge weight, best for graphs with many edges.",
+        "how_it_works": "Uses a Priority Queue to pick the smallest edge connecting the growing tree to an external vertex.",
+        "pros": [
+          "Faster for dense graphs.",
+          "Works naturally from a source."
+        ],
+        "cons": [
+          "Requires Priority Queue overhead."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(E log V)",
+            "note": "With Binary Heap."
+          },
+          "avg": {
+            "time": "O(E log V)",
+            "note": "Logarithmic factor is fixed."
+          },
+          "worst": {
+            "time": "O(E log V)",
+            "note": "Priority Queue processing."
+          },
+          "space": "O(V)"
+        },
+        "takeaways": [
+          "Prim's **grows from a seed node** outward",
+          "At each step, it picks the **cheapest edge** connecting the MST to an outside node",
+          "It's **Greedy** -- always picks the locally cheapest option",
+          "The result has exactly **n-1 edges** (for n nodes)",
+          "Total cost is the **minimum possible** to connect all nodes without cycles"
+        ]
+      },
       {
         "name": "Dijkstra's Algorithm",
         "description": "It greedily selects the closest unvisited node and relaxes its outgoing edges (usually via a Priority Queue).",
@@ -492,166 +988,8 @@
           "**The Golden Rule (Negatives):**",
           "**Negative Weights?** YES [YES]! It handles negative paths perfectly.",
           "**Negative Cycles?** NO [NO]. It cannot provide a valid answer if the graph contains a negative total cycle.",
-          "**Performance:** $O(V^3)$ is slow for large graphs, so use it when the number of nodes is small (usually less than 500).",
-          "**Real-Life Use:** Transitive closure (finding \"who knows whom\"), network routing, and project scheduling."
-        ]
-      },
-      {
-        "name": "BFS / DFS",
-        "description": "BFS explores levels layer-by-layer using a Queue; DFS explores as deep as possible using a Stack or Recursion.",
-        "designed_for": "Graph traversal and searching.",
-        "purpose": "BFS: Unweighted shortest path. DFS: Cycle detection and puzzles.",
-        "how_it_works": "Queue (BFS) vs Stack/Recursion (DFS) traversal.",
-        "pros": [
-          "Linear time O(V+E).",
-          "Simple to implement."
-        ],
-        "cons": [
-          "BFS has high space for wide graphs."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(V+E)",
-            "note": "Standard exploration."
-          },
-          "avg": {
-            "time": "O(V+E)",
-            "note": "Linear traversal."
-          },
-          "worst": {
-            "time": "O(V+E)",
-            "note": "Full graph search."
-          },
-          "space": "O(V)"
-        },
-        "takeaways": [
-          "BFS uses a **Queue** (First-In, First-Out)",
-          "It explores **layer by layer** -- all neighbors first, then neighbors of neighbors",
-          "It guarantees the **shortest path** in unweighted graphs",
-          "It visits nodes in **increasing order of distance** from the start",
-          "Works like ripples in a pond -- spreading outwards evenly!",
-          "DFS uses a **Stack** (Last-In, First-Out) -- or recursion",
-          "It explores **as deep as possible** before backtracking",
-          "It does **NOT** guarantee the shortest path (unlike BFS)",
-          "It's great for **mazes, cycles, and topological sorting**",
-          "**Iterative** = manual stack, **Recursive** = function calls itself",
-          "DFS visits nodes like exploring a cave -- go deep, then come back and try another tunnel!"
-        ]
-      },
-      {
-        "name": "Kruskal's Algorithm",
-        "description": "It first sorts all edges in the graph by weight and greedily adds them if they don't form a cycle (via Union-Find).",
-        "designed_for": "Minimum Spanning Tree (MST) in Sparse Graphs.",
-        "purpose": "Efficiently connecting all nodes with minimum total edge weight, best for graphs with fewer edges.",
-        "how_it_works": "Sorts all edges and uses Union-Find to add edges in greedy order while avoiding cycles.",
-        "pros": [
-          "Simple logic.",
-          "Optimal for sparse graphs."
-        ],
-        "cons": [
-          "Requires sorting all edges."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(E log E)",
-            "note": "Initial sort dominant."
-          },
-          "avg": {
-            "time": "O(E log E)",
-            "note": "Standard sort time."
-          },
-          "worst": {
-            "time": "O(E log E)",
-            "note": "Fixed sort overhead."
-          },
-          "space": "O(V+E)"
-        },
-        "takeaways": [
-          "**Sort all edges** by cost (cheapest first)",
-          "**Add edges** one by one -- skip if it creates a cycle",
-          "Uses **Union-Find** to efficiently check for cycles",
-          "Stop when you have **n-1 edges** (all nodes connected)",
-          "Both Kruskal's and Prim's find the **same MST** -- just different approaches!"
-        ]
-      },
-      {
-        "name": "Prim's Algorithm",
-        "description": "It greedily selects the minimum edge from the current frontier to connect to an unvisited node (usually via Priority Queue).",
-        "designed_for": "Minimum Spanning Tree (MST) in Dense Graphs.",
-        "purpose": "Efficiently connecting all nodes with minimum total edge weight, best for graphs with many edges.",
-        "how_it_works": "Uses a Priority Queue to pick the smallest edge connecting the growing tree to an external vertex.",
-        "pros": [
-          "Faster for dense graphs.",
-          "Works naturally from a source."
-        ],
-        "cons": [
-          "Requires Priority Queue overhead."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(E log V)",
-            "note": "With Binary Heap."
-          },
-          "avg": {
-            "time": "O(E log V)",
-            "note": "Logarithmic factor is fixed."
-          },
-          "worst": {
-            "time": "O(E log V)",
-            "note": "Priority Queue processing."
-          },
-          "space": "O(V)"
-        },
-        "takeaways": [
-          "Prim's **grows from a seed node** outward",
-          "At each step, it picks the **cheapest edge** connecting the MST to an outside node",
-          "It's **Greedy** -- always picks the locally cheapest option",
-          "The result has exactly **n-1 edges** (for n nodes)",
-          "Total cost is the **minimum possible** to connect all nodes without cycles"
-        ]
-      },
-      {
-        "name": "Topological Sort / Longest Path",
-        "description": "It iteratively removes nodes with zero in-degree (Kahn's) or uses post-order DFS to determine task dependencies.",
-        "designed_for": "Linear ordering of tasks in a DAG.",
-        "purpose": "Critical path analysis in project management.",
-        "how_it_works": "Uses DFS or Indegree-zero steps (Kahn's). Finds longest path using order.",
-        "pros": [
-          "Essential for dependency graphs.",
-          "Linear time O(V+E)."
-        ],
-        "cons": [
-          "Cannot handle cycles (requires DAG)."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(V+E)",
-            "note": "Basic graph processing."
-          },
-          "avg": {
-            "time": "O(V+E)",
-            "note": "Linear efficiency."
-          },
-          "worst": {
-            "time": "O(V+E)",
-            "note": "Visiting every node/edge."
-          },
-          "space": "O(V)"
-        },
-        "takeaways": [
-          "Topological Sort finds a **valid ordering** of tasks with dependencies",
-          "It only works on **DAGs** (Directed Acyclic Graphs) -- no circular dependencies!",
-          "**In-Degree** = number of prerequisites a task has",
-          "Tasks are **ready** when their In-Degree drops to **0**",
-          "There may be **multiple valid orderings** -- all are correct!",
-          "Used in **course planning, build systems, project management**",
-          "Combines **Topological Sort + Dynamic Programming**",
-          "The longest path determines the **minimum project completion time**",
-          "Uses the formula: `depth[neighbor] = MAX(depth[neighbor], depth[current] + 1)`",
-          "**MAX** ensures we always keep the **longest** path (not the shortest!)",
-          "A task on the critical path **cannot be delayed** without delaying the whole project",
-          "Only works on **DAGs** -- no cycles allowed!",
-          "```"
+          "**Performance:** $O(V^3)$ is slow for large graphs, so use it when the number of nodes is small.",
+          "**Real-Life Use:** Transitive closure, network routing, and project scheduling."
         ]
       },
       {
@@ -693,345 +1031,6 @@
     ]
   },
   {
-    "category": "Basic Data Structures",
-    "topics": [
-      {
-        "name": "Linked List",
-        "description": "It organizes data in nodes linked by pointers to allow constant-time insertions at endpoints and dynamic growth.",
-        "designed_for": "Dynamic memory and frequent insertions.",
-        "purpose": "Implementation of stacks, queues, and graph adjacency lists.",
-        "how_it_works": "Chain of nodes with next-pointers.",
-        "pros": [
-          "Dynamic size.",
-          "O(1) insertion at head/tail."
-        ],
-        "cons": [
-          "O(n) search.",
-          "No random access."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(1)",
-            "note": "Head operations."
-          },
-          "avg": {
-            "time": "O(n)",
-            "note": "Traversal needed."
-          },
-          "worst": {
-            "time": "O(n)",
-            "note": "Last element operations."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "A Linked List is a **chain of nodes**, each pointing to the next one",
-          "The first node is called the **Head** -- it's our entry point",
-          "The last node points to **None** -- meaning \"the chain ends here\"",
-          "**Adding** to the chain = create a new node and link it",
-          "**Deleting** from the chain = bypass the node by re-linking its neighbors",
-          "It's great for **inserting** and **deleting**, but slow for **searching** (you can't jump to the middle!)"
-        ]
-      },
-      {
-        "name": "Stack / Queue",
-        "description": "It restricts element access to one end (LIFO Stack) or opposite ends (FIFO Queue).",
-        "designed_for": "Restricted LIFO (Stack) / FIFO (Queue) access.",
-        "purpose": "Stack: Recursion/Backtracking. Queue: Scheduling/BFS.",
-        "how_it_works": "Endpoint pushes/pops only.",
-        "pros": [
-          "Predictable O(1) ops."
-        ],
-        "cons": [
-          "No access to middle items."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(1)",
-            "note": "Standard operations."
-          },
-          "avg": {
-            "time": "O(1)",
-            "note": "Endpoint manipulation."
-          },
-          "worst": {
-            "time": "O(1)",
-            "note": "Operational speed is constant."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "A Stack follows the **LIFO** rule -- Last In, First Out",
-          "You can only touch the **TOP** -- no peeking at the middle!",
-          "**PUSH** = Add to the top, **POP** = Remove from the top",
-          "Items come out in **reverse order** from how they went in",
-          "Stacks are used everywhere: Undo history, browser back, function calls",
-          "A Queue follows the **FIFO** rule -- First In, First Out",
-          "**ENQUEUE** = Join the BACK, **DEQUEUE** = Served from the FRONT",
-          "Items come out in the **SAME order** they went in",
-          "It's the opposite of a Stack (Stack = reverse order, Queue = same order)",
-          "Used everywhere: printers, web servers, customer support lines"
-        ]
-      },
-      {
-        "name": "Binary Heap",
-        "description": "A complete binary tree that maintains the heap property (Min/Max).",
-        "designed_for": "Fast access to the minimum or maximum element.",
-        "purpose": "Implementation of Priority Queues and efficient sorting.",
-        "how_it_works": "Maintains a semi-sorted structure where the parent is always smaller (Min) or larger (Max) than its children.",
-        "pros": [
-          "Efficient insertions/deletions O(log n).",
-          "Memory efficient (implemented as an array)."
-        ],
-        "cons": [
-          "Slow searching O(n)."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(1)",
-            "note": "Peeking at root."
-          },
-          "avg": {
-            "time": "O(log n)",
-            "note": "Insertion/Extraction."
-          },
-          "worst": {
-            "time": "O(log n)",
-            "note": "Path processing."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "Heaps are **not sorted**; they only guarantee the root is the extreme value.",
-          "Implemented using **arrays** for memory efficiency.",
-          "**Complete tree structure** ensures the height is always $\\log n$.",
-          "Standard tool for **Priority Queues** and **HeapSort**.",
-          "**Building a heap** from an array takes $O(n)$ time using the bottom-up approach."
-        ]
-      },
-      {
-        "name": "Binary Tree",
-        "description": "A hierarchical data structure where each node has at most two children (left and right).",
-        "designed_for": "Representing hierarchical data and being the base for BSTs/Heaps.",
-        "purpose": "Organizing data into branches for efficient hierarchical access.",
-        "how_it_works": "Nodes are connected via edges, forming a parent-child relationship with a single root.",
-        "pros": [
-          "Flexible size.",
-          "Hierarchical structure."
-        ],
-        "cons": [
-          "Worst case O(n) for unstructured trees."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(log n)",
-            "note": "Balanced search."
-          },
-          "avg": {
-            "time": "O(log n)",
-            "note": "Standard depth."
-          },
-          "worst": {
-            "time": "O(n)",
-            "note": "Skewed structure."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "Each node has a **maximum of 2 children**.",
-          "**Height** determines the maximum capacity of the tree.",
-          "**Leaf nodes** have no children.",
-          "Standard for representing hierarchical data and hierarchical decisions."
-        ]
-      },
-      {
-        "name": "Strict Binary Tree",
-        "description": "A binary tree version where every node has either 0 or 2 children, never just one.",
-        "designed_for": "Optimal encoding (Huffman) and decision trees.",
-        "purpose": "Ensuring all internal nodes have a full set of children for symmetrical operations.",
-        "how_it_works": "Enforces a '0 or 2' child rule across all levels.",
-        "pros": [
-          "Symmetrical structure.",
-          "Mathematically predictable leaf counts."
-        ],
-        "cons": [
-          "Requires more nodes than standard trees for same height."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(log n)",
-            "note": "Full leaves."
-          },
-          "avg": {
-            "time": "O(log n)",
-            "note": "Balanced depth."
-          },
-          "worst": {
-            "time": "O(n)",
-            "note": "Skewed strict paths."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "No node can have **exactly one child**.",
-          "The number of leaf nodes is always one more than the number of internal nodes.",
-          "For a given height $H$, it requires **more nodes** than a standard binary tree to remain \"Strict\" ($2H+1$ vs $H+1$).",
-          "Commonly used in **Huffman Coding** and logic-based decision trees."
-        ]
-      },
-      {
-        "name": "Union-Find (Disjoint Set)",
-        "description": "It manages disjoint sets by merging them based on rank and using path compression for fast root lookups.",
-        "designed_for": "Disjoint set tracking and connectivity checking.",
-        "purpose": "Kruskal's MST, detecting groups in networks.",
-        "how_it_works": "Find-root and Union-by-rank with path compression.",
-        "pros": [
-          "Near O(1) performance.",
-          "Highly efficient."
-        ],
-        "cons": [
-          "One-way merging only."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(a(n))",
-            "note": "Near constant speed."
-          },
-          "avg": {
-            "time": "O(a(n))",
-            "note": "Inverse Ackermann function."
-          },
-          "worst": {
-            "time": "O(a(n))",
-            "note": "Extremely fast overhead."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "Union-Find tracks **groups** (teams/friend circles)",
-          "**FIND** = \"Who is the leader of this person's group?\"",
-          "**UNION** = \"Merge these two groups into one\"",
-          "**Union by Rank** = Always make the smaller group join the bigger one (keeps things fast)",
-          "Operations are nearly **instant** -- almost O(1) time!",
-          "It's a key building block for many graph algorithms (like Kruskal's MST)"
-        ]
-      }
-    ]
-  },
-  {
-    "category": "Greedy & Practical Tech",
-    "topics": [
-      {
-        "name": "Huffman Encoding",
-        "description": "It greedily merges the two least frequent characters into a tree to build optimal, variable-length binary codes.",
-        "designed_for": "Optimal lossless data compression.",
-        "purpose": "Foundation of ZIP, JPEG, and MP3 formats.",
-        "how_it_works": "Greedy tree building based on frequency.",
-        "pros": [
-          "Maximum compression for static text."
-        ],
-        "cons": [
-          "Requires two-pass processing."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(n log n)",
-            "note": "Priority Queue tree build."
-          },
-          "avg": {
-            "time": "O(n log n)",
-            "note": "Consistent log-linear build."
-          },
-          "worst": {
-            "time": "O(n log n)",
-            "note": "Heap sorting factors."
-          },
-          "space": "O(n)"
-        },
-        "takeaways": [
-          "**Frequent characters** get **short codes**, **rare characters** get **long codes**",
-          "Build a tree by repeatedly merging the **two rarest** characters",
-          "**LEFT = 0, RIGHT = 1** when reading the tree",
-          "Codes are **prefix-free** -- no code starts with another code",
-          "Results in **significant space savings** (often 20-50% compression)",
-          "The **Heap version** is faster (O(n log n)) for large files"
-        ]
-      },
-      {
-        "name": "Interval Scheduling",
-        "description": "It greedily selects the task that ends earliest and doesn't overlap with previously chosen tasks.",
-        "designed_for": "Selecting max number of non-overlapping tasks.",
-        "purpose": "Resource booking and scheduling systems.",
-        "how_it_works": "Always pick the task ending earliest.",
-        "pros": [
-          "Simple and optimal.",
-          "O(n log n)."
-        ],
-        "cons": [
-          "No weighting (all tasks equal)."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(n log n)",
-            "note": "Sorting by finish time."
-          },
-          "avg": {
-            "time": "O(n log n)",
-            "note": "Standard sort time."
-          },
-          "worst": {
-            "time": "O(n log n)",
-            "note": "Dominant sort cost."
-          },
-          "space": "O(1)"
-        },
-        "takeaways": [
-          "**Sort by end time** (earliest first)",
-          "**Pick greedily** -- if a meeting starts after the room is free, take it!",
-          "This gives the **maximum number** of non-overlapping meetings",
-          "Time complexity: **O(n log n)** (just the sorting step!)",
-          "This is mathematically **proven** to be the optimal strategy"
-        ]
-      },
-      {
-        "name": "Minimize Lateness",
-        "description": "It sorts all tasks by their deadlines and processes them in that order to minimize the maximum lateness.",
-        "designed_for": "Scheduling tasks to reduce specific delays.",
-        "purpose": "Industrial scheduling and management fairness.",
-        "how_it_works": "Sort based on the earliest deadlines first.",
-        "pros": [
-          "Optimal for minimizing maximum lateness."
-        ],
-        "cons": [
-          "Doesn't minimize late count."
-        ],
-        "complexities": {
-          "best": {
-            "time": "O(n log n)",
-            "note": "Deadline sorting time."
-          },
-          "avg": {
-            "time": "O(n log n)",
-            "note": "Consistent sorting speed."
-          },
-          "worst": {
-            "time": "O(n log n)",
-            "note": "Sort performance profile."
-          },
-          "space": "O(1)"
-        },
-        "takeaways": [
-          "**Sort tasks by deadline** (earliest first) -- this is the greedy strategy",
-          "**Lateness** = Finish Time  Deadline (negative means on time!)",
-          "The goal is to minimize the **MAXIMUM** lateness, not the average",
-          "This strategy is **mathematically proven** to be optimal",
-          "Time complexity: **O(n log n)** -- just the sorting step!",
-          "Think of it as: \"Handle the most urgent thing first!\""
-        ]
-      }
-    ]
-  },
-  {
     "category": "Dynamic Programming",
     "topics": [
       {
@@ -1066,8 +1065,8 @@
         "takeaways": [
           "**Don't Re-calculate:** If you see the same problem twice, save the answer!",
           "**Memoization** is great for problems where you don't need to solve *every* single sub-part.",
-          "**Tabulation** is usually faster because it avoids the 'overhead' of calling functions thousands of times.",
-          "**Space Optimization** can often turn an O(n) space problem into an O(1) space problem.",
+          "**Tabulation** is usually faster because it avoids function overhead.",
+          "**Space Optimization** can often turn an O(n) space problem into O(1).",
           "**Dynamic Programming** makes the impossible O(2^n) problems possible in O(n) or O(n^2)."
         ]
       },
@@ -1076,14 +1075,14 @@
         "description": "A classic optimization problem where you must decide which houses to rob to maximize profit without triggering adjacent alarms.",
         "designed_for": "Understanding constraints, recurrence relations, and space optimization.",
         "purpose": "Learning the Rob/Skip decision pattern in DP.",
-        "how_it_works": "Builds a DP decision tree where each choice at house 'i' depends on the results from houses 'i-1' and 'i-2'.",
+        "how_it_works": "Builds a DP decision tree where each choice at house 'i' depends on houses 'i-1' and 'i-2'.",
         "pros": [
           "Linear time complexity O(n).",
           "Can be reduced to constant space O(1)."
         ],
         "cons": [
-          "Requires careful handling of base cases (0 or 1 houses).",
-          "Must correctly identify the dependency (skip current vs rob current)."
+          "Requires careful handling of base cases.",
+          "Must correctly identify the skip/rob dependency."
         ],
         "complexities": {
           "best": {
@@ -1102,8 +1101,8 @@
         },
         "takeaways": [
           "**Decision Power:** Every DP problem is just a series of choices (Rob or Skip).",
-          "**Dependency:** Your current best choice depends on your previous best choices.",
-          "**Memory Efficiency:** If you only need info from two steps back, use variables instead of an array.",
+          "**Dependency:** Your current best choice depends on previous best choices.",
+          "**Memory Efficiency:** If you only need info from two steps back, use variables.",
           "**Base Cases:** Always handle the simplest scenarios (empty streets) first."
         ]
       },
@@ -1118,7 +1117,7 @@
           "Demonstrates Pascal's Triangle properties."
         ],
         "cons": [
-          "Memory overhead for 2D table (if not optimized)."
+          "Memory overhead for 2D table."
         ],
         "complexities": {
           "best": {
@@ -1137,8 +1136,8 @@
         },
         "takeaways": [
           "**The sum rule:** Paths(r, c) = Paths(Above) + Paths(Left).",
-          "**Boundaries:** The top row and left column always have only 1 way to be reached.",
-          "**Combinatorics:** This is actually a visual representation of Pascal's Triangle!",
+          "**Boundaries:** Top row and left column always have only 1 way.",
+          "**Combinatorics:** Visual representation of Pascal's Triangle!",
           "**Space Efficiency:** Since we only look at the row above, we only need $O(n)$ space."
         ]
       },
@@ -1153,7 +1152,7 @@
           "Foundation for genetic sequencing."
         ],
         "cons": [
-          "Quadratic complexity O(m * n) can be slow for long strings."
+          "Quadratic complexity O(m * n)."
         ],
         "complexities": {
           "best": {
@@ -1172,9 +1171,9 @@
         },
         "takeaways": [
           "**Subsequence vs Substring:** Subsequences don't need to be contiguous.",
-          "**The decision:** If characters match, add 1. If they don't, take the MAX of skipping one from either string.",
-          "**DNA Matching:** This is the core algorithm used in genetic sequencing.",
-          "**Space Optimization:** We only need the current and previous rows of the DP table."
+          "**The decision:** If characters match, add 1. If not, take the MAX of alternatives.",
+          "**DNA Matching:** Core algorithm used in genetic sequencing.",
+          "**Space Optimization:** Only need current and previous rows."
         ]
       },
       {
@@ -1206,10 +1205,10 @@
           "space": "O(n)"
         },
         "takeaways": [
-          "**The streak meter:** If characters don't match, the streak resets to 0 immediately.",
-          "**Contiguous match:** This is used for plagiarism detection and exact phrase matching.",
-          "**Global Max:** Unlike LCS where the answer is in the last cell, for LCW you must track the maximum value found anywhere in the table.",
-          "**Subword = Substring:** These terms are often used interchangeably in algorithm theory."
+          "**The streak meter:** If characters don't match, the streak resets to 0.",
+          "**Contiguous match:** Used for plagiarism detection and exact matching.",
+          "**Global Max:** Must track the maximum value found anywhere in the table.",
+          "**Subword = Substring:** Terms used interchangeably in theory."
         ]
       }
     ]
@@ -1221,7 +1220,7 @@
         "name": "Quiz 1 - Practice Problems",
         "description": "A comprehensive set of practice questions covering function analysis, sorting logic, and linked list manipulations.",
         "designed_for": "Exam preparation and conceptual reinforcement.",
-        "purpose": "To test understanding of core Python DSA concepts through manual tracing and theoretical analysis.",
+        "purpose": "To test understanding of core Python DSA concepts through manual tracing.",
         "how_it_works": "Step-by-step solutions to 18 high-fidelity quiz problems with teacher's notes.",
         "pros": [
           "Detailed traces for complex logic.",
@@ -1229,16 +1228,16 @@
           "Pedagogical insights for every question."
         ],
         "cons": [
-          "Covers specific problem instances rather than generalized patterns."
+          "Covers specific problem instances."
         ],
         "takeaways": [
-          "Mastering **manual tracing** of code is essential for exam success.",
-          "Selection Sort condition counts reveal the inner mechanics of the algorithm.",
-          "Two-pointer techniques in Linked Lists (Fast/Slow) are powerful for finding midpoints.",
-          "Hash collisions and Linear Probing follow a systematic index-shift pattern.",
-          "Unique Topological Sorts in DAGs imply the existence of a Hamiltonian Path.",
-          "Binary Search logic (searching right for last occurrence) is key for finding bounds.",
-          "Adjacency Matrix DFS costs $O(n^2)$ due to mandatory $O(n)$ degree scans per vertex."
+          "Mastering **manual tracing** is essential for success.",
+          "Selection Sort condition counts reveal the inner mechanics.",
+          "Two-pointer techniques (Fast/Slow) are powerful for finding midpoints.",
+          "Hash collisions and Linear Probing follow a systematic pattern.",
+          "Unique Topological Sorts in DAGs imply a Hamiltonian Path.",
+          "Binary Search logic for bounds is key.",
+          "Adjacency Matrix DFS costs $O(n^2)$ due to mandatory scans."
         ]
       }
     ]

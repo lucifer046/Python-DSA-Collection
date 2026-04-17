@@ -4,6 +4,18 @@
 
 # Unique Grid Paths — The Robot's Journey
 
+## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Unique Grid Paths is a 2D dynamic programming problem that calculates the number of ways to travel from $(0,0)$ to $(m,n)$ on a grid, moving only Right or Down. Each cell's value is the sum of the cell above it and the cell to its left.
+
+**Context & Comparison:**
+*   **Pascal's Triangle:** This grid is a transformed version of Pascal's Triangle.
+*   **Combinatorics:** Can be solved using combinations: $\binom{m+n-2}{m-1}$.
+
+---
+
+
 ## The Scenario
 
 Imagine a **robot** starting at the top-left corner of a grid. Its mission is to reach the bottom-right corner. However, this robot has very limited movement circuits: it can **only move Right or Down**.

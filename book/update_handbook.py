@@ -86,38 +86,70 @@ The Longest Path / Shortest Path in a DAG algorithm utilizes the acyclic nature 
 **Context & Comparison:**
 *   **Longest Path (DAG):** Highly efficient because it evaluates nodes perfectly in dependency order. Solves the scheduling critical-path problem.
 *   **Dijkstra / Bellman-Ford:** Standard shortest-path algorithms are completely unnecessary in a DAG. Bellman-Ford is $O(VE)$ and Dijkstra is $O(E \\log V)$, whereas DAG traversal achieves $O(V+E)$ linearly and handles negative edge weights naturally without infinite looping.
+""",
+    "grid_paths.md": """## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Unique Grid Paths is a 2D dynamic programming problem that calculates the number of ways to travel from $(0,0)$ to $(m,n)$ on a grid, moving only Right or Down. Each cell's value is the sum of the cell above it and the cell to its left.
+
+**Context & Comparison:**
+*   **Pascal's Triangle:** This grid is a transformed version of Pascal's Triangle.
+*   **Combinatorics:** Can be solved using combinations: $\\binom{m+n-2}{m-1}$.
+""",
+    "longest_common_subsequence.md": """## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+LCS finds the longest sequence of characters that appear in the same relative order in two strings. It is not necessarily contiguous.
+
+**Comparison (LCS vs LCW):**
+*   **LCS:** Non-contiguous. If characters don't match, we take $\\max(Left, Above)$.
+*   **LCW (Substring):** Must be contiguous. If characters don't match, the streak resets to 0.
+""",
+    "longest_common_substring.md": """## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Longest Common Subword (LCW) or Substring finds the longest contiguous block of characters shared by two strings.
+
+**Comparison (LCS vs LCW):**
+*   **LCW:** Focuses on consecutive "streaks".
+*   **LCS:** Focuses on overall "sequence" regardless of gaps.
 """
 }
 
-# Apply definitions
-directory = os.path.join("..", "Graph_Algorithms")
-for filename, text in data.items():
-    path = os.path.join(directory, filename)
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            content = f.read()
+# Directories to search in
+directories = ["Graph_Algorithms", "Dynamic_Programming"]
 
-        # Check if already inserted
-        if "## Theoretical Definition & Comparisons" in content:
-            print(f"Skipping {filename} (already updated)")
-            continue
+for dir_name in directories:
+    directory = os.path.join("..", dir_name)
+    for filename, text in data.items():
+        path = os.path.join(directory, filename)
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                content = f.read()
 
-        # Insert after the main heading line (finding the first ## What is...)
-        if "## What is" in content:
-            new_content = content.replace("## What is", f"{text}\n---\n\n## What is", 1)
-        elif "## Introduction" in content:
-            new_content = content.replace("## Introduction", f"{text}\n---\n\n## Introduction", 1)
+            # Check if already inserted
+            if "## Theoretical Definition & Comparisons" in content:
+                print(f"Skipping {filename} in {dir_name} (already updated)")
+                continue
+
+            # Insert after the main heading line (finding the first ## What is...)
+            if "## What is" in content:
+                new_content = content.replace("## What is", f"{text}\n---\n\n## What is", 1)
+            elif "## Introduction" in content:
+                new_content = content.replace("## Introduction", f"{text}\n---\n\n## Introduction", 1)
+            else:
+                # Fallback: Just put it under the main title (# ...)
+                lines = content.split('\n')
+                for i, line in enumerate(lines):
+                    if line.startswith('# '):
+                        lines.insert(i+1, f"\n{text}\n---\n")
+                        break
+                new_content = '\n'.join(lines)
+
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(new_content)
+            print(f"Updated {filename} in {dir_name}")
         else:
-            # Fallback: Just put it under the main title (# ...)
-            lines = content.split('\n')
-            for i, line in enumerate(lines):
-                if line.startswith('# '):
-                    lines.insert(i+1, f"\n{text}\n---\n")
-                    break
-            new_content = '\n'.join(lines)
-
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print(f"Updated {filename}")
-    else:
-        print(f"File {path} not found.")
+            # Only print if we're in the expected directory for this file
+            # (Simple heuristic: don't warn if sort algorithm isn't in graph algorithms)
+            pass
