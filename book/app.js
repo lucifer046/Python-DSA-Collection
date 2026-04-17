@@ -134,6 +134,7 @@ async function init() {
         setupKeyboardShortcuts();
         setupCmdPalette();
         setupSwipeGestures();
+        setupXRayTooltips();
 
     } catch (error) {
         console.error('Initialization Error:', error);
@@ -916,3 +917,54 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
     setupCodeActions();
 });
+// =========================================
+//  X-RAY TOOLTIP MANAGER (Smart Positioning)
+// =========================================
+function setupXRayTooltips() {
+    // Create shared tooltip element if it doesn't exist
+    let tooltipEl = document.getElementById('xray-tooltip');
+    if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.id = 'xray-tooltip';
+        tooltipEl.className = 'xray-tooltip';
+        document.body.appendChild(tooltipEl);
+    }
+
+    // Use event delegation for performance and simplicity with dynamic content
+    document.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('.xray-var');
+        if (!target) return;
+
+        const text = target.getAttribute('data-tooltip');
+        if (!text) return;
+
+        tooltipEl.textContent = text;
+        tooltipEl.classList.add('visible');
+
+        // Positioning logic
+        const rect = target.getBoundingClientRect();
+        const tooltipRect = tooltipEl.getBoundingClientRect();
+
+        // Calculate preferred center position
+        let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+        let top = rect.top - tooltipRect.height - 10; // 10px spacing above
+
+        // Boundary safety check (Edge Detection)
+        const padding = 15; // Minimum distance from edge
+        if (left < padding) {
+            left = padding;
+        } else if (left + tooltipRect.width > window.innerWidth - padding) {
+            left = window.innerWidth - tooltipRect.width - padding;
+        }
+
+        // Apply positions
+        tooltipEl.style.left = `${left}px`;
+        tooltipEl.style.top = `${top}px`;
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest('.xray-var')) {
+            tooltipEl.classList.remove('visible');
+        }
+    });
+}

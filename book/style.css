@@ -631,12 +631,9 @@ pre {
     border-radius: 4px;
 }
 
-.xray-var::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
+/* Tooltip functionality moved to JS for smart edge detection (Antigravity v2.1) */
+.xray-tooltip {
+    position: fixed;
     background: var(--xray-bg);
     color: var(--text-main);
     padding: 0.6rem 0.8rem;
@@ -647,15 +644,16 @@ pre {
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: var(--transition);
+    transition: opacity 0.2s, transform 0.2s;
     border: 1px solid var(--border-light);
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    z-index: 10;
+    z-index: 10000; /* Ensure it's above everything */
+    transform: translateY(10px);
 }
 
-.xray-var:hover::after {
+.xray-tooltip.visible {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
 }
 
 /* Responsive Design System */
