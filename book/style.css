@@ -634,31 +634,26 @@ pre {
 /* Tooltip functionality moved to JS for smart edge detection (Antigravity v2.1) */
 .xray-tooltip {
     position: fixed;
-    background: rgba(30, 45, 60, 0.95); /* Deep Soft Navy */
-    backdrop-filter: blur(12px); /* Glassmorphism */
-    -webkit-backdrop-filter: blur(12px);
-    color: #e0e6ed; /* Crisp soft white */
-    padding: 0.75rem 1rem;
-    border-radius: 0.75rem;
+    background: var(--xray-bg);
+    color: var(--text-main);
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.5rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.4;
+    font-size: 0.85rem;
+    font-weight: 400;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(130, 170, 255, 0.25); /* Subtle glow border */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 
-                0 0 0 1px rgba(255,255,255,0.05) inset;
-    z-index: 10000;
-    transform: translateY(12px) scale(0.98);
+    transition: opacity 0.2s, transform 0.2s;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 10000; /* Ensure it's above everything */
+    transform: translateY(10px);
 }
 
 .xray-tooltip.visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 /* Responsive Design System */
