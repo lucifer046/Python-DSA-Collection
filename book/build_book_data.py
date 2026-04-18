@@ -68,6 +68,7 @@ def main():
                 "Prim's Algorithm": "prims_algorithm",
                 "Topological Sort / Longest Path": ["topological_sort", "longest_path_dag"],
                 "Stack / Queue": ["stack_implementation", "queue_implementation"],
+                "Stack using Queues": "stack_using_queues",
                 "Union-Find (Disjoint Set)": "union_find",
                 "Quiz 1 - Practice Problems": "Practice_Problems/Quiz_1/quiz_1_practice",
                 "Fibonacci (DP Case Study)": ["fibonacci", "fibonacci_dp"],

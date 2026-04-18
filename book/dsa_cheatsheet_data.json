@@ -81,6 +81,40 @@
         ]
       },
       {
+        "name": "Stack using Queues",
+        "description": "Simulates LIFO (Stack) behavior using FIFO (Queue) structures through element rotation or auxiliary storage.",
+        "designed_for": "Algorithmic thinking and understanding data structure limitations.",
+        "purpose": "Interview prep and understanding how restricted structures can simulate each other.",
+        "how_it_works": "Either uses element rotation in a single queue or transfers between two queues during push.",
+        "pros": [
+          "Deeply demonstrates understanding of structure properties."
+        ],
+        "cons": [
+          "Highly inefficient O(n) push operations."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(1)",
+            "note": "Pop and Peek operations."
+          },
+          "avg": {
+            "time": "O(n)",
+            "note": "Due to rotations during push."
+          },
+          "worst": {
+            "time": "O(n)",
+            "note": "Every push requires rotating all elements."
+          },
+          "space": "O(n)"
+        },
+        "takeaways": [
+          "You can build a **Stack** using either **one** or **two** queues.",
+          "The \"trick\" is always to move the **newest** item to the **front** of the queue.",
+          "Because Queues only let you take from the front, we must shuffle items during the **Push** operation to keep them in the right order.",
+          "While this works perfectly, it is **slower** than a normal stack because of the extra shuffling (O(n) instead of O(1))."
+        ]
+      },
+      {
         "name": "Binary Tree",
         "description": "A hierarchical data structure where each node has at most two children (left and right).",
         "designed_for": "Representing hierarchical data and being the base for BSTs/Heaps.",
@@ -375,7 +409,7 @@
           "After partitioning, the Pivot is in its **final correct position**",
           "The process repeats for the left and right groups",
           "**Average case: O(n log n)** -- very fast!",
-          "**Worst case: O(n)** -- happens when the pivot be smallest or largest",
+          "**Worst case: O(n)** -- happens when the pivot is always the smallest or largest",
           "It sorts **in-place** -- no extra memory needed (unlike Merge Sort)"
         ]
       }
@@ -454,7 +488,7 @@
           "A BST stores numbers with **smaller on the left, larger on the right**",
           "If data arrives in order, a normal BST becomes a **straight line** (very slow!)",
           "An **AVL Tree** fixes this by automatically **rotating** whenever it gets unbalanced",
-          "**Balance Factor** = Height(Left) - Height(Right), must be -1, 0, or +1",
+          "**Balance Factor** = Height(Left)  Height(Right), must be -1, 0, or +1",
           "**Rotations** are the self-correcting moves: Left, Right, Left-Right, Right-Left",
           "**Inorder traversal** always gives numbers in **sorted order**",
           "Guaranteed **O(log n)** search time -- even with millions of items!"
@@ -710,7 +744,7 @@
         },
         "takeaways": [
           "**Sort tasks by deadline** (earliest first) -- this is the greedy strategy",
-          "**Lateness** = Finish Time - Deadline (negative means on time!)",
+          "**Lateness** = Finish Time  Deadline (negative means on time!)",
           "The goal is to minimize the **MAXIMUM** lateness, not the average",
           "This strategy is **mathematically proven** to be optimal",
           "Time complexity: **O(n log n)** -- just the sorting step!",
@@ -804,7 +838,8 @@
           "Uses the formula: `depth[neighbor] = MAX(depth[neighbor], depth[current] + 1)`",
           "**MAX** ensures we always keep the **longest** path (not the shortest!)",
           "A task on the critical path **cannot be delayed** without delaying the whole project",
-          "Only works on **DAGs** -- no cycles allowed!"
+          "Only works on **DAGs** -- no cycles allowed!",
+          "```"
         ]
       },
       {
@@ -988,8 +1023,8 @@
           "**The Golden Rule (Negatives):**",
           "**Negative Weights?** YES [YES]! It handles negative paths perfectly.",
           "**Negative Cycles?** NO [NO]. It cannot provide a valid answer if the graph contains a negative total cycle.",
-          "**Performance:** $O(V^3)$ is slow for large graphs, so use it when the number of nodes is small.",
-          "**Real-Life Use:** Transitive closure, network routing, and project scheduling."
+          "**Performance:** $O(V^3)$ is slow for large graphs, so use it when the number of nodes is small (usually less than 500).",
+          "**Real-Life Use:** Transitive closure (finding \"who knows whom\"), network routing, and project scheduling."
         ]
       },
       {
@@ -1231,13 +1266,13 @@
           "Covers specific problem instances."
         ],
         "takeaways": [
-          "Mastering **manual tracing** is essential for success.",
-          "Selection Sort condition counts reveal the inner mechanics.",
-          "Two-pointer techniques (Fast/Slow) are powerful for finding midpoints.",
-          "Hash collisions and Linear Probing follow a systematic pattern.",
-          "Unique Topological Sorts in DAGs imply a Hamiltonian Path.",
-          "Binary Search logic for bounds is key.",
-          "Adjacency Matrix DFS costs $O(n^2)$ due to mandatory scans."
+          "Mastering **manual tracing** of code is essential for exam success.",
+          "Selection Sort condition counts reveal the inner mechanics of the algorithm.",
+          "Two-pointer techniques in Linked Lists (Fast/Slow) are powerful for finding midpoints.",
+          "Hash collisions and Linear Probing follow a systematic index-shift pattern.",
+          "Unique Topological Sorts in DAGs imply the existence of a Hamiltonian Path.",
+          "Binary Search logic (searching right for last occurrence) is key for finding bounds.",
+          "Adjacency Matrix DFS costs $O(n^2)$ due to mandatory $O(n)$ degree scans per vertex."
         ]
       }
     ]

@@ -87,6 +87,7 @@ def main():
                 "Kruskal / Prim (MST)": ["kruskals_algorithm", "prims_algorithm"],
                 "Topological Sort / Longest Path": ["topological_sort", "longest_path_dag"],
                 "Stack / Queue": ["stack_implementation", "queue_implementation"],
+                "Stack using Queues": "stack_using_queues",
                 "Union-Find (Disjoint Set)": "union_find",
                 "Binary Heap": "binary_heap_implementation",
                 "Binary Tree": "binary_tree",
