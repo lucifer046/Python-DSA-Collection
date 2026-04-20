@@ -64,6 +64,7 @@ def main():
                 "Bellman-Ford": "bellman_ford_algorithm",
                 "Floyd-Warshall": "floyd_warshall_algorithm",
                 "BFS / DFS": ["breadth_first_search", "depth_first_search"],
+                "Shortest Path (DFS)": "shortest_path_dfs",
                 "Kruskal's Algorithm": "kruskals_algorithm",
                 "Prim's Algorithm": "prims_algorithm",
                 "Topological Sort / Longest Path": ["topological_sort", "longest_path_dag"],

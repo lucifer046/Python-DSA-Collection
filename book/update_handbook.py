@@ -113,6 +113,16 @@ Longest Common Subword (LCW) or Substring finds the longest contiguous block of 
 **Comparison (LCS vs LCW):**
 *   **LCW:** Focuses on consecutive "streaks".
 *   **LCS:** Focuses on overall "sequence" regardless of gaps.
+""",
+    "shortest_path_dfs.md": """## Theoretical Definition & Comparisons
+
+**Theoretical Definition:** 
+Shortest Path via DFS uses exhaustive depth-first exploration with backtracking to visit every possible path from source to target, tracking the minimum distance (edge count or weight sum) found.
+
+**Comparison (Shortest Path Algorithms):**
+*   **DFS (Shortest Path):** Exponential complexity $O(V!)$. Best for small graphs or when backtracking is the focus.
+*   **BFS:** Optimal for unweighted graphs in $O(V+E)$.
+*   **Dijkstra:** Optimal for weighted graphs with positive edges in $O(E \\log V)$.
 """
 }
 
@@ -151,5 +161,4 @@ for dir_name in directories:
             print(f"Updated {filename} in {dir_name}")
         else:
             # Only print if we're in the expected directory for this file
-            # (Simple heuristic: don't warn if sort algorithm isn't in graph algorithms)
             pass

@@ -799,6 +799,45 @@
         ]
       },
       {
+        "name": "Shortest Path (DFS)",
+        "description": "Explores every possible path from source to target using recursion and backtracking, tracking the absolute minimum.",
+        "designed_for": "Small graphs or learning backtracking.",
+        "purpose": "Exhaustive path discovery and finding all paths.",
+        "how_it_works": "Uses recursion to visit all nodes; updates global best on arrival at target.",
+        "pros": [
+          "Finds all possible paths.",
+          "Memory efficient O(V)."
+        ],
+        "cons": [
+          "Extremely slow O(V!) for large graphs.",
+          "Inefficient for shortest paths."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(V!)",
+            "note": "Exhaustive exploration."
+          },
+          "avg": {
+            "time": "O(V!)",
+            "note": "Explores all permutations."
+          },
+          "worst": {
+            "time": "O(V!)",
+            "note": "Worst-case for complete graphs."
+          },
+          "space": "O(V)"
+        },
+        "takeaways": [
+          "DFS can find the shortest path by **trying every single path**",
+          "It uses **Backtracking** -- visit, check, then un-visit to try other ways",
+          "For **Unweighted**: Shortest = path with minimum depth",
+          "For **Weighted**: Shortest = path with minimum total cost",
+          "**Pruning**: Stop a path early if its weight already exceeds our best found so far!",
+          "Great for **small graphs** or coding interviews that test backtracking logic",
+          "In production, use **BFS** (unweighted) or **Dijkstra** (weighted) instead!"
+        ]
+      },
+      {
         "name": "Topological Sort / Longest Path",
         "description": "It iteratively removes nodes with zero in-degree (Kahn's) or uses post-order DFS to determine task dependencies.",
         "designed_for": "Linear ordering of tasks in a DAG.",
