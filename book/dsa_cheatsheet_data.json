@@ -991,6 +991,42 @@
         ]
       },
       {
+        "name": "MST via Dijkstra Logic",
+        "description": "Demonstrates the bridge between Shortest Path and MST by showing how Prim's and Kruskal's can be implemented using the same priority-queue greedy engine as Dijkstra.",
+        "designed_for": "Pedagogical understanding of Greedy Algorithms.",
+        "purpose": "Simplifying complex graph algorithms into a unified 'Process Cheapest First' mental model.",
+        "how_it_works": "Adapts the Dijkstra relaxation step (cumulative vs local weight) and uses priority queues for edge selection.",
+        "pros": [
+          "Unified mental model.",
+          "Shows algorithmic DNA."
+        ],
+        "cons": [
+          "Not a standalone algorithm name (concept bridge)."
+        ],
+        "complexities": {
+          "best": {
+            "time": "O(E log V)",
+            "note": "Prim-style relaxation."
+          },
+          "avg": {
+            "time": "O(E log V)",
+            "note": "Standard PQ overhead."
+          },
+          "worst": {
+            "time": "O(E log V)",
+            "note": "Heap complexity."
+          },
+          "space": "O(V+E)"
+        },
+        "takeaways": [
+          "**Prim is Dijkstra** with a different relaxation formula",
+          "**Kruskal is Dijkstra** on edges instead of nodes",
+          "Both use a **Priority Queue** to make the 'best local choice'",
+          "The **Min-Heap** is the engine that drives all three algorithms",
+          "Understanding one makes it much easier to master the others!"
+        ]
+      },
+      {
         "name": "Bellman-Ford",
         "description": "It iteratively relaxes all E edges (V-1) times to find shortest paths and detect negative cycles.",
         "designed_for": "Weighted shortest path with negative weights.",

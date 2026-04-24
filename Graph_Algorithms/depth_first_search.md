@@ -127,6 +127,23 @@ Because DFS doesn't want to miss anything! Backtracking is how it says, "Okay, I
 
 ---
 
+## Cycle Detection in Directed Graphs
+
+Cycle detection in directed graphs is trickier than undirected ones. We need to distinguish between:
+1.  **Visited Nodes:** Nodes we've explored already in *any* previous path.
+2.  **Recursion Stack:** Nodes currently in our **active** exploration path (the current "tunnel").
+
+**The Rule:** A cycle exists **ONLY** if we visit a node that is already in our **active recursion stack**. 
+
+*If we visit a node that was visited earlier but is NOT in our current stack, it's just a cross-edge (no cycle).*
+
+### The Logic Steps:
+1.  **Push:** When entering a node, add it to `visited` AND `rec_stack`.
+2.  **Explore:** Check neighbors. If neighbor is in `rec_stack` → **Cycle Detected!**
+3.  **Pop (Backtrack):** When leaving a node, remove it from `rec_stack`.
+
+---
+
 ## Where is DFS Used?
 
 | Use Case | How DFS Helps |

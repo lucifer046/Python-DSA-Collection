@@ -129,6 +129,42 @@ def compact_dfs(G, s, v=None):
         if m not in v: compact_dfs(G, m, v)
     return v # return set of discovered nodes
 
+def has_cycle_directed(G):
+    """
+    Cycle detection in a Directed Graph using DFS.
+    Logic: We use two trackers: 
+    - 'visited': nodes we have finished exploring entirely.
+    - 'rec_stack': nodes currently in the active recursion path.
+    If we see a node already in 'rec_stack', we found a BACK-EDGE (Cycle!).
+    """
+    n = len(G) if isinstance(G, list) else max(G.keys()) + 1
+    visited = [False] * n
+    rec_stack = [False] * n # Nodes currently in the DFS 'tunnel'
+    
+    def dfs_check(u):
+        visited[u] = True
+        rec_stack[u] = True
+        
+        for v in G[u]:
+            # If neighbor is in current 'tunnel', it's a cycle!
+            if rec_stack[v]:
+                return True
+            # If not visited, go deeper
+            if not visited[v]:
+                if dfs_check(v):
+                    return True
+        
+        # 4. Backtrack: Remove node from current 'tunnel'
+        rec_stack[u] = False
+        return False
+
+    # Check every component
+    for i in range(n):
+        if (isinstance(G, list) or i in G) and not visited[i]:
+            if dfs_check(i):
+                return True
+    return False
+
 # --- START OF PROGRAM ---
 
 # G1: sample graph dictionary (0-4)

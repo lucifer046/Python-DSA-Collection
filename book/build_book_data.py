@@ -61,6 +61,7 @@ def main():
                 "Karatsuba's Multiplication": "karatsubas_multiplication",
                 "Counting Inversions": "counting_inversions",
                 "Dijkstra's Algorithm": "dijkstras_algorithm",
+                "MST via Dijkstra Logic": "mst_dijkstra_logic",
                 "Bellman-Ford": "bellman_ford_algorithm",
                 "Floyd-Warshall": "floyd_warshall_algorithm",
                 "BFS / DFS": ["breadth_first_search", "depth_first_search"],

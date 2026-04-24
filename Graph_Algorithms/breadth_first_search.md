@@ -156,11 +156,24 @@ Because BFS explores layer by layer, the **first time** it sees a node, it *must
 
 ---
 
+## Cycle Detection using BFS (Undirected)
+
+BFS can be used to detect cycles in an undirected graph by tracking the **parent** of each node.
+
+**The Rule:** If we visit a node that is already `visited` and is **not** the parent of the current node, we have found a second way to reach that node—proving that a **cycle exists**.
+
+### The Logic Steps:
+1.  **Queue:** Store both the `current_node` and its `parent_node`.
+2.  **Visited Check:** If a neighbor is already visited, check if it is the parent.
+3.  **Cycle Found:** If neighbor is visited AND neighbor != parent, **Cycle Detected!**
+
+---
+
 ## Key Takeaways
 
 1. BFS uses a **Queue** (First-In, First-Out)
 2. It explores **layer by layer** — all neighbors first, then neighbors of neighbors
 3. It guarantees the **shortest path** in unweighted graphs
-4. It visits nodes in **increasing order of distance** from the start
+4. It can **detect cycles** in undirected graphs by tracking parent nodes
 5. Works like ripples in a pond — spreading outwards evenly!
 

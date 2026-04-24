@@ -137,6 +137,47 @@ def compact_bfs(G, s):
                 v.add(m); q.append(m) # seen it, add to search
     return q # return discovery order
 
+def has_cycle_bfs(G):
+    """
+    Cycle detection in an undirected graph using Breadth-First Search (BFS).
+    Logic: If we find a visited node that isn't the parent we just came from,
+    there must be a second path to that node, creating a cycle.
+    """
+    # n: handle both list of lists or dictionary graphs
+    if isinstance(G, list):
+        n = len(G)
+    else:
+        n = max(G.keys()) + 1 if G else 0
+        
+    visited = [False] * n
+    
+    # Graphs can be disconnected, so we check every possible start node
+    for i in range(n):
+        if (isinstance(G, list) or i in G) and not visited[i]:
+            # 1. Initialize Queue with (start_node, parent_id)
+            # Parent is -1 because the start node has no parent
+            queue = [(i, -1)]
+            visited[i] = True
+            
+            while queue:
+                u, p = queue.pop(0)
+                
+                # 2. Explore neighbors
+                for v in G[u]:
+                    # Handle weighted graphs if necessary (v might be (node, weight))
+                    neighbor = v[0] if isinstance(v, (tuple, list)) else v
+                    
+                    # If neighbor hasn't been seen, visit it and record u as parent
+                    if not visited[neighbor]:
+                        visited[neighbor] = True
+                        queue.append((neighbor, u))
+                    # 3. The Cycle Discovery
+                    # If neighbor WAS visited but is NOT our parent 'p', we found a loop!
+                    elif neighbor != p:
+                        return True
+                        
+    return False
+
 # --- START OF PROGRAM ---
 
 # G1: sample graph with 5 vertices (0-4)
