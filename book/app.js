@@ -135,10 +135,75 @@ async function init() {
         setupCmdPalette();
         setupSwipeGestures();
         setupXRayTooltips();
+        setupResizing();
 
     } catch (error) {
         console.error('Initialization Error:', error);
     }
+}
+
+// =========================================
+//  DRAGGABLE RESIZER
+// =========================================
+function setupResizing() {
+    const divider = document.getElementById('pane-divider');
+    const layout = document.getElementById('book-layout');
+    const theoryPane = document.querySelector('.theory-pane');
+
+    if (!divider || !layout || !theoryPane) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startPct = 0;
+
+    divider.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        isDragging = true;
+
+        const layoutRect = layout.getBoundingClientRect();
+        const style = window.getComputedStyle(layout);
+        
+        // Calculate available content width (subtract padding)
+        const paddingLR = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        const contentWidth = layoutRect.width - paddingLR;
+
+        startX = e.clientX;
+        // Get current percentage based on rendered width
+        startPct = (theoryPane.getBoundingClientRect().width / contentWidth) * 100;
+
+        divider.classList.add('dragging');
+        layout.classList.add('is-resizing');
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+
+        const layoutRect = layout.getBoundingClientRect();
+        const style = window.getComputedStyle(layout);
+        const paddingLR = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        const contentWidth = layoutRect.width - paddingLR;
+
+        const dx = e.clientX - startX;
+        const deltaPct = (dx / contentWidth) * 100;
+        let newPct = startPct + deltaPct;
+
+        // Clamp between 15% and 85%
+        newPct = Math.max(15, Math.min(85, newPct));
+
+        layout.style.setProperty('--theory-pane-width', `${newPct}%`);
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        divider.classList.remove('dragging');
+        layout.classList.remove('is-resizing');
+    });
+
+    // Reset on double click
+    divider.addEventListener('dblclick', () => {
+        layout.style.setProperty('--theory-pane-width', '50%');
+    });
 }
 
 // =========================================
@@ -171,11 +236,11 @@ function renderMenu(activeCat = null, activeTop = null) {
     const progress = getProgress();
 
     let html = `
-        <div class="menu-item home-btn ${activeCat === null ? 'active' : ''}" onclick="loadHome()">
+        <div class="menu-item home-btn ${activeCat === null ? 'active' : ''}" onclick="loadHome()" style="display: flex; align-items: center; gap: 0.75rem;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Home</span>
         </div>
-        <div class="menu-item home-btn" onclick="window.open('DSA_Cheatsheet.pdf', '_blank')">
+        <div class="menu-item pdf-btn" onclick="window.open('DSA_Cheatsheet.pdf', '_blank')" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             <span>Cheat Sheet PDF</span>
         </div>
@@ -190,11 +255,16 @@ function renderMenu(activeCat = null, activeTop = null) {
         const dashOffset = circumference * (1 - pct);
         const ringColor = pct === 1 ? '#27ae60' : '#1e5a8f';
 
+        const isOpen = window.openCategories.has(catIndex);
+
         html += `
             <div class="menu-category">
-                <div class="menu-category-title">
-                    <span>${category.category}</span>
-                    <svg class="category-progress-ring" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" title="${done}/${total} completed">
+                <div class="menu-category-title" onclick="toggleCategory(${catIndex})">
+                    <div class="category-title-left">
+                        <svg id="cat-chevron-${catIndex}" class="category-chevron" style="transform: ${isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        <span>${category.category}</span>
+                    </div>
+                    <svg class="category-progress-ring" viewBox="0 0 22 22" width="22" height="22" xmlns="http://www.w3.org/2000/svg" title="${done}/${total} completed">
                         <circle cx="11" cy="11" r="${radius}" fill="none" stroke="rgba(30,90,143,0.15)" stroke-width="2.2"/>
                         <circle cx="11" cy="11" r="${radius}" fill="none" stroke="${ringColor}" stroke-width="2.2"
                             stroke-dasharray="${circumference.toFixed(2)}"
@@ -204,7 +274,8 @@ function renderMenu(activeCat = null, activeTop = null) {
                             style="transition: stroke-dashoffset 0.6s cubic-bezier(0.25,1,0.5,1);"/>
                     </svg>
                 </div>
-                <div class="menu-grid">
+                <div class="menu-grid-wrapper" id="cat-grid-${catIndex}" style="max-height: ${isOpen ? '2000px' : '0px'};">
+                    <div class="menu-grid">
         `;
 
         category.topics.forEach((topic, topIndex) => {
@@ -218,7 +289,7 @@ function renderMenu(activeCat = null, activeTop = null) {
             `;
         });
 
-        html += `</div></div>`;
+        html += `</div></div></div>`;
     });
 
     html += `
@@ -231,6 +302,45 @@ function renderMenu(activeCat = null, activeTop = null) {
     list.innerHTML = html;
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
+    }
+}
+
+// State for accordion
+window.openCategories = new Set([0]);
+
+window.toggleCategory = function(catIndex) {
+    const gridWrapper = document.getElementById(`cat-grid-${catIndex}`);
+    const chevron = document.getElementById(`cat-chevron-${catIndex}`);
+    if (!gridWrapper) return;
+    
+    if (window.openCategories.has(catIndex)) {
+        // If clicking the already open one, just close it
+        window.openCategories.delete(catIndex);
+        gridWrapper.style.maxHeight = '0px';
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+    } else {
+        // First, close all currently open categories
+        window.openCategories.forEach(id => {
+            const openWrapper = document.getElementById(`cat-grid-${id}`);
+            const openChevron = document.getElementById(`cat-chevron-${id}`);
+            if (openWrapper) openWrapper.style.maxHeight = '0px';
+            if (openChevron) openChevron.style.transform = 'rotate(0deg)';
+        });
+        
+        // Clear state and set the new one
+        window.openCategories.clear();
+        window.openCategories.add(catIndex);
+        
+        // Open the clicked one
+        gridWrapper.style.maxHeight = gridWrapper.scrollHeight + 'px';
+        if (chevron) chevron.style.transform = 'rotate(90deg)';
+        
+        // After transition, set to larger value to allow dynamic content resizing
+        setTimeout(() => {
+            if (window.openCategories.has(catIndex)) {
+                gridWrapper.style.maxHeight = '2000px';
+            }
+        }, 400);
     }
 }
 
