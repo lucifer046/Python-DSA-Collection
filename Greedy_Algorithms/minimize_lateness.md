@@ -1,8 +1,8 @@
 <!-- +----------------------------------------------------------+ -->
-<!-- |  MINIMIZE LATENESS — THE BAKER'S DEADLINE PROBLEM         | -->
+<!-- |  MINIMIZE LATENESS - THE BAKER'S DEADLINE PROBLEM         | -->
 <!-- +----------------------------------------------------------+ -->
 
-# Minimize Lateness — The Baker's Deadline Problem
+# Minimize Lateness - The Baker's Deadline Problem
 
 ## What is the Minimize Lateness Problem?
 
@@ -68,9 +68,9 @@ If you bake the shortest cake first, you might ignore a long, urgent cake until 
 
 ## Key Takeaways
 
-1. **Sort tasks by deadline** (earliest first) — this is the greedy strategy
+1. **Sort tasks by deadline** (earliest first) - this is the greedy strategy
 2. **Lateness** = Finish Time − Deadline (negative means on time!)
 3. The goal is to minimize the **MAXIMUM** lateness, not the average
 4. This strategy is **mathematically proven** to be optimal
-5. Time complexity: **O(n log n)** — just the sorting step!
+5. Time complexity: **O(n log n)** - just the sorting step!
 6. Think of it as: "Handle the most urgent thing first!"

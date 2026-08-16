@@ -1,5 +1,5 @@
 // =========================================
-//  DSA HANDBOOK — App Logic v2.0
+//  DSA HANDBOOK - App Logic v2.0
 //  Features: Command Palette, Keyboard Nav,
 //  Progress Tracking, Smooth Transitions,
 //  Mobile Swipe Gestures
@@ -487,7 +487,7 @@ function initDSACanvas() {
 }
 
 // =========================================
-//  LOAD PAGE — with smooth transition
+//  LOAD PAGE - with smooth transition
 // =========================================
 function loadPage(catIndex, topIndex) {
     const topic = bookData[catIndex].topics[topIndex];
@@ -775,7 +775,7 @@ function setupKeyboardShortcuts() {
         const isPaletteInput = document.activeElement.id === 'cmd-palette-input';
         const isTyping = (tag === 'input' || tag === 'textarea' || tag === 'select') && !isPaletteInput;
 
-        // Cmd/Ctrl + K — Open Command Palette (always)
+        // Cmd/Ctrl + K - Open Command Palette (always)
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault();
             openCmdPalette();
@@ -792,7 +792,7 @@ function setupKeyboardShortcuts() {
         if (isTyping) return;
 
         switch (e.key) {
-            // Left/Right arrow — Previous/Next algorithm
+            // Left/Right arrow - Previous/Next algorithm
             case 'ArrowLeft': {
                 e.preventDefault();
                 const idx = getCurrentFlatIndex();
@@ -814,14 +814,14 @@ function setupKeyboardShortcuts() {
                 break;
             }
 
-            // T — Theory tab
+            // T - Theory tab
             case 't':
             case 'T':
                 switchView('theory');
                 showToast('Switched to Theory', '📖');
                 break;
 
-            // C — Code tab (without Shift)
+            // C - Code tab (without Shift)
             case 'c':
                 if (!e.shiftKey) {
                     switchView('code');
@@ -829,14 +829,14 @@ function setupKeyboardShortcuts() {
                 }
                 break;
 
-            // Shift+C — Copy code
+            // Shift+C - Copy code
             case 'C':
                 if (e.shiftKey) {
                     triggerCopy();
                 }
                 break;
 
-            // Escape — close sidebar
+            // Escape - close sidebar
             case 'Escape':
                 document.getElementById('sidebar-overlay').classList.remove('active');
                 break;

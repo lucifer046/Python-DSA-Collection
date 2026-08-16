@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |      FLOYD-WARSHALL — ALL-PAIRS SHORTEST PATH        | -->
+<!-- |      FLOYD-WARSHALL - ALL-PAIRS SHORTEST PATH        | -->
 <!-- +------------------------------------------------------+ -->
 
-# Floyd-Warshall — All-Pairs Shortest Path
+# Floyd-Warshall - All-Pairs Shortest Path
 
 ## Theoretical Definition & Comparisons
 

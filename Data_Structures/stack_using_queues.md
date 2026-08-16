@@ -1,5 +1,5 @@
 <!-- +------------------------------------------+ -->
-<!-- |  STACK USING QUEUES — THE BRAIN TEASER   | -->
+<!-- |  STACK USING QUEUES - THE BRAIN TEASER   | -->
 <!-- +------------------------------------------+ -->
 # Stack Implementation using Queues
 

@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  THE HOUSE ROBBER PROBLEM — OPTIMAL PLANNING         | -->
+<!-- |  THE HOUSE ROBBER PROBLEM - OPTIMAL PLANNING         | -->
 <!-- +------------------------------------------------------+ -->
 
-# The House Robber Problem — Optimal Planning
+# The House Robber Problem - Optimal Planning
 
 ## The Scenario (Without the Contradiction)
 

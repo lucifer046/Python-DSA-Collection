@@ -1,15 +1,15 @@
 <!-- +------------------------------------------------------------------+ -->
-<!-- |  BALANCED BST (AVL TREE) — THE SELF-BALANCING LIBRARY            | -->
+<!-- |  BALANCED BST (AVL TREE) - THE SELF-BALANCING LIBRARY            | -->
 <!-- +------------------------------------------------------------------+ -->
-# Balanced Binary Search Tree (AVL Tree) — The Self-Balancing Library
+# Balanced Binary Search Tree (AVL Tree) - The Self-Balancing Library
 
 ## What is a Binary Search Tree (BST)?
 
 Imagine a **family tree** for numbers:
-- Each person (node) can have at most **2 children** — a LEFT child and a RIGHT child.
+- Each person (node) can have at most **2 children** - a LEFT child and a RIGHT child.
 - **Rule:** ALL numbers smaller than the parent go **LEFT**, ALL numbers larger go **RIGHT**.
 
-> This rule makes searching super fast — you just go left or right at each step instead of checking everything!
+> This rule makes searching super fast - you just go left or right at each step instead of checking everything!
 
 ---
 
@@ -35,7 +35,7 @@ What happens if you add numbers **in order** like 1, 2, 3, 4, 5?
                                          (Same as a linked list!)
 ```
 
-The unbalanced tree becomes just a **straight line** — no better than a linked list!
+The unbalanced tree becomes just a **straight line** - no better than a linked list!
 
 ---
 
@@ -60,7 +60,7 @@ For every node:
 ![AVL Tree Balancing Rotations Diagram](docs/images/avl_tree_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine a balanced scale! If you add too much weight (numbers) to one side, the scale tips. In a normal tree, it just stays tipped over and becomes hard to use. But an **AVL Tree** is smart! The moment it feels too much weight on one side, it performs a **Rotation**—a quick 'swing' of the branches—to bring everything back to a perfect balance. This keeps the tree short and the search speed lightning fast!"
+> **Teacher's Perspective:** "Imagine a balanced scale! If you add too much weight (numbers) to one side, the scale tips. In a normal tree, it just stays tipped over and becomes hard to use. But an **AVL Tree** is smart! The moment it feels too much weight on one side, it performs a **Rotation**-a quick 'swing' of the branches-to bring everything back to a perfect balance. This keeps the tree short and the search speed lightning fast!"
 
 ---
 
@@ -93,7 +93,7 @@ A rotation is a mathematical trick that changes the structure of the tree **with
 
 ## RIGHT ROTATION (Fixing Left-Left Imbalance)
 
-Opposite of left rotation — used when the tree is **leaning too much to the LEFT**.
+Opposite of left rotation - used when the tree is **leaning too much to the LEFT**.
 
 ```
   BEFORE (leaning left):           AFTER RIGHT ROTATION:
@@ -205,7 +205,7 @@ If we know the height $H$ of an AVL tree, we can calculate how "dense" or "spars
 
 | Feature | Normal BST | AVL Tree |
 |---|---|---|
-| **Worst-case height** | O(n) — becomes a line | O(log n) — always balanced |
+| **Worst-case height** | O(n) - becomes a line | O(log n) - always balanced |
 | **Search time** | O(n) worst case | O(log n) guaranteed |
 | **Insert time** | O(n) worst case | O(log n) guaranteed |
 | **Self-balancing?** | ❌ No | ✅ Yes, automatically! |
@@ -222,5 +222,5 @@ If we know the height $H$ of an AVL tree, we can calculate how "dense" or "spars
 4. **Balance Factor** = Height(Left) − Height(Right), must be -1, 0, or +1
 5. **Rotations** are the self-correcting moves: Left, Right, Left-Right, Right-Left
 6. **Inorder traversal** always gives numbers in **sorted order**
-7. Guaranteed **O(log n)** search time — even with millions of items!
+7. Guaranteed **O(log n)** search time - even with millions of items!
 

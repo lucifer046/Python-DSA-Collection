@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  DIJKSTRA'S ALGORITHM — THE SMARTEST PATH FINDER    | -->
+<!-- |  DIJKSTRA'S ALGORITHM - THE SMARTEST PATH FINDER    | -->
 <!-- +------------------------------------------------------+ -->
-# Dijkstra's Algorithm — The Smartest Path Finder
+# Dijkstra's Algorithm - The Smartest Path Finder
 
 ## Theoretical Definition & Comparisons
 
@@ -42,7 +42,7 @@ Imagine you're using **Google Maps** to find the fastest route from your home to
 ![Dijkstra's Shortest Path "GPS" Diagram](docs/images/dijkstra_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you're using **Google Maps** to get to a concert. There are many roads, but some have heavy traffic (high cost) and some are clear highways (low cost). **Dijkstra's Algorithm** is the brain inside your GPS! It starts at your house and 'explores' every road, but it's very smart—it always focuses on the path that currently has the **lowest total time**. This clever 'greedy' strategy ensures that when it finally reaches the concert hall, it has found the absolute fastest way to get there!"
+> **Teacher's Perspective:** "Imagine you're using **Google Maps** to get to a concert. There are many roads, but some have heavy traffic (high cost) and some are clear highways (low cost). **Dijkstra's Algorithm** is the brain inside your GPS! It starts at your house and 'explores' every road, but it's very smart-it always focuses on the path that currently has the **lowest total time**. This clever 'greedy' strategy ensures that when it finally reaches the concert hall, it has found the absolute fastest way to get there!"
 
 ---
 
@@ -63,7 +63,7 @@ Before we start, we write "Infinity" (∞) on every node because we don't know t
 - Now, think: We already knew a way to Node 1 that took 4 minutes (directly from House). 
 - But now we see: `House -> Node 2 -> Node 1` only takes `2 + 1 = 3` minutes!
 - **Scoreboard Update:** We erase "4" and write **"3"**. 
-- This update is called **Relaxation**—we've found a better, "more relaxed" way to get there!
+- This update is called **Relaxation**-we've found a better, "more relaxed" way to get there!
 
 ### 4. Reaching the Goal
 We keep picking the cheapest node and updating the scoreboard until we've visited our destination. The final number on the Concert (Node 4) is our guaranteed shortest time!
@@ -186,10 +186,10 @@ Process **Node 3** (Cost 9). Check neighbor (4).
 ## Key Takeaways
 
 1. Dijkstra's finds the **shortest path in a weighted graph**
-2. It uses **Relaxation** — keep updating distances when shorter paths are found
-3. It's **Greedy** — always processes the cheapest unvisited node
+2. It uses **Relaxation** - keep updating distances when shorter paths are found
+3. It's **Greedy** - always processes the cheapest unvisited node
 4. Time complexity: **O((V+E) log V)** with a priority queue
-5. **Cannot handle negative edge weights** — use Bellman-Ford for that
+5. **Cannot handle negative edge weights** - use Bellman-Ford for that
 6. Used in **GPS navigation, network routing, and game pathfinding**
 
 

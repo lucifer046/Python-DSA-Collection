@@ -1,7 +1,7 @@
 <!-- +--------------------------------------------------------------+ -->
-<!-- |  BREADTH-FIRST SEARCH (BFS) — LAYER-BY-LAYER EXPLORATION    | -->
+<!-- |  BREADTH-FIRST SEARCH (BFS) - LAYER-BY-LAYER EXPLORATION    | -->
 <!-- +--------------------------------------------------------------+ -->
-# Breadth-First Search (BFS) — Layer-by-Layer Exploration
+# Breadth-First Search (BFS) - Layer-by-Layer Exploration
 
 ## Theoretical Definition & Comparisons
 
@@ -16,7 +16,7 @@ Breadth-First Search (BFS) is a graph traversal algorithm that explores the grap
 
 ## What is BFS?
 
-Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circles — first the closest ring, then the next ring, then the next.
+Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circles - first the closest ring, then the next ring, then the next.
 
 **BFS explores a graph exactly like those ripples!** It visits ALL neighbors at distance 1, then ALL neighbors at distance 2, and so on.
 
@@ -29,7 +29,7 @@ Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circl
 ![BFS "Ripples in a Pond" Layer-by-Layer Diagram](docs/images/bfs_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you **drop a stone in a calm pond**. Ripples spread outwards in perfect circles—first the circle right next to the stone, then the next circle, and then the next. **BFS** works exactly like those ripples! It visits all the 'Layer 1' neighbors first, then all the 'Layer 2' neighbors, and so on. It never moves to a deeper layer until it has finished exploring the current one. This 'fair' exploration is why BFS is the king of finding the **Shortest Path**!"
+> **Teacher's Perspective:** "Imagine you **drop a stone in a calm pond**. Ripples spread outwards in perfect circles-first the circle right next to the stone, then the next circle, and then the next. **BFS** works exactly like those ripples! It visits all the 'Layer 1' neighbors first, then all the 'Layer 2' neighbors, and so on. It never moves to a deeper layer until it has finished exploring the current one. This 'fair' exploration is why BFS is the king of finding the **Shortest Path**!"
 
 ---
 
@@ -38,7 +38,7 @@ Imagine you **drop a stone in a pond**. Ripples spread outwards in perfect circl
 Let's see how the ripple spreads through a graph starting at Node **0**:
 
 ### 1. The Waiting Line (The Queue)
-BFS is very organized. It uses a **Queue** (First-In, First-Out)—just like a line at a ticket counter. Whoever gets in line first gets processed first!
+BFS is very organized. It uses a **Queue** (First-In, First-Out)-just like a line at a ticket counter. Whoever gets in line first gets processed first!
 
 ### 2. The First Ripple (Layer 1)
 - We start at Node 0 and look at its immediate friends (let's say 1 and 2).
@@ -150,7 +150,7 @@ Because BFS explores layer by layer, the **first time** it sees a node, it *must
 | Use Case | How BFS Helps |
 |---|---|
 | **Shortest Path (unweighted)** | BFS always finds the shortest path in terms of number of steps |
-| **Social Networks** | "Friends of friends" — people 2 connections away from you |
+| **Social Networks** | "Friends of friends" - people 2 connections away from you |
 | **GPS (simple maps)** | Finding the fewest number of turns to reach somewhere |
 | **Web Crawlers** | Google's crawler visits a webpage, then visits all the links on that page |
 
@@ -160,7 +160,7 @@ Because BFS explores layer by layer, the **first time** it sees a node, it *must
 
 BFS can be used to detect cycles in an undirected graph by tracking the **parent** of each node.
 
-**The Rule:** If we visit a node that is already `visited` and is **not** the parent of the current node, we have found a second way to reach that node—proving that a **cycle exists**.
+**The Rule:** If we visit a node that is already `visited` and is **not** the parent of the current node, we have found a second way to reach that node-proving that a **cycle exists**.
 
 ### The Logic Steps:
 1.  **Queue:** Store both the `current_node` and its `parent_node`.
@@ -172,8 +172,8 @@ BFS can be used to detect cycles in an undirected graph by tracking the **parent
 ## Key Takeaways
 
 1. BFS uses a **Queue** (First-In, First-Out)
-2. It explores **layer by layer** — all neighbors first, then neighbors of neighbors
+2. It explores **layer by layer** - all neighbors first, then neighbors of neighbors
 3. It guarantees the **shortest path** in unweighted graphs
 4. It can **detect cycles** in undirected graphs by tracking parent nodes
-5. Works like ripples in a pond — spreading outwards evenly!
+5. Works like ripples in a pond - spreading outwards evenly!
 

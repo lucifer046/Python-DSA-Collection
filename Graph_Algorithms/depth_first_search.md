@@ -1,7 +1,7 @@
 <!-- +--------------------------------------------------------------+ -->
-<!-- |  DEPTH-FIRST SEARCH (DFS) — THE MAZE EXPLORER               | -->
+<!-- |  DEPTH-FIRST SEARCH (DFS) - THE MAZE EXPLORER               | -->
 <!-- +--------------------------------------------------------------+ -->
-# Depth-First Search (DFS) — The Maze Explorer
+# Depth-First Search (DFS) - The Maze Explorer
 
 ## Theoretical Definition & Comparisons
 
@@ -27,7 +27,7 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 ![DFS "Maze Explorer" Deep-First Diagram](docs/images/dfs_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine you're exploring a **pitch-black maze** with only a ball of string. You enter a tunnel and keep walking **as deep as possible** until you hit a dead end. Then, you follow your string **backtrack** to the last fork in the road and try a different tunnel. You keep doing this—diving deep, then coming back—until you've touched every wall of the maze. **DFS** is that brave explorer who always wants to see how far the rabbit hole goes before looking at anything else!"
+> **Teacher's Perspective:** "Imagine you're exploring a **pitch-black maze** with only a ball of string. You enter a tunnel and keep walking **as deep as possible** until you hit a dead end. Then, you follow your string **backtrack** to the last fork in the road and try a different tunnel. You keep doing this-diving deep, then coming back-until you've touched every wall of the maze. **DFS** is that brave explorer who always wants to see how far the rabbit hole goes before looking at anything else!"
 
 ---
 
@@ -36,7 +36,7 @@ Imagine you're exploring a **dark maze**. You enter a tunnel and keep walking **
 Let's watch our explorer dive into a graph starting at Node **0**:
 
 ### 1. The Strategy (The Stack)
-DFS is a "Go Deep First" strategy. It uses a **Stack** (Last-In, First-Out)—like a stack of heavy plates. You can only look at the plate on the very top. If you find a new path, you put a new plate on top and focus *only* on that until it's done.
+DFS is a "Go Deep First" strategy. It uses a **Stack** (Last-In, First-Out)-like a stack of heavy plates. You can only look at the plate on the very top. If you find a new path, you put a new plate on top and focus *only* on that until it's done.
 
 ### 2. The Deep Dive
 - Start at Node 0. It has friends 1 and 2. 
@@ -121,8 +121,8 @@ Because DFS doesn't want to miss anything! Backtracking is how it says, "Okay, I
 | Feature | Iterative (Manual Stack) | Recursive (Elegant) |
 |---|---|---|
 | **What remembers the path?** | A manual Stack object | The computer's call stack |
-| **Easier to understand?** | Maybe — you can see the stack | Yes — very clean code |
-| **Risk of crashing?** | No | Yes — for very deep graphs (stack overflow) |
+| **Easier to understand?** | Maybe - you can see the stack | Yes - very clean code |
+| **Risk of crashing?** | No | Yes - for very deep graphs (stack overflow) |
 | **Tracks parent path?** | Need extra code | Naturally built-in |
 
 ---
@@ -157,10 +157,10 @@ Cycle detection in directed graphs is trickier than undirected ones. We need to 
 
 ## Key Takeaways
 
-1. DFS uses a **Stack** (Last-In, First-Out) — or recursion
+1. DFS uses a **Stack** (Last-In, First-Out) - or recursion
 2. It explores **as deep as possible** before backtracking
 3. It does **NOT** guarantee the shortest path (unlike BFS)
 4. It's great for **mazes, cycles, and topological sorting**
 5. **Iterative** = manual stack, **Recursive** = function calls itself
-6. DFS visits nodes like exploring a cave — go deep, then come back and try another tunnel!
+6. DFS visits nodes like exploring a cave - go deep, then come back and try another tunnel!
 

@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  LONGEST COMMON SUBSEQUENCE (LCS) — GENETIC MATCHING | -->
+<!-- |  LONGEST COMMON SUBSEQUENCE (LCS) - GENETIC MATCHING | -->
 <!-- +------------------------------------------------------+ -->
 
-# Longest Common Subsequence (LCS) — Genetic Matching
+# Longest Common Subsequence (LCS) - Genetic Matching
 
 ## Theoretical Definition & Comparisons
 
@@ -18,7 +18,7 @@ LCS finds the longest sequence of characters that appear in the same relative or
 
 ## The Scenario
 
-Imagine you are a biologist comparing the **DNA** of two different species. You want to see how much of their code is shared. However, Evolution is messy—new bits get inserted, and old bits get deleted. 
+Imagine you are a biologist comparing the **DNA** of two different species. You want to see how much of their code is shared. However, Evolution is messy-new bits get inserted, and old bits get deleted. 
 
 You need to find characters that appear in the **same relative order** in both strings, even if they aren't right next to each other.
 

@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  KRUSKAL'S ALGORITHM — THE ISLAND BRIDGE BUILDER    | -->
+<!-- |  KRUSKAL'S ALGORITHM - THE ISLAND BRIDGE BUILDER    | -->
 <!-- +------------------------------------------------------+ -->
-# Kruskal's Algorithm — The Island Bridge Builder
+# Kruskal's Algorithm - The Island Bridge Builder
 
 ## Theoretical Definition & Comparisons
 
@@ -31,7 +31,7 @@ Kruskal's strategy is simple:
 
 1. **Sort all possible bridges** from cheapest to most expensive.
 2. Build the **cheapest bridge** first.
-3. Keep building the next cheapest — BUT **skip** any bridge that would connect two islands that are already connected (that would create a useless loop!).
+3. Keep building the next cheapest - BUT **skip** any bridge that would connect two islands that are already connected (that would create a useless loop!).
 
 > **Simple Definition:** Kruskal's sorts all edges by cost and adds them one by one (cheapest first), skipping any that would create a cycle. This builds the Minimum Spanning Tree.
 
@@ -164,8 +164,8 @@ This is exactly what **Union-Find** does!
 ## Key Takeaways
 
 1. **Sort all edges** by cost (cheapest first)
-2. **Add edges** one by one — skip if it creates a cycle
+2. **Add edges** one by one - skip if it creates a cycle
 3. Uses **Union-Find** to efficiently check for cycles
 4. Stop when you have **n-1 edges** (all nodes connected)
-5. Both Kruskal's and Prim's find the **same MST** — just different approaches!
+5. Both Kruskal's and Prim's find the **same MST** - just different approaches!
 

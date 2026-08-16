@@ -1,7 +1,7 @@
 <!-- +--------------------------------------------------+ -->
-<!-- |  SELECTION SORT — SORTING BY REPEATED PICKING    | -->
+<!-- |  SELECTION SORT - SORTING BY REPEATED PICKING    | -->
 <!-- +--------------------------------------------------+ -->
-# Selection Sort — Sorting by Repeated Picking
+# Selection Sort - Sorting by Repeated Picking
 
 ## What is Selection Sort?
 
@@ -13,7 +13,7 @@ Imagine you have a messy hand of **playing cards**. To sort them:
 4. Put it next to the first card.
 5. Keep repeating until every card is in place!
 
-> **Simple Definition:** Selection Sort splits your list into two parts — a **SORTED** part (left) and an **UNSORTED** part (right). Each time, it **selects** the smallest item from the unsorted part and adds it to the sorted part.
+> **Simple Definition:** Selection Sort splits your list into two parts - a **SORTED** part (left) and an **UNSORTED** part (right). Each time, it **selects** the smallest item from the unsorted part and adds it to the sorted part.
 
 ---
 
@@ -71,7 +71,7 @@ Because at every step, your only job is to **Select** the smallest remaining ite
 | 100 items | 4,950 comparisons |
 | 1,000 items | 499,500 comparisons |
 
-**Time Complexity: O(n²)** — It's simple but **slow** for large lists!
+**Time Complexity: O(n²)** - It's simple but **slow** for large lists!
 
 ---
 
@@ -80,6 +80,6 @@ Because at every step, your only job is to **Select** the smallest remaining ite
 1. Selection Sort **scans** the entire unsorted section to find the smallest item
 2. It **swaps** that smallest item to the front of the unsorted section
 3. The sorted section **grows by 1** with each pass
-4. It's **simple to understand** but **slow** for big lists — O(n²)
+4. It's **simple to understand** but **slow** for big lists - O(n²)
 5. Best for small lists or when you want a simple, easy-to-code solution
 

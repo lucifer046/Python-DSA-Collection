@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |    STRICT BINARY TREE — THE ALL-OR-NOTHING TREE      | -->
+<!-- |    STRICT BINARY TREE - THE ALL-OR-NOTHING TREE      | -->
 <!-- +------------------------------------------------------+ -->
 
-# Strict Binary Tree — The All-or-Nothing Tree
+# Strict Binary Tree - The All-or-Nothing Tree
 
 ## Theoretical Definition & Comparisons
 

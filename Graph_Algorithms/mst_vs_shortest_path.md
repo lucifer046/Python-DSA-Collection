@@ -1,7 +1,7 @@
 <!-- +----------------------------------------------------------+ -->
-<!-- |  MST VS. SHORTEST PATH — GLOBAL VS. LOCAL CONNECTIVITY    | -->
+<!-- |  MST VS. SHORTEST PATH - GLOBAL VS. LOCAL CONNECTIVITY    | -->
 <!-- +----------------------------------------------------------+ -->
-# MST vs. Shortest Path — Global vs. Local Connectivity
+# MST vs. Shortest Path - Global vs. Local Connectivity
 
 ## Theoretical Definition & Comparisons
 

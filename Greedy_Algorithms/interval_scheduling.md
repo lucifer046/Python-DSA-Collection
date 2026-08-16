@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  INTERVAL SCHEDULING — THE MEETING ROOM PROBLEM      | -->
+<!-- |  INTERVAL SCHEDULING - THE MEETING ROOM PROBLEM      | -->
 <!-- +------------------------------------------------------+ -->
 
-# Interval Scheduling — The Meeting Room Problem
+# Interval Scheduling - The Meeting Room Problem
 
 ## What is Interval Scheduling?
 
@@ -72,7 +72,7 @@ By picking the one that **ends first**, you are being "Greedy" for **Future Time
 ## Key Takeaways
 
 1. **Sort by end time** (earliest first)
-2. **Pick greedily** — if a meeting starts after the room is free, take it!
+2. **Pick greedily** - if a meeting starts after the room is free, take it!
 3. This gives the **maximum number** of non-overlapping meetings
 4. Time complexity: **O(n log n)** (just the sorting step!)
 5. This is mathematically **proven** to be the optimal strategy

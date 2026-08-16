@@ -1,7 +1,7 @@
 <!-- +------------------------------------------+ -->
-<!-- |  STACK — LAST IN, FIRST OUT (LIFO)       | -->
+<!-- |  STACK - LAST IN, FIRST OUT (LIFO)       | -->
 <!-- +------------------------------------------+ -->
-# Stack — Last In, First Out (LIFO)
+# Stack - Last In, First Out (LIFO)
 
 ## What is a Stack?
 
@@ -9,9 +9,9 @@ Think of a **stack of dinner plates**.
 
 - When you wash a plate, you place it on **TOP** of the pile.
 - When you need a plate, you take the one from the **TOP**.
-- You **never** pull a plate from the middle — everything above it would crash!
+- You **never** pull a plate from the middle - everything above it would crash!
 
-> **Simple Definition:** A Stack is a data structure where the **last item added** is always the **first item removed**. This rule is called **LIFO — Last In, First Out**.
+> **Simple Definition:** A Stack is a data structure where the **last item added** is always the **first item removed**. This rule is called **LIFO - Last In, First Out**.
 
 ---
 
@@ -29,7 +29,7 @@ Think of a **stack of dinner plates**.
 ![Stack "LIFO" Bookshelf Diagram](docs/images/stack_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Think of a **Stack of Cafeteria Trays** or a tall pile of books! You want to add a tray? You place it on the very **TOP** (Push). You want to use a tray? You take it from the very **TOP** (Pop). You'd never pull one from the middle, or the whole stack would crash! This simple rule is called **LIFO**—Last In, First Out."
+> **Teacher's Perspective:** "Think of a **Stack of Cafeteria Trays** or a tall pile of books! You want to add a tray? You place it on the very **TOP** (Push). You want to use a tray? You take it from the very **TOP** (Pop). You'd never pull one from the middle, or the whole stack would crash! This simple rule is called **LIFO**-Last In, First Out."
 
 ---
 
@@ -58,7 +58,7 @@ The Stack is the "Memory King" of your computer. Every time you press **Undo (Ct
 ---
 
 
-Notice: Items come out in **REVERSE** order! We pushed 10, 20, 30, 40 — and they pop out as 40, 30, 20, 10.
+Notice: Items come out in **REVERSE** order! We pushed 10, 20, 30, 40 - and they pop out as 40, 30, 20, 10.
 
 ---
 
@@ -74,8 +74,8 @@ Notice: Items come out in **REVERSE** order! We pushed 10, 20, 30, 40 — and th
 
 ## Key Takeaways
 
-1. A Stack follows the **LIFO** rule — Last In, First Out
-2. You can only touch the **TOP** — no peeking at the middle!
+1. A Stack follows the **LIFO** rule - Last In, First Out
+2. You can only touch the **TOP** - no peeking at the middle!
 3. **PUSH** = Add to the top, **POP** = Remove from the top
 4. Items come out in **reverse order** from how they went in
 5. Stacks are used everywhere: Undo history, browser back, function calls

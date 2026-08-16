@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |     QUICKSELECT — FINDING THE K-TH SMALLEST      | -->
+<!-- |     QUICKSELECT - FINDING THE K-TH SMALLEST      | -->
 <!-- +------------------------------------------------------+ -->
-# QuickSelect — Finding the K-th Smallest Element
+# QuickSelect - Finding the K-th Smallest Element
 
 ## What is QuickSelect?
 

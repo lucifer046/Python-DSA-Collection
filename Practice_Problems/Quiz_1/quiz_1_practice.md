@@ -1,29 +1,29 @@
 ## 📋 Table of Contents
 
-[Q1 — Function Analysis f(60)−f(59)](#q1)  
-[Q2 — Selection Sort Condition Count](#q2)  
-[Q3 — Linked List Operation Function](#q3)  
-[Q4 — Hash Table with Linear Probing](#q4)  
-[Q5 — Hash Table with Linear Probing](#q5)  
-[Q5 — DAG Max Edges with Unique Topological Sort](#q5)  
-[Q6 — Big-O Notation (MSQ)](#q6)  
-[Q7 — Merge Sort Properties (MSQ)](#q7)  
-[Q8 — Quicksort Properties (MSQ)](#q8)  
-[Q9 — Linked List Constant Time Operations (MSQ)](#q9)  
-[Q10 — Degree Sequences of Graphs (MSQ)](#q10)  
-[Q11 — BFS Properties (MSQ)](#q11)  
-[Q12 — Find Single Occurrence Element](#q12)  
-[Q13 — Binary Search Last Occurrence](#q13)  
-[Q14 — Stack and Queue Operations](#q14)  
-[Q15 — Connected Graph Edge Bounds](#q15)  
-[Q16 — DFS Time Complexity with Adjacency Matrix](#q16)  
-[Q17 — Data Structure Matching](#q17)
+[Q1 - Function Analysis f(60)−f(59)](#q1)  
+[Q2 - Selection Sort Condition Count](#q2)  
+[Q3 - Linked List Operation Function](#q3)  
+[Q4 - Hash Table with Linear Probing](#q4)  
+[Q5 - Hash Table with Linear Probing](#q5)  
+[Q5 - DAG Max Edges with Unique Topological Sort](#q5)  
+[Q6 - Big-O Notation (MSQ)](#q6)  
+[Q7 - Merge Sort Properties (MSQ)](#q7)  
+[Q8 - Quicksort Properties (MSQ)](#q8)  
+[Q9 - Linked List Constant Time Operations (MSQ)](#q9)  
+[Q10 - Degree Sequences of Graphs (MSQ)](#q10)  
+[Q11 - BFS Properties (MSQ)](#q11)  
+[Q12 - Find Single Occurrence Element](#q12)  
+[Q13 - Binary Search Last Occurrence](#q13)  
+[Q14 - Stack and Queue Operations](#q14)  
+[Q15 - Connected Graph Edge Bounds](#q15)  
+[Q16 - DFS Time Complexity with Adjacency Matrix](#q16)  
+[Q17 - Data Structure Matching](#q17)
 
 ---
 
 <a id="q1"></a>
 
-## Q1 — Function Analysis: What is f(60) − f(59)?
+## Q1 - Function Analysis: What is f(60) − f(59)?
 
 **Marks: 3 | Type: Short Answer (Numeric)**
 
@@ -94,7 +94,7 @@ f(60) − f(59) = 3 − 0 = 3
 
 <a id="q2"></a>
 
-## Q2 — Selection Sort: How Many Times Does the Condition Evaluate to True?
+## Q2 - Selection Sort: How Many Times Does the Condition Evaluate to True?
 
 **Marks: 3 | Type: Short Answer (Numeric)**
 
@@ -186,7 +186,7 @@ Total:  3
 
 <a id="q3"></a>
 
-## Q3 — Linked List: Output of the Operation Function
+## Q3 - Linked List: Output of the Operation Function
 
 **Marks: 3 | Type: Short Answer (Numeric)**
 
@@ -247,7 +247,7 @@ def operation(head):
 
 <a id="q4"></a>
 
-## Q4 — Hash Table with Linear Probing: Where Does 42 Go?
+## Q4 - Hash Table with Linear Probing: Where Does 42 Go?
 
 **Marks: 3 | Type: Short Answer (Numeric)**
 
@@ -278,7 +278,7 @@ def operation(head):
 
 <a id="q5"></a>
 
-## Q5 — DAG with Unique Topological Sort: Max Edges?
+## Q5 - DAG with Unique Topological Sort: Max Edges?
 
 **Marks: 3 | Type: Short Answer (Numeric)**
 
@@ -307,7 +307,7 @@ A **Directed Acyclic Graph (DAG)** has **6 vertices**. It is guaranteed to have 
 
 <a id="q6"></a>
 
-## Q6 — Big-O Notation: Which Statements are FALSE?
+## Q6 - Big-O Notation: Which Statements are FALSE?
 
 **Marks: 3 | Type: Multiple Select Question**
 
@@ -338,7 +338,7 @@ We are looking for **FALSE** statements.
 
 <a id="q7"></a>
 
-## Q7 — Merge Sort Properties: Which are TRUE?
+## Q7 - Merge Sort Properties: Which are TRUE?
 
 **Marks: 3 | Type: Multiple Select Question**
 
@@ -353,7 +353,7 @@ We are looking for **FALSE** statements.
 
 <a id="q8"></a>
 
-## Q8 — Quicksort Properties: Which are TRUE?
+## Q8 - Quicksort Properties: Which are TRUE?
 
 **(First element always chosen as pivot)**
 
@@ -368,7 +368,7 @@ We are looking for **FALSE** statements.
 
 <a id="q9"></a>
 
-## Q9 — Singly Linked List: Which Operations are NOT O(1)?
+## Q9 - Singly Linked List: Which Operations are NOT O(1)?
 
 **(With head and tail pointer)**
 
@@ -384,7 +384,7 @@ We are looking for **FALSE** statements.
 
 <a id="q10"></a>
 
-## Q10 — Degree Sequences of Connected Graphs (5 vertices)
+## Q10 - Degree Sequences of Connected Graphs (5 vertices)
 
 ### Justification using Handshaking Lemma
 
@@ -403,7 +403,7 @@ This means the sum of degrees MUST be **even**.
 
 <a id="q11"></a>
 
-## Q11 — BFS Properties: Which are TRUE?
+## Q11 - BFS Properties: Which are TRUE?
 
 - **A.** BFS visits level-by-level, not deep paths. **(FALSE)**
 - **B.** BFS finds shortest edge count, not arbitrary weights. **(FALSE)**
@@ -417,7 +417,7 @@ This means the sum of degrees MUST be **even**.
 
 <a id="q12"></a>
 
-## Q12 — Single Occurrence Element in Sorted List: Efficiency?
+## Q12 - Single Occurrence Element in Sorted List: Efficiency?
 
 ### Detailed Logic
 
@@ -436,7 +436,7 @@ To find an element in a sorted list, we can use **Binary Search**.
 
 <a id="q13"></a>
 
-## Q13 — Binary Search for Last Occurrence: How to Proceed?
+## Q13 - Binary Search for Last Occurrence: How to Proceed?
 
 ### Step-by-Step Logic
 
@@ -453,7 +453,7 @@ In standard Binary Search, when `L[mid] == target`, we return `mid`. However, to
 
 <a id="q14"></a>
 
-## Q14 — Stack and Queue Operations: Resulting Q?
+## Q14 - Stack and Queue Operations: Resulting Q?
 
 ### The Operation Trace
 
@@ -479,7 +479,7 @@ Let's maintain the state of the Queue `Q` and Stack `S` after each step.
 
 <a id="q15"></a>
 
-## Q15 — Connected Undirected Graph (n=7): Min/Max Edges?
+## Q15 - Connected Undirected Graph (n=7): Min/Max Edges?
 
 - **Min:** Tree = $n-1 = 6$
 - **Max:** Complete = $\frac{n(n-1)}{2} = \frac{7 \times 6}{2} = 21$
@@ -490,7 +490,7 @@ Let's maintain the state of the Queue `Q` and Stack `S` after each step.
 
 <a id="q16"></a>
 
-## Q16 — DFS Time Complexity with Adjacency Matrix
+## Q16 - DFS Time Complexity with Adjacency Matrix
 
 ### The "Matrix Penalty" Explained
 
@@ -508,7 +508,7 @@ Let's maintain the state of the Queue `Q` and Stack `S` after each step.
 
 <a id="q17"></a>
 
-## Q17 — Data Structure Matching
+## Q17 - Data Structure Matching
 
 1. **Undo-Redo:** Stack (ii)
 2. **Printer:** Queue (i)

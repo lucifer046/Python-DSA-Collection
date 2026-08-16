@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |      KARATSUBA'S INTEGER MULTIPLICATION — D&C        | -->
+<!-- |      KARATSUBA'S INTEGER MULTIPLICATION - D&C        | -->
 <!-- +------------------------------------------------------+ -->
-# Karatsuba's Integer Multiplication — Divide & Conquer
+# Karatsuba's Integer Multiplication - Divide & Conquer
 
 ## What is Karatsuba's Algorithm?
 
@@ -18,7 +18,7 @@ Imagine you have two **massive numbers** with thousands of digits. Traditionally
 In Python, `a * b` is already very efficient. However, for **extremely large numbers** (like 100,000+ digits), even the most optimized computer needs a better **strategy**.
 
 - **The Problem:** Modern high-level languages like Python and C++ use Karatsuba (or even faster algorithms like Schönhage-Strassen) **under the hood** when numbers get big. 
-- **The Study:** Scientists study this to understand how to optimize the "most basic" operations. If you improve the speed of multiplication, you improve the speed of **everything** — from 3D graphics to cryptography.
+- **The Study:** Scientists study this to understand how to optimize the "most basic" operations. If you improve the speed of multiplication, you improve the speed of **everything** - from 3D graphics to cryptography.
 
 ---
 

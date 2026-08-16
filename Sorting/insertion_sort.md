@@ -1,7 +1,7 @@
 <!-- +--------------------------------------------------+ -->
-<!-- |  INSERTION SORT — THE CARD-SORTING METHOD        | -->
+<!-- |  INSERTION SORT - THE CARD-SORTING METHOD        | -->
 <!-- +--------------------------------------------------+ -->
-# Insertion Sort — The Card-Sorting Method
+# Insertion Sort - The Card-Sorting Method
 
 ## What is Insertion Sort?
 
@@ -78,6 +78,6 @@ Because you take an item and **Insert** it into its correct position within the 
 1. Insertion Sort works like **sorting cards in your hand**
 2. Pick each item and **slide it left** until it reaches its correct position
 3. The sorted section grows from left to right
-4. **Best case: O(n)** — if the list is nearly sorted, it's blazing fast!
-5. **Worst case: O(n²)** — if the list is in reverse order, lots of sliding needed
+4. **Best case: O(n)** - if the list is nearly sorted, it's blazing fast!
+5. **Worst case: O(n²)** - if the list is in reverse order, lots of sliding needed
 

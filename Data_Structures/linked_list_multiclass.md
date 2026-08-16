@@ -1,11 +1,11 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  TWO-CLASS LINKED LIST — THE MANAGER & THE WORKER    | -->
+<!-- |  TWO-CLASS LINKED LIST - THE MANAGER & THE WORKER    | -->
 <!-- +------------------------------------------------------+ -->
-# Two-Class Linked List — The Manager & The Worker
+# Two-Class Linked List - The Manager & The Worker
 
 ## What's Different from the Basic Linked List?
 
-In the basic linked list, every node thought it was the **entire list** — it managed itself AND all the operations. That's messy!
+In the basic linked list, every node thought it was the **entire list** - it managed itself AND all the operations. That's messy!
 
 In this version, we split the work into **two clear roles**:
 
@@ -86,7 +86,7 @@ The Manager walks to the last carriage (30) and hooks the new one:
 
 ### Example: Remove carriage with value 30
 
-We need **two walkers** — one stays one step behind the other.
+We need **two walkers** - one stays one step behind the other.
 
 ```
         previous            current
@@ -128,7 +128,7 @@ The previous node (30) **bypasses** current node (40) by pointing directly to 50
 | Feature | Single-Class (linked_list.py) | Two-Class (This File) |
 |---|---|---|
 | **Who manages operations?** | Each Node manages everything | The Manager class handles everything |
-| **Ease of use** | Confusing — every node thinks it's the list | Clean — user talks only to the Manager |
+| **Ease of use** | Confusing - every node thinks it's the list | Clean - user talks only to the Manager |
 | **Code organization** | Everything mixed into one class | Neatly separated (Node does node things, Manager does management) |
 | **Real-world analogy** | Every carriage tries to be the Station Manager too | Carriages carry cargo, Station Manager manages the train |
 
@@ -139,5 +139,5 @@ The previous node (30) **bypasses** current node (40) by pointing directly to 50
 1. **Separation of Concerns** = Give each class a clear job
 2. The **Worker (Node)** only stores data and a "next" link
 3. The **Manager (LinkedList)** handles add, delete, and display
-4. The **Head** is the starting point — the Manager always knows where it is
+4. The **Head** is the starting point - the Manager always knows where it is
 5. This design is how **professional programmers** build linked lists!

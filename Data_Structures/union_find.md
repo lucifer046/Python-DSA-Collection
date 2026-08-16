@@ -1,7 +1,7 @@
 <!-- +------------------------------------------+ -->
-<!-- |  UNION-FIND — THE TEAM MANAGER           | -->
+<!-- |  UNION-FIND - THE TEAM MANAGER           | -->
 <!-- +------------------------------------------+ -->
-# Union-Find — The Team Manager
+# Union-Find - The Team Manager
 
 ## What is Union-Find?
 
@@ -28,7 +28,7 @@ Imagine a room full of **strangers** at a party. As people talk, they start form
 ![Union-Find "Islands and Bridges" Diagram](docs/images/union_find_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Imagine a sea full of tiny **Islands** (individual pieces of data). At first, every island is its own kingdom, and every person is their own **King** (the Representative). But as we build **Bridges** (Union), many islands merge into one big country. Now, if you ask any person on an island 'Who is your King?', they'll all point to the same person at the very top of their country! That is **Union-Find**—managing who belongs to which kingdom."
+> **Teacher's Perspective:** "Imagine a sea full of tiny **Islands** (individual pieces of data). At first, every island is its own kingdom, and every person is their own **King** (the Representative). But as we build **Bridges** (Union), many islands merge into one big country. Now, if you ask any person on an island 'Who is your King?', they'll all point to the same person at the very top of their country! That is **Union-Find**-managing who belongs to which kingdom."
 
 ---
 
@@ -80,6 +80,6 @@ If we just blindly join islands, we might get one long, vertical line of bosses.
 2. **FIND** = "Who is the leader of this person's group?"
 3. **UNION** = "Merge these two groups into one"
 4. **Union by Rank** = Always make the smaller group join the bigger one (keeps things fast)
-5. Operations are nearly **instant** — almost O(1) time!
+5. Operations are nearly **instant** - almost O(1) time!
 6. It's a key building block for many graph algorithms (like Kruskal's MST)
 

@@ -1,8 +1,8 @@
 <!-- +---------------------------------------------+ -->
-<!-- |  TOPOLOGICAL SORT — THE TASK SCHEDULER       | -->
+<!-- |  TOPOLOGICAL SORT - THE TASK SCHEDULER       | -->
 <!-- +---------------------------------------------+ -->
 
-# Topological Sort — The Task Scheduler
+# Topological Sort - The Task Scheduler
 
 ## Theoretical Definition & Comparisons
 
@@ -53,7 +53,7 @@ First, we look at every task and count how many other tasks must finish before i
 
 ### 4. Mission AccomplISHED
 
-We keep repeating this—pick a ready task, knock out its dependencies, and find new ready tasks—until every single task is finished. If we get stuck, it means we have a **circular dependency** (like needing a key that is locked inside the box the key opens!), which topological sort neatly helps us identify as impossible!
+We keep repeating this-pick a ready task, knock out its dependencies, and find new ready tasks-until every single task is finished. If we get stuck, it means we have a **circular dependency** (like needing a key that is locked inside the box the key opens!), which topological sort neatly helps us identify as impossible!
 
 ---
 
@@ -141,8 +141,8 @@ Topological Sort is the brain behind how **Excel** recalculates formulas, how **
 ## Key Takeaways
 
 1. Topological Sort finds a **valid ordering** of tasks with dependencies
-2. It only works on **DAGs** (Directed Acyclic Graphs) — no circular dependencies!
+2. It only works on **DAGs** (Directed Acyclic Graphs) - no circular dependencies!
 3. **In-Degree** = number of prerequisites a task has
 4. Tasks are **ready** when their In-Degree drops to **0**
-5. There may be **multiple valid orderings** — all are correct!
+5. There may be **multiple valid orderings** - all are correct!
 6. Used in **course planning, build systems, project management**

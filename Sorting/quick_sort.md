@@ -1,7 +1,7 @@
 <!-- +--------------------------------------------------+ -->
-<!-- |  QUICK SORT — THE PICK-A-PIVOT METHOD            | -->
+<!-- |  QUICK SORT - THE PICK-A-PIVOT METHOD            | -->
 <!-- +--------------------------------------------------+ -->
-# Quick Sort — The Pick-a-Pivot Method
+# Quick Sort - The Pick-a-Pivot Method
 
 ## What is Quick Sort?
 
@@ -21,7 +21,7 @@ Imagine you're a teacher sorting students by **height**. You pick **one student*
 ![Quick Sort Partitioning Diagram](docs/images/quick_sort_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Look at the diagram above. The **Pivot** (gold) is the middle-ground student we picked. Notice how everyone shorter (to the left) and everyone taller (to the right) is organized around them. Once this step is done, the Pivot doesn't need to move ever again—they are in their final, perfect spot!"
+> **Teacher's Perspective:** "Look at the diagram above. The **Pivot** (gold) is the middle-ground student we picked. Notice how everyone shorter (to the left) and everyone taller (to the right) is organized around them. Once this step is done, the Pivot doesn't need to move ever again-they are in their final, perfect spot!"
 
 ---
 
@@ -95,7 +95,7 @@ Quick Sort is like a delegator. Instead of trying to sort 100 people at once, it
 1. Quick Sort picks a **Pivot** and puts everything smaller to its left, larger to its right
 2. After partitioning, the Pivot is in its **final correct position**
 3. The process repeats for the left and right groups
-4. **Average case: O(n log n)** — very fast!
-5. **Worst case: O(n²)** — happens when the pivot is always the smallest or largest
-6. It sorts **in-place** — no extra memory needed (unlike Merge Sort)
+4. **Average case: O(n log n)** - very fast!
+5. **Worst case: O(n²)** - happens when the pivot is always the smallest or largest
+6. It sorts **in-place** - no extra memory needed (unlike Merge Sort)
 

@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  PRIM'S ALGORITHM — THE GREEDY TREE BUILDER          | -->
+<!-- |  PRIM'S ALGORITHM - THE GREEDY TREE BUILDER          | -->
 <!-- +------------------------------------------------------+ -->
-# Prim's Algorithm — The Greedy Tree Builder
+# Prim's Algorithm - The Greedy Tree Builder
 
 ## Theoretical Definition & Comparisons
 
@@ -27,7 +27,7 @@ For most graphs, both find the same MST, but their efficiency depends on graph d
 
 Imagine you're the **mayor of a town** and you need to build **water pipelines** to connect ALL houses. Each pipe costs money based on distance. You want to **connect everyone** while spending the **least total money**.
 
-> **Simple Definition:** Prim's Algorithm finds the **Minimum Spanning Tree (MST)** — the cheapest way to connect ALL nodes in a graph using the least total edge weight, without creating any loops.
+> **Simple Definition:** Prim's Algorithm finds the **Minimum Spanning Tree (MST)** - the cheapest way to connect ALL nodes in a graph using the least total edge weight, without creating any loops.
 
 ---
 
@@ -58,7 +58,7 @@ Now we have two houses (0 and 1) in our network. We look at ALL the pipes leadin
 - **The Winner:** The **$3 pipe to Node 2** is the cheapest! We add it to our network.
 
 ### 3. Reaching Every House
-We keep repeating this—checking the "fringe" of our network for the cheapest possible expansion—until every house is connected. By always taking the shortest leap, we ensure the total cost of all pipes combined is the lowest possible!
+We keep repeating this-checking the "fringe" of our network for the cheapest possible expansion-until every house is connected. By always taking the shortest leap, we ensure the total cost of all pipes combined is the lowest possible!
 
 ---
 
@@ -130,7 +130,7 @@ While both find the exact same "Minimum Spanning Tree," they have different styl
 
 1. Prim's **grows from a seed node** outward
 2. At each step, it picks the **cheapest edge** connecting the MST to an outside node
-3. It's **Greedy** — always picks the locally cheapest option
+3. It's **Greedy** - always picks the locally cheapest option
 4. The result has exactly **n-1 edges** (for n nodes)
 5. Total cost is the **minimum possible** to connect all nodes without cycles
 

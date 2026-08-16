@@ -1,7 +1,7 @@
 <!-- +------------------------------------------+ -->
-<!-- |  QUEUE — FIRST IN, FIRST OUT (FIFO)      | -->
+<!-- |  QUEUE - FIRST IN, FIRST OUT (FIFO)      | -->
 <!-- +------------------------------------------+ -->
-# Queue — First In, First Out (FIFO)
+# Queue - First In, First Out (FIFO)
 
 ## What is a Queue?
 
@@ -11,7 +11,7 @@ Think of a **cinema ticket counter**.
 - The ticket seller only talks to the person at the very **FRONT**.
 - The person who has been **waiting the longest** is always served first!
 
-> **Simple Definition:** A Queue is a data structure where the **first item added** is the **first item removed**. This rule is called **FIFO — First In, First Out**.
+> **Simple Definition:** A Queue is a data structure where the **first item added** is the **first item removed**. This rule is called **FIFO - First In, First Out**.
 
 ---
 
@@ -29,7 +29,7 @@ Think of a **cinema ticket counter**.
 ![Queue "FIFO" Ticket Line Diagram](docs/images/queue_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Think of a **Cinema Ticket Counter**! When a new customer arrives, they join at the **BACK** of the line (Enqueue). The ticket seller only talks to the person at the very **FRONT** (Dequeue). The person who has been waiting the longest is always served first! This fair rule is called **FIFO**—First In, First Out."
+> **Teacher's Perspective:** "Think of a **Cinema Ticket Counter**! When a new customer arrives, they join at the **BACK** of the line (Enqueue). The ticket seller only talks to the person at the very **FRONT** (Dequeue). The person who has been waiting the longest is always served first! This fair rule is called **FIFO**-First In, First Out."
 
 ---
 
@@ -53,7 +53,7 @@ The ticket seller only speaks to the person at the **Front**:
 ---
 
 ## Why is this so useful?
-The Queue is the "Fairness King" of your computer. When you send 5 documents to a **Printer**, they don't print in random order—they print in exactly the order you sent them! When millions of people visit a website, a **Web Server** puts them in a queue so everyone gets served fairly.
+The Queue is the "Fairness King" of your computer. When you send 5 documents to a **Printer**, they don't print in random order-they print in exactly the order you sent them! When millions of people visit a website, a **Web Server** puts them in a queue so everyone gets served fairly.
 
 ---
 
@@ -73,7 +73,7 @@ The Queue is the "Fairness King" of your computer. When you send 5 documents to 
 
 ## Key Takeaways
 
-1. A Queue follows the **FIFO** rule — First In, First Out
+1. A Queue follows the **FIFO** rule - First In, First Out
 2. **ENQUEUE** = Join the BACK, **DEQUEUE** = Served from the FRONT
 3. Items come out in the **SAME order** they went in
 4. It's the opposite of a Stack (Stack = reverse order, Queue = same order)

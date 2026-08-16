@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  LONGEST COMMON SUBWORD (LCW) — THE STREAK METER    | -->
+<!-- |  LONGEST COMMON SUBWORD (LCW) - THE STREAK METER    | -->
 <!-- +------------------------------------------------------+ -->
 
-# Longest Common Subword (LCW) — The Streak Meter
+# Longest Common Subword (LCW) - The Streak Meter
 
 ## Theoretical Definition & Comparisons
 

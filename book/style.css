@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* Educational Light Slate Theme */
-    --bg-base: #a6b8c7; /* Light grayish blue background */
-    --bg-surface: #ffffff; /* White panels mimicking paper/laptop */
-    --bg-panel: rgba(255, 255, 255, 0.9);
-    --text-main: #2c3e50; /* Dark slate text for readability */
-    --text-muted: #5e6d7e;
-    --accent-primary: #1e5a8f; /* Deep blue accent */
-    --accent-secondary: #4a6a8a;
-    --accent-success: #27ae60;
-    --border-light: rgba(30, 90, 143, 0.15); /* Soft navy-slate border */
-    --border-highlight: rgba(30, 90, 143, 0.3);
-    --xray-bg: #ecf3f9;
+    /* Modern Minimalist Theme */
+    --bg-base: #ffffff; /* Crisp white background */
+    --bg-surface: #faf9f6; /* Subtle warm cream panels */
+    --bg-panel: rgba(250, 249, 246, 0.9);
+    --text-main: #18181b; /* Neutral dark charcoal */
+    --text-muted: #71717a; /* Neutral gray for muted text */
+    --accent-primary: #18181b; /* Dark charcoal accents */
+    --accent-secondary: #52525b; /* Medium charcoal */
+    --accent-success: #10b981;
+    --border-light: #e4e4e7; /* Neutral light border */
+    --border-highlight: #d4d4d8;
+    --xray-bg: #ffffff;
     --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     /* Resizable Layout Variables */
     --theory-pane-width: 50%;
@@ -80,7 +80,7 @@ header {
     justify-content: center;
     align-items: center;
     padding: 0.65rem 2rem;
-    background: #3e4f5f; /* Slightly lighter charcoal-blue */
+    background: #18181b; /* Neutral dark charcoal */
     font-size: 0.6rem;
     font-weight: 700;
     letter-spacing: 0.15em;
@@ -365,7 +365,7 @@ header {
 /* Theory Pane */
 .theory-pane {
     flex: none;
-    width: var(--theory-pane-width);
+    width: calc(var(--theory-pane-width) - 8px);
     overflow-y: auto;
     padding-right: 2rem;
     padding-left: 3rem; /* Expanded to fit 40px blur */
@@ -387,7 +387,7 @@ header {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    background: #3e4f5f; /* Matches lighter footer background */
+    background: #18181b; /* Neutral dark charcoal */
     padding: 1.25rem;
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.08);
@@ -404,25 +404,32 @@ header {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
 }
 
 .comp-label {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.65); /* Improved contrast for darker background */
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .comp-value {
     font-family: 'Fira Code', monospace;
     font-size: 1.15rem;
     font-weight: 600;
+    white-space: nowrap;
 }
 
-.comp-value.best-val { color: #2ecc71; }    /* Fixed Green */
-.comp-value.avg-val { color: #3498db; }     /* Fixed Blue */
-.comp-value.worst-val { color: #f07178; }   /* Fixed Reddish */
-.comp-value.space-val { color: #a6b8c7; }   /* Harmonic Cyan/Slate */
+.comp-value.best-val,
+.comp-value.avg-val,
+.comp-value.worst-val,
+.comp-value.space-val { 
+    color: #e2e8f0; /* Unified crisp light slate */
+}
 
 .theory-content {
     font-size: 1.15rem;
@@ -433,8 +440,8 @@ header {
 .theory-content h2, .theory-content h3 {
     margin-top: 3.5rem;
     margin-bottom: 1.25rem;
-    color: var(--text-main);
-    font-weight: 700;
+    color: #0f172a;
+    font-weight: 800;
 }
 
 .theory-content h2 { 
@@ -446,8 +453,18 @@ header {
 
 .theory-content h3 { 
     font-size: 1.5rem; 
-    color: var(--accent-primary); 
+    color: #0f172a; 
     margin-top: 2.5rem;
+}
+
+/* Inline code blocks */
+.theory-content code:not([class*="language-"]) {
+    background: #f1f5f9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.9em;
+    color: #0f172a;
 }
 
 .theory-content p { margin-bottom: 1.5rem; }
@@ -529,6 +546,8 @@ header {
     display: flex;
     flex-direction: column;
     position: relative;
+    min-width: 0;
+    min-height: 0;
 }
 
 /* 3. PANE DIVIDER STYLES */
@@ -581,7 +600,7 @@ header {
 
 .code-box-wrapper {
     flex: 1;
-    background: #282c34; /* Professional dark gray */
+    background: #18181b; /* Neutral dark charcoal */
     border-radius: 1.25rem;
     border: 1px solid rgba(255,255,255,0.05);
     display: flex;
@@ -589,6 +608,8 @@ header {
     overflow: hidden;
     position: relative;
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    min-height: 0;
+    min-width: 0;
 }
 
 .code-box-wrapper::before {
@@ -643,6 +664,7 @@ header {
     color: var(--text-muted);
 }
 
+
 .code-badge .status-dot {
     width: 8px; height: 8px; border-radius: 50%; 
     background: var(--accent-success);
@@ -689,14 +711,17 @@ pre {
 /* Override PrismJS dark theme colors for the light Theory Pane */
 .theory-content pre {
     margin: 2rem 0 !important;
-    padding: 1rem 0;
+    padding: 1.25rem !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
 }
 
 .theory-content pre,
 .theory-content pre code,
 .theory-content pre[class*="language-"],
 .theory-content code[class*="language-"] {
-    color: var(--text-main) !important;
+    color: #0f172a !important;
     text-shadow: none !important;
 }
 
@@ -705,13 +730,13 @@ pre {
 .token.prolog, 
 .token.doctype, 
 .token.cdata {
-    color: #99aaaa !important; /* Soft slate gray-green for comments */
+    color: #64748b !important; /* Muted slate for comments */
     font-style: italic;
 }
 
 .token.string,
 .token.docstring {
-    color: #addb67 !important; /* Muted lime green for strings */
+    color: #34d399 !important; /* Emerald for strings */
 }
 
 /* X-Ray Variables */

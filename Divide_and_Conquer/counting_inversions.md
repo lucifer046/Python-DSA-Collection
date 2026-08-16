@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |      COUNTING INVERSIONS — DIVIDE & CONQUER      | -->
+<!-- |      COUNTING INVERSIONS - DIVIDE & CONQUER      | -->
 <!-- +------------------------------------------------------+ -->
-# Counting Inversions — Divide & Conquer
+# Counting Inversions - Divide & Conquer
 
 ## What is an Inversion?
 

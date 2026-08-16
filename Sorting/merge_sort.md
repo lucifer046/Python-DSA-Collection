@@ -1,13 +1,13 @@
 <!-- +--------------------------------------------------+ -->
-<!-- |  MERGE SORT — THE DIVIDE AND CONQUER WAY         | -->
+<!-- |  MERGE SORT - THE DIVIDE AND CONQUER WAY         | -->
 <!-- +--------------------------------------------------+ -->
-# Merge Sort — The Divide and Conquer Way
+# Merge Sort - The Divide and Conquer Way
 
 ## What is Merge Sort?
 
 Imagine you have **100 exam papers** to sort by student name. Instead of doing it alone:
 
-1. You **split** the stack in half — give 50 to a friend, keep 50.
+1. You **split** the stack in half - give 50 to a friend, keep 50.
 2. Each of you splits your stack further and sorts it.
 3. Now you both have **sorted stacks**. You **merge** them together by comparing the top paper of each stack and picking the one that comes first.
 
@@ -20,7 +20,7 @@ Imagine you have **100 exam papers** to sort by student name. Instead of doing i
 ![Merge Sort Divide and Conquer Diagram](docs/images/merge_sort_diagram.png)
 
 > [!NOTE]
-> **Teacher's Perspective:** "Merge Sort is all about teamwork! First, we **Divide** the big problem into tiny, single-person tasks (Phase 1). Then, we **Merge** them back together, two by two, ensuring they stay in order at every step (Phase 2). It's like building a puzzle—you can't see the whole picture until you start joining the pieces correctly!"
+> **Teacher's Perspective:** "Merge Sort is all about teamwork! First, we **Divide** the big problem into tiny, single-person tasks (Phase 1). Then, we **Merge** them back together, two by two, ensuring they stay in order at every step (Phase 2). It's like building a puzzle-you can't see the whole picture until you start joining the pieces correctly!"
 
 ---
 
@@ -89,7 +89,7 @@ Merge Sort is **~50,000x faster** than Selection Sort for 1 million items!
 
 1. **Divide:** Keep splitting the list in half until each piece has 1 item
 2. **Merge:** Combine two sorted pieces into one sorted piece by comparing top items
-3. Time complexity: **O(n log n)** — much faster than O(n²) algorithms
+3. Time complexity: **O(n log n)** - much faster than O(n²) algorithms
 4. It's like sorting exam papers by splitting the workload among friends
-5. The "merge" step is the real magic — combining two sorted lists is very efficient
+5. The "merge" step is the real magic - combining two sorted lists is very efficient
 

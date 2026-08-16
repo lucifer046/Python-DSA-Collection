@@ -1,7 +1,7 @@
 <!-- +----------------------------------------------------------+ -->
-<!-- |  MST VIA DIJKSTRA LOGIC — THE UNIFIED GREEDY APPROACH    | -->
+<!-- |  MST VIA DIJKSTRA LOGIC - THE UNIFIED GREEDY APPROACH    | -->
 <!-- +----------------------------------------------------------+ -->
-# MST via Dijkstra Logic — The Unified Greedy Approach
+# MST via Dijkstra Logic - The Unified Greedy Approach
 
 ## Theoretical Definition & Comparisons
 

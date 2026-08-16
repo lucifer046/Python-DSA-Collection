@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |      CLOSEST PAIR OF POINTS — DIVIDE & CONQUER       | -->
+<!-- |      CLOSEST PAIR OF POINTS - DIVIDE & CONQUER       | -->
 <!-- +------------------------------------------------------+ -->
-# Closest Pair of Points — Divide & Conquer
+# Closest Pair of Points - Divide & Conquer
 
 ## What is the Closest Pair Problem?
 

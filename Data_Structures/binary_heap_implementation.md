@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |      BINARY HEAP — THE PRIORITY MASTER             | -->
+<!-- |      BINARY HEAP - THE PRIORITY MASTER             | -->
 <!-- +------------------------------------------------------+ -->
 
-# Binary Heap — The Priority Master
+# Binary Heap - The Priority Master
 
 ## Theoretical Foundation
 

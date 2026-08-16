@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  DYNAMIC PROGRAMMING — SOLVING BY SAVING RESULTS     | -->
+<!-- |  DYNAMIC PROGRAMMING - SOLVING BY SAVING RESULTS     | -->
 <!-- +------------------------------------------------------+ -->
 
-# Dynamic Programming — solving Problems by Saving Results
+# Dynamic Programming - solving Problems by Saving Results
 
 ## What is Dynamic Programming (DP)?
 
@@ -30,7 +30,7 @@ For a problem to be solved using DP, it must have:
 
 ## 1. The Problem: Standard Recursion (The "Forgetful" Method)
 
-In standard recursion, the computer is like a goldfish—it forgets everything it just did.
+In standard recursion, the computer is like a goldfish-it forgets everything it just did.
 
 ### ASCII Recursion Tree for Fibonacci(5)
 
@@ -54,11 +54,11 @@ Look at how many times we calculate `fib(2)` and `fib(1)`!
 [ ] = Recalculating the same thing again!
 ```
 
-**Complexity:** $O(2^n)$ — This grows **exponentially**. If $n=50$, your computer might take years to finish!
+**Complexity:** $O(2^n)$ - This grows **exponentially**. If $n=50$, your computer might take years to finish!
 
 ---
 
-## 2. Memoization — Top-Down (The "Note-Taking" Method)
+## 2. Memoization - Top-Down (The "Note-Taking" Method)
 
 **Memoization** is like recursion, but we keep a **Notebook** (Dictionary/Array).
 Before calculating `fib(n)`, we check the notebook:
@@ -68,11 +68,11 @@ Before calculating `fib(n)`, we check the notebook:
 
 > **Direction:** We start at the **TOP** (the big problem) and break it down to the **BOTTOM** (base cases).
 
-**Complexity:** $O(n)$ — High speed, but uses some extra memory for the "notebook" and the function call stack.
+**Complexity:** $O(n)$ - High speed, but uses some extra memory for the "notebook" and the function call stack.
 
 ---
 
-## 3. Tabulation — Bottom-Up (The "Building-Block" Method)
+## 3. Tabulation - Bottom-Up (The "Building-Block" Method)
 
 **Tabulation** skips the recursion entirely. It's like building a skyscraper: you start at the **FOUNDATION** (base cases) and build your way to the **TOP**.
 
@@ -89,7 +89,7 @@ We use a **Table** (usually an array) and fill it in order:
 
 > **Direction:** We start at the **BOTTOM** and work our way up to the **TOP**.
 
-**Complexity:** $O(n)$ — Very fast and often more memory-efficient than memoization.
+**Complexity:** $O(n)$ - Very fast and often more memory-efficient than memoization.
 
 ---
 
@@ -103,7 +103,7 @@ Instead of an array, we just use **two variables** (`prev1`, `prev2`).
 **Complexity:**
 
 - Time: $O(n)$
-- Space: $O(1)$ — **The ultimate optimization!**
+- Space: $O(1)$ - **The ultimate optimization!**
 
 ---
 

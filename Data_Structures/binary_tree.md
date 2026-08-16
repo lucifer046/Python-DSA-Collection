@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |      BINARY TREE — THE HIERARCHICAL FOUNDATION      | -->
+<!-- |      BINARY TREE - THE HIERARCHICAL FOUNDATION      | -->
 <!-- +------------------------------------------------------+ -->
 
-# Binary Tree — The Hierarchical Foundation
+# Binary Tree - The Hierarchical Foundation
 
 ## Theoretical Definition & Comparisons
 

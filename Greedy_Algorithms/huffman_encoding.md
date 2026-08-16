@@ -1,7 +1,7 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  HUFFMAN ENCODING — DATA COMPRESSION MADE SIMPLE    | -->
+<!-- |  HUFFMAN ENCODING - DATA COMPRESSION MADE SIMPLE    | -->
 <!-- +------------------------------------------------------+ -->
-# Huffman Encoding — Data Compression Made Simple
+# Huffman Encoding - Data Compression Made Simple
 
 ## What is Huffman Encoding?
 
@@ -160,7 +160,7 @@ The code provides TWO implementations:
 | Feature | Simple Version | Heap Version |
 |---|---|---|
 | **Finding 2 smallest** | Sort the entire list each time | Uses a Min-Heap (pyramid) |
-| **Speed** | O(n²) — Slow for large data | O(n log n) — Fast! |
+| **Speed** | O(n²) - Slow for large data | O(n log n) - Fast! |
 | **Concept** | Same tree-building logic | Same tree-building logic |
 
 ### What's a Min-Heap?
@@ -174,8 +174,8 @@ The code provides TWO implementations:
     ╱   ╲
   [8]   [6]
   
-  Getting the smallest = O(1) — just grab the top!
-  Adding a new item = O(log n) — bubble it up
+  Getting the smallest = O(1) - just grab the top!
+  Adding a new item = O(log n) - bubble it up
 ```
 
 ---
@@ -198,6 +198,6 @@ The code provides TWO implementations:
 1. **Frequent characters** get **short codes**, **rare characters** get **long codes**
 2. Build a tree by repeatedly merging the **two rarest** characters
 3. **LEFT = 0, RIGHT = 1** when reading the tree
-4. Codes are **prefix-free** — no code starts with another code
+4. Codes are **prefix-free** - no code starts with another code
 5. Results in **significant space savings** (often 20-50% compression)
 6. The **Heap version** is faster (O(n log n)) for large files

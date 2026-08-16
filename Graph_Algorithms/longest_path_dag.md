@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  LONGEST PATH IN DAG — THE CRITICAL PATH METHOD      | -->
+<!-- |  LONGEST PATH IN DAG - THE CRITICAL PATH METHOD      | -->
 <!-- +------------------------------------------------------+ -->
 
-# Longest Path in DAG — The Critical Path Method
+# Longest Path in DAG - The Critical Path Method
 
 ## Theoretical Definition & Comparisons
 
@@ -155,5 +155,5 @@ Depth 4: 7 < The project's total "length"!
 3. Uses the formula: `depth[neighbor] = MAX(depth[neighbor], depth[current] + 1)`
 4. **MAX** ensures we always keep the **longest** path (not the shortest!)
 5. A task on the critical path **cannot be delayed** without delaying the whole project
-6. Only works on **DAGs** — no cycles allowed!
+6. Only works on **DAGs** - no cycles allowed!
 ```

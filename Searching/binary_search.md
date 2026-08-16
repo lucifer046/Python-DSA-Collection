@@ -1,7 +1,7 @@
 <!-- +------------------------------------------+ -->
-<!-- |  BINARY SEARCH — THE PHONEBOOK METHOD    | -->
+<!-- |  BINARY SEARCH - THE PHONEBOOK METHOD    | -->
 <!-- +------------------------------------------+ -->
-# Binary Search — The Phonebook Method
+# Binary Search - The Phonebook Method
 
 ## What is Binary Search?
 
@@ -104,7 +104,7 @@ Both methods give the **same result**. The recursive version calls itself with a
 
 1. Binary Search only works on **sorted lists**
 2. It cuts the search area in **half** with every step
-3. Time complexity: **O(log n)** — incredibly fast even for billions of items
-4. It works like finding a name in a phonebook — you don't read every page!
+3. Time complexity: **O(log n)** - incredibly fast even for billions of items
+4. It works like finding a name in a phonebook - you don't read every page!
 5. Two implementations: **Iterative** (while loop) and **Recursive** (self-calling function)
 

@@ -1,8 +1,8 @@
 <!-- +------------------------------------------------------+ -->
-<!-- |  UNIQUE GRID PATHS — THE ROBOT'S JOURNEY             | -->
+<!-- |  UNIQUE GRID PATHS - THE ROBOT'S JOURNEY             | -->
 <!-- +------------------------------------------------------+ -->
 
-# Unique Grid Paths — The Robot's Journey
+# Unique Grid Paths - The Robot's Journey
 
 ## Theoretical Definition & Comparisons
 

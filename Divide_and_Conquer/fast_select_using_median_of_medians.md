@@ -1,5 +1,5 @@
 <!-- +------------------------------------------------------------+ -->
-<!-- |    FAST SELECT USING MEDIAN OF MEDIANS — THE 'SHIELD'       | -->
+<!-- |    FAST SELECT USING MEDIAN OF MEDIANS - THE 'SHIELD'       | -->
 <!-- +------------------------------------------------------------+ -->
 # Fast Select using Median of Medians
 
